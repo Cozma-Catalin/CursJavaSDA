@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Registration form</title>
+</head>
+
+<body>
+    <h2>Please fill the next form in order to create an account</h2>
+    <form name="registration_form" onsubmit="processRegistrationForm();return false" method="POST">
+        <label>Nume:</label>
+        <input type="text" required="true" name="name"/><br/>
+        <label>Prenume:</label>
+        <input type="text" required="true" name="prenume"/><br/>
+        <label>M</label>
+        <input type="radio" name="m"><br/>
+        <label>F</label>
+        <input type="radio" name="f"><br/>
+        <label>Do you want to receive our mounthly newsletter?</label>
+        <input type="checkbox" name="subscription"/><br/>
+        <input type="submit" value="Submit"/>
+    </form>
+
+
+        <script>
+            function processRegistrationForm(){
+
+                var nameValue = document.forms["registration_form"]["name"].value;
+                var prenumeValue = document.forms["registration_form"]["prenume"].value;
+                var radioMValue = document.forms["registration_form"]["m"].value;
+                var radioFValue = document.forms["registration_form"]["f"].value;
+                var subscriptionValue = document.forms["registration_form"]["subscription"].value;
+   
+                console.log(nameValue);
+                console.log(prenumeValue);
+                console.log(radioMValue);
+                console.log(radioFValue);
+                console.log(subscriptionValue);
+   
+   
+             }
+
+
+
+        </script>
+
+
+
+
+
+
+</body>
+
+</html>

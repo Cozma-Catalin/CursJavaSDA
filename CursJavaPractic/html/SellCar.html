@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Sell Car</title>
+        <link rel="stylesheet" href="CSS/style.css">
+    </head>
+    <body id="b2">
+        
+    <div>
+        <h1><b>Car Selling Form</b></h1>
+    </div>
+    <table>
+            <tr>
+              <th id="home"><a href="file:///E:/html/CarShop.html#">Home</a></th>
+              <th id="contact"><a href="https://www.facebook.com/yocozma/">Contact</a></th>
+          </tr>
+   </table>  
+
+    <div class="sellingForm">
+            <form name="selling_form" onsubmit="processSellingForm();return false">
+                <label> Buyers name</label>
+                <input type="text" name="name" required='true'><br/>
+                <label>Buyers surname</label>
+                <input type="text" name="surname" required='true'><br/>
+                <label>City</label>
+                <input type="text" name="city" required='true'><br/>
+                <label>Age</label>
+                <input type='number' name='age' required='true'><br/>
+                <label>Selling price</label>
+                <input type="number" name="price" required='true'><br/>
+                <label>Leasing</label>
+                <input type="radio" name="leasing" ><br/>
+                <label>e-mail</label>
+                <input type="text" required='true' name="email"><br/>
+                <label> Phone number</label>
+                <input type="number" required='true' name="phoneNumber"><br/>
+                <label>Selling date</label>
+                <input type="date" required='true' name="date"><br/><br/></br>
+                <input id='submit' type="submit" value='Submit'/>
+            </form>
+    </div>
+    <script src="JS/functions.js"></script>
+    </body>
+</html>

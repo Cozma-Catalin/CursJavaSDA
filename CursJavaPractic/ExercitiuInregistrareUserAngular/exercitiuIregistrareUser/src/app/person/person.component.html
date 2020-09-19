@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Componenta person</title>
+    </head>
+    <body>
+        <div>
+            <h2 id="h2">Bine ati venit</h2>
+            <h3 id="h3">Va rugam sa va introduceti datele in campurile de mai jos</h3>
+          </div>
+          <form>
+          <div>
+            <div id="datePersonale">
+              <p>Introduceti datele personale</p>
+              <p>Nume</p>
+              <input type="text" required="true" name="Nume" (focusout)="focusoutFunctionNume($event)"><br/>
+              <p class="error">{{errorMessageNume}}</p>
+              <p>Prenume</p>
+              <input type="text" required="true" name="Prenume" (focusout)="focusoutFunctionPrenume($event)"><br/>
+              <p class="error">{{errorMessagePrenume}}</p>
+              <p>Oras</p>
+              <input type="text" required="true" name="Oras" (focusout)="focusoutFunctionOras($event)"><br/>
+              <p class="error">{{errorMessageOras}}</p>
+              <p>Data Nasterii</p>
+              <input type="date" required="true" name="Data Nasterii" (focusout)="focusoutFunctionData($event)"><br/>
+            </div>
+            <div id="dateIdentificare">
+              <p>Introduceti datele de identificare</p>
+              <p>Parola</p>
+              <input type="password" required="true" name="Parola" (focusout)="focusoutFunctionParola($event)"><br/>
+              <p class="error">{{errorMessagePasswordLength}}</p>
+              <p>Confirmare parola</p>
+              <input type="password" required="true" name="Confirmare parola" (focusout)="focusoutFunctionConfirmare($event)"><br/>
+              <p class="error">{{errorMessagePassword}}</p>
+              <p>E-mail</p>
+              <input type="email" required="true" name="Email" (focusout)="focusoutFunctionEmail($event)"><br/>
+              <br/>
+              <input type="submit" name="Inregistrare" (click)="inregistrare()"><br/>
+            </div>
+          </div>
+          </form>
+          <div>
+            <h2>Ati introdus urmatoarele date</h2>
+            <p>Nume: </p>{{personInfo.nume}}
+            <p>Prenume: </p>{{personInfo.prenume}}
+            <p>Oras: </p>{{personInfo.oras}}
+            <p>Data Nasterii: </p>{{personInfo.dataNasterii}}
+            <p>Parola: </p>{{personInfo.parola}}
+            <p>Confirmare parola: </p>{{personInfo.confirmare}}
+            <p>E-mail: </p>{{personInfo.email}}
+          </div>
+    </body>
+</html>

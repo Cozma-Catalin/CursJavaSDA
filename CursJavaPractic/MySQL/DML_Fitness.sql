@@ -1,0 +1,2 @@
+insert into subscriptions(name,price,begin_subscription,end_of_subscription,workout_id) values ("Basic","600","01.08.2020","01.09.2020",2);
+insert into gyms(name,city,address,subscription_id) values ("One","Galati","Calugareni",1);

@@ -1,0 +1,16 @@
+Avem un magazin online si vrem sa facem pagina de inregistrare a utilizatorilor.
+Cand inregistram un utilizator ii cerem:
+- numele, 
+- prenumele, 
+- data nasterii,
+- orasul
+- parola
+- confirmarea parolei
+- adresa de e-mail 
+Vrem sa validam fiecare camp astfel incat utilizatorul sa nu introduca date irelevante.
+Daca un utilizator introduce intr-un camp date neconforme, alaturi de campul respectiv se va afisa un mesaj cu rosu: invalid field
+Formularul sa aiba un buton de register/save.
+Sub formular sa afisam datele introduse dupa ce se apasa butonul.
+Proiectul il facem in Angular.
+
+

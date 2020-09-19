@@ -1,0 +1,8 @@
+header{text-align: center;padding-top: 50px;color: lightcyan;}
+body{width: 1600px;height: 1200px;;background-image:url(../assets/watch.jpg);background-size:contain;}
+.buttons{padding-top: 50px;padding-left: 50px;opacity: 80%;}
+#home{float: left;}
+#create{float: inherit;}
+#login{float: inherit;}
+#contact{float: inherit;}
+

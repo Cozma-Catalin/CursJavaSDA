@@ -1,0 +1,25 @@
+<?xml version ='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <!-- sectiunea in care scriem toate config necesare frameworkului hibernate pentru a conecta la baza de date si pentru a mapa obiectele la tabele-->
+    <!-- hibernate se conecteaza la baza de date in cadrul unei sesiuni-->
+
+    <session-factory>
+        <!-- datele de config pentru orice sesiune creata de hibernate cu baza noastra de date-->
+        <!-- dialectul de baza de date folosit: mysql,oracle,postgres-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!-- driverul pentru baza de date: jdbc-->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!-- adresa bazei de date-->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost3306/school?serverTimezone=UTC</property>
+        <!-- userul pentru conectarea la baza de date-->
+        <property name="hibernate.connection.username">root</property>
+        <!-- parola -->
+        <property name="hibernate.connection.password">1234</property>
+        <!-- specificam care clase trebuiesc mapate cu un tabel din baza de date-->
+        <mapping class="entities.Student"/>
+    </session-factory>
+</hibernate-configuration>

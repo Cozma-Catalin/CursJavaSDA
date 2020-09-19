@@ -1,0 +1,114 @@
+<html>
+
+<head>
+<title><h1>HTML Exercise CV</h1></title>
+<style>body{background-color:blanchedalmond ;background-image:url("IMG_0668.JPG") ;background-size:cover;background-repeat: no-repeat;}
+        h1{color: rgb(10, 3, 3);text-align: center;font-size:xx-large;}
+        h2{text-align: justify;}
+        .datePersonale{color: rgb(139, 0, 19); text-align:start;}
+        .experientaProfesionala{color: rgb(190, 32, 32);text-align: left;}
+        .studii{color: rgb(167, 23, 23);text-align: left;}
+        .certificateObtinute{color: rgb(170, 32, 32); text-align: left;float:right;}
+        .cursuri{color: rgb(20, 5, 8);text-align: left;}
+        .hobbies{color: rgb(168, 14, 14);text-align: left;}
+        .aptitudini{color: rgb(119, 9, 14);text-align: left;}
+        .limbiStraine{color: rgb(122, 11, 20);text-align: left;}
+        .dateContact{color: rgb(126, 9, 9);text-align: left;}
+</style>
+
+
+</head>
+
+<body>
+
+    <p id="normalP">My name is Catalin</p>
+    <h1><b>Curriculum Vitae</b></h1>
+    <div class="datePersonale"><h2><b>Date personale:</b></h2>
+        <ul>
+            <li>Nume: Cozma</li>   
+            <li>Prenume: Catalin</li>
+            <li>Data nasterii: 02.09.1989</li>
+            <li>Domiciliu: Galati</li>
+        </ul>
+    </div>
+    
+    <div class="studii"> <h2><b>Studii:</b></h2>
+        <ul>
+            <li><a href="http://colegiuldumitrumotoc.ro/">Liceu: D. Motoc</a></li>
+        </ul>
+      </div>
+   
+      <div class="experientaProfesionala"><h2><b>Experienta profesionala:</b></h2>
+        <ul>
+            <li>
+                Barman - 10 ani
+            </li>
+        </ul>
+    
+    </div>
+    <div class="certificateObtinute"><h2><b>Certificate obtinute:</b></h2></div>
+    <div class="cursuri"><h2><b>Cursuri profesionale absolvite:</b></h2>
+    <ul>
+        <li>SDA Java Programing Language(poate)</li>
+    </ul>
+    </div>
+    <div class="hobbies"><h2><b>Hobby-uri:</b></h2>
+    <ul>
+        <li>Fotbal</li>
+
+        <li>Pescuit</li>
+        
+        <li>Excursii</li>
+    </ul>
+    </div>
+    <div class="aptitudini"><h2><b>Aptitudini:</b></h2>
+    <ul>
+        <li>
+
+        </li>
+    </ul>
+    </div>
+    <div class="limbiStraine"><h2><b>Limbi straine:</b></h2>
+    <ul>
+        <li>Engleza</li>
+        <li>Franceza</li>
+        <li>Spaniola</li>
+    </ul>
+    </div>
+    <div class="dateContact"><h2><b>Date de contact:</b></h2>
+    <ul>
+        <li>Nr. telefon: 0741748501</li>
+        <li>Adresa de Facebook: <a href="https://www.facebook.com/yocozma/">Cozma Catalin</a></li>
+    </ul>
+    
+    </div>
+    <script>
+        alert("CV Cozma Catalin");
+        console.log("Codul din spate");
+        var text="Ana are mere.";
+        console.log(text);
+        for(i=10;i<50;i++){
+            if(i%2==0){
+                console.log(i);
+            }
+        }
+    var array=[2,"Cata",false];
+    for(i=0;i<array.length;i++){
+        console.log(array[i]);
+    }
+    function checkNumber(number){
+        if(number=>100 && number<=200){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    console.log(checkNumber(156));
+    
+    //luam datele de pe un paragraf si l afisam in consola
+    var normalParagraphValue = document.getElementById("normalP").textContent;
+    console.log(normalParagraphValue);
+</script>
+</body>
+
+</html>

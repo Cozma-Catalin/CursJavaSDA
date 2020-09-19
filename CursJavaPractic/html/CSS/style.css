@@ -1,0 +1,13 @@
+body{background-image: url(../images/ferrari.png);background-size: cover;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 25px;}
+#b1{place-self: center;text-align: center;background-image: url(../images/apollojpg.jpg);background-size: cover;}
+#b2{background-image: url(../images/car.jpg);background-size: cover;}
+h1{text-align: center;}
+.registrationForm{width: 500px;height: 400px;place-self:center ;text-align:justify;padding-left: 100px;padding-right: 100px;padding-top: 50px;background-color: rgb(238, 237, 194);opacity: 70%;}
+.sellingForm{width: 500px;height: 400px;place-self:center ;text-align:justify;padding-left: 100px;padding-right: 100px;padding-top: 50px;background-color: rgb(238, 237, 194);opacity: 70%;}
+#submit{font-weight: bold;place-self:center;background-color: rgb(202, 206, 199);color: black;width: 100px;}
+#table{font-weight: bold;}
+#home{padding-left: 25px;padding-right: 25px;}
+#register{padding-left: 25px;padding-right: 25px;}
+#sell{padding-left: 25px ;padding-right: 25px;}
+#contact{padding-left: 25px;padding-right: 25px;}
+title{text-align: center;}
