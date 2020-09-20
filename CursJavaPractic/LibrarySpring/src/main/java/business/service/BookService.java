@@ -18,26 +18,33 @@ public class BookService {
     @Autowired
     BookDAO bookDAO;
 
-    public void insertBookDTO(BookDTO bookDTO){
-        Author author = new Author();
-        author.setName(bookDTO.getAuthorDTO().getName());
-        author.setSurname(bookDTO.getAuthorDTO().getSurname());
+    public String insertBookDTO(BookDTO bookDTO) {
 
-        Section section = new Section();
-        section.setName(bookDTO.getSectionDTO().getName());
+            Author author = new Author();
+            author.setName(bookDTO.getAuthorDTO().getName());
+            author.setSurname(bookDTO.getAuthorDTO().getSurname());
 
-        Book book = new Book();
-        book.setName(bookDTO.getName());
-        book.setAuthor(author);
-        book.setSection(section);
-        bookDAO.insertBook(book);
-    }
+            Section section = new Section();
+            section.setName(bookDTO.getSectionDTO().getName());
 
-    public List<BookDTO> findBookDTO(){
-        List<Book> bookList = bookDAO.findBook();
+            Book book = new Book();
+            book.setTitle(bookDTO.getTitle());
+            book.setAuthor(author);
+            book.setSection(section);
+            bookDAO.insertBook(book);
+            return "Cartea a fost adaugata cu succes.";
+        }
+
+        public Long countBooksByTitle(String title){
+        Long result = bookDAO.countBooksByTitle(title);
+        return result;
+        }
+
+    public List<BookDTO> findBookDTOByTitle(String title) {
+        List<Book> bookList = bookDAO.findBookByTitle(title);
         List<BookDTO> bookDTOList = new ArrayList<BookDTO>();
 
-        for(Book book:bookList){
+        for (Book book : bookList) {
 
             AuthorDTO authorDTO = new AuthorDTO();
             authorDTO.setName(book.getAuthor().getName());
@@ -47,7 +54,7 @@ public class BookService {
             sectionDTO.setName(book.getSection().getName());
 
             BookDTO bookDTO = new BookDTO();
-            bookDTO.setName(book.getName());
+            bookDTO.setTitle(book.getTitle());
             bookDTO.setAuthorDTO(authorDTO);
             bookDTO.setSectionDTO(sectionDTO);
             bookDTOList.add(bookDTO);
@@ -55,8 +62,32 @@ public class BookService {
         return bookDTOList;
     }
 
-    public int deleteBookByName(String name){
-        int result = bookDAO.deleteBookByName(name);
+    public List<BookDTO> findAllBooksDTO(){
+       List<Book> bookList = bookDAO.findAllBooks();
+       List<BookDTO> bookDTOList = new ArrayList<>();
+
+       for(Book book : bookList){
+           BookDTO bookDTO = new BookDTO();
+           bookDTO.setTitle(book.getTitle());
+
+           AuthorDTO authorDTO = new AuthorDTO();
+           authorDTO.setName(bookDTO.getAuthorDTO().getName());
+           authorDTO.setSurname(bookDTO.getAuthorDTO().getSurname());
+
+           SectionDTO sectionDTO = new SectionDTO();
+           sectionDTO.setName(bookDTO.getSectionDTO().getName());
+
+           bookDTOList.add(bookDTO);
+       }
+
+        return bookDTOList;
+    }
+
+    public Long deleteBookByTitle(String title) {
+        Long result = bookDAO.deleteBookByTitle(title);
+        if (result == 0) {
+            System.out.println("Nu a fost stearsa nici o carte.");
+        }
         return result;
     }
 }

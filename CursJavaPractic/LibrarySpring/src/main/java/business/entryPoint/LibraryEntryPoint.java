@@ -33,9 +33,6 @@ public class LibraryEntryPoint {
         bookService.insertBookDTO(WWII);
         bookService.insertBookDTO(scarface);
 
-        System.out.println("Cartile gasite sunt:" + bookService.findBookDTO());
-        System.out.println("Autorul cautat este: " + authorService.findAuthorDTOByNameList("Tony"));
-        System.out.println("Sectiile cautate sunt" + sectionService.findSectionDTO());
 
        // bookController.deleteBookByName("Scarface");
 

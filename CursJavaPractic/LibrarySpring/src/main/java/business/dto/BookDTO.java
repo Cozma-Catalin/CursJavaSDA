@@ -1,29 +1,39 @@
 package business.dto;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class BookDTO {
-    private String name;
+
+    @NotBlank(message = "Campul este gol.")
+    @NotNull
+    @Pattern(regexp = "([a-zA-Z])*")
+    private String title;
+
     private SectionDTO sectionDTO;
+
     private AuthorDTO authorDTO;
 
 
-    public BookDTO(String name, SectionDTO sectionDTO,AuthorDTO authorDTO) {
-        this.name = name;
+    public BookDTO(String title, SectionDTO sectionDTO,AuthorDTO authorDTO) {
+        this.title = title;
         this.sectionDTO = sectionDTO;
         this.authorDTO = authorDTO;
     }
-    public BookDTO(String name){
-        this.name = name;
+    public BookDTO(String title){
+        this.title = title;
     }
 
     public BookDTO(){}
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public SectionDTO getSectionDTO() {
@@ -47,7 +57,7 @@ public class BookDTO {
 
     @Override
     public String toString() {
-        return "BookDTO: " + name ;
+        return "BookDTO: " + title ;
     }
 }
 

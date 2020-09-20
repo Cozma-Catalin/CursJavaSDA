@@ -19,25 +19,48 @@ public class BookDAO {
         session.close();
     }
 
-    public List<Book> findBook(){
+    public List<Book> findBookByTitle(String title){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query findBookQuery = session.createNamedQuery("findBook");
-        List<Book> bookList= findBookQuery.getResultList();
+        Query findBookByTitleQuery = session.createNamedQuery("findBookByTitle");
+        findBookByTitleQuery.setParameter("title",title);
+        List<Book> bookList= findBookByTitleQuery.getResultList();
         session.getTransaction().commit();
         session.close();
         return bookList;
     }
 
-    public int deleteBookByName(String name){
+    public List<Book> findAllBooks(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query deleteBookByNameQuery = session.createNamedQuery("deleteBookByName");
-        deleteBookByNameQuery.setParameter("name",name);
-        int result = deleteBookByNameQuery.executeUpdate();
+        Query findAllBooksQuery = session.createNamedQuery("findAllBooks");
+        List<Book> bookList= findAllBooksQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return bookList;
+    }
+
+
+    public Long deleteBookByTitle(String title){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query deleteBookByTitleQuery = session.createNamedQuery("deleteBookByTitle");
+        deleteBookByTitleQuery.setParameter("title",title);
+        Long result =(Long) (deleteBookByTitleQuery.getSingleResult());
         session.getTransaction().commit();
         session.close();
         return result;
-
     }
+
+    public Long countBooksByTitle(String title){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query countBooksByTitleQuery = session.createNamedQuery("countBooksByTitle");
+        countBooksByTitleQuery.setParameter("title",title);
+        Long result =(Long) (countBooksByTitleQuery.getSingleResult());
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
 }

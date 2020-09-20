@@ -4,8 +4,10 @@ package persistance.entities;
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = "findBook",query = "select book from Book book"),
-        @NamedQuery(name = "deleteBookByName",query = "delete from Book where name= :name")
+        @NamedQuery(name = "findAllBooks",query = "select book from Book book"),
+        @NamedQuery(name = "findBookByTitle",query = "select book from Book book where title= :title"),
+        @NamedQuery(name = "deleteBookByTitle",query = "delete from Book where title= :title"),
+        @NamedQuery(name = "countBooksByTitle",query = "select count(*) from Book book where book.title= :title")
 })
 
 @Entity
@@ -14,8 +16,8 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title")
+    private String title;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sections_id")
     private Section section;
@@ -24,20 +26,20 @@ public class Book {
     private Author author;
 
 
-    public Book(String name, Section section, Author author) {
-        this.name = name;
+    public Book(String title, Section section, Author author) {
+        this.title = title;
         this.section = section;
         this.author = author;
     }
 
     public Book(){}
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Section getSection() {
@@ -58,6 +60,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book: " + name ;
+        return "Book: " + title ;
     }
 }

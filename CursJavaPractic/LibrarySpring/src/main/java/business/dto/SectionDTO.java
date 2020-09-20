@@ -1,9 +1,18 @@
 package business.dto;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class SectionDTO {
+
+    @NotBlank(message = "Campul este gol.")
+    @NotNull
+    @Pattern(regexp = "([a-zA-Z])*")
     private String name;
-    private BookDTO bookDTO;
+
+
 
     public SectionDTO(){}
 
@@ -19,13 +28,6 @@ public class SectionDTO {
         this.name = name;
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
-    }
-
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
-    }
 
     @Override
     public String toString() {

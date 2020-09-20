@@ -1,26 +1,32 @@
 package business.dto;
 
-import persistance.entities.Book;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import java.util.Set;
 
 public class AuthorDTO {
-private String name;
-private String surname;
-private Set<BookDTO> bookSetDTO;
 
-    public AuthorDTO(String name, String surname, Set<BookDTO> bookSetDTO) {
+    @NotBlank(message = "Campul este gol.")
+    @NotNull
+    @Pattern(regexp = "([a-zA-Z])*")
+    private String name;
+
+    @NotBlank(message = "Campul este gol.")
+    @NotNull
+    @Pattern(regexp = "([a-zA-Z])*")
+    private String surname;
+
+
+
+
+    public AuthorDTO(String name, String surname) {
         this.name = name;
         this.surname = surname;
-        this.bookSetDTO = bookSetDTO;
     }
 
-    public AuthorDTO(String name,String surname){
-        this.name = name;
-        this.surname = surname;
+    public AuthorDTO() {
     }
-
-    public AuthorDTO(){}
 
     public String getName() {
         return name;
@@ -38,16 +44,9 @@ private Set<BookDTO> bookSetDTO;
         this.surname = surname;
     }
 
-    public Set<BookDTO> getBookSetDTO() {
-        return bookSetDTO;
-    }
-
-    public void setBookSetDTO(Set<BookDTO> bookSetDTO) {
-        this.bookSetDTO = bookSetDTO;
-    }
 
     @Override
     public String toString() {
-        return "AuthorDTO: " + name + ", " + surname ;
+        return "AuthorDTO: " + name + ", " + surname;
     }
 }
