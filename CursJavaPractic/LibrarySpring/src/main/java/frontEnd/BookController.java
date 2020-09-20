@@ -35,7 +35,7 @@ public class BookController {
 
     @DeleteMapping(path = "/deleteBookByTitle")
     public String deleteBookByTitle(@RequestParam String title) {
-        Long result = bookService.deleteBookByTitle(title);
+        int result = bookService.deleteBookByTitle(title);
         if (result == 0) {
             return "Nu a fost sters niciun obiect de tipul Book.";
         } else {

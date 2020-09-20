@@ -67,24 +67,27 @@ public class BookService {
        List<BookDTO> bookDTOList = new ArrayList<>();
 
        for(Book book : bookList){
-           BookDTO bookDTO = new BookDTO();
-           bookDTO.setTitle(book.getTitle());
 
            AuthorDTO authorDTO = new AuthorDTO();
-           authorDTO.setName(bookDTO.getAuthorDTO().getName());
-           authorDTO.setSurname(bookDTO.getAuthorDTO().getSurname());
+           authorDTO.setName(book.getAuthor().getName());
+           authorDTO.setSurname(book.getAuthor().getSurname());
 
            SectionDTO sectionDTO = new SectionDTO();
-           sectionDTO.setName(bookDTO.getSectionDTO().getName());
+           sectionDTO.setName(book.getSection().getName());
 
+
+           BookDTO bookDTO = new BookDTO();
+           bookDTO.setTitle(book.getTitle());
+           bookDTO.setAuthorDTO(authorDTO);
+           bookDTO.setSectionDTO(sectionDTO);
            bookDTOList.add(bookDTO);
        }
 
         return bookDTOList;
     }
 
-    public Long deleteBookByTitle(String title) {
-        Long result = bookDAO.deleteBookByTitle(title);
+    public int deleteBookByTitle(String title) {
+        int result = bookDAO.deleteBookByTitle(title);
         if (result == 0) {
             System.out.println("Nu a fost stearsa nici o carte.");
         }

@@ -9,11 +9,11 @@ public class BookDTO {
 
     @NotBlank(message = "Campul este gol.")
     @NotNull
-    @Pattern(regexp = "([a-zA-Z])*")
+    @Pattern(regexp = "([a-z A-Z])*")
     private String title;
-
+    @NotNull
     private SectionDTO sectionDTO;
-
+    @NotNull
     private AuthorDTO authorDTO;
 
 
@@ -57,7 +57,7 @@ public class BookDTO {
 
     @Override
     public String toString() {
-        return "BookDTO: " + title ;
+        return "BookDTO: " + title + authorDTO.getName()+authorDTO.getSurname() + sectionDTO ;
     }
 }
 

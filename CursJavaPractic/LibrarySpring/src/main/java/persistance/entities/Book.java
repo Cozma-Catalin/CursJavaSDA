@@ -7,7 +7,7 @@ import javax.persistence.*;
         @NamedQuery(name = "findAllBooks",query = "select book from Book book"),
         @NamedQuery(name = "findBookByTitle",query = "select book from Book book where title= :title"),
         @NamedQuery(name = "deleteBookByTitle",query = "delete from Book where title= :title"),
-        @NamedQuery(name = "countBooksByTitle",query = "select count(*) from Book book where book.title= :title")
+        @NamedQuery(name = "countBooksByTitle",query = "select count(*) from Book book where title= :title")
 })
 
 @Entity
@@ -60,6 +60,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book: " + title ;
+        return "Book: " + title + author + section ;
     }
 }

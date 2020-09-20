@@ -41,12 +41,12 @@ public class BookDAO {
     }
 
 
-    public Long deleteBookByTitle(String title){
+    public int deleteBookByTitle(String title){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query deleteBookByTitleQuery = session.createNamedQuery("deleteBookByTitle");
         deleteBookByTitleQuery.setParameter("title",title);
-        Long result =(Long) (deleteBookByTitleQuery.getSingleResult());
+        int result =deleteBookByTitleQuery.executeUpdate();
         session.getTransaction().commit();
         session.close();
         return result;
