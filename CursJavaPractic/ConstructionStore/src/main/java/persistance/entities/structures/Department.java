@@ -10,7 +10,7 @@ import java.util.Set;
 
         @NamedQuery(name = "findDepartmentByName",query="select department from Department department where name= :name"),
         @NamedQuery(name = "deleteDepartmentByName",query = "delete from Department where name= :name"),
-        @NamedQuery(name = "updateDepartmentName",query = "update from Department department set name= :name where name= :name")
+        @NamedQuery(name = "updateDepartmentName",query = "update from Department department set name= :newName where name= :name")
 })
 
 @Entity

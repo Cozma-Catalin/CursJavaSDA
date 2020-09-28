@@ -30,7 +30,6 @@ public class DepartmentDAO {
     }
 
 
-
     public Department findDepartmentByName(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -47,11 +46,11 @@ public class DepartmentDAO {
             return departmentFound;
     }
 
-    public int deleteDepartmentByName(String name){
+    public int deleteDepartmentByName(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query deleteDepartmentByNameQuery = session.createNamedQuery("deleteDepartmentByName");
-        deleteDepartmentByNameQuery.setParameter("name",name);
+        deleteDepartmentByNameQuery.setParameter("name", name);
         int result = deleteDepartmentByNameQuery.executeUpdate();
         session.getTransaction().commit();
         session.close();
@@ -62,7 +61,7 @@ public class DepartmentDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query updateDepartmentNameQuery = session.createNamedQuery("updateDepartmentName");
-        updateDepartmentNameQuery.setParameter("name",newName);
+        updateDepartmentNameQuery.setParameter("newName",newName);
         updateDepartmentNameQuery.setParameter("name",name);
         int result = updateDepartmentNameQuery.executeUpdate();
         session.getTransaction().commit();
