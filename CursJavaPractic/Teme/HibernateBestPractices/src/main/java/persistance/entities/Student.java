@@ -30,7 +30,8 @@ public class Student {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "students_teachers",
             joinColumns= {@JoinColumn(name = "students_id")},
-            inverseJoinColumns = {@JoinColumn(name = "teachers_id")})
+            inverseJoinColumns = {@JoinColumn(name = "teachers_id")
+    })
     private Set<Teacher> teacherSet;
 
     public Student() {

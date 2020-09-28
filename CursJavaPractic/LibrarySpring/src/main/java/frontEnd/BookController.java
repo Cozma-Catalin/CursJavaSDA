@@ -46,12 +46,7 @@ public class BookController {
     @PostMapping(path = "/insertBook")
     public String insertBook(@RequestBody @Valid BookDTO bookToInsert) {
         if (bookService.countBooksByTitle(bookToInsert.getTitle()) == 0) {
-            BookDTO bookDTO = new BookDTO();
-            bookDTO.setTitle(bookToInsert.getTitle());
-            bookDTO.setAuthorDTO(bookToInsert.getAuthorDTO());
-            bookDTO.setSectionDTO(bookToInsert.getSectionDTO());
-            bookService.insertBookDTO(bookDTO);
-
+            bookService.insertBookDTO(bookToInsert);
             return "A fost inserata cartea " + bookToInsert.getTitle() + ": scrisa de " + bookToInsert.getAuthorDTO().getName() + " " + bookToInsert.getAuthorDTO().getSurname() + ".";
         } else {
             return "Exista cartea aceasta.";
