@@ -1,4 +1,4 @@
-package persistance.entities.products.Chemicals;
+package persistance.entities.products;
 
 import persistance.entities.structures.Department;
 import persistance.entities.structures.Warehouse;
@@ -7,21 +7,23 @@ import javax.persistence.*;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = "findCementByBrand",query = "select cement from Cement cement where brand= :brand"),
-        @NamedQuery(name = "deleteCementByBrand",query = "delete from Cement where brand= :brand"),
-        @NamedQuery(name = "updateCementPrice",query = "update from Cement cement set price= :price where brand= :brand"),
-        @NamedQuery(name = "updateCementQuantity",query = "update from Cement cement set quantity= :quantity where brand= :brand"),
-        @NamedQuery(name = "countCement",query = "select count(*) from Cement cement where brand= :brand")
+        @NamedQuery(name = "findScrewdriverByBrand", query = "select screwdriver from Screwdriver screwdriver where brand= :brand"),
+        @NamedQuery(name = "deleteScrewdriverByBrand", query = "delete from Screwdriver where brand= :brand"),
+        @NamedQuery(name = "updateScrewdriverPrice", query = "update from Screwdriver screwdriver set price= :price where brand= :brand"),
+        @NamedQuery(name = "updateScrewdriverQuantity",query = "update from Screwdriver screwdriver set quantity= :quantity where brand= :brand"),
+        @NamedQuery(name = "countScrewdriverByBrand",query = "select count(*) from Screwdriver screwdriver where brand= :brand")
 })
 
 @Entity
-@Table(name = "cements")
-public class Cement {
+@Table(name = "screwdrivers")
+public class Screwdriver {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "brand")
     private String brand;
+    @Column(name = "head_type")
+    private String headType;
     @Column(name = "size")
     private String size;
     @Column(name = "price")
@@ -31,22 +33,25 @@ public class Cement {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departments_id")
     private Department department;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinTable(name = "cements_warehouses",
-            joinColumns = {@JoinColumn(name = "cements_id")},
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER )
+    @JoinTable(name = "screwdrivers_warehouses",
+            joinColumns = {@JoinColumn(name = "screwdrivers_id")},
             inverseJoinColumns = {@JoinColumn(name = "warehouses_id")}
     )
     private Set<Warehouse> warehouseSet;
 
-    public Cement(String brand, String size, double price, double quantity, Department department) {
+    public Screwdriver(String brand, String headType, String size, double price, double quantity) {
+
         this.brand = brand;
+        this.headType = headType;
         this.size = size;
         this.price = price;
         this.quantity = quantity;
-        this.department = department;
     }
 
-    public Cement(){}
+    public Screwdriver() {
+    }
+
 
     public int getId() {
         return id;
@@ -62,6 +67,14 @@ public class Cement {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getHeadType() {
+        return headType;
+    }
+
+    public void setHeadType(String headType) {
+        this.headType = headType;
     }
 
     public String getSize() {
@@ -106,6 +119,6 @@ public class Cement {
 
     @Override
     public String toString() {
-        return "Cement: " + "brand: " + brand + ", size: " + size + ", price: " + price + ", quantity: " + quantity + ", department: " + department + ",warehouses: " + warehouseSet ;
+        return "Screwdriver: " + "brand: " + brand + ", headType: " + headType + ", size: " + size + ", price: " + price + ", quantity: " + quantity + ", department: " + department + ",warehouses: " + warehouseSet;
     }
 }

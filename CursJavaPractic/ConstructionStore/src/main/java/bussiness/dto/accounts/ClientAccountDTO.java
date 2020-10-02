@@ -1,16 +1,25 @@
 package bussiness.dto.accounts;
 
 
-public class AdminDTO {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+public class ClientAccountDTO {
+    @NotNull
+    @Pattern(regexp = "([a-zA-z]*)")
     private String name;
+    @NotNull
+    @Pattern(regexp = "([a-zA-z]*)")
     private String surname;
+    @NotNull
     private String email;
+    @NotNull
+    @Pattern(regexp = "([a-zA-z]*)")
     private String password;
 
-    public AdminDTO(){}
+    public ClientAccountDTO(){}
 
-    public AdminDTO(String name, String surname, String email, String password) {
+    public ClientAccountDTO(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -51,6 +60,6 @@ public class AdminDTO {
 
     @Override
     public String toString() {
-        return "AdminDTO: " + name + " " + surname + ", email: " + email ;
+        return "ClientDTO: " + name + " " + surname + ", email: " + email ;
     }
 }

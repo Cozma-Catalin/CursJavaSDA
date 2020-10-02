@@ -1,4 +1,4 @@
-package persistance.entities.products.Chemicals;
+package persistance.entities.products;
 
 import persistance.entities.structures.Department;
 import persistance.entities.structures.Warehouse;
@@ -9,7 +9,9 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "findPaintByBrand", query = "select paint from Paint paint where brand= :brand"),
         @NamedQuery(name = "deletePaintByBrand", query = "delete from Paint where brand= :brand"),
-        @NamedQuery(name = "modifyPaintPrice", query = "update from Paint paint set price= :price where brand= :brand")
+        @NamedQuery(name = "updatePaintPrice", query = "update from Paint paint set price= :price where brand= :brand"),
+        @NamedQuery(name = "updatePaintQuantity",query = "update from Paint paint set quantity= :quantity where brand= :brand"),
+        @NamedQuery(name = "countPaintByBrand",query = "select count(*) from Paint paint where brand= :brand")
 })
 @Entity
 @Table(name = "paints")
@@ -19,16 +21,16 @@ public class Paint {
     private int id;
     @Column(name = "brand")
     private String brand;
+    @Column(name = "color")
+    private String color;
     @Column(name = "size")
     private String size;
+    @Column(name = "used_for")
+    private String usage;
     @Column(name = "price")
     private double price;
     @Column(name = "quantity")
     private double quantity;
-    @Column(name = "color")
-    private String color;
-    @Column(name = "used_for")
-    private String usage;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departments_id")
     private Department department;

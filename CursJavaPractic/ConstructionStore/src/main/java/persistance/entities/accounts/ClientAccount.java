@@ -3,6 +3,7 @@ package persistance.entities.accounts;
 import persistance.entities.finance.ShoppingCart;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "client_account")
@@ -18,9 +19,12 @@ public class ClientAccount {
     private String email;
     @Column(name = "password")
     private String password;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shoppingCarts_id")
-    private ShoppingCart shoppingCart;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "client_shopping_cart",
+            joinColumns = {@JoinColumn(name = "clients_id")},
+            inverseJoinColumns = {@JoinColumn(name = "shopping_carts_id")
+    })
+    private Set<ShoppingCart> shoppingCartSet;
 
 
     public ClientAccount(){}
@@ -64,16 +68,24 @@ public class ClientAccount {
         this.password = password;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
+    public int getId() {
+        return id;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Set<ShoppingCart> getShoppingCartSet() {
+        return shoppingCartSet;
+    }
+
+    public void setShoppingCartSet(Set<ShoppingCart> shoppingCartSet) {
+        this.shoppingCartSet = shoppingCartSet;
     }
 
     @Override
     public String toString() {
-        return "ClientAccount: " + name + " " + surname + ", email: " + email + ", password: " + password + ", shopping cart: " + shoppingCart ;
+        return "ClientAccount: " + name + " " + surname + ", email: " + email + ", password: " + password + ", shopping cart: " + shoppingCartSet ;
     }
 }

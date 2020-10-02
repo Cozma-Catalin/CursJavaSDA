@@ -12,10 +12,13 @@ public class DepartmentService {
     @Autowired
     DepartmentDAO departmentDAO;
 
-    public void insertDepartmentDTO(DepartmentDTO departmentDTO) {
-        Department department = new Department();
-        department.setName(departmentDTO.getName());
-        departmentDAO.insertDepartment(department);
+
+
+    public DepartmentDTO findDepartmentDTOByName(String name){
+        Department department = departmentDAO.findDepartmentByName(name);
+        DepartmentDTO departmentDTO = new DepartmentDTO();
+        departmentDTO.setName(department.getName());
+        return departmentDTO;
     }
 
     public int deleteDepartmentByName(String name){
@@ -23,8 +26,8 @@ public class DepartmentService {
         return result;
     }
 
-    public int updateDepartmentName(String newName,String name){
-        int result = departmentDAO.updateDepartmentName(newName,name);
+    public int renameDepartment(String newName,String name){
+        int result = departmentDAO.renameDepartment(newName,name);
         return result;
     }
 }

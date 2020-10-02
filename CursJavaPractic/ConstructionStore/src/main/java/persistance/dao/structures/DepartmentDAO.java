@@ -1,13 +1,10 @@
 package persistance.dao.structures;
 
 import bussiness.config.HibernateUtil;
-import bussiness.dto.products.chemicals.CementDTO;
-import bussiness.dto.structures.DepartmentDTO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import persistance.entities.products.Chemicals.Cement;
 import persistance.entities.structures.Department;
 
 
@@ -21,12 +18,6 @@ public class DepartmentDAO {
         session.save(department);
         session.getTransaction().commit();
         session.close();
-    }
-
-    public void extractDepartmentDTOFromCement(CementDTO cementDTO, Cement cement) {
-        DepartmentDTO departmentDTO = new DepartmentDTO();
-        departmentDTO.setName(cement.getDepartment().getName());
-        cementDTO.setDepartmentDTO(departmentDTO);
     }
 
 
@@ -57,10 +48,10 @@ public class DepartmentDAO {
         return result;
     }
 
-    public int updateDepartmentName(String newName,String name){
+    public int renameDepartment(String newName,String name){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query updateDepartmentNameQuery = session.createNamedQuery("updateDepartmentName");
+        Query updateDepartmentNameQuery = session.createNamedQuery("renameDepartment");
         updateDepartmentNameQuery.setParameter("newName",newName);
         updateDepartmentNameQuery.setParameter("name",name);
         int result = updateDepartmentNameQuery.executeUpdate();

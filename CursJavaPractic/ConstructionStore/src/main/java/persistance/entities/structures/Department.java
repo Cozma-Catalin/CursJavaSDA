@@ -1,8 +1,8 @@
 package persistance.entities.structures;
 
-import persistance.entities.products.Chemicals.Cement;
-import persistance.entities.products.Chemicals.Paint;
-import persistance.entities.products.Tools.Screwdriver;
+import persistance.entities.products.Cement;
+import persistance.entities.products.Paint;
+import persistance.entities.products.Screwdriver;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.Set;
 
         @NamedQuery(name = "findDepartmentByName",query="select department from Department department where name= :name"),
         @NamedQuery(name = "deleteDepartmentByName",query = "delete from Department where name= :name"),
-        @NamedQuery(name = "updateDepartmentName",query = "update from Department department set name= :newName where name= :name")
+        @NamedQuery(name = "renameDepartment",query = "update from Department department set name= :newName where name= :name")
 })
 
 @Entity

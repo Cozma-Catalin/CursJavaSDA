@@ -1,11 +1,13 @@
 package bussiness.dto.structures;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class DepartmentDTO {
 
 
     @NotNull
+    @Pattern(regexp = "([a-zA-z]*)")
     private String name;
 
     public DepartmentDTO(){}

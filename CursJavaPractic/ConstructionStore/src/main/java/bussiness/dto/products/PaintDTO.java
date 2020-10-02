@@ -1,16 +1,23 @@
-package bussiness.dto.products.chemicals;
+package bussiness.dto.products;
 
 import bussiness.dto.structures.DepartmentDTO;
 import bussiness.dto.structures.WarehouseDTO;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 public class PaintDTO {
+    @NotNull
     private String brand;
-    private String size;
+    @NotNull
     private String color;
+    @NotNull
+    private String size;
+    @NotNull
     private String usage;
+    @NotNull
     private double price;
+    @NotNull
     private double quantity;
     private DepartmentDTO departmentDTO;
     private Set<WarehouseDTO> warehouseDTOSet;

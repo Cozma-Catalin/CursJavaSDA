@@ -16,9 +16,9 @@
         <mapping class="persistance.entities.structures.Department"/>
         <mapping class="persistance.entities.accounts.AdminAccount"/>
         <mapping class="persistance.entities.accounts.ClientAccount"/>
-        <mapping class="persistance.entities.products.Chemicals.Cement"/>
-        <mapping class="persistance.entities.products.Chemicals.Paint"/>
-        <mapping class="persistance.entities.products.Tools.Screwdriver"/>
+        <mapping class="persistance.entities.products.Cement"/>
+        <mapping class="persistance.entities.products.Paint"/>
+        <mapping class="persistance.entities.products.Screwdriver"/>
         <mapping class="persistance.entities.finance.ShoppingCart"/>
     </session-factory>
 </hibernate-configuration>

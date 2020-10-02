@@ -1,13 +1,14 @@
 package persistance.entities.structures;
 
-import persistance.entities.products.Chemicals.Cement;
-import persistance.entities.products.Chemicals.Paint;
-import persistance.entities.products.Tools.Screwdriver;
+import persistance.entities.products.Cement;
+import persistance.entities.products.Paint;
+import persistance.entities.products.Screwdriver;
 
 import javax.persistence.*;
 import java.util.Set;
 @NamedQueries({
-        @NamedQuery(name = "findWarehouse",query = "select warehouse from Warehouse warehouse where name= :name and city= :city")
+        @NamedQuery(name = "findWarehouse",query = "select warehouse from Warehouse warehouse where city= :city and address= :address"),
+        @NamedQuery(name = "deleteWarehouse",query = "delete from Warehouse where name= :name and city= :city")
 })
 
 @Entity

@@ -1,4 +1,4 @@
-package bussiness.dto.products.chemicals;
+package bussiness.dto.products;
 
 import bussiness.dto.structures.DepartmentDTO;
 import bussiness.dto.structures.WarehouseDTO;
@@ -6,38 +6,31 @@ import bussiness.dto.structures.WarehouseDTO;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-public class CementDTO {
-
+public class ScrewdriverDTO {
     @NotNull
-
     private String brand;
     @NotNull
-
     private String size;
-
+    @NotNull
+    private String headType;
     @NotNull
     private double price;
-
     @NotNull
     private double quantity;
-
     private DepartmentDTO departmentDTO;
-
     private Set<WarehouseDTO> warehouseDTOSet;
 
+    public ScrewdriverDTO(){}
 
-    public CementDTO(){}
-
-    public CementDTO(String brand, String size, double price, double quantity, DepartmentDTO departmentDTO, Set<WarehouseDTO> warehouseDTOSet) {
-
+    public ScrewdriverDTO(String brand, String size, String headType, double price, double quantity, DepartmentDTO departmentDTO, Set<WarehouseDTO> warehouseDTOSet) {
         this.brand = brand;
         this.size = size;
+        this.headType = headType;
         this.price = price;
         this.quantity = quantity;
         this.departmentDTO = departmentDTO;
         this.warehouseDTOSet = warehouseDTOSet;
     }
-
 
     public String getBrand() {
         return brand;
@@ -53,6 +46,14 @@ public class CementDTO {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getHeadType() {
+        return headType;
+    }
+
+    public void setHeadType(String headType) {
+        this.headType = headType;
     }
 
     public double getPrice() {
@@ -89,6 +90,6 @@ public class CementDTO {
 
     @Override
     public String toString() {
-        return "CementDTO: " + brand + ", size: " + size + ", price: " + price + ", quantity: " + quantity + ",department: " + departmentDTO + ",warehouses: " + warehouseDTOSet ;
+        return "ScrewdriverDTO: " + brand + ", size: " + size + ", headType: " + headType + ", price: " + price + ", quantity: " + quantity + ",department: " + departmentDTO + ",warehouses: " + warehouseDTOSet ;
     }
 }
