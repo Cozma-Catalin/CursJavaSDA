@@ -1,6 +1,6 @@
 package persistance.dao.structures;
 
-import bussiness.config.HibernateUtil;
+import business.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -13,21 +13,24 @@ import java.util.List;
 public class WarehouseDAO {
 
 
-    public List<Warehouse> findWarehouse(String city, String address) {
+    public Warehouse findWarehouse(String city, String address) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query findWarehouseQuery = session.createNamedQuery("findWarehouse");
         findWarehouseQuery.setParameter("city", city);
-        findWarehouseQuery.setParameter("address",address);
-        List<Warehouse> warehouseFoundList = findWarehouseQuery.getResultList();
-        /*if(!warehouseFound.getAddress().equalsIgnoreCase(address)){
-            warehouseFound.setName(" ");
-            warehouseFound.setCity(" ");
-            warehouseFound.setAddress(" ");
-        }*/
+        findWarehouseQuery.setParameter("address", address);
+        Warehouse warehouseFound = (Warehouse) findWarehouseQuery.uniqueResult();
         session.getTransaction().commit();
         session.close();
-        return warehouseFoundList;
+        Warehouse warehouse = new Warehouse();
+        if (warehouseFound == null) {
+            warehouse.setName(" ");
+            warehouse.setCity(" ");
+            warehouse.setAddress(" ");
+            return warehouse;
+        } else {
+            return warehouseFound;
+        }
     }
 
 

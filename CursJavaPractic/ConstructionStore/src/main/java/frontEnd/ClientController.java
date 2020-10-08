@@ -1,6 +1,6 @@
 package frontEnd;
 
-import bussiness.service.products.CementService;
+import business.service.products.CementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,4 +10,7 @@ public class ClientController {
     CementService cementService;
 
 
+    public void addCementToCart(String brand,double quantity){
+        cementService.addCementDTOtoCart(brand,quantity);
+    }
 }

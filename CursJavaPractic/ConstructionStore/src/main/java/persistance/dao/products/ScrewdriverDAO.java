@@ -1,6 +1,6 @@
 package persistance.dao.products;
 
-import bussiness.config.HibernateUtil;
+import business.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;

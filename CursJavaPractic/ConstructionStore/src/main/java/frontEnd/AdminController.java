@@ -1,13 +1,13 @@
 package frontEnd;
 
-import bussiness.dto.products.CementDTO;
-import bussiness.dto.products.PaintDTO;
-import bussiness.dto.products.ScrewdriverDTO;
-import bussiness.dto.structures.DepartmentDTO;
-import bussiness.service.products.CementService;
-import bussiness.service.products.PaintService;
-import bussiness.service.products.ScrewdriverService;
-import bussiness.service.structures.DepartmentService;
+import business.dto.products.CementDTO;
+import business.dto.products.PaintDTO;
+import business.dto.products.ScrewdriverDTO;
+import business.dto.structures.DepartmentDTO;
+import business.service.products.CementService;
+import business.service.products.PaintService;
+import business.service.products.ScrewdriverService;
+import business.service.structures.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -153,7 +153,15 @@ public class AdminController {
         return result + " items updated.";
     }
 
-
+    @DeleteMapping("/deleteScrewdriver")
+    public String deleteScrewdriver(String brand){
+        int result = screwdriverService.deleteScrewdriverDTOByBrand(brand);
+        if(result == 0){
+            return "No item found with this brand.";
+        }else{
+            return result + " items deleted.";
+        }
+    }
 
     @DeleteMapping("/deleteDepartmentByName")
     public String deleteDepartmentByName(String name) {
