@@ -1,25 +1,37 @@
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
 
 
-        int[] numbers = {1, 2, 3, 3, 4, 5, 5, 8, 9,10, 10};
-        checkForDoubles(numbers);
+        int[] numbers = {1, 2, 3, 3, 4, 5, 5, 8, 9, 10, 10,5,8,7};
+        checkForDoublesV2(numbers);
 
     }
 
-    static void checkForDoubles(int[] array) {
+    static void checkForDoublesV2(int[] array) {   //O(n) final
+        //calculam care este cel mai mare nr din primul vector
         int count = 0;
-
-        for (int i = 0; i < array.length-1; i++) {
-            for (int j = i+1; j < array.length; j++) {
-                if (array[i] == array[j]) {
-                    System.out.println(array[i]);
-                    count++;
-                }
+        int max = 0;
+        for (int i = 0; i < array.length; i++) {   //O(n)
+            if (array[i] > max) {
+                max = array[i];
             }
         }
-        System.out.println(count);;
+
+        int[] arr = new int[max+1];
+
+        for (int i = 0; i < array.length; i++) {  //O(n)
+            if (arr[array[i]] == array[i]) {
+                System.out.println(arr[array[i]]);
+                count++;
+            } else {
+                arr[array[i]] = array[i];
+            }
+        }
+        System.out.println(count);
+
     }
 }
 
