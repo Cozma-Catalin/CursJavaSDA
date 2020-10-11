@@ -22,7 +22,7 @@ public class TextFileReader {
                     }else{
                        int wordCount = wordsMap.get(word);
                        wordCount++;
-                       wordsMap.get(word.repeat(wordCount));
+                       wordsMap.put(word,wordCount);
                     }
                 }
                 text = bufferedReader.readLine();
