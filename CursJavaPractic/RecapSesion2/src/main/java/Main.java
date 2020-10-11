@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+     /*   Scanner scanner = new Scanner(System.in);
         LinkedList<Integer> linkedList = new LinkedList<>();
         ArrayList<Integer> arrayList = new ArrayList<>();
         System.out.println("Introduceti numerele");
@@ -16,9 +16,9 @@ public class Main {
         displayNumbers(linkedList);
         removeEvenNumbers(linkedList);
         removeElementsOnOddPosition(arrayList);
+*/
 
-
-        char[] cuv = {'a', 'm', 'p', 'm', 'a'};
+        char[] cuv = {'a', 'm', 'm', 'a'};
 
         checkIfPalindrome(cuv);
 
