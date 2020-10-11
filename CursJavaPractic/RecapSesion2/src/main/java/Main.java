@@ -18,7 +18,7 @@ public class Main {
         removeElementsOnOddPosition(arrayList);
 */
 
-        char[] cuv = {'a', 'm', 'm', 'a'};
+        char[] cuv = {'a', 'm', 'm', 'a','s'};
 
         checkIfPalindrome(cuv);
 
@@ -65,10 +65,12 @@ public class Main {
                 palindrome = true;
             } else {
                 palindrome = false;
+                break;
             }
             i++;
             j--;
         }
+        System.out.println("Is the word a palindrome?");
         System.out.println(palindrome);
 
     }
