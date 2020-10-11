@@ -92,10 +92,10 @@ public class Main {
         int fibNr=0;
 
         while(fibNr<arrary.length){
-            System.out.println(fibNr);
-            fibNr = j;
-            j= i+j;
-            i=fibNr;
+            System.out.println(fibNr); //0-->1-->1-->2-->3
+            fibNr = j;                 //fibNr=1-->fibNr=1-->fibNr=2-->fibNr=3
+            j= i + j;                  //j=1-->j=2-->j=3-->j=5
+            i =fibNr;                  //i=1-->i=1-->i=2-->i=3
 
         }
     }
