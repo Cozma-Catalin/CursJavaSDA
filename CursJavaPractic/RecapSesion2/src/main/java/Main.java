@@ -16,11 +16,21 @@ public class Main {
         displayNumbers(linkedList);
         removeEvenNumbers(linkedList);
         removeElementsOnOddPosition(arrayList);
-*/
+
 
         char[] cuv = {'a', 'm', 'm', 'a','s'};
 
         checkIfPalindrome(cuv);
+*/
+
+    int[] array = new int[1030];
+    for(int i = 0;i<array.length;i++){
+        array[i]=i;
+    }
+
+    displayFibNr(array);
+
+
 
     }
 
@@ -74,4 +84,20 @@ public class Main {
         System.out.println(palindrome);
 
     }
+
+    static void displayFibNr(int[] arrary){
+
+        int i = 0;
+        int j = 1;
+        int fibNr=0;
+
+        while(fibNr<arrary.length){
+            System.out.println(fibNr);
+            fibNr = j;
+            j= i+j;
+            i=fibNr;
+
+        }
+    }
+
 }
