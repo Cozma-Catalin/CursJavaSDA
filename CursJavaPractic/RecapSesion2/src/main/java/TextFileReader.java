@@ -20,8 +20,9 @@ public class TextFileReader {
                     if(wordsMap.get(word)==null){
                         wordsMap.put(word,count);
                     }else{
-                        count++;
-                        wordsMap.put(word,count);
+                       int wordCount = wordsMap.get(word);
+                       wordCount++;
+                       wordsMap.get(word.repeat(wordCount));
                     }
                 }
                 text = bufferedReader.readLine();
