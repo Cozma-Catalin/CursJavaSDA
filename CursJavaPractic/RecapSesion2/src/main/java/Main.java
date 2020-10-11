@@ -29,7 +29,7 @@ public class Main {
     }
 
     displayFibNr(array);
-
+    displaySum(array);
 
 
     }
@@ -98,6 +98,14 @@ public class Main {
             i =fibNr;                  //i=1-->i=1-->i=2-->i=3
 
         }
+    }
+
+    static void displaySum(int[] array){
+        double sum = 0;
+        for(int i = 0;i<array.length;i++){
+            sum += array[i];
+        }
+        System.out.println(sum);
     }
 
 }
