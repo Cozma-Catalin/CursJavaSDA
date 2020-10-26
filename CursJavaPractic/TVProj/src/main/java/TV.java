@@ -40,4 +40,7 @@ public class TV {
         return "TV: " + brand + ", model: " + model + ", diagonal: " + diag ;
     }
 
+    public TV clone(){
+        return new TV(this.brand,this.model,this.diag);
+    }
 }

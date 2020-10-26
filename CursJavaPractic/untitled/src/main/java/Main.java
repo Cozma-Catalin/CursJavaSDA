@@ -1,36 +1,37 @@
+import java.util.Scanner;
+
 public class Main {
-
     public static void main(String[] args) {
-
-
-        int[] numbers = {1, 2,1,4,2,5,4,7,8,6, 3, 3, 4, 5, 5, 8, 9, 10, 10,5,8,7};
-        checkForDoublesV2(numbers);
-
-    }
-
-    static void checkForDoublesV2(int[] array) {   //O(n) final
-        //calculam care este cel mai mare nr din primul vector
-        int count = 0;
-        int max = 0;
-        for (int value : array) {   //O(n)
-            if (value > max) {
-                max = value;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduceti nr:");
+        int userInput = scanner.nextInt();
+        int[][] array = new int[2][userInput];
+        array[0][0] = userInput;
+        for (int i = 0; i < userInput; i++) {
+            System.out.println("Introduceti valoarea:");
+            array[1][i] = scanner.nextInt();
+        }
+        
+        System.out.println("Valorile array ului sunt: ");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < userInput; j++) {
+                System.out.print(array[i][j] + "  ");
             }
+            System.out.println("");
         }
 
-        int[] arr = new int[max+1];
 
-        for (int i = 0; i < array.length; i++) {  //O(n)
-            if (arr[array[i]] == array[i]) {
-                System.out.println(arr[array[i]]);
+        int maxCount = 0;
+        for (int i = 0; i <= userInput - 2; i++) {
+            int count = 1;
+            while (i <= userInput - 2 && array[1][i] + array[1][i + 1] == 2) {
                 count++;
-            } else {
-                arr[array[i]] = array[i];
+                i++;
+            }
+            if (count > maxCount) {
+                maxCount = count;
             }
         }
-        System.out.println("The count is:");
-        System.out.println(count);
-
+        System.out.println("Cifra '1' se regaseste consecutiv de : " + maxCount + " ori.");
     }
 }
-

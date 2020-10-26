@@ -1,16 +1,16 @@
-public class SmartPhone extends Product {
+public class Phone extends Product implements SmartPhone {
     private String display;
     private String batterySize;
     private String cam;
 
-    public SmartPhone(String brand, String model, double quantity, double price, String display, String batterySize,String cam) {
+    public Phone(String brand, String model, double quantity, double price, String display, String batterySize,String cam) {
         super(brand, model, quantity, price);
         this.display = display;
         this.batterySize = batterySize;
         this.cam = cam;
     }
 
-    public SmartPhone() {}
+    public Phone() {}
 
     public void start() {
         System.out.println("Phone started...setup account.");
@@ -20,7 +20,7 @@ public class SmartPhone extends Product {
         System.out.println("Phone shutting down.");
     }
 
-    public void takingPictures(){
+    public void takePictures(){
         System.out.println("Click...:)) picture taken.");
     }
 
@@ -50,5 +50,9 @@ public class SmartPhone extends Product {
 
     public void setCam(String cam) {
         this.cam = cam;
+    }
+
+    public void connectToWifi() {
+        System.out.println("Wifi connected...browse the web.");
     }
 }

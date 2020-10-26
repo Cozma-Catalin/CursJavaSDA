@@ -76,4 +76,20 @@ public class NumberOps {
         System.out.println(average);
         return average;
     }
+
+
+    public int Liters(double time)  {
+        int liters = (int) (time/2);
+        System.out.println(liters);
+        return liters;
+    }
+
+    public int[] invert(int[] array) {
+        for(int i = 0; i<array.length;i++){
+            array[i] = array[i] * -1;
+            System.out.println(array[i]);
+        }
+
+        return array;
+    }
 }

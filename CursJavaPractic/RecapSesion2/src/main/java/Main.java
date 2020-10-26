@@ -110,12 +110,13 @@ public class Main {
             while (i < j) {
                 if (array[i] == array[j]) {
                     palindrome = true;
+                    i++;
+                    j--;
                 } else {
                     palindrome = false;
                     break;
                 }
-                i++;
-                j--;
+
             }
             System.out.println("Is the word a palindrome?");
             System.out.println(palindrome);
