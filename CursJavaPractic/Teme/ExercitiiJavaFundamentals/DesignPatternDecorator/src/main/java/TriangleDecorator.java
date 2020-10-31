@@ -8,7 +8,7 @@ public class TriangleDecorator extends ShapeDecorator {
 
     @Override
     public void draw() {
-        shapeToDecorate.draw();
+        super.draw();
         System.out.println("Am border.");
     }
 }

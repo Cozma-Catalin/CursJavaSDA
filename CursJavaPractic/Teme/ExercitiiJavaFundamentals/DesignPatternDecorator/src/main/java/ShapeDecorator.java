@@ -1,4 +1,4 @@
-public abstract class ShapeDecorator {
+public abstract class ShapeDecorator implements Shape{
     protected Shape shapeToDecorate;
 
 
@@ -6,6 +6,10 @@ public abstract class ShapeDecorator {
         this.shapeToDecorate = shapeToDecorate;
     }
 
-    public abstract void draw();
+    public void draw(){
+        if(shapeToDecorate!=null){
+            shapeToDecorate.draw();
+        }
+    }
 
 }
