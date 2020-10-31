@@ -5,6 +5,7 @@ import persistance.entities.structures.Department;
 import persistance.entities.structures.Warehouse;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @NamedQueries({
@@ -47,6 +48,15 @@ public class Cement {
         this.price = price;
         this.quantity = quantity;
         this.department = department;
+    }
+
+    public Cement(String brand, String size, double price, double quantity, Department department, Set<Warehouse> warehouses) {
+        this.brand = brand;
+        this.size = size;
+        this.price = price;
+        this.quantity = quantity;
+        this.department = department;
+        this.warehouseSet = warehouses;
     }
 
     public Cement(){}
@@ -113,6 +123,24 @@ public class Cement {
 
     public void setShoppingCartSet(Set<ShoppingCart> shoppingCartSet) {
         this.shoppingCartSet = shoppingCartSet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cement cement = (Cement) o;
+        return  Double.compare(cement.price, price) == 0 &&
+                Double.compare(cement.quantity, quantity) == 0 &&
+                Objects.equals(brand, cement.brand) &&
+                Objects.equals(size, cement.size) &&
+                Objects.equals(department, cement.department) &&
+                Objects.equals(warehouseSet, cement.warehouseSet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, size, price, quantity, department, warehouseSet);
     }
 
     @Override

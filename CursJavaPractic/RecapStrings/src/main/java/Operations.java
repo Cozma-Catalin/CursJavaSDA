@@ -101,14 +101,17 @@ public class Operations {
     public void transformText() {
         ArrayList list = textFileReader.readFile();
         Iterator iterator = list.iterator();
-        String text = " ";
+        String text = "";
         while (iterator.hasNext()) {
             String[] line = (String[]) iterator.next();
             line[0] = String.valueOf(Math.pow(Integer.parseInt(line[0]), 3));
             text += line[0] + " ";
             for (int i = 1; i < line.length; i++) {
                 if (line[i].endsWith("a") || line[i].endsWith("e") || line[i].endsWith("i") || line[i].endsWith("o") || line[i].endsWith("u")) {
-                    text += line[i] + " ";
+                    text += line[i] + " " ;
+                }
+                if(i==line.length-1){
+                    text+=System.lineSeparator();
                 }
             }
         }
