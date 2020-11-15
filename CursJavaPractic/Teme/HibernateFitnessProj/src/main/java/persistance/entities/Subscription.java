@@ -17,28 +17,19 @@ public class Subscription {
     private String beginSubscription;
     @Column(name = "end_of_subscription")
     private String endOfSubscription;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "workout_id")
-    private Workout workout;
     @OneToMany(mappedBy = "subscription",cascade = CascadeType.ALL)
-    private Set<Person> person;
-    @OneToOne(mappedBy = "subscription",cascade = CascadeType.ALL)
-    private Gym gym;
-
-
-
-
+    private Set<Customer> customerSet;
 
 
     public Subscription(){}
 
 
-    public Subscription(String name,String price,String beginSubscription,String endOfSubscription,Gym gym){
+    public Subscription(String name,String price,String beginSubscription,String endOfSubscription){
         this.name = name;
         this.price = price;
         this.beginSubscription = beginSubscription;
         this.endOfSubscription = endOfSubscription;
-        this.gym = gym;
+
     }
 
     public String getName() {
@@ -85,29 +76,16 @@ public class Subscription {
         this.endOfSubscription = endOfSubscription;
     }
 
-    public Workout getWorkout() {
-        return workout;
+
+    public Set<Customer> getCustomerSet() {
+        return customerSet;
     }
 
-    public void setWorkout(Workout workout) {
-        this.workout = workout;
+    public void setCustomerSet(Set<Customer> customerSet) {
+        this.customerSet = customerSet;
     }
 
-    public Set<Person> getPerson() {
-        return person;
-    }
 
-    public void setPerson(Set<Person> person) {
-        this.person = person;
-    }
-
-    public Gym getGym() {
-        return gym;
-    }
-
-    public void setGym(Gym gym) {
-        this.gym = gym;
-    }
 
     @Override
     public String toString() {

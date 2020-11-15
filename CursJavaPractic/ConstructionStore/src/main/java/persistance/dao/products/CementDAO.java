@@ -1,6 +1,6 @@
 package persistance.dao.products;
 
-import business.config.HibernateUtil;
+import persistance.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -94,7 +94,6 @@ public class CementDAO {
         Cement cement = findCementByBrand(brand);
         cement.setQuantity(quantity);
         cementSet.add(cement);
-        shoppingCart.setCementSet(cementSet);
         session.save(shoppingCart);
         session.getTransaction().commit();
         session.close();

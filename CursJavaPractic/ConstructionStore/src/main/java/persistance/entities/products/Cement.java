@@ -1,6 +1,6 @@
 package persistance.entities.products;
 
-import persistance.entities.finance.ShoppingCart;
+
 import persistance.entities.structures.Department;
 import persistance.entities.structures.Warehouse;
 
@@ -9,18 +9,18 @@ import java.util.Objects;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = "findCementByBrand",query = "select cement from Cement cement where brand= :brand"),
-        @NamedQuery(name = "deleteCementByBrand",query = "delete from Cement where brand= :brand"),
-        @NamedQuery(name = "updateCementPrice",query = "update from Cement cement set price= :price where brand= :brand"),
-        @NamedQuery(name = "updateCementQuantity",query = "update from Cement cement set quantity= :quantity where brand= :brand"),
-        @NamedQuery(name = "countCementByBrand",query = "select count(*) from Cement cement where brand= :brand")
+        @NamedQuery(name = "findCementByBrand", query = "select cement from Cement cement where brand= :brand"),
+        @NamedQuery(name = "deleteCementByBrand", query = "delete from Cement where brand= :brand"),
+        @NamedQuery(name = "updateCementPrice", query = "update from Cement cement set price= :price where brand= :brand"),
+        @NamedQuery(name = "updateCementQuantity", query = "update from Cement cement set quantity= :quantity where brand= :brand"),
+        @NamedQuery(name = "countCementByBrand", query = "select count(*) from Cement cement where brand= :brand")
 })
 
 @Entity
 @Table(name = "cements")
 public class Cement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "brand")
     private String brand;
@@ -33,14 +33,13 @@ public class Cement {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departments_id")
     private Department department;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "cements_warehouses",
             joinColumns = {@JoinColumn(name = "cements_id")},
             inverseJoinColumns = {@JoinColumn(name = "warehouses_id")}
     )
     private Set<Warehouse> warehouseSet;
-    @ManyToMany(mappedBy = "cementSet",cascade = CascadeType.ALL)
-    private Set<ShoppingCart> shoppingCartSet;
+
 
     public Cement(String brand, String size, double price, double quantity, Department department) {
         this.brand = brand;
@@ -59,7 +58,8 @@ public class Cement {
         this.warehouseSet = warehouses;
     }
 
-    public Cement(){}
+    public Cement() {
+    }
 
     public int getId() {
         return id;
@@ -117,20 +117,12 @@ public class Cement {
         this.warehouseSet = warehouseSet;
     }
 
-    public Set<ShoppingCart> getShoppingCartSet() {
-        return shoppingCartSet;
-    }
-
-    public void setShoppingCartSet(Set<ShoppingCart> shoppingCartSet) {
-        this.shoppingCartSet = shoppingCartSet;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cement cement = (Cement) o;
-        return  Double.compare(cement.price, price) == 0 &&
+        return Double.compare(cement.price, price) == 0 &&
                 Double.compare(cement.quantity, quantity) == 0 &&
                 Objects.equals(brand, cement.brand) &&
                 Objects.equals(size, cement.size) &&
@@ -145,6 +137,6 @@ public class Cement {
 
     @Override
     public String toString() {
-        return "Cement: " + "brand: " + brand + ", size: " + size + ", price: " + price + ", quantity: " + quantity + ", department: " + department + ",warehouses: " + warehouseSet ;
+        return "Cement: " + "brand: " + brand + ", size: " + size + ", price: " + price + ", quantity: " + quantity + ", department: " + department + ",warehouses: " + warehouseSet;
     }
 }

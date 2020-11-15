@@ -13,20 +13,30 @@ public class Workout {
     private String name;
     @Column(name = "duration")
     private String duration;
-    @Column(name = "aerobic")
-    private int aerobic;
-    @OneToMany(mappedBy = "workout",cascade = CascadeType.ALL)
-    private Set<Person> person;
-    @OneToOne(mappedBy = "workout",cascade = CascadeType.ALL)
-    private Subscription subscription;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trainers_id")
+    private Trainer trainer;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "gyms_workouts",
+            joinColumns = {@JoinColumn(name = "workouts_id")},
+            inverseJoinColumns = {@JoinColumn(name = "gyms_id")})
+    private Set<Gym> gymSet;
 
 
-    public Workout(){}
+    public Workout() {
+    }
 
-    public Workout(String name,String duration,int aerobic){
+    public Workout(String name, String duration, Trainer trainer,Set<Gym> gymSet) {
         this.name = name;
         this.duration = duration;
-        this.aerobic = aerobic;
+        this.trainer = trainer;
+        this.gymSet = gymSet;
+    }
+
+    public Workout(String name, String duration, Trainer trainer) {
+        this.name = name;
+        this.duration = duration;
+        this.trainer = trainer;
     }
 
     public String getName() {
@@ -45,20 +55,37 @@ public class Workout {
         this.duration = duration;
     }
 
-    public boolean getAerobic() {
-        if(this.aerobic==0){
-            return false;
-        }else{
-         return true;
-        }
+    public String getDuration() {
+        return duration;
     }
 
-    public void setAerobic(int aerobic) {
-        this.aerobic = aerobic;
+
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
+    }
+
+    public Set<Gym> getGymSet() {
+        return gymSet;
+    }
+
+    public void setGymSet(Set<Gym> gymSet) {
+        this.gymSet = gymSet;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Workout " + name + ", duration: " + duration + ", aerobic: " + getAerobic() ;
+        return "Workout " + name + ", duration: " + duration;
     }
 }

@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "screwdrivers")
 public class Screwdriver {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "brand")
     private String brand;
@@ -33,7 +33,7 @@ public class Screwdriver {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departments_id")
     private Department department;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER )
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY )
     @JoinTable(name = "screwdrivers_warehouses",
             joinColumns = {@JoinColumn(name = "screwdrivers_id")},
             inverseJoinColumns = {@JoinColumn(name = "warehouses_id")}

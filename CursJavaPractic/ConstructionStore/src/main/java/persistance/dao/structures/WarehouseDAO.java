@@ -1,12 +1,10 @@
 package persistance.dao.structures;
 
-import business.config.HibernateUtil;
+import persistance.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import persistance.entities.structures.Warehouse;
-
-import java.util.List;
 
 
 @Repository

@@ -14,7 +14,6 @@ import persistance.entities.structures.Department;
 import persistance.entities.structures.Warehouse;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -103,15 +102,15 @@ public class CementService {
         Cement cement = cementDAO.findCementByBrand(brand);
         if (!cement.getBrand().equalsIgnoreCase(brand)) {
             cementDTO.setBrand(" ");
+        }else {
+            cementDTO.setBrand(cement.getBrand());
+            cementDTO.setSize(cement.getSize());
+            cementDTO.setPrice(cement.getPrice());
+            cementDTO.setQuantity(cement.getQuantity());
+
+            extractDepartmentDTOFromCement(cementDTO, cement);
+            extractWarehouseDTOFromCement(cementDTO, cement);
         }
-        cementDTO.setBrand(cement.getBrand());
-        cementDTO.setSize(cement.getSize());
-        cementDTO.setPrice(cement.getPrice());
-        cementDTO.setQuantity(cement.getQuantity());
-
-        extractDepartmentDTOFromCement(cementDTO, cement);
-        extractWarehouseDTOFromCement(cementDTO, cement);
-
         return cementDTO;
     }
 

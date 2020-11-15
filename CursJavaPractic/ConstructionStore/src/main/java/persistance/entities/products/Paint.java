@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "paints")
 public class Paint {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "brand")
     private String brand;
@@ -34,7 +34,7 @@ public class Paint {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departments_id")
     private Department department;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name = "paints_warehouses",
             joinColumns = {@JoinColumn(name = "paints_id")},
             inverseJoinColumns = {@JoinColumn(name = "warehouses_id")}
@@ -49,6 +49,27 @@ public class Paint {
         this.quantity = quantity;
         this.color = color;
         this.usage = usage;
+    }
+
+    public Paint(String brand, String color, String size, String usage, double price, double quantity, Department department) {
+        this.brand = brand;
+        this.color = color;
+        this.size = size;
+        this.usage = usage;
+        this.price = price;
+        this.quantity = quantity;
+        this.department = department;
+    }
+
+    public Paint(String brand, String color, String size, String usage, double price, double quantity, Department department, Set<Warehouse> warehouseSet) {
+        this.brand = brand;
+        this.color = color;
+        this.size = size;
+        this.usage = usage;
+        this.price = price;
+        this.quantity = quantity;
+        this.department = department;
+        this.warehouseSet = warehouseSet;
     }
 
     public Paint() {
