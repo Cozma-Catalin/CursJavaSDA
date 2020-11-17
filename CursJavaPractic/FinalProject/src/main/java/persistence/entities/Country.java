@@ -5,7 +5,9 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "deleteCountry",query = "delete from Country where name= :name") ,
+        @NamedQuery(name = "countCountry" ,query = "select count(name) from Country where name= :name"),
         @NamedQuery(name = "findCountry",query = "select country from Country country where country.name= :name"),
+        @NamedQuery(name = "findCountries",query = "select country from Country country inner join country.continent continent where continent.name= :name"),
         @NamedQuery(name = "changeCountryName",query = "update from Country set name= :newName where name= :name")
 })
 

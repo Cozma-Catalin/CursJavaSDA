@@ -1,12 +1,16 @@
 package persistence.dao;
 
+import business.dto.CountryDTO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import persistence.HibernateUtil;
 import persistence.entities.Continent;
+import persistence.entities.Country;
 
 import javax.persistence.NoResultException;
+import java.util.List;
+
 
 @Repository
 
@@ -31,27 +35,27 @@ public class ContinentDAO {
         return result;
     }
 
-    public Continent findContinent(String name){
+    public Continent findContinent(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query findContinentQuery = session.createNamedQuery("findContinent");
-        findContinentQuery.setParameter("name",name);
-        Continent result = null;
+        findContinentQuery.setParameter("name", name);
+        Continent continent = null;
         try {
-            result = (Continent) findContinentQuery.getSingleResult();
+            continent = (Continent) findContinentQuery.getSingleResult();
         } catch (NoResultException e) {
             System.out.println(e.getMessage());
         }
         session.getTransaction().commit();
         session.close();
-        return result;
+        return continent;
     }
 
-    public long countContinent(String name){
+    public long countContinent(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query countContinentQuery = session.createNamedQuery("countContinent");
-        countContinentQuery.setParameter("name",name);
+        countContinentQuery.setParameter("name", name);
         long result = (Long) countContinentQuery.getSingleResult();
         session.getTransaction().commit();
         session.close();

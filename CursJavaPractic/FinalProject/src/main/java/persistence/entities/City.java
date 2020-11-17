@@ -3,8 +3,10 @@ package persistence.entities;
 import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "deleteCity",query = "delete from City where name= :name"),
+        @NamedQuery(name = "countCity",query = "select count(name) from City where name= :name"),
         @NamedQuery(name = "findCity", query = "select city from City city where city.name= :name"),
-        @NamedQuery(name = "changeCityName",query = "update from City set name= :newName where name= :name")
+        @NamedQuery(name = "changeCityName",query = "update from City set name= :newName where name= :name"),
+        @NamedQuery(name = "findCities",query = "select city from City city inner join city.country country where country.name= :name")
 })
 
 @Entity

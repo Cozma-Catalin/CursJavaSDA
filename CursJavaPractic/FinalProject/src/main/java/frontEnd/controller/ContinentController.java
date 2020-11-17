@@ -1,6 +1,7 @@
 package frontEnd.controller;
 
 import business.dto.ContinentDTO;
+import business.dto.CountryDTO;
 import business.service.ContinentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class ContinentController {
@@ -17,9 +19,8 @@ public class ContinentController {
 
     @PostMapping(path = "/insertContinent")
     public ResponseEntity insertContinent(@RequestBody @Valid ContinentDTO continentDTO) {
-        long result = continentService.countContinentDTO(continentDTO.getName());
-        if (result != 0){
-            return  ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
+        if (continentService.countContinentDTO(continentDTO.getName()) != 0){
+            return  ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(continentDTO.getName() + " already exists in database");
         }
         continentService.insertContinentDTO(continentDTO);
         return ResponseEntity.ok("Continent '" + continentDTO.getName() + "' added.");
@@ -29,9 +30,22 @@ public class ContinentController {
     public ResponseEntity findContinent(@RequestParam String name){
         ContinentDTO continentDTO = continentService.findContinentDTO(name);
         if(continentDTO==null){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(name + " can't be found in database.");
         }
         return ResponseEntity.ok(continentDTO);
     }
+
+
+    @DeleteMapping(path = "/deleteContinent")
+    public ResponseEntity deleteContinent(String name){
+        if(continentService.countContinentDTO(name)==0){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Continent '" + name + "' can't be found in database.");
+        }
+        if(continentService.deleteContinentDTO(name)==0){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(name + " can't be found in database to be deleted.");
+        }
+        return ResponseEntity.ok("Continent '" + name + "' deleted.");
+    }
+
 
 }

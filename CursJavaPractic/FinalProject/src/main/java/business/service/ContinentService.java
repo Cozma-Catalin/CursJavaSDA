@@ -1,15 +1,23 @@
 package business.service;
 
 import business.dto.ContinentDTO;
+import business.dto.CountryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.ContinentDAO;
+import persistence.dao.CountryDAO;
 import persistence.entities.Continent;
+import persistence.entities.Country;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class ContinentService {
     @Autowired
     ContinentDAO continentDAO;
+    @Autowired
+    CountryDAO countryDAO;
 
     public void insertContinentDTO(ContinentDTO continentDTO) {
         Continent continent = new Continent();
@@ -31,4 +39,15 @@ public class ContinentService {
         continentDTO.setName(continent.getName());
         return continentDTO;
     }
+
+    public int deleteContinentDTO(String name) {
+        List<Country> countryName = countryDAO.findCountries(name);
+        for (Country country : countryName) {
+            countryDAO.deleteCountry(country.getName());
+        }
+        int result = continentDAO.deleteContinent(name);
+        return result;
+    }
+
+
 }
