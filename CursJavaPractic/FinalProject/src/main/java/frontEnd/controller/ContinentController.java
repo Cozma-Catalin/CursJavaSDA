@@ -41,9 +41,7 @@ public class ContinentController {
         if(continentService.countContinentDTO(name)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Continent '" + name + "' can't be found in database.");
         }
-        if(continentService.deleteContinentDTO(name)==0){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(name + " can't be found in database to be deleted.");
-        }
+        continentService.deleteContinentDTO(name);
         return ResponseEntity.ok("Continent '" + name + "' deleted.");
     }
 

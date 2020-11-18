@@ -4,8 +4,10 @@ import business.dto.ContinentDTO;
 import business.dto.CountryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import persistence.dao.CityDAO;
 import persistence.dao.ContinentDAO;
 import persistence.dao.CountryDAO;
+import persistence.entities.City;
 import persistence.entities.Continent;
 import persistence.entities.Country;
 
@@ -18,10 +20,17 @@ public class CountryService {
     CountryDAO countryDAO;
     @Autowired
     ContinentDAO continentDAO;
+    @Autowired
+    CityDAO cityDAO;
 
     public void insertCountry(CountryDTO countryDTO) {
         Country country = new Country();
         country.setName(countryDTO.getName());
+        setContinent(countryDTO, country);
+        countryDAO.insertCountry(country);
+    }
+
+    private void setContinent(CountryDTO countryDTO, Country country) {
         Continent continentFound = continentDAO.findContinent(countryDTO.getContinentDTO().getName());
         if (continentFound == null) {
             Continent continent = new Continent();
@@ -30,7 +39,6 @@ public class CountryService {
         } else {
             country.setContinent(continentFound);
         }
-        countryDAO.insertCountry(country);
     }
 
     public long countCountryDTO(String name) {
@@ -54,7 +62,6 @@ public class CountryService {
     public List<CountryDTO> findCountriesDTO(String continentName) {
         List<CountryDTO> countryDTOList = new LinkedList<>();
         List<Country> countryList = countryDAO.findCountries(continentName);
-
         for (Country c : countryList) {
             CountryDTO countryDTO = new CountryDTO();
             countryDTO.setName(c.getName());
@@ -66,8 +73,11 @@ public class CountryService {
         return countryDTOList;
     }
 
-
     public int deleteCountry(String name) {
+        List<City> cityList = cityDAO.findCities(name);
+        for(City c : cityList){
+            cityDAO.deleteCity(c.getName());
+        }
         int result = countryDAO.deleteCountry(name);
         return result;
     }

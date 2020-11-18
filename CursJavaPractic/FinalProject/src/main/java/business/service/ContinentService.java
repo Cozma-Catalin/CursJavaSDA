@@ -1,7 +1,6 @@
 package business.service;
 
 import business.dto.ContinentDTO;
-import business.dto.CountryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.ContinentDAO;
@@ -9,7 +8,7 @@ import persistence.dao.CountryDAO;
 import persistence.entities.Continent;
 import persistence.entities.Country;
 
-import java.util.LinkedList;
+
 import java.util.List;
 
 @Service

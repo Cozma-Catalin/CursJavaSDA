@@ -7,12 +7,12 @@ import javax.validation.constraints.Pattern;
 
 public class ContinentDTO {
     @NotNull
-    @NotEmpty
     @NotBlank(message = "Campul este gol")
     @Pattern(regexp = "([a-z A-Z])*")
+    @NotEmpty
     private String name;
 
-    public ContinentDTO(String name) {
+    public ContinentDTO(@NotBlank(message = "Campul este gol") @Pattern(regexp = "([a-z A-Z])*") @NotNull @NotEmpty String name) {
         this.name = name;
     }
 

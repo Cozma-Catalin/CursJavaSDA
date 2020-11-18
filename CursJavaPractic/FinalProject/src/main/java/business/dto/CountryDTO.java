@@ -11,9 +11,12 @@ public class CountryDTO {
     @NotBlank(message = "Empty field!")
     @Pattern(regexp = "([a-z A-Z])*")
     private String name;
+    @NotNull
+    @NotEmpty(message = "enter valid continent")
+    @NotBlank(message = "enter continent")
     private ContinentDTO continentDTO;
 
-    public CountryDTO(String name, ContinentDTO continentDTO) {
+    public CountryDTO( String name,ContinentDTO continentDTO) {
         this.name = name;
         this.continentDTO = continentDTO;
     }

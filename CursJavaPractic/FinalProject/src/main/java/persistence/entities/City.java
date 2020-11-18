@@ -1,6 +1,8 @@
 package persistence.entities;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @NamedQueries({
         @NamedQuery(name = "deleteCity",query = "delete from City where name= :name"),
         @NamedQuery(name = "countCity",query = "select count(name) from City where name= :name"),
@@ -20,6 +22,8 @@ public class City {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "countries_id")
     private Country country;
+    @OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+    private Set<Hotel> hotelSet;
 
     public City(String name, Country country) {
         this.name = name;
@@ -51,6 +55,14 @@ public class City {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Set<Hotel> getHotelSet() {
+        return hotelSet;
+    }
+
+    public void setHotelSet(Set<Hotel> hotelSet) {
+        this.hotelSet = hotelSet;
     }
 
     @Override

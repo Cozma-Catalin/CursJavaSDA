@@ -52,10 +52,10 @@ public class CountryController {
 
     @DeleteMapping(path = "/deleteCountry")
     public ResponseEntity deleteCountry(@RequestParam String name) {
-        int result = countryService.deleteCountry(name);
-        if (result == 0) {
+        if(countryService.countCountryDTO(name)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(name + " can't be found in database to be deleted.");
         }
+        countryService.deleteCountry(name);
         return ResponseEntity.ok("Country '" + name + "' deleted.");
     }
 
