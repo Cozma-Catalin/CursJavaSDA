@@ -40,7 +40,8 @@ public class ContinentService {
     }
 
     public int deleteContinentDTO(String name) {
-        List<Country> countryName = countryDAO.findCountries(name);
+        List<Country> countryName = countryDAO.findCountriesInContinent(
+                name);
         for (Country country : countryName) {
             countryDAO.deleteCountry(country.getName());
         }

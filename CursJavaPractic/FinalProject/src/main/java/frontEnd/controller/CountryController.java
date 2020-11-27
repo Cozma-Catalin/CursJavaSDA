@@ -37,12 +37,12 @@ public class CountryController {
         return ResponseEntity.ok(countryDTO);
     }
 
-    @GetMapping(path = "/findCountries")
-    public ResponseEntity findCountries(@RequestParam String continentName){
+    @GetMapping(path = "/findCountriesInContinent")
+    public ResponseEntity findCountriesInContinent(@RequestParam String continentName){
         if(continentService.countContinentDTO(continentName)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(continentName+ " can't be found in database.");
         }
-        List<CountryDTO> countryDTOList = countryService.findCountriesDTO(continentName);
+        List<CountryDTO> countryDTOList = countryService.findCountriesInContinent(continentName);
         if(countryDTOList.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body( "No countries found for continent '" + continentName + "'.");
         }

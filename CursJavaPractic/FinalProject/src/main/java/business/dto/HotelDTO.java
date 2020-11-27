@@ -1,10 +1,9 @@
 package business.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.Set;
+
 
 public class HotelDTO {
     @NotNull
@@ -13,30 +12,30 @@ public class HotelDTO {
     @Pattern(regexp = "([a-z A-Z])*")
     private String name;
     @NotNull
-   // @Pattern(regexp = "([1-5])*")
-    private double numberOfStars;
     @NotBlank
-    @NotNull
     @NotEmpty
-    private String description;
+    private String address;
     @NotNull
-    private CityDTO cityDTO;
-    @NotNull
+    @Min(1)
+    @Max(5)
+    private double numberOfStars;
+    @NotNull @Valid
     private Set<RoomDTO> roomDTOSet;
+    @NotNull
+    private String description;
 
-    public HotelDTO(@NotNull @NotEmpty @NotBlank @Pattern(regexp = "([a-z A-Z])*") String name, @NotNull double numberOfStars, @NotBlank @NotNull @NotEmpty String description, @NotNull CityDTO cityDTO) {
-        this.name = name;
-        this.numberOfStars = numberOfStars;
-        this.description = description;
-        this.cityDTO = cityDTO;
-    }
+    @Valid
+    private CityDTO cityDTO;
 
-    public HotelDTO(@NotNull @NotEmpty @NotBlank @Pattern(regexp = "([a-z A-Z])*") String name, @NotNull double numberOfStars, @NotBlank @NotNull @NotEmpty String description, @NotNull CityDTO cityDTO, @NotNull Set<RoomDTO> roomDTOSet) {
+
+    public HotelDTO( String name, String address, double numberOfStars, Set<RoomDTO> roomDTOSet,
+                     String description,CityDTO cityDTO) {
         this.name = name;
+        this.address = address;
         this.numberOfStars = numberOfStars;
-        this.description = description;
-        this.cityDTO = cityDTO;
         this.roomDTOSet = roomDTOSet;
+        this.description = description;
+        this.cityDTO = cityDTO;
     }
 
     public HotelDTO() {
@@ -66,14 +65,6 @@ public class HotelDTO {
         this.description = description;
     }
 
-    public CityDTO getCityDTO() {
-        return cityDTO;
-    }
-
-    public void setCityDTO(CityDTO cityDTO) {
-        this.cityDTO = cityDTO;
-    }
-
     public Set<RoomDTO> getRoomDTOSet() {
         return roomDTOSet;
     }
@@ -82,8 +73,25 @@ public class HotelDTO {
         this.roomDTOSet = roomDTOSet;
     }
 
+    public CityDTO getCityDTO() {
+        return cityDTO;
+    }
+
+    public void setCityDTO(CityDTO cityDTO) {
+        this.cityDTO = cityDTO;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return "HotelDTO: " + name + ", numberOfStars:" + numberOfStars + ", description:" + description + ", cityDTO:" + cityDTO + ", roomDTOSet: " + roomDTOSet ;
+        return "HotelDTO: " + name + ", address: " + address + ", numberOfStars:" + numberOfStars +
+                 ", rooms : " + roomDTOSet + ", description:" + description + ", cityDTO:" + cityDTO ;
     }
 }

@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import persistence.dao.CityDAO;
 import persistence.dao.ContinentDAO;
 import persistence.dao.CountryDAO;
+import persistence.dao.HotelDAO;
 import persistence.entities.City;
 import persistence.entities.Continent;
 import persistence.entities.Country;
+import persistence.entities.Hotel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class CityService {
     CountryDAO countryDAO;
     @Autowired
     ContinentDAO continentDAO;
+    @Autowired
+    HotelDAO hotelDAO;
 
     public void insertCityDTO(CityDTO cityDTO) {
         City city = new City();
@@ -32,7 +36,7 @@ public class CityService {
         cityDAO.insertCity(city);
     }
 
-    private void setCountry(CityDTO cityDTO, City city) {
+    public void setCountry(CityDTO cityDTO, City city) {
         Country countryFound = countryDAO.findCountry(cityDTO.getCountryDTO().getName());
         if (countryFound == null) {
             Country country = new Country();
@@ -61,7 +65,11 @@ public class CityService {
     }
 
     public int deleteCityDTO(String name) {
-        int result = cityDAO.deleteCity(name);
+       List<Hotel> hotelList = hotelDAO.findHotelsInCity(name);
+       for(Hotel h: hotelList){
+           hotelDAO.deleteHotelByName(h.getName());
+       }
+       int result = cityDAO.deleteCity(name);
         return result;
     }
 
@@ -86,8 +94,8 @@ public class CityService {
         return cityDTO;
     }
 
-    public List<CityDTO> findCitiesDTO(String countryName) {
-        List<City> cityList = cityDAO.findCities(countryName);
+    public List<CityDTO> findCitiesInCountry(String countryName) {
+        List<City> cityList = cityDAO.findCitiesInCountry(countryName);
         List<CityDTO> cityDTOList = new LinkedList<>();
         for (City c : cityList) {
             CityDTO cityDTO = new CityDTO();

@@ -1,6 +1,7 @@
 package persistence.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -9,14 +10,21 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "type")
     private String roomType;
+
     @Column(name = "number_of_rooms")
     private int numberOfRooms;
+
     @Column(name = "extra_bed")
     private boolean extraBed;
+
     @Column(name = "rooms_available")
     private int roomsAvailable;
+
+    @ManyToMany(mappedBy = "roomSet",cascade = CascadeType.ALL)
+    private Set<Hotel> hotelSet;
 
     public Room(String roomType, int numberOfRooms, boolean extraBed, int roomsAvailable) {
         this.roomType = roomType;
@@ -68,8 +76,17 @@ public class Room {
         this.roomsAvailable = roomsAvailable;
     }
 
+    public Set<Hotel> getHotelSet() {
+        return hotelSet;
+    }
+
+    public void setHotelSet(Set<Hotel> hotelSet) {
+        this.hotelSet = hotelSet;
+    }
+
     @Override
     public String toString() {
-        return "Room: " + roomType + ", number of rooms:" + numberOfRooms + ", extra bed: " + extraBed + ",number of rooms available : " + roomsAvailable;
+        return "Room: " + roomType + ", number of rooms:" + numberOfRooms + ", extra bed: " +
+                extraBed + ",number of rooms available : " + roomsAvailable;
     }
 }

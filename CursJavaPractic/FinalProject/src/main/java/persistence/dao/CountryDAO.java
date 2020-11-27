@@ -52,7 +52,7 @@ public class CountryDAO {
         try {
             country = (Country) findCountryQuery.getSingleResult();
         } catch (NoResultException e) {
-            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
         }
         session.getTransaction().commit();
         session.close();
@@ -60,10 +60,10 @@ public class CountryDAO {
     }
 
 
-    public List<Country> findCountries(String continentName) {
+    public List<Country> findCountriesInContinent(String continentName) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query findCountriesQuery = session.createNamedQuery("findCountries");
+        Query findCountriesQuery = session.createNamedQuery("findCountriesInContinent");
         findCountriesQuery.setParameter("name", continentName);
         List<Country> countryList = findCountriesQuery.getResultList();
         session.getTransaction().commit();

@@ -1,5 +1,6 @@
 package business.dto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,14 +12,17 @@ public class CountryDTO {
     @NotBlank(message = "Empty field!")
     @Pattern(regexp = "([a-z A-Z])*")
     private String name;
-    @NotNull
-    @NotEmpty(message = "enter valid continent")
-    @NotBlank(message = "enter continent")
+
+
     private ContinentDTO continentDTO;
 
     public CountryDTO( String name,ContinentDTO continentDTO) {
         this.name = name;
         this.continentDTO = continentDTO;
+    }
+
+    public CountryDTO( String name) {
+        this.name = name;
     }
 
     public CountryDTO() {

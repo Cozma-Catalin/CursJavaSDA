@@ -17,8 +17,10 @@ public class Continent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "name")
     private String name;
+
     @OneToMany(mappedBy = "continent", cascade = CascadeType.ALL)
     private Set<Country> countrySet;
 

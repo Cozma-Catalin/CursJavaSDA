@@ -36,18 +36,17 @@ public class CityController {
         return ResponseEntity.ok(cityDTO);
     }
 
-    @GetMapping(path = "/findCities")
-    public ResponseEntity findCities(String countryName){
-        if(countryService.countCountryDTO(countryName)==0){
+    @GetMapping(path = "/findCitiesInCountry")
+    public ResponseEntity findCitiesInCountry(String countryName) {
+        if (countryService.countCountryDTO(countryName) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryName + " isn't in the database.");
         }
-        List<CityDTO> cityDTOList = cityService.findCitiesDTO(countryName);
-        if(cityDTOList.isEmpty()){
+        List<CityDTO> cityDTOList = cityService.findCitiesInCountry(countryName);
+        if (cityDTOList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No cities found for country '" + countryName + "'.");
         }
         return ResponseEntity.ok(cityDTOList);
     }
-
 
 
     @DeleteMapping(path = "/deleteCity")
@@ -55,11 +54,20 @@ public class CityController {
         if (cityService.countCityDTO(name) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(name + " can't be found in database.");
         }
-        if (cityService.deleteCityDTO(name) == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(name + " can't be found in database.");
-        }
+        cityService.deleteCityDTO(name);
         return ResponseEntity.ok(name + " deleted.");
     }
 
+    @PutMapping(path = "/changeCityName")
+    public ResponseEntity changeCityName(@RequestParam String newName, String cityName) {
+        if (cityService.countCityDTO(newName) != 0) {
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(newName + " is already in the database.");
+        }
+        int result = cityService.changeCityDTOName(newName, cityName);
+        if (result == 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(cityName + " can't be found in the database.");
+        }
+        return ResponseEntity.ok(cityName + " changed into " + newName);
+    }
 
 }

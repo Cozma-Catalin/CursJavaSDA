@@ -15,6 +15,11 @@
         <mapping class="persistence.entities.Country"/>
         <mapping class="persistence.entities.City"/>
         <mapping class="persistence.entities.Hotel"/>
+        <mapping class="persistence.entities.Airport"/>
+        <mapping class="persistence.entities.Account"/>
+        <mapping class="persistence.entities.Customer"/>
+        <mapping class="persistence.entities.Trip"/>
         <mapping class="persistence.entities.Room"/>
+        <mapping class="persistence.entities.Flight"/>
     </session-factory>
 </hibernate-configuration>

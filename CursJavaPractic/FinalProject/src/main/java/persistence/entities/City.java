@@ -8,7 +8,7 @@ import java.util.Set;
         @NamedQuery(name = "countCity",query = "select count(name) from City where name= :name"),
         @NamedQuery(name = "findCity", query = "select city from City city where city.name= :name"),
         @NamedQuery(name = "changeCityName",query = "update from City set name= :newName where name= :name"),
-        @NamedQuery(name = "findCities",query = "select city from City city inner join city.country country where country.name= :name")
+        @NamedQuery(name = "findCitiesInCountry",query = "select city from City city inner join city.country country where country.name= :name")
 })
 
 @Entity
@@ -17,13 +17,20 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "name")
     private String name;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "countries_id")
     private Country country;
+
     @OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
     private Set<Hotel> hotelSet;
+
+    @OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+    private Set<Airport> airportSet;
+
 
     public City(String name, Country country) {
         this.name = name;
@@ -63,6 +70,14 @@ public class City {
 
     public void setHotelSet(Set<Hotel> hotelSet) {
         this.hotelSet = hotelSet;
+    }
+
+    public Set<Airport> getAirportSet() {
+        return airportSet;
+    }
+
+    public void setAirportSet(Set<Airport> airportSet) {
+        this.airportSet = airportSet;
     }
 
     @Override

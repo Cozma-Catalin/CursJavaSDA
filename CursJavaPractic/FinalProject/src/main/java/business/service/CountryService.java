@@ -30,7 +30,7 @@ public class CountryService {
         countryDAO.insertCountry(country);
     }
 
-    private void setContinent(CountryDTO countryDTO, Country country) {
+    public void setContinent(CountryDTO countryDTO, Country country) {
         Continent continentFound = continentDAO.findContinent(countryDTO.getContinentDTO().getName());
         if (continentFound == null) {
             Continent continent = new Continent();
@@ -59,9 +59,9 @@ public class CountryService {
         return countryDTO;
     }
 
-    public List<CountryDTO> findCountriesDTO(String continentName) {
+    public List<CountryDTO> findCountriesInContinent(String continentName) {
         List<CountryDTO> countryDTOList = new LinkedList<>();
-        List<Country> countryList = countryDAO.findCountries(continentName);
+        List<Country> countryList = countryDAO.findCountriesInContinent(continentName);
         for (Country c : countryList) {
             CountryDTO countryDTO = new CountryDTO();
             countryDTO.setName(c.getName());
@@ -74,7 +74,7 @@ public class CountryService {
     }
 
     public int deleteCountry(String name) {
-        List<City> cityList = cityDAO.findCities(name);
+        List<City> cityList = cityDAO.findCitiesInCountry(name);
         for(City c : cityList){
             cityDAO.deleteCity(c.getName());
         }

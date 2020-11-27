@@ -4,7 +4,15 @@ import javax.persistence.*;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = "countHotel",query = "select count(hotel.name) from Hotel hotel inner join hotel.city city where city.name= :name")
+
+        @NamedQuery(name = "findHotelsInCity",query = "select hotel from Hotel hotel inner join hotel.city city where city.name= :name"),
+        @NamedQuery(name = "deleteHotelByName",query = "delete from Hotel where name= :name "),
+        @NamedQuery(name = "findHotel",query = "select hotel from Hotel hotel where name= :name"),
+        @NamedQuery(name = "changeHotelName",query = "update from Hotel set name= :newName where name= :name"),
+        @NamedQuery(name = "countHotelName",query = "select count(name) from Hotel where name= :name"),
+        @NamedQuery(name = "countAddressInCity",query = "select hotel.address from Hotel hotel inner join hotel.city city where city.name= :name"),
+        @NamedQuery(name = "deleteHotelByAddress",query = "delete from Hotel where address= :address"),
+        @NamedQuery(name = "findHotelByAddress" ,query = "select hotel from Hotel hotel where address= :address")
 })
 
 @Entity
@@ -12,35 +20,37 @@ import java.util.Set;
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
+
     @Column(name = "name")
     private String name;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "number_of_stars")
     private double numberOfStars;
+
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "hotels_rooms",joinColumns = {@JoinColumn(name = "hotels_id")},
+            inverseJoinColumns = {@JoinColumn(name = "rooms_id")})
+    private Set<Room> roomSet;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cities_id")
     private City city;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "hotels_rooms",
-    joinColumns = {@JoinColumn(name = "hotels_id")},
-    inverseJoinColumns = {@JoinColumn(name = "rooms_id")})
-    private Set<Room> roomSet;
 
-    public Hotel(String name, double numberOfStars, String description, City city) {
+    public Hotel(String name, String address, double numberOfStars,Set<Room> roomSet ,String description, City city) {
         this.name = name;
+        this.address = address;
         this.numberOfStars = numberOfStars;
-        this.description = description;
-        this.city = city;
-    }
-
-    public Hotel(String name, double numberOfStars, String description, City city, Set<Room> roomSet) {
-        this.name = name;
-        this.numberOfStars = numberOfStars;
-        this.description = description;
-        this.city = city;
         this.roomSet = roomSet;
+        this.description = description;
+        this.city = city;
     }
 
     public Hotel() {
@@ -62,6 +72,14 @@ public class Hotel {
         this.name = name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public double getNumberOfStars() {
         return numberOfStars;
     }
@@ -78,14 +96,6 @@ public class Hotel {
         this.description = description;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public Set<Room> getRoomSet() {
         return roomSet;
     }
@@ -94,8 +104,18 @@ public class Hotel {
         this.roomSet = roomSet;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+
     @Override
     public String toString() {
-        return "Hotel: " + name + ", number of stars: " + numberOfStars + ", description: " + description + ", " + city + roomSet;
+        return "Hotel: " + name + ", address: " + address + ", number of stars: " + numberOfStars
+         + " ,rooms: " + roomSet + ", description: " + description + ", " + city ;
     }
 }

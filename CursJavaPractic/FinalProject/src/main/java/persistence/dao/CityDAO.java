@@ -51,17 +51,17 @@ public class CityDAO {
         try {
             city = (City) findCityQuery.getSingleResult();
         } catch (NoResultException e) {
-            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
         }
         session.getTransaction().commit();
         session.close();
         return city;
     }
 
-    public List<City> findCities(String countryName) {
+    public List<City> findCitiesInCountry(String countryName) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query findCitiesQuery = session.createNamedQuery("findCities");
+        Query findCitiesQuery = session.createNamedQuery("findCitiesInCountry");
         findCitiesQuery.setParameter("name", countryName);
         List<City> cityList = findCitiesQuery.getResultList();
         session.getTransaction().commit();

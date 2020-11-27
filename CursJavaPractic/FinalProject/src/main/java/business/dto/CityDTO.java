@@ -1,9 +1,11 @@
 package business.dto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
 
 public class CityDTO {
     @NotNull
@@ -11,12 +13,18 @@ public class CityDTO {
     @NotBlank(message = "Campul este gol")
     @Pattern(regexp = "([a-z A-Z])*")
     private String name;
-    @NotNull
+
+    @Valid
     private CountryDTO countryDTO;
 
-    public CityDTO(@NotNull @NotEmpty @NotBlank(message = "Campul este gol") @Pattern(regexp = "([a-z A-Z])*") String name, @NotNull CountryDTO countryDTO) {
+
+    public CityDTO(String name,CountryDTO countryDTO) {
         this.name = name;
         this.countryDTO = countryDTO;
+    }
+
+    public CityDTO(String name) {
+        this.name = name;
     }
 
     public CityDTO() {
