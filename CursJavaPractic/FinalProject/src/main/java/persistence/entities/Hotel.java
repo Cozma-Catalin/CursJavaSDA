@@ -40,7 +40,7 @@ public class Hotel {
             inverseJoinColumns = {@JoinColumn(name = "rooms_id")})
     private Set<Room> roomSet;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "cities_id")
     private City city;
 

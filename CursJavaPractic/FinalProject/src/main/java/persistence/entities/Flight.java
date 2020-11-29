@@ -2,6 +2,9 @@ package persistence.entities;
 
 import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = "findFlightByFlightNumber",query = "select flight from Flight flight where flightNumber= :flightNumber")
+})
 
 
 @Entity

@@ -23,7 +23,7 @@ public class Room {
     @Column(name = "rooms_available")
     private int roomsAvailable;
 
-    @ManyToMany(mappedBy = "roomSet",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "roomSet")
     private Set<Hotel> hotelSet;
 
     public Room(String roomType, int numberOfRooms, boolean extraBed, int roomsAvailable) {

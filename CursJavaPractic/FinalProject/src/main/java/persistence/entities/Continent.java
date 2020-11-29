@@ -21,7 +21,7 @@ public class Continent {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "continent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "continent")
     private Set<Country> countrySet;
 
     public Continent(String name) {

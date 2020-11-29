@@ -3,6 +3,10 @@ package persistence.entities;
 import javax.persistence.*;
 import java.util.Date;
 
+@NamedQueries({
+
+
+})
 
 @Entity
 @Table(name = "trips")

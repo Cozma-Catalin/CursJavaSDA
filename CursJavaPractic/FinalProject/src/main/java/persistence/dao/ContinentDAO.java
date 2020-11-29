@@ -51,6 +51,21 @@ public class ContinentDAO {
         return continent;
     }
 
+    public Continent findContinent(String name,Session session) {
+
+        Query findContinentQuery = session.createNamedQuery("findContinent");
+        findContinentQuery.setParameter("name", name);
+        Continent continent = null;
+        try {
+            continent = (Continent) findContinentQuery.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return continent;
+    }
+
+
     public long countContinent(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

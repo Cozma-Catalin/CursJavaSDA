@@ -92,4 +92,13 @@ public class AirportDAO {
         return airportList;
     }
 
+
+    public List<Airport> findAirportsInCity(String cityName,Session session){
+
+        Query findAirportsInCityQuery = session.createNamedQuery("findAirportsInCity");
+        findAirportsInCityQuery.setParameter("cityName",cityName);
+        List<Airport> airportList = findAirportsInCityQuery.getResultList();
+
+        return airportList;
+    }
 }

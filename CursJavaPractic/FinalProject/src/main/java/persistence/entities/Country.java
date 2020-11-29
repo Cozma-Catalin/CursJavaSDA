@@ -25,7 +25,7 @@ public class Country {
     @JoinColumn(name = "continents_id")
     private Continent continent;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country")
     private Set<City> citySet;
 
     public Country(String name, Continent continent) {

@@ -25,10 +25,10 @@ public class City {
     @JoinColumn(name = "countries_id")
     private Country country;
 
-    @OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city")
     private Set<Hotel> hotelSet;
 
-    @OneToMany(mappedBy = "city",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city")
     private Set<Airport> airportSet;
 
 

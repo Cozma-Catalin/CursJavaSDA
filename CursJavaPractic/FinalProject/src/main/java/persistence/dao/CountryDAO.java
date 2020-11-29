@@ -59,6 +59,20 @@ public class CountryDAO {
         return country;
     }
 
+    public Country findCountry(String name,Session session) {
+
+        Query findCountryQuery = session.createNamedQuery("findCountry");
+        findCountryQuery.setParameter("name", name);
+        Country country = null;
+        try {
+            country = (Country) findCountryQuery.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return country;
+    }
+
 
     public List<Country> findCountriesInContinent(String continentName) {
         Session session = HibernateUtil.getSessionFactory().openSession();

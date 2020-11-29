@@ -68,7 +68,7 @@ public class HotelService {
         } else {
             Country country = new Country();
             country.setName(hotelDTO.getCityDTO().getCountryDTO().getName());
-            setContinent(hotelDTO, country);
+         //   setContinent(hotelDTO, country);
             city.setCountry(country);
         }
     }
@@ -145,28 +145,23 @@ public class HotelService {
 
 
     public long countHotelName(String name){
-        long result = hotelDAO.countHotelName(name);
-        return result;
+        return hotelDAO.countHotelName(name);
     }
 
     public List<String> countAddressInCity(String address){
-        List<String> result = hotelDAO.countAddressInCity(address);
-        return result;
+        return hotelDAO.countAddressInCity(address);
     }
 
     public int deleteHotelByName(String hotelName) {
-        int result = hotelDAO.deleteHotelByName(hotelName);
-        return result;
+        return hotelDAO.deleteHotelByName(hotelName);
     }
 
     public int deleteHotelByAddress(String address){
-        int result = hotelDAO.deleteHotelByAddress(address);
-        return result;
+        return hotelDAO.deleteHotelByAddress(address);
     }
 
     public int changeHotelName(String newName,String name){
-        int result = hotelDAO.changeHotelName(newName,name);
-        return result;
+        return hotelDAO.changeHotelName(newName,name);
     }
 
 }

@@ -34,6 +34,8 @@ public class Airport {
     public Airport() {
     }
 
+
+
     public int getId() {
         return id;
     }
