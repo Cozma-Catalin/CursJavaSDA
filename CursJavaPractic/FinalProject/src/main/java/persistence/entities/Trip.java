@@ -5,8 +5,16 @@ import java.util.Date;
 
 @NamedQueries({
         @NamedQuery(name = "countTrips", query = "select count(name) from Trip trip where trip.name= :name and trip.departureDate= :departureDate"),
-        @NamedQuery(name = "deleteTripsByName",query = "delete from Trip where name= :name"),
-        @NamedQuery(name = "findPromotedTrips",query = "select trip from Trip trip where promoted= :promoted")
+        @NamedQuery(name = "deleteTripsByName", query = "delete from Trip where name= :name"),
+        @NamedQuery(name = "findPromotedTrips", query = "select trip from Trip trip where promoted= :promoted"),
+        @NamedQuery(name = "findTripsByDepartureContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city inner join city.country country inner join country.continent continent where continent.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city inner join city.country country inner join country.continent continent where continent.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureCountry", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city inner join city.country country where country.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingCountry", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city inner join city.country country where country.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureCity", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city where city.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingCity", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city where city.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureAirport" , query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport where departureAirport.name= :name" ),
+        @NamedQuery(name = "findTripsByHotel" , query = "select trip from Trip trip inner join trip.stayingHotel stayingHotel where stayingHotel.name= :name")
 
 })
 

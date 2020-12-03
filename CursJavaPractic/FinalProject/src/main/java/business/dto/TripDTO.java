@@ -79,7 +79,7 @@ public class TripDTO {
         return stayingHotelDTO;
     }
 
-    public void setStayingHotelDTOSet(HotelDTO stayingHotelDTO) {
+    public void setStayingHotelDTO(HotelDTO stayingHotelDTO) {
         this.stayingHotelDTO = stayingHotelDTO;
     }
 

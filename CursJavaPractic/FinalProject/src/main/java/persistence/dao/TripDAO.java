@@ -50,4 +50,95 @@ public class TripDAO {
         session.close();
         return trips;
     }
+
+    public List<Trip> findTripsByDepartureContinent(String continentName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByContinentQuery = session.createNamedQuery("findTripsByDepartureContinent");
+        findTripsByContinentQuery.setParameter("name",continentName);
+        List<Trip> tripList = findTripsByContinentQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+    public List<Trip> findTripsByArrivingContinent(String continentName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByArrivingContinentQuery = session.createNamedQuery("findTripsByArrivingContinent");
+        findTripsByArrivingContinentQuery.setParameter("name",continentName);
+        List<Trip> tripList = findTripsByArrivingContinentQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+    public List<Trip> findTripsByDepartureCountry(String countryName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByDepartureCountryQuery = session.createNamedQuery("findTripsByDepartureCountry");
+        findTripsByDepartureCountryQuery.setParameter("name",countryName);
+        List<Trip> tripList = findTripsByDepartureCountryQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findTripsByArrivingCountry(String countryName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByArrivingCountryQuery = session.createNamedQuery("findTripsByArrivingCountry");
+        findTripsByArrivingCountryQuery.setParameter("name",countryName);
+        List<Trip> tripList = findTripsByArrivingCountryQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+    public List<Trip> findTripsByDepartureCity(String cityName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByDepartureCityQuery = session.createNamedQuery("findTripsByDepartureCity");
+        findTripsByDepartureCityQuery.setParameter("name",cityName);
+        List<Trip> tripList = findTripsByDepartureCityQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findTripsByArrivingCity(String cityName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByArrivingCityQuery = session.createNamedQuery("findTripsByArrivingCity");
+        findTripsByArrivingCityQuery.setParameter("name",cityName);
+        List<Trip> tripList = findTripsByArrivingCityQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+    public List<Trip> findTripsByHotel(String hotelName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByHotelQuery = session.createNamedQuery("findTripsByHotel");
+        findTripsByHotelQuery.setParameter("name",hotelName);
+        List<Trip> tripList = findTripsByHotelQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findTripsByDepartureAirport(String airportName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByDepartureAirportQuery = session.createNamedQuery("findTripsByDepartureAirport");
+        findTripsByDepartureAirportQuery.setParameter("name",airportName);
+        List<Trip> tripList = findTripsByDepartureAirportQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
 }

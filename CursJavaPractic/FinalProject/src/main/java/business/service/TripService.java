@@ -352,6 +352,8 @@ public class TripService {
             FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
             tripDTO.setReturningFlightDTO(returningFlightDTO);
             tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
             tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
             tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
             tripDTO.setNumberOfDays(trip.getNumberOfDays());
@@ -361,9 +363,229 @@ public class TripService {
             tripDTO.setTripsPrice(trip.getTripsPrice());
             tripDTOList.add(tripDTO);
         }
-
         return tripDTOList;
     }
+
+    public List<TripDTO> findTripsByDepartureContinent(String continentName){
+        List<Trip> tripList = tripDAO.findTripsByDepartureContinent(continentName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+    public List<TripDTO> findTripsByArrivingContinent(String continentName){
+        List<Trip> tripList = tripDAO.findTripsByArrivingContinent(continentName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+
+    public List<TripDTO> findTripsByDepartureCountry(String countryName){
+        List<Trip> tripList = tripDAO.findTripsByDepartureCountry(countryName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+
+    public List<TripDTO> findTripsByArrivingCountry(String countryName){
+        List<Trip> tripList = tripDAO.findTripsByArrivingCountry(countryName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+
+    public List<TripDTO> findTripsByDepartureCity(String cityName){
+        List<Trip> tripList = tripDAO.findTripsByDepartureCity(cityName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+    public List<TripDTO> findTripsByArrivingCity(String cityName){
+        List<Trip> tripList = tripDAO.findTripsByArrivingCity(cityName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+    public List<TripDTO> findTripsByHotel(String hotelName){
+        List<Trip> tripList = tripDAO.findTripsByHotel(hotelName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
+
+    public List<TripDTO> findTripsByDepartureAirport(String airportName){
+        List<Trip> tripList = tripDAO.findTripsByDepartureAirport(airportName);
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            TripDTO tripDTO = new TripDTO();
+            tripDTO.setName(trip.getName());
+            tripDTO.setDepartureDate(trip.getDepartureDate());
+            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
+            tripDTO.setDepartureFlightDTO(departureFlightDTO);
+            tripDTO.setReturnDate(trip.getReturnDate());
+            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
+            tripDTO.setReturningFlightDTO(returningFlightDTO);
+            tripDTO.setMealType(trip.getMealType());
+            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
+            tripDTO.setStayingHotelDTO(hotelDTO);
+            tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
+            tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+            tripDTO.setNumberOfDays(trip.getNumberOfDays());
+            tripDTO.setPriceForAdult(trip.getPriceForAdult());
+            tripDTO.setPriceForChild(trip.getPriceForChild());
+            tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
+            tripDTO.setTripsPrice(trip.getTripsPrice());
+            tripDTOList.add(tripDTO);
+        }
+        return tripDTOList;
+    }
+
 
     private FlightDTO setDepartureFlightDTO(Flight departureFlight) {
         FlightDTO departureFlightDTO = new FlightDTO();
@@ -427,4 +649,30 @@ public class TripService {
         return returningFlightDTO;
     }
 
+    private HotelDTO setStayingHotel(Hotel hotel){
+        HotelDTO hotelDTO = new HotelDTO();
+        hotelDTO.setName(hotel.getName());
+        hotelDTO.setAddress(hotel.getAddress());
+        hotelDTO.setNumberOfStars(hotel.getNumberOfStars());
+        hotelDTO.setDescription(hotel.getDescription());
+        ContinentDTO continentDTO = new ContinentDTO(hotel.getCity().getCountry().getContinent().getName());
+        CountryDTO countryDTO = new CountryDTO(hotel.getCity().getCountry().getName());
+        countryDTO.setContinentDTO(continentDTO);
+        CityDTO cityDTO = new CityDTO();
+        cityDTO.setName(hotel.getCity().getName());
+        cityDTO.setCountryDTO(countryDTO);
+        hotelDTO.setCityDTO(cityDTO);
+
+        Set<RoomDTO> roomDTOSet = new HashSet<>();
+        for(Room room : hotel.getRoomSet()){
+            RoomDTO roomDTO = new RoomDTO();
+            roomDTO.setNumberOfRooms(room.getNumberOfRooms());
+            roomDTO.setRoomType(room.getRoomType());
+            roomDTO.setRoomsAvailable(room.getRoomsAvailable());
+            roomDTO.setExtraBed(room.isExtraBed());
+            roomDTOSet.add(roomDTO);
+        }
+        hotelDTO.setRoomDTOSet(roomDTOSet);
+        return hotelDTO;
+    }
 }

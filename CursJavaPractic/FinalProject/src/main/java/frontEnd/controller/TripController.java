@@ -46,4 +46,85 @@ public class TripController {
         return ResponseEntity.ok(tripDTOList);
     }
 
+    @GetMapping(path = "/findTripsByDepartureContinent")
+    public ResponseEntity findTripsByDepartureContinent(@RequestParam String continentName){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureContinent(continentName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing from Continent: " + continentName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByArrivingContinent")
+    public ResponseEntity findTripsByArrivingContinent(@RequestParam String continentName){
+        List<TripDTO> tripDTOList = tripService.findTripsByArrivingContinent(continentName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found arriving on Continent: " + continentName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+
+    @GetMapping(path = "/findTripsByDepartureCountry")
+    public ResponseEntity findTripsByDepartureCountry(@RequestParam String countryName){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureCountry(countryName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing from Country: " + countryName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByArrivingCountry")
+    public ResponseEntity findTripsByArrivingCountry(@RequestParam String countryName){
+        List<TripDTO> tripDTOList = tripService.findTripsByArrivingCountry(countryName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found arriving in Country: " + countryName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByDepartureCity")
+    public ResponseEntity findTripsByDepartureCity(@RequestParam String cityName){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureCity(cityName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing from City: " + cityName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByArrivingCity")
+    public ResponseEntity findTripsByArrivingCity(@RequestParam String cityName){
+        List<TripDTO> tripDTOList = tripService.findTripsByArrivingCity(cityName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found arriving in City: " + cityName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByHotel")
+    public ResponseEntity findTripsByHotel(@RequestParam String hotelName){
+        List<TripDTO> tripDTOList = tripService.findTripsByHotel(hotelName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found with staying hotel: " + hotelName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByDepartureAirport")
+    public ResponseEntity findTripsByDepartureAirport(@RequestParam String airportName){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureAirport(airportName);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing from airport: " + airportName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
 }
