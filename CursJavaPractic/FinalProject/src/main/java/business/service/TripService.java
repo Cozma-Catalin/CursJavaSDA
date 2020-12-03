@@ -9,6 +9,9 @@ import persistence.HibernateUtil;
 import persistence.dao.*;
 import persistence.entities.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Scope("prototype")
 @Service
 public class TripService {
@@ -34,169 +37,68 @@ public class TripService {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         //pregatesc continentele de la dus
-        Continent departureContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO(),session);
-        Continent arrivingContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO(),session);
+        Continent departureContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO(), session);
+        Continent arrivingContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO(), session);
 
         //pregatesc continentele pentru sosire
-        Continent returningDepartureContinent = null;
-        if (!arrivingContinent.getName().equalsIgnoreCase(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO().getName())) {
-            returningDepartureContinent = prepareContinent(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO(),session);
-        }
-
-
-        Continent returningArrivingContinent = null;
-        if (!departureContinent.getName().equalsIgnoreCase(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO().getName())) {
-            returningArrivingContinent = prepareContinent(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO(),session);
-        }
-
+        Continent returningDepartureContinent = setReturningContinent(session, arrivingContinent, tripDTO.getReturningFlightDTO().getDepartureAirport());
+        Continent returningArrivingContinent = setReturningContinent(session, departureContinent, tripDTO.getReturningFlightDTO().getArrivingAirport());
 
         //pregatesc tara de la dus din punctul de plecare
-        Country departureCountry = prepareCountry(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO(),session);
-        if (departureCountry.getContinent() == null) {
-            departureCountry.setContinent(departureContinent);
-        }
+        Country departureCountry = setDepartureCountry(session, departureContinent, tripDTO.getDepartureFlightDTO().getDepartureAirport());
 
         //pregatesc tara de la dus din punctul de sosire
-        Country arrivingCountry = prepareCountry(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO(),session);
-        if (arrivingCountry.getContinent() == null) {
-            arrivingCountry.setContinent(arrivingContinent);
-        }
+        Country arrivingCountry = setDepartureCountry(session, arrivingContinent, tripDTO.getDepartureFlightDTO().getArrivingAirport());
 
         //pregatesc tara de la intors din punctul de plecare
-        Country returningDepartureCountry = null;
-        if (!arrivingCountry.getName().equalsIgnoreCase(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getName())) {
-            returningDepartureCountry = prepareCountry(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO(),session);
-            if (returningDepartureCountry.getContinent() == null) {
-                if (returningDepartureContinent == null) {
-                    returningDepartureCountry.setContinent(arrivingContinent);
-                } else {
-                    returningDepartureCountry.setContinent(returningDepartureContinent);
-                }
-            }
-        }
+        Country returningDepartureCountry = setCountryForReturningFlight(session, arrivingContinent, returningDepartureContinent, arrivingCountry, tripDTO.getReturningFlightDTO().getDepartureAirport());
 
         //pregatesc tara de la intors din punctul de sosire
-        Country returningArrivingCountry = null;
-        if (!departureCountry.getName().equalsIgnoreCase(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getName())) {
-            returningArrivingCountry = prepareCountry(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO(),session);
-            if (returningArrivingCountry.getContinent() == null) {
-                if (returningArrivingContinent == null) {
-                    returningArrivingCountry.setContinent(departureContinent);
-                } else {
-                    returningArrivingCountry.setContinent(returningArrivingContinent);
-                }
-            }
-        }
+        Country returningArrivingCountry = setCountryForReturningFlight(session, departureContinent, returningArrivingContinent, departureCountry, tripDTO.getReturningFlightDTO().getArrivingAirport());
 
         //pregatesc orasul de la dus din punctul de plecare
-        City departureCity = prepareCity(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO(),session);
-        if (departureCity.getCountry() == null) {
-            departureCity.setCountry(departureCountry);
-        }
+        City departureCity = setCityForDepartureFlight(session, departureCountry, tripDTO.getDepartureFlightDTO().getDepartureAirport());
 
         //pregatesc orasul de la dus din punctul de sosire
-        City arrivingCity = prepareCity(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO(),session);
-        if (arrivingCity.getCountry() == null) {
-            arrivingCity.setCountry(arrivingCountry);
-        }
+        City arrivingCity = setCityForDepartureFlight(session, arrivingCountry, tripDTO.getDepartureFlightDTO().getArrivingAirport());
 
         //pregatesc orasul de la intoarcere din punctul de plecare
-        City returningDepartureCity = null;
-        if (!tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getName().equalsIgnoreCase(arrivingCity.getName())) {
-            returningDepartureCity = prepareCity(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO(),session);
-            if (returningDepartureCity.getCountry() == null) {
-                if (returningDepartureCountry == null) {
-                    returningDepartureCity.setCountry(arrivingCountry);
-                } else {
-                    returningDepartureCity.setCountry(returningDepartureCountry);
-                }
-            }
-        }
+        City returningDepartureCity = setCityForReturningFlight(session, arrivingCountry, returningDepartureCountry, arrivingCity, tripDTO.getReturningFlightDTO().getDepartureAirport());
 
         //pregatesc orasul de la intoarcere din punctul de sosire
-        City returningArrivingCity = null;
-        if (!tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getName().equalsIgnoreCase(departureCity.getName())) {
-            returningArrivingCity = prepareCity(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO(),session);
-            if (returningArrivingCity.getCountry() == null) {
-                if (returningArrivingCountry == null) {
-                    returningArrivingCity.setCountry(departureCountry);
-                } else {
-                    returningArrivingCity.setCountry(returningArrivingCountry);
-                }
-            }
-        }
+        City returningArrivingCity = setCityForReturningFlight(session, departureCountry, returningArrivingCountry, departureCity, tripDTO.getReturningFlightDTO().getArrivingAirport());
 
         //pregatesc aeroportul de la dus din punctul de plecare
-        Airport departureAirport = prepareAirport(tripDTO.getDepartureFlightDTO().getDepartureAirport(),session);
-        if (departureAirport.getCity() == null) {
-            departureAirport.setCity(departureCity);
-        }
+        Airport departureAirport = setAirportForDepartureFlight(session, departureCity, tripDTO.getDepartureFlightDTO().getDepartureAirport());
 
         //pregatesc aeroportul de la dus din punctul de sosire
-        Airport arrivingAirport = prepareAirport(tripDTO.getDepartureFlightDTO().getArrivingAirport(),session);
-        if (arrivingAirport.getCity() == null) {
-            arrivingAirport.setCity(arrivingCity);
-        }
+        Airport arrivingAirport = setAirportForDepartureFlight(session, arrivingCity, tripDTO.getDepartureFlightDTO().getArrivingAirport());
 
         //pregatesc aeroportul de la intors din punctul de plecare
-        Airport returningDepartureAirport = null;
-        if (!arrivingAirport.getName().equalsIgnoreCase(tripDTO.getReturningFlightDTO().getDepartureAirport().getName())) {
-            returningDepartureAirport = prepareAirport(tripDTO.getReturningFlightDTO().getDepartureAirport(),session);
-            if (returningDepartureAirport.getCity() == null) {
-                returningDepartureAirport.setName(tripDTO.getReturningFlightDTO().getDepartureAirport().getName());
-                if (returningDepartureCity != null) {
-                    returningDepartureAirport.setCity(returningDepartureCity);
-                } else {
-                    returningDepartureAirport.setCity(arrivingCity);
-                }
-            }
-        }
+        Airport returningDepartureAirport = setAirportForReturningFlight(session, arrivingCity, returningDepartureCity, arrivingAirport, tripDTO.getReturningFlightDTO().getDepartureAirport());
 
         //pregatesc aeroportul de la intors din punctul de sosire
-        Airport returningArrivingAirport = null;
-        if (!departureAirport.getName().equalsIgnoreCase(tripDTO.getReturningFlightDTO().getArrivingAirport().getName())) {
-            returningArrivingAirport = prepareAirport(tripDTO.getReturningFlightDTO().getArrivingAirport(),session);
-            if (returningArrivingAirport.getCity() == null) {
-                if (returningArrivingCity != null) {
-                    returningArrivingAirport.setCity(returningArrivingCity);
-                } else {
-                    returningArrivingAirport.setCity(departureCity);
-                }
-            }
-        }
-        System.out.println("Aeroportul de la intoarcere " + returningArrivingAirport);
+        Airport returningArrivingAirport = setAirportForReturningFlight(session, departureCity, returningArrivingCity, departureAirport, tripDTO.getReturningFlightDTO().getArrivingAirport());
 
-        Flight departureFlight = prepareFlight(tripDTO.getDepartureFlightDTO(),session);
-        if (departureFlight.getDepartureAirport() == null) {
-            departureFlight.setDepartureAirport(departureAirport);
-        }
+        Flight departureFlight = setDepartureFlight(tripDTO, session, departureAirport, arrivingAirport);
 
+        Flight returningFlight = setReturningFlight(tripDTO, session, departureAirport, arrivingAirport, returningDepartureAirport, returningArrivingAirport);
 
-        if (departureFlight.getArrivingAirport() == null) {
-            departureFlight.setArrivingAirport(arrivingAirport);
-        }
+        Hotel stayingHotel = setHotel(tripDTO, departureFlight);
 
-        Flight returningFlight = prepareFlight(tripDTO.getReturningFlightDTO(),session);
-        if (returningFlight.getDepartureAirport() == null) {
-            if (returningDepartureAirport == null) {
-                returningFlight.setDepartureAirport(arrivingAirport);
-            } else {
-                returningFlight.setDepartureAirport(returningDepartureAirport);
-            }
-        }
+        Trip trip = setTrip(tripDTO, departureFlight, returningFlight, stayingHotel);
 
-        if (returningFlight.getArrivingAirport() == null) {
-            if (returningArrivingAirport == null) {
-                returningFlight.setArrivingAirport(departureAirport);
-            } else {
-                returningFlight.setArrivingAirport(returningArrivingAirport);
-            }
-        }
+        tripDAO.insertTrip(trip, session);
+        session.getTransaction().commit();
+        session.close();
 
+    }
 
+    private Trip setTrip(TripDTO tripDTO, Flight departureFlight, Flight returningFlight, Hotel stayingHotel) {
         Trip trip = new Trip();
         trip.setName(tripDTO.getName());
         trip.setDepartureFlight(departureFlight);
+        trip.setStayingHotel(stayingHotel);
         trip.setReturningFlight(returningFlight);
         trip.setMealType(tripDTO.getMealType());
         trip.setDepartureDate(tripDTO.getDepartureDate());
@@ -209,114 +111,10 @@ public class TripService {
         trip.setPromoted(tripDTO.isPromoted());
         trip.setTripsPrice(calculateTripsPrice(tripDTO));
         trip.setNumberOfTripsAvailable(tripDTO.getNumberOfTripsAvailable());
-        tripDAO.insertTrip(trip,session);
+        return trip;
+    }
 
-        session.getTransaction().commit();
-        session.close();
-
-
-
-       /* Airport departureFlightDepartureAirport = prepareAirport(tripDTO.getDepartureFlightDTO().getDepartureAirport());
-        City departureFlightDepartureCity = prepareCity(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO());
-        Country departureFlightDepartureCountry = prepareCountry(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO());
-        Continent departureContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO());
-
-        Airport departureFlightArrivingAirport = prepareAirport(tripDTO.getDepartureFlightDTO().getArrivingAirport());
-        City departureFlightArrivingCity = prepareCity(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO());
-        Country departureFlightArrivingCountry = prepareCountry(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO());
-        Continent departureFlightArrivingContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO());
-
-
-        departureFlightDepartureCountry.setContinent(departureFlightDepartureContinent);
-        departureFlightDepartureCity.setCountry(departureFlightDepartureCountry);
-        departureFlight.setDepartureAirport(departureFlightDepartureAirport);
-
-
-        if (departureFlightArrivingContinent.getName().equalsIgnoreCase(departureFlightDepartureContinent.getName())) {
-            departureFlightArrivingContinent.setId(departureFlightDepartureContinent.getId());
-        }
-
-        departureFlightArrivingCountry.setContinent(departureFlightArrivingContinent);
-        departureFlightArrivingCity.setCountry(departureFlightArrivingCountry);
-        departureFlightArrivingAirport.setCity(departureFlightArrivingCity);
-
-        departureFlight.setFlightNumber(tripDTO.getDepartureFlightDTO().getFlightNumber());
-        departureFlight.setSeatsAvailable(tripDTO.getDepartureFlightDTO().getSeatsAvailable());
-        departureFlight.setPrice(tripDTO.getDepartureFlightDTO().getPrice());
-        departureFlight.setDepartureDateAndTime(tripDTO.getDepartureFlightDTO().getDepartureDateAndTime());
-        departureFlight.setArrivingDateAndTime(tripDTO.getDepartureFlightDTO().getArrivingDateAndTime());
-
-        trip.setDepartureFlight(departureFlight);
-
-
-
-        Flight returningFlight = new Flight();
-
-        Continent returningFlightDepartureContinent = prepareContinent(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO());
-        Country returningFlightDepartureCountry = prepareCountry(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO());
-        City returningFlightDepartureCity = prepareCity(tripDTO.getReturningFlightDTO().getDepartureAirport().getCityDTO());
-        Airport returningFlightDepartureAirport = prepareAirport(tripDTO.getReturningFlightDTO().getDepartureAirport());
-
-        Continent returningFlightArrivingContinent = prepareContinent(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO());
-        Country returningFlightArrivingCountry = prepareCountry(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO());
-        City returningFlightArrivingCity = prepareCity(tripDTO.getReturningFlightDTO().getArrivingAirport().getCityDTO());
-        Airport returningFlightArrivingAirport = prepareAirport(tripDTO.getReturningFlightDTO().getArrivingAirport());
-
-        if (returningFlightDepartureContinent.getName().equalsIgnoreCase(departureFlightArrivingContinent.getName())) {
-            returningFlightDepartureContinent.setId(departureFlightArrivingContinent.getId());
-        }
-
-        if (returningFlightDepartureCountry.getName().equalsIgnoreCase(departureFlightArrivingCountry.getName())) {
-            returningFlightDepartureCountry.setId(departureFlightArrivingCountry.getId());
-        }
-
-        if (returningFlightDepartureCity.getName().equalsIgnoreCase(departureFlightArrivingCity.getName())) {
-            returningFlightDepartureCity.setId(departureFlightArrivingCity.getId());
-        }
-
-        if (returningFlightDepartureAirport.getName().equalsIgnoreCase(departureFlightArrivingAirport.getName())) {
-            returningFlightDepartureAirport.setId(departureFlightArrivingAirport.getId());
-        }
-
-        returningFlightDepartureCountry.setContinent(returningFlightDepartureContinent);
-        returningFlightDepartureCity.setCountry(returningFlightDepartureCountry);
-        returningFlightDepartureAirport.setCity(returningFlightDepartureCity);
-        returningFlight.setDepartureAirport(returningFlightDepartureAirport);
-
-
-        if (returningFlightArrivingContinent.getName().equalsIgnoreCase(departureFlightDepartureContinent.getName())) {
-            returningFlightArrivingContinent.setId(departureFlightDepartureContinent.getId());
-        } else if (returningFlightArrivingContinent.getName().equalsIgnoreCase(returningFlightDepartureContinent.getName())) {
-            returningFlightArrivingContinent.setId(returningFlightDepartureContinent.getId());
-        }
-
-        if (returningFlightArrivingCountry.getName().equalsIgnoreCase(departureFlightDepartureCountry.getName())) {
-            returningFlightArrivingCountry.setId(departureFlightDepartureCountry.getId());
-        }
-
-        if (returningFlightArrivingCity.getName().equalsIgnoreCase(departureFlightDepartureCity.getName())) {
-            returningFlightArrivingCity.setId(departureFlightDepartureCity.getId());
-        }
-
-        if (returningFlightArrivingAirport.getName().equalsIgnoreCase(departureFlightDepartureAirport.getName())) {
-            returningFlightArrivingAirport.setId(departureFlightDepartureAirport.getId());
-        }
-
-        returningFlightArrivingCountry.setContinent(returningFlightArrivingContinent);
-        returningFlightArrivingCity.setCountry(returningFlightArrivingCountry);
-        returningFlightArrivingAirport.setCity(returningFlightArrivingCity);
-        returningFlight.setArrivingAirport(returningFlightArrivingAirport);
-
-        returningFlight.setFlightNumber(tripDTO.getReturningFlightDTO().getFlightNumber());
-        returningFlight.setDepartureDateAndTime(tripDTO.getReturningFlightDTO().getDepartureDateAndTime());
-        returningFlight.setArrivingDateAndTime(tripDTO.getReturningFlightDTO().getArrivingDateAndTime());
-        returningFlight.setPrice(tripDTO.getReturningFlightDTO().getPrice());
-        returningFlight.setSeatsAvailable(tripDTO.getReturningFlightDTO().getSeatsAvailable());
-
-
-        trip.setReturningFlight(returningFlight);
-
-
+    private Hotel setHotel(TripDTO tripDTO, Flight departureFlight) {
         Hotel hotelFound = hotelDAO.findHotelByAddress(tripDTO.getStayingHotelDTO().getAddress());
         if (hotelFound == null) {
             Hotel hotel = new Hotel();
@@ -329,9 +127,16 @@ public class TripService {
             hotel.setAddress(tripDTO.getStayingHotelDTO().getAddress());
             hotel.setDescription(tripDTO.getStayingHotelDTO().getDescription());
             hotel.setNumberOfStars(tripDTO.getStayingHotelDTO().getNumberOfStars());
+            setRoomsForHotel(tripDTO, hotel);
+            return hotel;
+        } else {
+            return hotelFound;
+        }
+    }
+
+        private void setRoomsForHotel (TripDTO tripDTO, Hotel hotel){
             Set<Room> rooms = new HashSet<>();
-            Set<RoomDTO> roomDTOSet = tripDTO.getStayingHotelDTO().getRoomDTOSet();
-            for (RoomDTO roomDTO : roomDTOSet) {
+            for (RoomDTO roomDTO : tripDTO.getStayingHotelDTO().getRoomDTOSet()) {
                 Room room = new Room();
                 room.setRoomType(roomDTO.getRoomType());
                 room.setNumberOfRooms(roomDTO.getNumberOfRooms());
@@ -340,80 +145,186 @@ public class TripService {
                 rooms.add(room);
             }
             hotel.setRoomSet(rooms);
-            trip.setStayingHotel(hotel);
-        } else {
-            trip.setStayingHotel(hotelFound);*/
-
-
-    }
-
-
-    private Flight prepareFlight(FlightDTO flightDTO,Session session) {
-        Flight flight;
-        if (flightDAO.findFlightByFlightNumber(flightDTO.getFlightNumber(),session) == null) {
-            flight = new Flight();
-            flight.setFlightNumber(flightDTO.getFlightNumber());
-            flight.setSeatsAvailable(flightDTO.getSeatsAvailable());
-            flight.setPrice(flightDTO.getPrice());
-            flight.setDepartureDateAndTime(flightDTO.getDepartureDateAndTime());
-            flight.setArrivingDateAndTime(flightDTO.getArrivingDateAndTime());
-        } else {
-            flight = flightDAO.findFlightByFlightNumber(flightDTO.getFlightNumber(),session);
         }
-        return flight;
-    }
 
+        private Flight setReturningFlight (TripDTO tripDTO, Session session, Airport departureAirport, Airport
+        arrivingAirport, Airport returningDepartureAirport, Airport returningArrivingAirport){
+            Flight returningFlight = prepareFlight(tripDTO.getReturningFlightDTO(), session);
+            if (returningFlight.getDepartureAirport() == null) {
+                if (returningDepartureAirport == null) {
+                    returningFlight.setDepartureAirport(arrivingAirport);
+                } else {
+                    returningFlight.setDepartureAirport(returningDepartureAirport);
+                }
+            }
 
-    private Airport prepareAirport(AirportDTO airportDTO,Session session) {
-        Airport airport;
-        if (airportDAO.findAirportByName(airportDTO.getName()) == null) {
-            airport = new Airport();
-            airport.setName(airportDTO.getName());
-        } else {
-            airport = airportDAO.findAirportByName(airportDTO.getName());
+            if (returningFlight.getArrivingAirport() == null) {
+                if (returningArrivingAirport == null) {
+                    returningFlight.setArrivingAirport(departureAirport);
+                } else {
+                    returningFlight.setArrivingAirport(returningArrivingAirport);
+                }
+            }
+            return returningFlight;
         }
-        return airport;
-    }
 
-    private City prepareCity(CityDTO cityDTO,Session session) {
-        City city;
-        if (cityDAO.findCity(cityDTO.getName(),session) == null) {
-            city = new City();
-            city.setName(cityDTO.getName());
-        } else {
-            city = cityDAO.findCity(cityDTO.getName(),session);
+        private Flight setDepartureFlight (TripDTO tripDTO, Session session, Airport departureAirport, Airport
+        arrivingAirport){
+            Flight departureFlight = prepareFlight(tripDTO.getDepartureFlightDTO(), session);
+            if (departureFlight.getDepartureAirport() == null) {
+                departureFlight.setDepartureAirport(departureAirport);
+            }
+
+
+            if (departureFlight.getArrivingAirport() == null) {
+                departureFlight.setArrivingAirport(arrivingAirport);
+            }
+            return departureFlight;
         }
-        return city;
-    }
 
-    private Country prepareCountry(CountryDTO countryDTO,Session session) {
-        Country country;
-        if (countryDAO.findCountry(countryDTO.getName(),session) == null) {
-            country = new Country();
-            country.setName(countryDTO.getName());
-        } else {
-            country = countryDAO.findCountry(countryDTO.getName(),session);
+
+        private Airport setAirportForReturningFlight (Session session, City arrivingCity, City
+        returningDepartureCity, Airport arrivingAirport, AirportDTO departureAirport2){
+            Airport returningDepartureAirport = null;
+            if (!arrivingAirport.getName().equalsIgnoreCase(departureAirport2.getName())) {
+                returningDepartureAirport = prepareAirport(departureAirport2, session);
+                if (returningDepartureAirport.getCity() == null) {
+                    returningDepartureAirport.setName(departureAirport2.getName());
+                    if (returningDepartureCity != null) {
+                        returningDepartureAirport.setCity(returningDepartureCity);
+                    } else {
+                        returningDepartureAirport.setCity(arrivingCity);
+                    }
+                }
+            }
+            return returningDepartureAirport;
         }
-        return country;
-    }
 
-    private Continent prepareContinent(ContinentDTO continentDTO,Session session) {
-        Continent continent;
-        if (continentDAO.findContinent(continentDTO.getName(),session) == null) {
-            continent = new Continent();
-            continent.setName(continentDTO.getName());
-        } else {
-            continent = continentDAO.findContinent(continentDTO.getName(),session);
+        private Airport setAirportForDepartureFlight (Session session, City departureCity, AirportDTO departureAirport2)
+        {
+            Airport departureAirport = prepareAirport(departureAirport2, session);
+            if (departureAirport.getCity() == null) {
+                departureAirport.setCity(departureCity);
+            }
+            return departureAirport;
         }
-        return continent;
+
+        private City setCityForReturningFlight (Session session, Country arrivingCountry, Country
+        returningDepartureCountry, City arrivingCity, AirportDTO departureAirport2){
+            City returningDepartureCity = null;
+            if (!departureAirport2.getCityDTO().getName().equalsIgnoreCase(arrivingCity.getName())) {
+                returningDepartureCity = prepareCity(departureAirport2.getCityDTO(), session);
+                if (returningDepartureCity.getCountry() == null) {
+                    if (returningDepartureCountry == null) {
+                        returningDepartureCity.setCountry(arrivingCountry);
+                    } else {
+                        returningDepartureCity.setCountry(returningDepartureCountry);
+                    }
+                }
+            }
+            return returningDepartureCity;
+        }
+
+        private City setCityForDepartureFlight (Session session, Country departureCountry, AirportDTO departureAirport2)
+        {
+            City departureCity = prepareCity(departureAirport2.getCityDTO(), session);
+            if (departureCity.getCountry() == null) {
+                departureCity.setCountry(departureCountry);
+            }
+            return departureCity;
+        }
+
+        private Country setCountryForReturningFlight (Session session, Continent arrivingContinent, Continent
+        returningDepartureContinent, Country arrivingCountry, AirportDTO departureAirport2){
+            Country returningDepartureCountry = null;
+            if (!arrivingCountry.getName().equalsIgnoreCase(departureAirport2.getCityDTO().getCountryDTO().getName())) {
+                returningDepartureCountry = prepareCountry(departureAirport2.getCityDTO().getCountryDTO(), session);
+                if (returningDepartureCountry.getContinent() == null) {
+                    if (returningDepartureContinent == null) {
+                        returningDepartureCountry.setContinent(arrivingContinent);
+                    } else {
+                        returningDepartureCountry.setContinent(returningDepartureContinent);
+                    }
+                }
+            }
+            return returningDepartureCountry;
+        }
+
+        private Country setDepartureCountry (Session session, Continent departureContinent, AirportDTO departureAirport2)
+        {
+            Country departureCountry = prepareCountry(departureAirport2.getCityDTO().getCountryDTO(), session);
+            if (departureCountry.getContinent() == null) {
+                departureCountry.setContinent(departureContinent);
+            }
+            return departureCountry;
+        }
+
+        private Continent setReturningContinent (Session session, Continent arrivingContinent, AirportDTO
+        departureAirport2){
+            Continent returningDepartureContinent = null;
+            if (!arrivingContinent.getName().equalsIgnoreCase(departureAirport2.getCityDTO().getCountryDTO().getContinentDTO().getName())) {
+                returningDepartureContinent = prepareContinent(departureAirport2.getCityDTO().getCountryDTO().getContinentDTO(), session);
+            }
+            return returningDepartureContinent;
+        }
+
+
+        private Flight prepareFlight (FlightDTO flightDTO, Session session){
+            Flight flight = flightDAO.findFlightByFlightNumber(flightDTO.getFlightNumber(), session);
+            if (flight == null) {
+                flight = new Flight();
+                flight.setFlightNumber(flightDTO.getFlightNumber());
+                flight.setSeatsAvailable(flightDTO.getSeatsAvailable());
+                flight.setPrice(flightDTO.getPrice());
+                flight.setDepartureDateAndTime(flightDTO.getDepartureDateAndTime());
+                flight.setArrivingDateAndTime(flightDTO.getArrivingDateAndTime());
+            }
+            return flight;
+        }
+
+
+        private Airport prepareAirport (AirportDTO airportDTO, Session session){
+            Airport airport = airportDAO.findAirportByName(airportDTO.getName());
+            if (airport == null) {
+                airport = new Airport();
+                airport.setName(airportDTO.getName());
+            }
+            return airport;
+        }
+
+        private City prepareCity (CityDTO cityDTO, Session session){
+            City city = cityDAO.findCity(cityDTO.getName(), session);
+            if (city == null) {
+                city = new City();
+                city.setName(cityDTO.getName());
+            }
+            return city;
+        }
+
+        private Country prepareCountry (CountryDTO countryDTO, Session session){
+            Country country = countryDAO.findCountry(countryDTO.getName(), session);
+            if (country == null) {
+                country = new Country();
+                country.setName(countryDTO.getName());
+            }
+            return country;
+        }
+
+        private Continent prepareContinent (ContinentDTO continentDTO, Session session){
+            Continent continent = continentDAO.findContinent(continentDTO.getName(), session);
+            if (continent == null) {
+                continent = new Continent();
+                continent.setName(continentDTO.getName());
+            }
+            return continent;
+        }
+
+
+        private double calculateTripsPrice (TripDTO tripDTO){
+            double totalFlightPrice = (tripDTO.getDepartureFlightDTO().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()))
+                    + (tripDTO.getReturningFlightDTO().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()));
+            return ((tripDTO.getPriceForAdult() * tripDTO.getNumberOfAdults() + (tripDTO.getPriceForChild() * tripDTO.getNumberOfChildren())) + totalFlightPrice);
+        }
+
+
     }
-
-
-    private double calculateTripsPrice(TripDTO tripDTO) {
-        double totalFlightPrice = (tripDTO.getDepartureFlightDTO().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()))
-                + (tripDTO.getReturningFlightDTO().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()));
-        return ((tripDTO.getPriceForAdult() * tripDTO.getNumberOfAdults() + (tripDTO.getPriceForChild() * tripDTO.getNumberOfChildren())) + totalFlightPrice);
-    }
-
-
-}

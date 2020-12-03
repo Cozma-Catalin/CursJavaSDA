@@ -19,10 +19,11 @@ public class HotelDTO {
     @Min(1)
     @Max(5)
     private double numberOfStars;
-    @NotNull @Valid
-    private Set<RoomDTO> roomDTOSet;
     @NotNull
     private String description;
+    @NotNull @Valid
+    private Set<RoomDTO> roomDTOSet;
+
 
     @Valid
     private CityDTO cityDTO;

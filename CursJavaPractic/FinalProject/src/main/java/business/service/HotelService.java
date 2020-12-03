@@ -49,6 +49,8 @@ public class HotelService {
         hotel.setRoomSet(roomSet);
     }
 
+
+
     public void setCity(HotelDTO hotelDTO, Hotel hotel) {
         City cityFound = cityDAO.findCity(hotelDTO.getCityDTO().getName());
         if (cityFound != null) {
@@ -68,7 +70,7 @@ public class HotelService {
         } else {
             Country country = new Country();
             country.setName(hotelDTO.getCityDTO().getCountryDTO().getName());
-         //   setContinent(hotelDTO, country);
+            setContinent(hotelDTO, country);
             city.setCountry(country);
         }
     }
