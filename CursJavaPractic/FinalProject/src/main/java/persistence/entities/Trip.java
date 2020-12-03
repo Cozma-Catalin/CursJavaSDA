@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @NamedQueries({
-
+        @NamedQuery(name = "countTrips", query = "select count(name) from Trip trip where trip.name= :name and trip.departureDate= :departureDate"),
+        @NamedQuery(name = "deleteTripsByName",query = "delete from Trip where name= :name"),
+        @NamedQuery(name = "findPromotedTrips",query = "select trip from Trip trip where promoted= :promoted")
 
 })
 
@@ -26,7 +28,7 @@ public class Trip {
     @JoinColumn(name = "returning_flight")
     private Flight returningFlight;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "staying_hotel")
     private Hotel stayingHotel;
 
@@ -64,7 +66,7 @@ public class Trip {
     private int numberOfTripsAvailable;
 
 
-    public Trip(String name,Flight departureFlight,Flight returningFlight, Hotel stayingHotel, String mealType, Date departureDate,
+    public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, Date departureDate,
                 Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild,
                 int numberOfAdults, int numberOfChildren, double tripsPrice, int numberOfTripsAvailable) {
         this.name = name;
@@ -217,7 +219,7 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "Trip: " + name + "departure flight: "+ departureFlight + " returning flight: " + returningFlight
+        return "Trip: " + name + "departure flight: " + departureFlight + " returning flight: " + returningFlight
                 + ", staying Hotel:" + stayingHotel + ", meal type:" + mealType + ", departure date:" + departureDate
                 + ", return date:" + returnDate + ", number of days:" + numberOfDays + ", promoted:" + promoted
                 + ", price for adult:" + priceForAdult + ", price for child:" + priceForChild

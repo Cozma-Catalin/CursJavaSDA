@@ -23,10 +23,8 @@ public class Room {
     @Column(name = "rooms_available")
     private int roomsAvailable;
 
-   @ManyToMany(mappedBy = "roomSet")
+    @ManyToMany(mappedBy = "roomSet")
     private Set<Hotel> hotelSet;
-
-
 
 
     public Room(String roomType, int numberOfRooms, boolean extraBed, int roomsAvailable) {
@@ -79,14 +77,13 @@ public class Room {
         this.roomsAvailable = roomsAvailable;
     }
 
-   public Set<Hotel> getHotelSet() {
+    public Set<Hotel> getHotelSet() {
         return hotelSet;
     }
 
     public void setHotelSet(Set<Hotel> hotelSet) {
         this.hotelSet = hotelSet;
     }
-
 
     @Override
     public String toString() {

@@ -3,7 +3,8 @@ package persistence.entities;
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = "findFlightByFlightNumber",query = "select flight from Flight flight where flightNumber= :flightNumber")
+        @NamedQuery(name = "findFlightByFlightNumber",query = "select flight from Flight flight where flightNumber= :flightNumber"),
+        @NamedQuery(name = "countFlightNumber",query = "select count(flightNumber) from Flight where flightNumber= :flightNumber")
 })
 
 

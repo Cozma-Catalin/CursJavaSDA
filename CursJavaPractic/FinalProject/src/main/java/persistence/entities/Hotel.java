@@ -5,14 +5,14 @@ import java.util.Set;
 
 @NamedQueries({
 
-        @NamedQuery(name = "findHotelsInCity", query = "select hotel from Hotel hotel inner join hotel.city city where city.name= :name"),
-        @NamedQuery(name = "deleteHotelByName", query = "delete from Hotel where name= :name "),
-        @NamedQuery(name = "findHotel", query = "select hotel from Hotel hotel where name= :name"),
-        @NamedQuery(name = "changeHotelName", query = "update from Hotel set name= :newName where name= :name"),
-        @NamedQuery(name = "countHotelName", query = "select count(name) from Hotel where name= :name"),
-        @NamedQuery(name = "countAddressInCity", query = "select hotel.address from Hotel hotel inner join hotel.city city where city.name= :name"),
-        @NamedQuery(name = "deleteHotelByAddress", query = "delete from Hotel where address= :address"),
-        @NamedQuery(name = "findHotelByAddress", query = "select hotel from Hotel hotel where address= :address")
+        @NamedQuery(name = "findHotelsInCity",query = "select hotel from Hotel hotel inner join hotel.city city where city.name= :name"),
+        @NamedQuery(name = "deleteHotelByName",query = "delete from Hotel where name= :name "),
+        @NamedQuery(name = "findHotel",query = "select hotel from Hotel hotel where name= :name"),
+        @NamedQuery(name = "changeHotelName",query = "update from Hotel set name= :newName where name= :name"),
+        @NamedQuery(name = "countHotelName",query = "select count(name) from Hotel where name= :name"),
+        @NamedQuery(name = "countAddressInCity",query = "select hotel.address from Hotel hotel inner join hotel.city city where city.name= :name"),
+        @NamedQuery(name = "deleteHotelByAddress",query = "delete from Hotel where address= :address"),
+        @NamedQuery(name = "findHotelByAddress" ,query = "select hotel from Hotel hotel where address= :address")
 })
 
 @Entity
@@ -20,7 +20,6 @@ import java.util.Set;
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
 
     @Column(name = "name")
@@ -41,11 +40,11 @@ public class Hotel {
             inverseJoinColumns = {@JoinColumn(name = "rooms_id")})
     private Set<Room> roomSet;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cities_id")
     private City city;
 
-    public Hotel(String name, String address, double numberOfStars, Set<Room> roomSet, String description, City city) {
+    public Hotel(String name, String address, double numberOfStars,Set<Room> roomSet ,String description, City city) {
         this.name = name;
         this.address = address;
         this.numberOfStars = numberOfStars;
@@ -117,6 +116,6 @@ public class Hotel {
     @Override
     public String toString() {
         return "Hotel: " + name + ", address: " + address + ", number of stars: " + numberOfStars
-                + " ,rooms: " + roomSet + ", description: " + description + ", " + city;
+         + " ,rooms: " + roomSet + ", description: " + description + ", " + city ;
     }
 }

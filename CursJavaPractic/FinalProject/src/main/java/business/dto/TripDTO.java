@@ -1,18 +1,21 @@
 package business.dto;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
-import java.util.Set;
+
 
 public class TripDTO {
     @NotNull @NotBlank @NotEmpty @Pattern(regexp = "([a-z A-Z])*")
     private String name;
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;
     @Valid
     private FlightDTO departureFlightDTO;

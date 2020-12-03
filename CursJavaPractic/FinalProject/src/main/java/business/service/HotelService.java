@@ -30,13 +30,13 @@ public class HotelService {
         hotel.setName(hotelDTO.getName());
         hotel.setAddress(hotelDTO.getAddress());
         hotel.setNumberOfStars(hotelDTO.getNumberOfStars());
-        setRooms(hotelDTO, hotel);
+        setRoomsInHotel(hotelDTO, hotel);
         hotel.setDescription(hotelDTO.getDescription());
         setCity(hotelDTO, hotel);
         hotelDAO.insertHotel(hotel);
     }
 
-    private void setRooms(HotelDTO hotelDTO, Hotel hotel) {
+    private void setRoomsInHotel(HotelDTO hotelDTO, Hotel hotel) {
         Set<Room> roomSet = new HashSet<>();
         for(RoomDTO r : hotelDTO.getRoomDTOSet()){
             Room room = new Room();
@@ -48,8 +48,6 @@ public class HotelService {
         }
         hotel.setRoomSet(roomSet);
     }
-
-
 
     public void setCity(HotelDTO hotelDTO, Hotel hotel) {
         City cityFound = cityDAO.findCity(hotelDTO.getCityDTO().getName());
@@ -85,6 +83,18 @@ public class HotelService {
         }
     }
 
+    private void setRoomsInHotelDTO(HotelDTO hotelDTO, Hotel hotel) {
+        Set<RoomDTO> roomDTOSet = new HashSet<>();
+        for(Room r : hotel.getRoomSet()){
+            RoomDTO roomDTO = new RoomDTO();
+            roomDTO.setRoomType(r.getRoomType());
+            roomDTO.setNumberOfRooms(r.getNumberOfRooms());
+            roomDTO.setExtraBed(r.isExtraBed());
+            roomDTO.setRoomsAvailable(r.getRoomsAvailable());
+            roomDTOSet.add(roomDTO);
+        }
+        hotelDTO.setRoomDTOSet(roomDTOSet);
+    }
 
     public List<HotelDTO> findHotelsInCity(String cityName) {
         List<HotelDTO> hotelDTOList = new LinkedList<>();
@@ -95,9 +105,9 @@ public class HotelService {
             hotelDTO.setAddress(h.getAddress());
             hotelDTO.setNumberOfStars(h.getNumberOfStars());
             hotelDTO.setDescription(h.getDescription());
+            setRoomsInHotelDTO(hotelDTO,h);
 
-            ContinentDTO continentDTO = new ContinentDTO();
-            continentDTO.setName(h.getCity().getCountry().getContinent().getName());
+            ContinentDTO continentDTO = new ContinentDTO(h.getCity().getCountry().getContinent().getName());
 
             CountryDTO countryDTO = new CountryDTO();
             countryDTO.setName(h.getCity().getCountry().getName());
@@ -124,6 +134,7 @@ public class HotelService {
             hotelDTO.setAddress(h.getAddress());
             hotelDTO.setNumberOfStars(h.getNumberOfStars());
             hotelDTO.setDescription(h.getDescription());
+            setRoomsInHotelDTO(hotelDTO,h);
             CityDTO cityDTO = new CityDTO();
             cityDTO.setName(h.getCity().getName());
             hotelDTO.setCityDTO(cityDTO);
@@ -135,12 +146,25 @@ public class HotelService {
     public HotelDTO findHotelByAddress(String address){
         HotelDTO hotelDTO = new HotelDTO();
         Hotel hotel = hotelDAO.findHotelByAddress(address);
+        if(hotel == null){
+            return null;
+        }
         hotelDTO.setName(hotel.getName());
         hotelDTO.setAddress(address);
         hotelDTO.setNumberOfStars(hotel.getNumberOfStars());
         hotelDTO.setDescription(hotel.getDescription());
+        setRoomsInHotelDTO(hotelDTO,hotel);
+
+        ContinentDTO continentDTO = new ContinentDTO(hotel.getCity().getCountry().getContinent().getName());
+
+        CountryDTO countryDTO = new CountryDTO();
+        countryDTO.setName(hotel.getCity().getCountry().getName());
+        countryDTO.setContinentDTO(continentDTO);
+
         CityDTO cityDTO = new CityDTO();
+        cityDTO.setCountryDTO(countryDTO);
         cityDTO.setName(hotel.getCity().getName());
+
         hotelDTO.setCityDTO(cityDTO);
         return hotelDTO;
     }

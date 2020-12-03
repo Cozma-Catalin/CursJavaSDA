@@ -29,7 +29,6 @@ public class FlightService {
         flight.setFlightNumber(flightDTO.getFlightNumber());
         flight.setDepartureDateAndTime(flightDTO.getDepartureDateAndTime());
         setDepartureAirport(flightDTO, flight);
-
         setArrivingAirport(flightDTO, flight);
         flight.setArrivingDateAndTime(flightDTO.getArrivingDateAndTime());
         flight.setPrice(flightDTO.getPrice());
@@ -111,5 +110,9 @@ public class FlightService {
         }
     }
 
+    public long countFlightNumber(String flightNumber){
+        long result = flightDAO.countFlightNumber(flightNumber);
+        return result;
+    }
 
 }

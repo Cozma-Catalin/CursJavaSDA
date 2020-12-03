@@ -19,6 +19,10 @@ public class RoomDTO {
         this.roomsAvailable = roomsAvailable;
     }
 
+    public RoomDTO() {
+
+    }
+
     public String getRoomType() {
         return roomType;
     }

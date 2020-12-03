@@ -54,12 +54,6 @@ public class HotelController {
     }
 
 
-    /*   @DeleteMapping(path = "/deleteHotelFromCity")
-       public ResponseEntity deleteHotelFromCity(@RequestParam String hotelName,String cityName) {
-           hotelService.deleteHotelFromCity(hotelName,cityName);
-           return ResponseEntity.ok( " deleted.");
-       }
-   */
     @PutMapping(path = "/changeHotelName")
     public ResponseEntity changeHotelName(@RequestParam String newName, String name) {
 
@@ -71,6 +65,16 @@ public class HotelController {
         }
         hotelService.changeHotelName(newName, name);
         return ResponseEntity.ok(name + " changed to: " + newName);
+    }
+
+
+    @GetMapping(path = "findHotelByAddress")
+    public ResponseEntity findHotelByAddress(@RequestParam String address){
+        HotelDTO hotelDTO = hotelService.findHotelByAddress(address);
+        if(hotelDTO == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find any hotel with the address: " + address);
+        }
+        return ResponseEntity.ok(hotelDTO);
     }
 
 }

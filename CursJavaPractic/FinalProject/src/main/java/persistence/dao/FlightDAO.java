@@ -19,6 +19,17 @@ public class FlightDAO {
         session.close();
     }
 
+    public long countFlightNumber(String flightNumber){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query countFlightNumberQuery = session.createNamedQuery("countFlightNumber");
+        countFlightNumberQuery.setParameter("flightNumber",flightNumber);
+        long result = (Long) countFlightNumberQuery.getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
     public Flight findFlightByFlightNumber(String flightNumber){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
