@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -126,5 +126,83 @@ public class TripController {
         return ResponseEntity.ok(tripDTOList);
     }
 
+
+    @GetMapping(path = "/findTripsByDepartureDate")
+    public ResponseEntity findTripsByDepartureDate(@RequestParam Date departureDate){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureDate(departureDate);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found with departing date: " + departureDate + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByReturnDate")
+    public ResponseEntity findTripsByReturnDate(@RequestParam Date returnDate){
+        List<TripDTO> tripDTOList = tripService.findTripsByReturnDate(returnDate);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found with returning date: " + returnDate + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByDepartureTimeFrame")
+    public ResponseEntity findTripsByDepartureTimeFrame(@RequestParam Date departureDate,Date returnDate){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureTimeFrame(departureDate,returnDate);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing between date: " + departureDate + ", " + returnDate + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByReturnTimeFrame")
+    public ResponseEntity findTripsByReturnTimeFrame(@RequestParam Date departureDate,Date returnDate){
+        List<TripDTO> tripDTOList = tripService.findTripsByReturnTimeFrame(departureDate,returnDate);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found returning between date: " + departureDate + ", " + returnDate + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByMealType")
+    public ResponseEntity findTripsByMealType(@RequestParam String mealType){
+        List<TripDTO> tripDTOList = tripService.findTripsByMealType(mealType);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found with meal type: " + mealType + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+    @GetMapping(path = "/findTripsByHotelStars")
+    public ResponseEntity findTripsByHotelStars(@RequestParam double numberOfStars){
+        List<TripDTO> tripDTOList = tripService.findTripsByHotelStars(numberOfStars);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found were hotel has: " + numberOfStars + " stars.");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findTripsByNumberOfDays")
+    public ResponseEntity findTripsByNumberOfDays(@RequestParam int numberOfDays){
+        List<TripDTO> tripDTOList = tripService.findTripsByNumberOfDays(numberOfDays);
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found with: " + numberOfDays + " number of days.");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
+
+
+    @GetMapping(path = "/findAllTrips")
+    public ResponseEntity findAllTrips(){
+        List<TripDTO> tripDTOList = tripService.findAllTrips();
+        if(tripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found in database. ");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
 
 }

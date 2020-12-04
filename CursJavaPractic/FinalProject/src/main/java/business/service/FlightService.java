@@ -27,10 +27,12 @@ public class FlightService {
     public void insertFlight(FlightDTO flightDTO) {
         Flight flight = new Flight();
         flight.setFlightNumber(flightDTO.getFlightNumber());
-        flight.setDepartureDateAndTime(flightDTO.getDepartureDateAndTime());
+        flight.setDepartureDate(flightDTO.getDepartureDate());
+        flight.setDepartureTime(flightDTO.getDepartureTime());
         setDepartureAirport(flightDTO, flight);
         setArrivingAirport(flightDTO, flight);
-        flight.setArrivingDateAndTime(flightDTO.getArrivingDateAndTime());
+        flight.setArrivingDate(flightDTO.getArrivingDate());
+        flight.setArrivingTime(flightDTO.getArrivingTime());
         flight.setPrice(flightDTO.getPrice());
         flight.setSeatsAvailable(flightDTO.getSeatsAvailable());
         flightDAO.insertFlight(flight);

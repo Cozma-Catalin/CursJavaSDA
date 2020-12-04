@@ -141,4 +141,99 @@ public class TripDAO {
         session.close();
         return tripList;
     }
+
+    public List<Trip> findTripsByDepartureDate(java.sql.Date departureDate){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByDepartureDateQuery = session.createNamedQuery("findTripsByDepartureDate");
+        findTripsByDepartureDateQuery.setParameter("departureDate",departureDate);
+        List<Trip> tripList = findTripsByDepartureDateQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+    public List<Trip> findTripsByReturnDate(java.sql.Date returnDate){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByReturnDateQuery = session.createNamedQuery("findTripsByReturnDate");
+        findTripsByReturnDateQuery.setParameter("returnDate",returnDate);
+        List<Trip> tripList = findTripsByReturnDateQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+    public List<Trip> findTripsByDepartureTimeFrame(java.sql.Date departureDate, java.sql.Date returnDate){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByDepartureTimeFrameQuery = session.createNamedQuery("findTripsByDepartureTimeFrame");
+        findTripsByDepartureTimeFrameQuery.setParameter("departureDate",departureDate);
+        findTripsByDepartureTimeFrameQuery.setParameter("returnDate",returnDate);
+        List<Trip> tripList = findTripsByDepartureTimeFrameQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+
+    public List<Trip> findTripsByReturnTimeFrame(java.sql.Date departureDate, java.sql.Date returnDate){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByReturnTimeFrameQuery = session.createNamedQuery("findTripsByReturnTimeFrame");
+        findTripsByReturnTimeFrameQuery.setParameter("departureDate",departureDate);
+        findTripsByReturnTimeFrameQuery.setParameter("returnDate",returnDate);
+        List<Trip> tripList = findTripsByReturnTimeFrameQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findTripsByMealType(String mealType){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByMealTypeQuery = session.createNamedQuery("findTripsByMealType");
+        findTripsByMealTypeQuery.setParameter("mealType",mealType);
+        List<Trip> tripList = findTripsByMealTypeQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findTripsByHotelStars(double numberOfStars){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByHotelStarsQuery = session.createNamedQuery("findTripsByHotelStars");
+        findTripsByHotelStarsQuery.setParameter("numberOfStars",numberOfStars);
+        List<Trip> tripList = findTripsByHotelStarsQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findTripsByNumberOfDays(int numberOfDays){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByNumberOfDaysQuery = session.createNamedQuery("findTripsByNumberOfDays");
+        findTripsByNumberOfDaysQuery.setParameter("numberOfDays",numberOfDays);
+        List<Trip> tripList = findTripsByNumberOfDaysQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+    public List<Trip> findAllTrips(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findAllTripsQuery = session.createNamedQuery("findAllTrips");
+        List<Trip> tripList = findAllTripsQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
 }

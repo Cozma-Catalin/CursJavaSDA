@@ -16,7 +16,7 @@ public class TripDTO {
     private String name;
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date departureDate;
+    private java.sql.Date departureDate;
     @Valid
     private FlightDTO departureFlightDTO;
     @NotNull
@@ -43,7 +43,7 @@ public class TripDTO {
     @NotNull
     private int numberOfTripsAvailable;
 
-    public TripDTO(String name, HotelDTO stayingHotelDTO, String mealType, Date departureDate,
+    public TripDTO(String name, HotelDTO stayingHotelDTO, String mealType, java.sql.Date departureDate,
                    FlightDTO departureFlightDTO, Date returnDate,FlightDTO returningFlightDTO,
                    int numberOfDays, boolean promoted, double priceForAdult, double priceForChild, int numberOfAdults,
                    int numberOfChildren, double tripsPrice, int numberOfTripsAvailable) {
@@ -107,11 +107,11 @@ public class TripDTO {
         this.mealType = mealType;
     }
 
-    public Date getDepartureDate() {
+    public java.sql.Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(java.sql.Date departureDate) {
         this.departureDate = departureDate;
     }
 

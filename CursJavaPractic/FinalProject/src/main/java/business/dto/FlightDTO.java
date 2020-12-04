@@ -1,19 +1,33 @@
 package business.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public class FlightDTO {
     @NotNull
     private String flightNumber;
     @NotNull
-    private String departureDateAndTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date departureDate;
+    @NotNull
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss",timezone = "Europe/Bucharest")
+    private Timestamp departureTime;
 
     private AirportDTO departureAirport;
     @NotNull
-    private String arrivingDateAndTime;
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
+    private Date arrivingDate;
+    @NotNull
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm:ss",timezone = "Europe/Bucharest")
+    private Timestamp arrivingTime;
 
     private AirportDTO arrivingAirport;
     @NotNull
@@ -21,12 +35,14 @@ public class FlightDTO {
     @NotNull
     private int seatsAvailable;
 
-    public FlightDTO(String flightNumber,String departureDateAndTime, AirportDTO departureAirport,String arrivingDateAndTime ,
+    public FlightDTO(String flightNumber,Date departureDate,Timestamp departureTime, AirportDTO departureAirport,Date arrivingDate,Timestamp arrivingTime ,
                      AirportDTO arrivingAirport, double price, int seatsAvailable) {
         this.flightNumber = flightNumber;
-        this.departureDateAndTime = departureDateAndTime;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
         this.departureAirport = departureAirport;
-        this.arrivingDateAndTime = arrivingDateAndTime;
+        this.arrivingDate = arrivingDate;
+        this.arrivingTime = arrivingTime;
         this.arrivingAirport = arrivingAirport;
         this.price = price;
         this.seatsAvailable = seatsAvailable;
@@ -43,28 +59,44 @@ public class FlightDTO {
         this.flightNumber = flightNumber;
     }
 
-    public String getDepartureDateAndTime() {
-        return departureDateAndTime;
+    public Date getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDepartureDateAndTime(String departureDateAndTime) {
-        this.departureDateAndTime = departureDateAndTime;
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Timestamp getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(Timestamp departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public Date getArrivingDate() {
+        return arrivingDate;
+    }
+
+    public void setArrivingDate(Date arrivingDate) {
+        this.arrivingDate = arrivingDate;
+    }
+
+    public Timestamp getArrivingTime() {
+        return arrivingTime;
+    }
+
+    public void setArrivingTime(Timestamp arrivingTime) {
+        this.arrivingTime = arrivingTime;
     }
 
     public AirportDTO getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setArrivingDateAndTime(String arrivingDateAndTime) {
-        this.arrivingDateAndTime = arrivingDateAndTime;
-    }
-
     public void setDepartureAirport(AirportDTO departureAirport) {
         this.departureAirport = departureAirport;
-    }
-
-    public String getArrivingDateAndTime() {
-        return arrivingDateAndTime;
     }
 
     public AirportDTO getArrivingAirport() {
@@ -93,9 +125,9 @@ public class FlightDTO {
 
     @Override
     public String toString() {
-        return "FlightDTO: " + flightNumber + " departure date and time:" + departureDateAndTime +
-                ", departing from Airport:" + departureAirport +
-                ", arriving in Airport:" + arrivingAirport + ", price:" + price +
-                ", number of seats available:" + seatsAvailable ;
+        return "FlightDTO: " + flightNumber + " departure date:" + departureDate + ", time: " + departureTime +
+                ", departing from Airport:" + departureAirport + ", arriving in Airport:" + arrivingAirport +
+                 " ,arriving date: " + arrivingDate + ", time: " + arrivingTime +
+                ", price:" + price + ", number of seats available:" + seatsAvailable ;
     }
 }

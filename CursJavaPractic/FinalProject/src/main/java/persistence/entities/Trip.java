@@ -5,17 +5,33 @@ import java.util.Date;
 
 @NamedQueries({
         @NamedQuery(name = "countTrips", query = "select count(name) from Trip trip where trip.name= :name and trip.departureDate= :departureDate"),
-        @NamedQuery(name = "deleteTripsByName", query = "delete from Trip where name= :name"),
+        @NamedQuery(name = "deleteTripsByName", query = "delete from Trip where name= :name "),
         @NamedQuery(name = "findPromotedTrips", query = "select trip from Trip trip where promoted= :promoted"),
-        @NamedQuery(name = "findTripsByDepartureContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city inner join city.country country inner join country.continent continent where continent.name= :name"),
-        @NamedQuery(name = "findTripsByArrivingContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city inner join city.country country inner join country.continent continent where continent.name= :name"),
-        @NamedQuery(name = "findTripsByDepartureCountry", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city inner join city.country country where country.name= :name"),
-        @NamedQuery(name = "findTripsByArrivingCountry", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city inner join city.country country where country.name= :name"),
-        @NamedQuery(name = "findTripsByDepartureCity", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city where city.name= :name"),
-        @NamedQuery(name = "findTripsByArrivingCity", query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city where city.name= :name"),
-        @NamedQuery(name = "findTripsByDepartureAirport" , query = "select trip from Trip trip inner join trip.departureFlight departureFlight inner join departureFlight.departureAirport departureAirport where departureAirport.name= :name" ),
-        @NamedQuery(name = "findTripsByHotel" , query = "select trip from Trip trip inner join trip.stayingHotel stayingHotel where stayingHotel.name= :name")
-
+        @NamedQuery(name = "findTripsByDepartureContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city inner join city.country country " +
+                "inner join country.continent continent where continent.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city inner join city.country country " +
+                "inner join country.continent continent where continent.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureCountry", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city inner join city.country country where country.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingCountry", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city inner join city.country country where country.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureCity", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.departureAirport departureAirport inner join departureAirport.city city where city.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingCity", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city where city.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureAirport", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.departureAirport departureAirport where departureAirport.name= :name"),
+        @NamedQuery(name = "findTripsByHotel", query = "select trip from Trip trip inner join trip.stayingHotel stayingHotel where stayingHotel.name= :name"),
+        @NamedQuery(name = "findTripsByDepartureDate", query = "select trip from Trip trip where departureDate= :departureDate"),
+        @NamedQuery(name = "findTripsByReturnDate", query = "select trip from Trip trip where returnDate= :returnDate"),
+        @NamedQuery(name = "findTripsByDepartureTimeFrame", query = "select trip from Trip trip where departureDate>= :departureDate and departureDate<= :returnDate"),
+        @NamedQuery(name = "findTripsByReturnTimeFrame", query = "select trip from Trip trip where returnDate>= :departureDate and returnDate<= :returnDate"),
+        @NamedQuery(name = "findTripsByMealType" ,query = "select trip from Trip trip where mealType= :mealType"),
+        @NamedQuery(name = "findTripsByHotelStars" , query = " select trip from Trip trip inner join trip.stayingHotel stayingHotel where stayingHotel.numberOfStars= :numberOfStars"),
+        @NamedQuery(name = "findTripsByNumberOfDays",query = "select trip from Trip trip where numberOfDays= :numberOfDays"),
+        @NamedQuery(name = "findAllTrips" ,query = "select trip from Trip trip order by trip.tripsPrice asc")
 })
 
 @Entity
@@ -28,9 +44,15 @@ public class Trip {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "departure_date")
+    private java.sql.Date departureDate;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departure_flight")
     private Flight departureFlight;
+
+    @Column(name = "return_date")
+    private Date returnDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "returning_flight")
@@ -42,12 +64,6 @@ public class Trip {
 
     @Column(name = "meal_type")
     private String mealType;
-
-    @Column(name = "departure_date")
-    private Date departureDate;
-
-    @Column(name = "return_date")
-    private Date returnDate;
 
     @Column(name = "number_of_days")
     private int numberOfDays;
@@ -74,7 +90,7 @@ public class Trip {
     private int numberOfTripsAvailable;
 
 
-    public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, Date departureDate,
+    public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, java.sql.Date departureDate,
                 Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild,
                 int numberOfAdults, int numberOfChildren, double tripsPrice, int numberOfTripsAvailable) {
         this.name = name;
@@ -145,11 +161,11 @@ public class Trip {
         this.mealType = mealType;
     }
 
-    public Date getDepartureDate() {
+    public java.sql.Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(java.sql.Date departureDate) {
         this.departureDate = departureDate;
     }
 

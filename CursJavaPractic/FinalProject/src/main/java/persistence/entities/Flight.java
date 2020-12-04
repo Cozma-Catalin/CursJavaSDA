@@ -1,6 +1,8 @@
 package persistence.entities;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @NamedQueries({
         @NamedQuery(name = "findFlightByFlightNumber",query = "select flight from Flight flight where flightNumber= :flightNumber"),
@@ -18,15 +20,21 @@ public class Flight {
     @Column(name = "flight_number")
     private String flightNumber;
 
-    @Column(name = "departure_date_and_time")
-    private String departureDateAndTime;
+    @Column(name = "departure_date")
+    private Date departureDate;
+
+    @Column(name = "departure_time")
+    private Timestamp departureTime;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departure_airport")
     private Airport departureAirport;
 
-    @Column(name = "arriving_date_and_time")
-    private String arrivingDateAndTime;
+    @Column(name = "arriving_date")
+    private Date arrivingDate;
+
+    @Column(name = "arriving_time")
+    private Timestamp arrivingTime;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "arriving_airport")
@@ -40,12 +48,14 @@ public class Flight {
 
 
 
-    public Flight(String flightNumber, String departureDateAndTime, Airport departureAirport,
-                  String arrivingDateAndTime, Airport arrivingAirport, double price, int seatsAvailable) {
+    public Flight(String flightNumber, Date departureDate,Timestamp departureTime, Airport departureAirport,
+                  Date arrivingDate,Timestamp arrivingTime, Airport arrivingAirport, double price, int seatsAvailable) {
         this.flightNumber = flightNumber;
-        this.departureDateAndTime = departureDateAndTime;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
         this.departureAirport = departureAirport;
-        this.arrivingDateAndTime = arrivingDateAndTime;
+        this.arrivingDate = arrivingDate;
+        this.arrivingTime = arrivingTime;
         this.arrivingAirport = arrivingAirport;
         this.price = price;
         this.seatsAvailable = seatsAvailable;
@@ -70,20 +80,36 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public String getDepartureDateAndTime() {
-        return departureDateAndTime;
+    public Date getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDepartureDateAndTime(String departureDateAndTime) {
-        this.departureDateAndTime = departureDateAndTime;
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 
-    public String getArrivingDateAndTime() {
-        return arrivingDateAndTime;
+    public Timestamp getDepartureTime() {
+        return departureTime;
     }
 
-    public void setArrivingDateAndTime(String arrivingDateAndTime) {
-        this.arrivingDateAndTime = arrivingDateAndTime;
+    public void setDepartureTime(Timestamp departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public Date getArrivingDate() {
+        return arrivingDate;
+    }
+
+    public void setArrivingDate(Date arrivingDate) {
+        this.arrivingDate = arrivingDate;
+    }
+
+    public Timestamp getArrivingTime() {
+        return arrivingTime;
+    }
+
+    public void setArrivingTime(Timestamp arrivingTime) {
+        this.arrivingTime = arrivingTime;
     }
 
     public Airport getDepartureAirport() {
@@ -120,9 +146,9 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight: " + flightNumber + "departure date and time: " + departureDateAndTime + ", " +
-                ",departing from airport: " + departureAirport + " ,arriving date and time: " + arrivingDateAndTime +
-                " arriving in airport: " + arrivingAirport + ", price:" + price +
+        return "Flight: " + flightNumber + "departure date: " + departureDate + ",time: " + departureTime +
+                ",departing from airport: " + departureAirport + " ,arriving date: " + arrivingDate + ",time: "
+                + arrivingTime + " arriving in airport: " + arrivingAirport + ", price:" + price +
                 ",number of seats available:" + seatsAvailable ;
     }
 }
