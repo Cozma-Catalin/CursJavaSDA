@@ -12,12 +12,7 @@ public class RoomDTO {
     @NotNull
     private int roomsAvailable;
 
-    public RoomDTO(String roomType, int numberOfRooms, boolean extraBed, int roomsAvailable) {
-        this.roomType = roomType;
-        this.numberOfRooms = numberOfRooms;
-        this.extraBed = extraBed;
-        this.roomsAvailable = roomsAvailable;
-    }
+
 
     public RoomDTO() {
 

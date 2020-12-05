@@ -87,7 +87,7 @@ public class TripService {
     }
 
     private Hotel setHotel(TripDTO tripDTO, Flight departureFlight, City arrivingCity, Session session) {
-        City city = null;
+        City city;
 
         Hotel hotel = hotelDAO.findHotelByAddress(tripDTO.getStayingHotelDTO().getAddress());
         if (hotel == null) {
@@ -100,7 +100,8 @@ public class TripService {
                 if (city.getCountry() == null) {
                     Country country = prepareCountry(tripDTO.getStayingHotelDTO().getCityDTO().getCountryDTO(), session);
                     if (country.getContinent() == null) {
-                        country.getContinent().setName(tripDTO.getStayingHotelDTO().getCityDTO().getCountryDTO().getContinentDTO().getName());
+                        Continent continent = new Continent(tripDTO.getStayingHotelDTO().getCityDTO().getCountryDTO().getContinentDTO().getName());
+                        country.setContinent(continent);
                     }
                     city.setCountry(country);
                 }
@@ -264,7 +265,7 @@ public class TripService {
 
 
     private Airport prepareAirport(AirportDTO airportDTO, Session session) {
-        Airport airport = airportDAO.findAirportByName(airportDTO.getName());
+        Airport airport = airportDAO.findAirportByName(airportDTO.getName(),session);
         if (airport == null) {
             airport = new Airport();
             airport.setName(airportDTO.getName());
@@ -307,13 +308,11 @@ public class TripService {
     }
 
     public long countTrips(String name, Date date) {
-        long result = tripDAO.countTrips(name, date);
-        return result;
+        return  tripDAO.countTrips(name, date);
     }
 
     public int deleteTripsByName(String name) {
-        int result = tripDAO.deleteTripsByName(name);
-        return result;
+        return tripDAO.deleteTripsByName(name);
     }
 
     public List<TripDTO> findPromotedTrips(boolean promoted) {
@@ -428,6 +427,7 @@ public class TripService {
         tripDTO.setPriceForChild(trip.getPriceForChild());
         tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
         tripDTO.setTripsPrice(trip.getTripsPrice());
+        tripDTO.setPromoted(trip.isPromoted());
         return tripDTO;
     }
 
@@ -516,4 +516,7 @@ public class TripService {
         }
         return roomDTOSet;
     }
+
+
+
 }

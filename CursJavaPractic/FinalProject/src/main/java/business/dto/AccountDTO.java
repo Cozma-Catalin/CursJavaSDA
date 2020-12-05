@@ -17,13 +17,6 @@ public class AccountDTO {
 
 
 
-    public AccountDTO(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-
-    }
-
-
     public AccountDTO() {
     }
 

@@ -18,10 +18,7 @@ public class CityDTO {
     private CountryDTO countryDTO;
 
 
-    public CityDTO(String name,CountryDTO countryDTO) {
-        this.name = name;
-        this.countryDTO = countryDTO;
-    }
+
 
     public CityDTO(String name) {
         this.name = name;

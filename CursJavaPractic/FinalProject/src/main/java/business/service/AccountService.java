@@ -14,38 +14,33 @@ public class AccountService {
 
 
     public int deleteAccount(String userName) {
-        int result = accountDAO.deleteAccount(userName);
-        return result;
+        return accountDAO.deleteAccount(userName);
     }
 
     public int updateUserLogIn(boolean loggedIn,String userName){
-        int result = accountDAO.updateUserLogIn(loggedIn,userName);
-        return result;
+        return accountDAO.updateUserLogIn(loggedIn,userName);
     }
 
 
     public String cryptPass(String password) {
         char[] chars = password.toCharArray();
-        String newPassword = " ";
+        StringBuilder newPassword = new StringBuilder(" ");
         for (char c : chars) {
             c += 3;
-            newPassword += c;
+            newPassword.append(c);
         }
-        return newPassword;
+        return newPassword.toString();
     }
 
     public String checkRegistration(String userName, String password) {
-        String retrievedPassword = accountDAO.checkRegistration(userName, password);
-        return retrievedPassword;
+        return accountDAO.checkRegistration(userName, password);
     }
 
     public long countUserName(String userName) {
-        long result = accountDAO.countUserName(userName);
-        return result;
+        return accountDAO.countUserName(userName);
     }
 
     public int changeUsername(String newUsername, String userName) {
-        int result = accountDAO.changeUserName(newUsername, userName);
-        return result;
+        return accountDAO.changeUserName(newUsername, userName);
     }
 }

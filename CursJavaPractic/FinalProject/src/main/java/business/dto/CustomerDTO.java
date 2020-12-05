@@ -21,16 +21,6 @@ public class CustomerDTO {
     private AccountDTO accountDTO;
 
 
-    public CustomerDTO(String name, String surname, String address, Date birthDate,String phoneNumber,
-                       String email, AccountDTO accountDTO) {
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
-        this.birthDate = birthDate;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.accountDTO = accountDTO;
-    }
 
     public CustomerDTO() {
     }

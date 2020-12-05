@@ -43,26 +43,7 @@ public class TripDTO {
     @NotNull
     private int numberOfTripsAvailable;
 
-    public TripDTO(String name, HotelDTO stayingHotelDTO, String mealType, java.sql.Date departureDate,
-                   FlightDTO departureFlightDTO, Date returnDate,FlightDTO returningFlightDTO,
-                   int numberOfDays, boolean promoted, double priceForAdult, double priceForChild, int numberOfAdults,
-                   int numberOfChildren, double tripsPrice, int numberOfTripsAvailable) {
-        this.name = name;
-        this.stayingHotelDTO = stayingHotelDTO;
-        this.mealType = mealType;
-        this.departureDate = departureDate;
-        this.departureFlightDTO = departureFlightDTO;
-        this.returnDate = returnDate;
-        this.returningFlightDTO = returningFlightDTO;
-        this.numberOfDays = numberOfDays;
-        this.promoted = promoted;
-        this.priceForAdult = priceForAdult;
-        this.priceForChild = priceForChild;
-        this.numberOfAdults = numberOfAdults;
-        this.numberOfChildren = numberOfChildren;
-        this.tripsPrice = tripsPrice;
-        this.numberOfTripsAvailable = numberOfTripsAvailable;
-    }
+
 
     public TripDTO() {
     }
@@ -169,10 +150,6 @@ public class TripDTO {
 
     public void setNumberOfChildren(int numberOfChildren) {
         this.numberOfChildren = numberOfChildren;
-    }
-
-    public double getTripsPrice() {
-        return tripsPrice;
     }
 
     public void setTripsPrice(double tripsPrice) {

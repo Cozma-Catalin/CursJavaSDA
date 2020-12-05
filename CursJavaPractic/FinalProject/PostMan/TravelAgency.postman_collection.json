@@ -9,13 +9,13 @@
 			"name": "Post",
 			"item": [
 				{
-					"name": "insertAirport",
+					"name": "insertCustomer",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n    \"name\":\"Catalin Daniel\",\r\n    \"surname\":\"Cozma\",\r\n    \"birthDate\":\"1989-02-09\",\r\n    \"address\":\"Calugareni Galati\",\r\n    \"phoneNumber\":\"0741748501\",\r\n    \"email\":\"cozmacatalindaniel189@gmail.com\",\r\n    \"accountDTO\":{\r\n        \"userName\":\"ka7a189\",\r\n        \"password\":123456\r\n    }\r\n}",
+							"raw": "{ \r\n    \"name\":\"Catalin Daniel\",\r\n    \"surname\":\"Cozma\",\r\n    \"birthDate\":\"1989-02-09\",\r\n    \"address\":\"Calugareni Galati\",\r\n    \"phoneNumber\":\"0741748501\",\r\n    \"email\":\"cozmacatalindaniel89@gmail.com\",\r\n    \"accountDTO\":{\r\n        \"userName\":\"ka7a_89\",\r\n        \"password\":123456\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -915,6 +915,35 @@
 									"port": "8080",
 									"path": [
 										"findCustomerByEmail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findCustomerAccount",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findCustomerAccount?userName=ka7a_89&password=123456",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findCustomerAccount"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "ka7a_89"
+										},
+										{
+											"key": "password",
+											"value": "123456"
+										}
 									]
 								}
 							},

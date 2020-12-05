@@ -41,8 +41,7 @@ public class CustomerService {
 
 
     public long countEmail(String email) {
-        long result = customerDAO.countEmail(email);
-        return result;
+        return customerDAO.countEmail(email);
     }
 
     public CustomerDTO findCustomerByEmail(String email) {

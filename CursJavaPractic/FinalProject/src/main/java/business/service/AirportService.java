@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.AirportDAO;
 import persistence.dao.CityDAO;
-import persistence.dao.ContinentDAO;
 import persistence.dao.CountryDAO;
 import persistence.entities.Airport;
 import persistence.entities.City;
@@ -58,23 +57,19 @@ public class AirportService {
     }
 
     public List<String> getAirportNameByCityName(String cityName) {
-        List<String> result = airportDAO.getAirportNameByCityName(cityName);
-        return result;
+        return airportDAO.getAirportNameByCityName(cityName);
     }
 
     public int deleteAirportByName(String name){
-        int result = airportDAO.deleteAirportByName(name);
-        return result;
+        return airportDAO.deleteAirportByName(name);
     }
 
     public long countAirportName(String name){
-        long result = airportDAO.countAirportName(name);
-        return result;
+        return airportDAO.countAirportName(name);
     }
 
-    public int changeAirportName(String newName,String name){
-        int result = airportDAO.changeAirportName(newName,name);
-        return result;
+    public void changeAirportName(String newName, String name){
+        airportDAO.changeAirportName(newName,name);
     }
 
     public AirportDTO findAirportByName(String name){

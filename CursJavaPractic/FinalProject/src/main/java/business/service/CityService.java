@@ -60,17 +60,15 @@ public class CityService {
     }
 
     public long countCityDTO(String name) {
-        long result = cityDAO.countCity(name);
-        return result;
+        return cityDAO.countCity(name);
     }
 
-    public int deleteCityDTO(String name) {
+    public void deleteCityDTO(String name) {
        List<Hotel> hotelList = hotelDAO.findHotelsInCity(name);
        for(Hotel h: hotelList){
            hotelDAO.deleteHotelByName(h.getName());
        }
-       int result = cityDAO.deleteCity(name);
-        return result;
+       cityDAO.deleteCity(name);
     }
 
     public int changeCityDTOName(String newName, String name) {

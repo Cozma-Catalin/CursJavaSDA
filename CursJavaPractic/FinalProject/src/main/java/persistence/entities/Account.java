@@ -32,11 +32,6 @@ public class Account {
     @OneToOne(mappedBy = "account",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Customer customer;
 
-    public Account(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-
-    }
 
 
     public Account() {

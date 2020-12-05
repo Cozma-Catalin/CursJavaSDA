@@ -42,8 +42,7 @@ public class CountryService {
     }
 
     public long countCountryDTO(String name) {
-        long result = countryDAO.countCountry(name);
-        return result;
+        return countryDAO.countCountry(name);
     }
 
     public CountryDTO findCountryDTO(String name) {
@@ -73,17 +72,15 @@ public class CountryService {
         return countryDTOList;
     }
 
-    public int deleteCountry(String name) {
+    public void deleteCountry(String name) {
         List<City> cityList = cityDAO.findCitiesInCountry(name);
         for(City c : cityList){
             cityDAO.deleteCity(c.getName());
         }
-        int result = countryDAO.deleteCountry(name);
-        return result;
+        countryDAO.deleteCountry(name);
     }
 
     public int changeCountryName(String newName, String name) {
-        int result = countryDAO.changeCountryName(newName, name);
-        return result;
+        return countryDAO.changeCountryName(newName, name);
     }
 }

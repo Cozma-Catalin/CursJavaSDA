@@ -2,6 +2,7 @@ package persistence.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "countTrips", query = "select count(name) from Trip trip where trip.name= :name and trip.departureDate= :departureDate"),
@@ -89,6 +90,8 @@ public class Trip {
     @Column(name = "number_of_trips_available")
     private int numberOfTripsAvailable;
 
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "tripSet")
+    private Set<Customer> customerSet;
 
     public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, java.sql.Date departureDate,
                 Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild,
@@ -239,6 +242,14 @@ public class Trip {
 
     public void setNumberOfTripsAvailable(int numberOfTripsAvailable) {
         this.numberOfTripsAvailable = numberOfTripsAvailable;
+    }
+
+    public Set<Customer> getCustomerSet() {
+        return customerSet;
+    }
+
+    public void setCustomerSet(Set<Customer> customerSet) {
+        this.customerSet = customerSet;
     }
 
     @Override

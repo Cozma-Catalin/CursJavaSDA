@@ -25,8 +25,7 @@ public class ContinentService {
     }
 
     public long countContinentDTO(String name) {
-        long result = continentDAO.countContinent(name);
-        return result;
+        return continentDAO.countContinent(name);
     }
 
     public ContinentDTO findContinentDTO(String name) {
@@ -39,14 +38,13 @@ public class ContinentService {
         return continentDTO;
     }
 
-    public int deleteContinentDTO(String name) {
+    public void deleteContinentDTO(String name) {
         List<Country> countryName = countryDAO.findCountriesInContinent(
                 name);
         for (Country country : countryName) {
             countryDAO.deleteCountry(country.getName());
         }
-        int result = continentDAO.deleteContinent(name);
-        return result;
+        continentDAO.deleteContinent(name);
     }
 
 

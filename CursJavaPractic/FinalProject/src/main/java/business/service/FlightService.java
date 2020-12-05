@@ -43,7 +43,7 @@ public class FlightService {
         if (arrivingAirportFound == null) {
             Airport arrivingAirport = new Airport();
             arrivingAirport.setName(flightDTO.getArrivingAirport().getName());
-            setArrivingCity(flightDTO, arrivingAirportFound, arrivingAirport);
+            setArrivingCity(flightDTO, null, arrivingAirport);
             flight.setArrivingAirport(arrivingAirport);
         } else {
             setArrivingCity(flightDTO, arrivingAirportFound, arrivingAirportFound);
@@ -113,8 +113,7 @@ public class FlightService {
     }
 
     public long countFlightNumber(String flightNumber){
-        long result = flightDAO.countFlightNumber(flightNumber);
-        return result;
+        return flightDAO.countFlightNumber(flightNumber);
     }
 
     public FlightDTO findFlightByFlightNumber(String flightNumber){

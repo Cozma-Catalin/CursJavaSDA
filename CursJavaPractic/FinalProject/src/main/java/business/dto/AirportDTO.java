@@ -14,10 +14,7 @@ public class AirportDTO {
     @Valid
     private CityDTO cityDTO;
 
-    public AirportDTO(String name, CityDTO cityDTO) {
-        this.name = name;
-        this.cityDTO = cityDTO;
-    }
+
 
     public AirportDTO() {
     }

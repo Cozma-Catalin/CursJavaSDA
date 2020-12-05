@@ -29,15 +29,6 @@ public class HotelDTO {
     private CityDTO cityDTO;
 
 
-    public HotelDTO( String name, String address, double numberOfStars, Set<RoomDTO> roomDTOSet,
-                     String description,CityDTO cityDTO) {
-        this.name = name;
-        this.address = address;
-        this.numberOfStars = numberOfStars;
-        this.roomDTOSet = roomDTOSet;
-        this.description = description;
-        this.cityDTO = cityDTO;
-    }
 
     public HotelDTO() {
     }

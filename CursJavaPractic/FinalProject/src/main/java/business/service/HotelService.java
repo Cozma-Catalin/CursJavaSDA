@@ -178,16 +178,16 @@ public class HotelService {
         return hotelDAO.countHotelAddress(address);
     }
 
-    public int deleteHotelByName(String hotelName) {
-        return hotelDAO.deleteHotelByName(hotelName);
+    public void deleteHotelByName(String hotelName) {
+        hotelDAO.deleteHotelByName(hotelName);
     }
 
-    public int deleteHotelByAddress(String address){
-        return hotelDAO.deleteHotelByAddress(address);
+    public void deleteHotelByAddress(String address){
+        hotelDAO.deleteHotelByAddress(address);
     }
 
-    public int changeHotelName(String newName,String name){
-        return hotelDAO.changeHotelName(newName,name);
+    public void changeHotelName(String newName, String name){
+        hotelDAO.changeHotelName(newName, name);
     }
 
 }

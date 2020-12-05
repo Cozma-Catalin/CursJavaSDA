@@ -81,6 +81,19 @@ public class AirportDAO {
         return airport;
     }
 
+
+    public Airport findAirportByName(String name,Session session){
+        Query findAirportByNameQuery = session.createNamedQuery("findAirportByName");
+        findAirportByNameQuery.setParameter("name",name);
+        Airport airport = null;
+        try {
+            airport = (Airport) findAirportByNameQuery.getSingleResult();
+        }catch (NoResultException e){
+            System.out.println(e.getMessage());
+        }
+        return airport;
+    }
+
     public List<Airport> findAirportsInCity(String cityName){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

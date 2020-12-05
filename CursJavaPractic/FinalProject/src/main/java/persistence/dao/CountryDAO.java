@@ -32,15 +32,14 @@ public class CountryDAO {
         return result;
     }
 
-    public int deleteCountry(String name) {
+    public void deleteCountry(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query deleteCountryQuery = session.createNamedQuery("deleteCountry");
         deleteCountryQuery.setParameter("name", name);
-        int result = deleteCountryQuery.executeUpdate();
+        deleteCountryQuery.executeUpdate();
         session.getTransaction().commit();
         session.close();
-        return result;
     }
 
     public Country findCountry(String name) {
