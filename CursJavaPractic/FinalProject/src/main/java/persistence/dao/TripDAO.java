@@ -164,12 +164,12 @@ public class TripDAO {
         return tripList;
     }
 
-    public List<Trip> findTripsByDepartureTimeFrame(java.sql.Date departureDate, java.sql.Date returnDate){
+    public List<Trip> findTripsByDepartureTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query findTripsByDepartureTimeFrameQuery = session.createNamedQuery("findTripsByDepartureTimeFrame");
-        findTripsByDepartureTimeFrameQuery.setParameter("departureDate",departureDate);
-        findTripsByDepartureTimeFrameQuery.setParameter("returnDate",returnDate);
+        findTripsByDepartureTimeFrameQuery.setParameter("beginTimeFrame",beginTimeFrame);
+        findTripsByDepartureTimeFrameQuery.setParameter("endTimeFrame",endTimeFrame);
         List<Trip> tripList = findTripsByDepartureTimeFrameQuery.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -178,12 +178,12 @@ public class TripDAO {
 
 
 
-    public List<Trip> findTripsByReturnTimeFrame(java.sql.Date departureDate, java.sql.Date returnDate){
+    public List<Trip> findTripsByReturnTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query findTripsByReturnTimeFrameQuery = session.createNamedQuery("findTripsByReturnTimeFrame");
-        findTripsByReturnTimeFrameQuery.setParameter("departureDate",departureDate);
-        findTripsByReturnTimeFrameQuery.setParameter("returnDate",returnDate);
+        findTripsByReturnTimeFrameQuery.setParameter("beginTimeFrame",beginTimeFrame);
+        findTripsByReturnTimeFrameQuery.setParameter("endTimeFrame",endTimeFrame);
         List<Trip> tripList = findTripsByReturnTimeFrameQuery.getResultList();
         session.getTransaction().commit();
         session.close();

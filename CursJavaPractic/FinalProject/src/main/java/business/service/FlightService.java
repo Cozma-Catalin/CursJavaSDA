@@ -1,6 +1,6 @@
 package business.service;
 
-import business.dto.FlightDTO;
+import business.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.AirportDAO;
@@ -115,6 +115,50 @@ public class FlightService {
     public long countFlightNumber(String flightNumber){
         long result = flightDAO.countFlightNumber(flightNumber);
         return result;
+    }
+
+    public FlightDTO findFlightByFlightNumber(String flightNumber){
+        Flight flight = flightDAO.findFlightByFlightNumber(flightNumber);
+        if(flight == null){
+            return null;
+        }else {
+            FlightDTO flightDTO = new FlightDTO();
+            flightDTO.setFlightNumber(flight.getFlightNumber());
+            flightDTO.setDepartureTime(flight.getDepartureTime());
+            flightDTO.setArrivingTime(flight.getArrivingTime());
+            flightDTO.setDepartureDate(flight.getDepartureDate());
+            flightDTO.setArrivingDate(flight.getArrivingDate());
+            flightDTO.setPrice(flight.getPrice());
+            flightDTO.setSeatsAvailable(flight.getSeatsAvailable());
+
+            flightDTO.setDepartureAirport(getDepartureAirportDTO(flight));
+            flightDTO.setArrivingAirport(getArrivingAirportDTO(flight));
+            return flightDTO;
+        }
+    }
+
+    private AirportDTO getDepartureAirportDTO(Flight flight) {
+        AirportDTO departureAirportDTO = new AirportDTO();
+        departureAirportDTO.setName(flight.getDepartureAirport().getName());
+        ContinentDTO continentDTO = new ContinentDTO(flight.getDepartureAirport().getCity().getCountry().getContinent().getName());
+        CountryDTO countryDTO = new CountryDTO(flight.getDepartureAirport().getCity().getCountry().getName());
+        countryDTO.setContinentDTO(continentDTO);
+        CityDTO cityDTO = new CityDTO(flight.getDepartureAirport().getCity().getName());
+        cityDTO.setCountryDTO(countryDTO);
+        departureAirportDTO.setCityDTO(cityDTO);
+        return departureAirportDTO;
+    }
+
+    private AirportDTO getArrivingAirportDTO(Flight flight) {
+        AirportDTO arrivingAirportDTO = new AirportDTO();
+        arrivingAirportDTO.setName(flight.getArrivingAirport().getName());
+        ContinentDTO continentDTO = new ContinentDTO(flight.getArrivingAirport().getCity().getCountry().getContinent().getName());
+        CountryDTO countryDTO = new CountryDTO(flight.getArrivingAirport().getCity().getCountry().getName());
+        countryDTO.setContinentDTO(continentDTO);
+        CityDTO cityDTO = new CityDTO(flight.getArrivingAirport().getCity().getName());
+        cityDTO.setCountryDTO(countryDTO);
+        arrivingAirportDTO.setCityDTO(cityDTO);
+        return arrivingAirportDTO;
     }
 
 }

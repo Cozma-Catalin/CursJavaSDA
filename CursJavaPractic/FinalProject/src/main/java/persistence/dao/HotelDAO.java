@@ -33,12 +33,12 @@ public class HotelDAO {
     }
 
 
-    public List<String> countAddressInCity(String name) {
+    public List<String> countHotelAddress(String address) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query countAddressQuery = session.createNamedQuery("countAddressInCity");
-        countAddressQuery.setParameter("name",name);
-        List<String> result = countAddressQuery.getResultList();
+        Query countHotelAddressQuery = session.createNamedQuery("countHotelAddress");
+        countHotelAddressQuery.setParameter("address",address);
+        List<String> result = countHotelAddressQuery.getResultList();
         session.getTransaction().commit();
         session.close();
         return result;

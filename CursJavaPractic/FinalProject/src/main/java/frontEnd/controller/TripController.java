@@ -148,20 +148,20 @@ public class TripController {
 
 
     @GetMapping(path = "/findTripsByDepartureTimeFrame")
-    public ResponseEntity findTripsByDepartureTimeFrame(@RequestParam Date departureDate,Date returnDate){
-        List<TripDTO> tripDTOList = tripService.findTripsByDepartureTimeFrame(departureDate,returnDate);
+    public ResponseEntity findTripsByDepartureTimeFrame(@RequestParam Date beginTimeFrame, Date endTimeFrame){
+        List<TripDTO> tripDTOList = tripService.findTripsByDepartureTimeFrame(beginTimeFrame,endTimeFrame);
         if(tripDTOList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing between date: " + departureDate + ", " + returnDate + ".");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found departing between date: " + beginTimeFrame + ", " + endTimeFrame + ".");
         }
         return ResponseEntity.ok(tripDTOList);
     }
 
 
     @GetMapping(path = "/findTripsByReturnTimeFrame")
-    public ResponseEntity findTripsByReturnTimeFrame(@RequestParam Date departureDate,Date returnDate){
-        List<TripDTO> tripDTOList = tripService.findTripsByReturnTimeFrame(departureDate,returnDate);
+    public ResponseEntity findTripsByReturnTimeFrame(@RequestParam Date beginTimeFrame, Date endTimeFrame){
+        List<TripDTO> tripDTOList = tripService.findTripsByReturnTimeFrame(beginTimeFrame,endTimeFrame);
         if(tripDTOList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found returning between date: " + departureDate + ", " + returnDate + ".");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found returning between date: " + beginTimeFrame + ", " + endTimeFrame + ".");
         }
         return ResponseEntity.ok(tripDTOList);
     }

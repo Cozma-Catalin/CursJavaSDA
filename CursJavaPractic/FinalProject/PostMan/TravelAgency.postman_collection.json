@@ -1,0 +1,1296 @@
+{
+	"info": {
+		"_postman_id": "59dba6f3-8370-493f-b2a8-ab11decb559e",
+		"name": "TravelAgency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "insertAirport",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"name\":\"Catalin Daniel\",\r\n    \"surname\":\"Cozma\",\r\n    \"birthDate\":\"1989-02-09\",\r\n    \"address\":\"Calugareni Galati\",\r\n    \"phoneNumber\":\"0741748501\",\r\n    \"email\":\"cozmacatalindaniel189@gmail.com\",\r\n    \"accountDTO\":{\r\n        \"userName\":\"ka7a189\",\r\n        \"password\":123456\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertCustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertFlight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"flightNumber\":\"AA 8604\",\r\n        \"departureDateAndTime\":\"2020-12-25 14:00:00\",\r\n        \"departureAirport\":{\r\n        \"name\":\"Otopeni\",\r\n            \"cityDTO\":{\r\n                \"name\":\"Bucuresti\",\r\n                \"countryDTO\":{\r\n                    \"name\":\"Romania\",\r\n                    \"continentDTO\":{\r\n                        \"name\":\"Europe\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"arrivingDateAndTime\":\"2020-12-25 17:00:00\",\r\n        \"arrivingAirport\":{\r\n            \"name\":\"Charles de Gaulle\",\r\n            \"cityDTO\":{\r\n                \"name\":\"Paris\",\r\n                \"countryDTO\":{\r\n                    \"name\":\"France\",\r\n                    \"continentDTO\":{\r\n                        \"name\":\"Europe\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"price\":1200,\r\n        \"seatsAvailable\":10  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertFlight",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertFlight"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertTrip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"name\":\"City Break Discover Miamis\",\r\n    \"departureDate\":\"2020-12-25\",\r\n    \"departureFlightDTO\":{\r\n        \"flightNumber\":\"AA 8604\",\r\n        \"departureDate\":\"2020-12-25\",\r\n        \"departureTime\":\"14:00:00\",\r\n        \"departureAirport\":{\r\n        \"name\":\"Otopeni\",\r\n            \"cityDTO\":{\r\n                \"name\":\"Bucuresti\",\r\n                \"countryDTO\":{\r\n                    \"name\":\"Romania\",\r\n                    \"continentDTO\":{\r\n                        \"name\":\"Europe\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"arrivingDate\":\"2020-12-25\",\r\n        \"arrivingTime\":\"17:00:00\",\r\n        \"arrivingAirport\":{\r\n            \"name\":\"Miami international Airport\",\r\n            \"cityDTO\":{\r\n                \"name\":\"Miami\",\r\n                \"countryDTO\":{\r\n                    \"name\":\"USA\",\r\n                    \"continentDTO\":{\r\n                        \"name\":\"America\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"price\":1000,\r\n        \"seatsAvailable\":10  \r\n    },\r\n   \"returnDate\":\"2020-12-30\",\r\n    \"returningFlightDTO\":{\r\n        \"flightNumber\":\"LF 2504\",\r\n        \"departureDate\":\"2020-12-30\",\r\n        \"departureTime\":\"10:00:00\",\r\n        \"departureAirport\":{\r\n         \"name\":\"Miami international Airport\",\r\n             \"cityDTO\":{\r\n                \"name\":\"Miami\",\r\n                \"countryDTO\":{\r\n                    \"name\":\"USA\",\r\n                    \"continentDTO\":{\r\n                        \"name\":\"America\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"arrivingDate\":\"2020-12-30\",\r\n        \"arrivingTime\":\"15:00:00\",\r\n        \"arrivingAirport\":{\r\n            \"name\":\"Amsterdatm Airport\",\r\n            \"cityDTO\":{\r\n                \"name\":\"Amsterdam\",\r\n                \"countryDTO\":{\r\n                    \"name\":\"Holland\",\r\n                    \"continentDTO\":{\r\n                        \"name\":\"Europe\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"price\":1200,\r\n        \"seatsAvailable\":10  \r\n    },\r\n   \"stayingHotelDTO\":{\r\n    \"name\":\"Marriot\",\r\n    \"address\":\"35th NW Braodway\",\r\n    \"numberOfStars\":4,\r\n    \"description\":\"jgasfvcanmlnadw \",\r\n    \"roomDTOSet\":[{\r\n        \"roomType\":\"single\",\r\n        \"numberOfRooms\":10,\r\n        \"extraBed\":false,\r\n        \"roomsAvailable\":10\r\n    },{\r\n         \"roomType\":\"double\",\r\n        \"numberOfRooms\":20,\r\n        \"extraBed\":true,\r\n        \"roomsAvailable\":20\r\n    }],\r\n\r\n    \"cityDTO\":{\r\n        \"name\":\"Miami\",\r\n        \"countryDTO\":{\r\n            \"name\":\"USA\",\r\n            \"continentDTO\":{\r\n                \"name\":\"America\"\r\n            }\r\n        }\r\n    }\r\n   },\r\n   \"mealType\":\"All inclusive\",\r\n   \"numberOfDays\":5,\r\n   \"promoted\":true,\r\n   \"priceForAdult\":150,\r\n   \"priceForChild\":50,\r\n   \"numberOfAdults\":2,\r\n   \"numberOfChildren\":1,\r\n   \"numberOfTripsAvailable\":10\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertTrip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertTrip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertHotel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"La belle epoque\",\r\n    \"address\":\"Champs elisees\",\r\n    \"numberOfStars\":4,\r\n    \"roomDTOSet\":[{\r\n        \"roomType\":\"single\",\r\n        \"numberOfRooms\":10,\r\n        \"extraBed\":false,\r\n        \"roomsAvailable\":10\r\n    },{\r\n         \"roomType\":\"double\",\r\n        \"numberOfRooms\":20,\r\n        \"extraBed\":true,\r\n        \"roomsAvailable\":20\r\n    }],\r\n    \"description\":\"jgasfvcanmlnadw \",\r\n    \"cityDTO\":{\r\n        \"name\":\"Paris\",\r\n        \"countryDTO\":{\r\n            \"name\":\"France\",\r\n             \"continentDTO\":{\r\n                         \"name\":\"Europe\"\r\n                     }\r\n        }\r\n    }\r\n}    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertHotel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertHotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertCountry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Romania\",\r\n    \"continentDTO\":{\r\n         \"name\":\"Europe\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertCountry?name=Franta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertCountry"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Franta"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertContinent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"America\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertContinent?name=Europe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertContinent"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Europe"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertCity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Bucuresti\",\r\n    \"countryDTO\":{\r\n        \"name\":\"Romania\",\r\n        \"continentDTO\":{\r\n            \"name\":\"Europa\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertCity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertCity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertAirport",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"name\":\"Catalin Daniel\",\r\n    \"surname\":\"Cozma\",\r\n    \"birthDate\":\"1989-02-09\",\r\n    \"address\":\"Calugareni Galati\",\r\n    \"phoneNumber\":\"0741748501\",\r\n    \"email\":\"cozmacatalindaniel189@gmail.com\",\r\n    \"accountDTO\":{\r\n        \"userName\":\"ka7a189\",\r\n        \"password\":123456\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/insertAirport",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"insertAirport"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get",
+			"item": [
+				{
+					"name": "Trip",
+					"item": [
+						{
+							"name": "findTripsByDepartureCity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByDepartureCity?cityName=Buzau",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByDepartureCity"
+									],
+									"query": [
+										{
+											"key": "cityName",
+											"value": "Buzau"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByArrivingCity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByArrivingCity",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByArrivingCity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findPromotedTrips",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findPromotedTrips",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findPromotedTrips"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByDepartureContinent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByDepartureContinent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByDepartureContinent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByArrivingContinent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByArrivingContinent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByArrivingContinent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByArrivingCountry",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByArrivingCountry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByArrivingCountry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByDepartureCountry",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByDepartureCountry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByDepartureCountry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByArrivingCity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByArrivingCity",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByArrivingCity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByDepartureAirport",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByDepartureAirport",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByDepartureAirport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByDepartureDate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByDepartureDate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByDepartureDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByArrivingAirport",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByArrivingAirport",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByArrivingAirport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByReturnDate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByReturnDate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByReturnDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByDepartureTimeFrame",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByDepartureTimeFrame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByDepartureTimeFrame"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByReturnTimeFrame",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByReturnTimeFrame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByReturnTimeFrame"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByMealType",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByMealType",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByMealType"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByHotelStars",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByHotelStars",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByHotelStars"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findTripsByNumberOfDays",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findTripsByNumberOfDays",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findTripsByNumberOfDays"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllTrips",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findAllTrips",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findAllTrips"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "City",
+					"item": [
+						{
+							"name": "findCityByName",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n    {\r\n        \"brand\": \"Ceresit CM 1\",\r\n        \"size\": \"1 Kg\",\r\n        \"price\": 26.0,\r\n        \"quantity\": 100.0,\r\n        \"departmentDTO\": {\r\n            \"name\": \"Vopseluri\"\r\n        },\r\n        \"warehouseDTOSet\": [\r\n            {\r\n                \"name\":\"Pietricica\",\r\n                \"city\": \"Bucuresti\",\r\n                \"address\": \"Splaiului 32\"\r\n            },\r\n            {\r\n                \"name\": \"Depozit 2\",\r\n                \"city\": \"Galati\",\r\n                \"address\": \"Domneasca 4\"\r\n            }\r\n        ]\r\n    }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/findCity?name=Galati",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findCity"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Galati"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findCitiesInCountry",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n    {\r\n        \"brand\": \"Ceresit CM 1\",\r\n        \"size\": \"1 Kg\",\r\n        \"price\": 26.0,\r\n        \"quantity\": 100.0,\r\n        \"departmentDTO\": {\r\n            \"name\": \"Vopseluri\"\r\n        },\r\n        \"warehouseDTOSet\": [\r\n            {\r\n                \"name\":\"Pietricica\",\r\n                \"city\": \"Bucuresti\",\r\n                \"address\": \"Splaiului 32\"\r\n            },\r\n            {\r\n                \"name\": \"Depozit 2\",\r\n                \"city\": \"Galati\",\r\n                \"address\": \"Domneasca 4\"\r\n            }\r\n        ]\r\n    }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/findCitiesInCountry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findCitiesInCountry"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Airport",
+					"item": [
+						{
+							"name": "findAirportsInCity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findAirportsInCity?cityName=Galati",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findAirportsInCity"
+									],
+									"query": [
+										{
+											"key": "cityName",
+											"value": "Galati"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAirportByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findAirportByName",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findAirportByName"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Hotel",
+					"item": [
+						{
+							"name": "findHotelByAddress",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findHotelByAddress",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findHotelByAddress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findHotelsInCity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findHotelsInCity",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findHotelsInCity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findHotelByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findHotelByName",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findHotelByName"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Country",
+					"item": [
+						{
+							"name": "findCountriesInContinent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findCountriesInContinent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findCountriesInContinent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findContinent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findCountry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findCountry"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Continent",
+					"item": [
+						{
+							"name": "findContinent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findContinent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findContinent"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Flight",
+					"item": [
+						{
+							"name": "findFlightByFlightNumber",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findFlightByFlightNumber?flightNumber=AA 8604",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findFlightByFlightNumber"
+									],
+									"query": [
+										{
+											"key": "flightNumber",
+											"value": "AA 8604"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "findCustomerByEmail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/findCustomerByEmail",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"findCustomerByEmail"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "deleteTripsByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteTripsByName?name=City break Discover Miami",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteTripsByName"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "City break Discover Miami"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAirportByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteAirportByName?name=Pegas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteAirportByName"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Pegas"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAccountByUserName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteAccount",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCityByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteCity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteCity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteContinentByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteContinent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteContinent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCountryByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteCountry?name= ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteCountry"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": " "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotelByName",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteHotelByName?hotelName=Vega",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteHotelByName"
+							],
+							"query": [
+								{
+									"key": "hotelName",
+									"value": "Vega"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotelByAddress",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deleteHotelByAddress?address=35th NW Braodway",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteHotelByAddress"
+							],
+							"query": [
+								{
+									"key": "address",
+									"value": "35th NW Braodway"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Put",
+			"item": [
+				{
+					"name": "customerLogOut",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/logOut?userName=ka7a189",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logOut"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "ka7a189"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeUserName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/changeUserName?newUserName=ka7a_89&userName=francezule",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"changeUserName"
+							],
+							"query": [
+								{
+									"key": "newUserName",
+									"value": "ka7a_89"
+								},
+								{
+									"key": "userName",
+									"value": "francezule"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customerLogIn",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/logIn?userName=ka7a&password=123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logIn"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "ka7a"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeCityName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/changeCityName?newName=Brasov&cityName=Galati",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"changeCityName"
+							],
+							"query": [
+								{
+									"key": "newName",
+									"value": "Brasov"
+								},
+								{
+									"key": "cityName",
+									"value": "Galati"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeCountryName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/changeCountryName?newName=Romanica&name=Germania",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"changeCountryName"
+							],
+							"query": [
+								{
+									"key": "newName",
+									"value": "Romanica"
+								},
+								{
+									"key": "name",
+									"value": "Germania"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeHotelName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/changeHotelName?newName=Vega&name=Galati",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"changeHotelName"
+							],
+							"query": [
+								{
+									"key": "newName",
+									"value": "Vega"
+								},
+								{
+									"key": "name",
+									"value": "Galati"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

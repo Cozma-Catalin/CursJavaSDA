@@ -17,9 +17,9 @@ public class HotelController {
 
     @PostMapping(path = "insertHotel")
     public ResponseEntity insertHotel(@RequestBody @Valid HotelDTO hotelDTO) {
-        List<String> addressList = hotelService.countAddressInCity(hotelDTO.getCityDTO().getName());
+        List<String> addressList = hotelService.countHotelAddress(hotelDTO.getAddress());
         if (addressList.contains(hotelDTO.getAddress())) {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(hotelDTO.getName() + " with address:'" + hotelDTO.getAddress() +"' is already in the database.");
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(hotelDTO.getName() + " with address:'" + hotelDTO.getAddress() + "' is already in the database.");
         }
         hotelService.insertHotelDTO(hotelDTO);
         return ResponseEntity.ok(hotelDTO.getName() + " added.");
@@ -34,10 +34,18 @@ public class HotelController {
         return ResponseEntity.ok(hotelDTOList);
     }
 
-    @DeleteMapping(path = "/deleteHotelByName")
-    public ResponseEntity deleteHotelByName(@RequestParam String hotelName) {
+    @PostMapping(path = "/findHotelByName")
+    public ResponseEntity findHotelByName(@RequestParam String hotelName) {
         List<HotelDTO> hotelDTOList = hotelService.findHotel(hotelName);
         if (hotelDTOList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(hotelName + " can't be found in database.");
+        }
+        return ResponseEntity.ok(hotelDTOList);
+    }
+
+    @DeleteMapping(path = "/deleteHotelByName")
+    public ResponseEntity deleteHotelByName(@RequestParam String hotelName) {
+        if (hotelService.countHotelName(hotelName) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(hotelName + " can't be found in database.");
         }
         hotelService.deleteHotelByName(hotelName);
@@ -46,10 +54,11 @@ public class HotelController {
 
     @DeleteMapping(path = "/deleteHotelByAddress")
     public ResponseEntity deleteHotelByAddress(@RequestParam String address) {
-        int result = hotelService.deleteHotelByAddress(address);
-        if (result == 0) {
+        List<String> addressList = hotelService.countHotelAddress(address);
+        if (addressList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hotel can be found with address '" + address + "' in database.");
         }
+        hotelService.deleteHotelByAddress(address);
         return ResponseEntity.ok("Hotel deleted.");
     }
 
@@ -69,9 +78,9 @@ public class HotelController {
 
 
     @GetMapping(path = "findHotelByAddress")
-    public ResponseEntity findHotelByAddress(@RequestParam String address){
+    public ResponseEntity findHotelByAddress(@RequestParam String address) {
         HotelDTO hotelDTO = hotelService.findHotelByAddress(address);
-        if(hotelDTO == null){
+        if (hotelDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find any hotel with the address: " + address);
         }
         return ResponseEntity.ok(hotelDTO);

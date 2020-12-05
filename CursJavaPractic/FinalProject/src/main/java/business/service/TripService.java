@@ -371,13 +371,13 @@ public class TripService {
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureTimeFrame(java.sql.Date departureDate, java.sql.Date returnDate){
-        List<Trip> tripList = tripDAO.findTripsByDepartureTimeFrame(departureDate,returnDate);
+    public List<TripDTO> findTripsByDepartureTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame){
+        List<Trip> tripList = tripDAO.findTripsByDepartureTimeFrame(beginTimeFrame,endTimeFrame);
        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByReturnTimeFrame(java.sql.Date departureDate, java.sql.Date returnDate){
-        List<Trip> tripList = tripDAO.findTripsByReturnTimeFrame(departureDate,returnDate);
+    public List<TripDTO> findTripsByReturnTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame){
+        List<Trip> tripList = tripDAO.findTripsByReturnTimeFrame(beginTimeFrame,endTimeFrame);
         return getTripDTOList(tripList);
     }
 

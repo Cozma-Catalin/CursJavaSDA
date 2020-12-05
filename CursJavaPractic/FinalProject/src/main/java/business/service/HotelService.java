@@ -174,8 +174,8 @@ public class HotelService {
         return hotelDAO.countHotelName(name);
     }
 
-    public List<String> countAddressInCity(String address){
-        return hotelDAO.countAddressInCity(address);
+    public List<String> countHotelAddress(String address){
+        return hotelDAO.countHotelAddress(address);
     }
 
     public int deleteHotelByName(String hotelName) {
