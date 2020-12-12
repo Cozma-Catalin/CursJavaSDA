@@ -3,7 +3,7 @@ package persistence.dao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import persistence.HibernateUtil;
+import persistence.utils.HibernateUtil;
 import persistence.entities.Flight;
 
 import javax.persistence.NoResultException;
@@ -58,5 +58,17 @@ public class FlightDAO {
         }
 
         return flight;
+    }
+
+
+    public void updateSeatsAvailable(int numberOfPersons,String flightNumber){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query updateSeatsAvailableQuery = session.createNamedQuery("updateSeatsAvailable");
+        updateSeatsAvailableQuery.setParameter("numberOfPersons",numberOfPersons);
+        updateSeatsAvailableQuery.setParameter("flightNumber",flightNumber);
+        updateSeatsAvailableQuery.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
     }
 }

@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import persistence.HibernateUtil;
+import persistence.utils.HibernateUtil;
 import persistence.dao.*;
 import persistence.entities.*;
 
@@ -78,13 +78,11 @@ public class TripService {
         trip.setNumberOfDays(tripDTO.getNumberOfDays());
         trip.setPriceForAdult(tripDTO.getPriceForAdult());
         trip.setPriceForChild(tripDTO.getPriceForChild());
-        trip.setNumberOfAdults(tripDTO.getNumberOfAdults());
-        trip.setNumberOfChildren(tripDTO.getNumberOfChildren());
         trip.setPromoted(tripDTO.isPromoted());
-        trip.setTripsPrice(calculateTripsPrice(tripDTO));
         trip.setNumberOfTripsAvailable(tripDTO.getNumberOfTripsAvailable());
         return trip;
     }
+
 
     private Hotel setHotel(TripDTO tripDTO, Flight departureFlight, City arrivingCity, Session session) {
         City city;
@@ -301,14 +299,13 @@ public class TripService {
     }
 
 
-    private double calculateTripsPrice(TripDTO tripDTO) {
-        double totalFlightPrice = (tripDTO.getDepartureFlightDTO().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()))
-                + (tripDTO.getReturningFlightDTO().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()));
-        return ((tripDTO.getPriceForAdult() * tripDTO.getNumberOfAdults() + (tripDTO.getPriceForChild() * tripDTO.getNumberOfChildren())) + totalFlightPrice);
-    }
 
     public long countTrips(String name, Date date) {
         return  tripDAO.countTrips(name, date);
+    }
+
+    public long countTripsByName(String name) {
+        return  tripDAO.countTripsByName(name);
     }
 
     public int deleteTripsByName(String name) {
@@ -400,33 +397,50 @@ public class TripService {
        return getTripDTOList(tripList);
     }
 
+    public TripDTO findTripByNameAndDepartureDate(String name, java.sql.Date departureDate){
+        Trip trip = tripDAO.findTripByNameAndDepartureDate(name,departureDate);
+        if(trip==null){
+            return null;
+        }
+        return getTripDTO(trip);
+    }
+
+
+    public TripDTO findTripByName(String name){
+        Trip trip = tripDAO.findTripByName(name);
+        if(trip == null){
+            return null;
+        }
+        return getTripDTO(trip);
+    }
+
+    public List<TripDTO> findTripsByName(String name){
+        List<Trip> tripList = tripDAO.findTripsByName(name);
+        return getTripDTOList(tripList);
+    }
+
     private List<TripDTO> getTripDTOList(List<Trip> tripList) {
         List<TripDTO> tripDTOList = new LinkedList<>();
         for (Trip trip : tripList) {
-            FlightDTO departureFlightDTO = setDepartureFlightDTO(trip.getDepartureFlight());
-            FlightDTO returningFlightDTO = setReturningFlightDTO(trip.getReturningFlight());
-            HotelDTO hotelDTO = setStayingHotel(trip.getStayingHotel());
-            tripDTOList.add(getTripDTO(trip,departureFlightDTO, returningFlightDTO, hotelDTO));
+            tripDTOList.add(getTripDTO(trip));
         }
         return tripDTOList;
     }
 
-    private TripDTO getTripDTO(Trip trip, FlightDTO departureFlightDTO, FlightDTO returningFlightDTO, HotelDTO hotelDTO) {
+
+    private TripDTO getTripDTO(Trip trip) {
         TripDTO tripDTO = new TripDTO();
         tripDTO.setName(trip.getName());
         tripDTO.setDepartureDate(trip.getDepartureDate());
-        tripDTO.setDepartureFlightDTO(departureFlightDTO);
+        tripDTO.setDepartureFlightDTO(setDepartureFlightDTO(trip.getDepartureFlight()));
         tripDTO.setReturnDate(trip.getReturnDate());
-        tripDTO.setReturningFlightDTO(returningFlightDTO);
+        tripDTO.setReturningFlightDTO(setReturningFlightDTO(trip.getReturningFlight()));
         tripDTO.setMealType(trip.getMealType());
-        tripDTO.setStayingHotelDTO(hotelDTO);
-        tripDTO.setNumberOfAdults(trip.getNumberOfAdults());
-        tripDTO.setNumberOfChildren(trip.getNumberOfChildren());
+        tripDTO.setStayingHotelDTO(setStayingHotel(trip.getStayingHotel()));
         tripDTO.setNumberOfDays(trip.getNumberOfDays());
         tripDTO.setPriceForAdult(trip.getPriceForAdult());
         tripDTO.setPriceForChild(trip.getPriceForChild());
         tripDTO.setNumberOfTripsAvailable(trip.getNumberOfTripsAvailable());
-        tripDTO.setTripsPrice(trip.getTripsPrice());
         tripDTO.setPromoted(trip.isPromoted());
         return tripDTO;
     }
@@ -517,6 +531,13 @@ public class TripService {
         return roomDTOSet;
     }
 
+    public int setNumberOfAdults(int numberOfAdults){
+       return tripDAO.setNumberOfAdults(numberOfAdults);
+    }
+
+    public int setNumberOfChildren(int numberOfChildren){
+        return tripDAO.setNumberOfChildren(numberOfChildren);
+    }
 
 
 }

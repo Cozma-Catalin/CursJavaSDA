@@ -160,4 +160,12 @@ public class FlightService {
         return arrivingAirportDTO;
     }
 
+    public boolean checkAvailability(int numberOfPersons,int seatsAvailable){
+        if(seatsAvailable-numberOfPersons > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

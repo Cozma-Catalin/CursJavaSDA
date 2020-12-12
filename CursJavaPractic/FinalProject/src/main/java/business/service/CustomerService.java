@@ -2,12 +2,23 @@ package business.service;
 
 import business.dto.AccountDTO;
 import business.dto.CustomerDTO;
+import business.dto.TripDTO;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.CustomerDAO;
+import persistence.dao.FlightDAO;
+import persistence.dao.TripDAO;
 import persistence.entities.Account;
 import persistence.entities.Customer;
+import persistence.entities.Trip;
 
+import java.io.IOException;
+import java.util.Iterator;
 
 
 @Service
@@ -15,9 +26,20 @@ public class CustomerService {
 
     @Autowired
     CustomerDAO customerDAO;
-
+    @Autowired
+    TripDAO tripDAO;
+    @Autowired
+    FlightDAO flightDAO;
 
     public void insertCustomerDTO(CustomerDTO customerDTO) {
+        Customer customer = getCustomerFromDTO(customerDTO);
+
+        setAccount(customerDTO, customer);
+
+        customerDAO.insertCustomer(customer);
+    }
+
+    private Customer getCustomerFromDTO(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
         customer.setSurname(customerDTO.getSurname());
@@ -25,10 +47,7 @@ public class CustomerService {
         customer.setAddress(customerDTO.getAddress());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
         customer.setEmail(customerDTO.getEmail());
-
-        setAccount(customerDTO, customer);
-
-        customerDAO.insertCustomer(customer);
+        return customer;
     }
 
     private void setAccount(CustomerDTO customerDTO, Customer customer) {
@@ -37,7 +56,6 @@ public class CustomerService {
         account.setPassword(customerDTO.getAccountDTO().getPassword());
         customer.setAccount(account);
     }
-
 
 
     public long countEmail(String email) {
@@ -61,10 +79,11 @@ public class CustomerService {
     }
 
 
-
     public CustomerDTO findCustomerAccount(String userName, String password) {
-
         Customer customer = customerDAO.findCustomerAccount(userName, password);
+        if (customer == null) {
+            return null;
+        }
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setName(customer.getName());
         customerDTO.setSurname(customer.getSurname());
@@ -78,6 +97,65 @@ public class CustomerService {
         customerDTO.setAccountDTO(accountDTO);
 
         return customerDTO;
+    }
+
+
+    public double calculateTripsPrice(TripDTO tripDTO, Trip trip) {
+        double totalFlightPrice = (trip.getDepartureFlight().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()))
+                + (trip.getReturningFlight().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()));
+        return ((trip.getPriceForAdult() * tripDTO.getNumberOfAdults() + (trip.getPriceForChild() * tripDTO.getNumberOfChildren())) + totalFlightPrice);
+    }
+
+    public CustomerDTO findCustomerByUserName(String userName) {
+        CustomerDTO customerDTO = new CustomerDTO();
+        Customer customer = customerDAO.findCustomerByUserName(userName);
+
+        customerDTO.setName(customer.getName());
+        customerDTO.setSurname(customer.getSurname());
+        customerDTO.setBirthDate(customer.getBirthDate());
+        customerDTO.setAddress(customer.getAddress());
+        customerDTO.setEmail(customer.getEmail());
+        AccountDTO accountDTO = new AccountDTO();
+
+        accountDTO.setUserName(customer.getAccount().getUserName());
+        accountDTO.setPassword(customer.getAccount().getPassword());
+        accountDTO.setLoggedIn(customer.getAccount().isLoggedIn());
+        customerDTO.setAccountDTO(accountDTO);
+        return customerDTO;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+
+       readFile();
+    }
+
+    public static void readFile() throws IOException {
+        String filePath = "C:\\Users\\Catalin\\Desktop\\Travel_Agency.xlsx";
+        XSSFWorkbook workbook = new XSSFWorkbook(filePath);
+        XSSFSheet sheet = workbook.getSheet("Trips");
+
+        try {
+            Iterator<Row> rowIterator = sheet.iterator();
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    DataFormatter dataFormatter = new DataFormatter();
+                    Object cellData = dataFormatter.formatCellValue(cell);
+                    System.out.print(cellData + "|" + "\t");
+                }
+                System.out.println();
+            }
+            workbook.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getCause());
+        }
 
     }
 }
+
+

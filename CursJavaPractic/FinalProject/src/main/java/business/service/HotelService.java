@@ -190,4 +190,6 @@ public class HotelService {
         hotelDAO.changeHotelName(newName, name);
     }
 
+
+
 }

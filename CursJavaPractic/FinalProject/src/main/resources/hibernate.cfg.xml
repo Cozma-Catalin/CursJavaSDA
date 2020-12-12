@@ -21,5 +21,6 @@
         <mapping class="persistence.entities.Trip"/>
         <mapping class="persistence.entities.Room"/>
         <mapping class="persistence.entities.Flight"/>
+        <mapping class="persistence.entities.PurchasedTrip"/>
     </session-factory>
 </hibernate-configuration>

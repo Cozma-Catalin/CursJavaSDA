@@ -3,9 +3,10 @@ package persistence.dao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import persistence.HibernateUtil;
+import persistence.utils.HibernateUtil;
 import persistence.entities.Trip;
 
+import javax.persistence.NoResultException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class TripDAO {
 
     public void insertTrip(Trip trip,Session session){
-        session.saveOrUpdate(trip);
+        session.save(trip);
     }
 
     public long countTrips(String name, Date date){
@@ -24,6 +25,18 @@ public class TripDAO {
         countTripsQuery.setParameter("name",name);
         countTripsQuery.setParameter("departureDate",date);
         long result = (Long) countTripsQuery.getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+
+    public long countTripsByName(String name){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query countTripsByNameQuery = session.createNamedQuery("countTripsByName");
+        countTripsByNameQuery.setParameter("name",name);
+        long result = (Long) countTripsByNameQuery.getSingleResult();
         session.getTransaction().commit();
         session.close();
         return result;
@@ -227,6 +240,54 @@ public class TripDAO {
     }
 
 
+    public Trip findTripByNameAndDepartureDate(String name, java.sql.Date departureDate){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripByNameAndDateQuery = session.createNamedQuery("findTripByNameAndDepartureDate");
+        findTripByNameAndDateQuery.setParameter("name",name);
+        findTripByNameAndDateQuery.setParameter("departureDate",departureDate);
+        Trip trip = null;
+        try {
+            trip = (Trip) findTripByNameAndDateQuery.getSingleResult();
+        }catch (NoResultException e){
+            System.out.println(e.getCause());
+        }
+        session.getTransaction().commit();
+        session.close();
+        return trip;
+    }
+
+
+    public Trip findTripByName(String name){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripByNameQuery = session.createNamedQuery("findTripByName");
+        findTripByNameQuery.setParameter("name",name);
+        Trip trip = null;
+        try {
+            trip = (Trip) findTripByNameQuery.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+        }
+        session.getTransaction().commit();
+        session.close();
+        return trip;
+    }
+
+
+    public List<Trip> findTripsByName(String name){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByNameQuery = session.createNamedQuery("findTripByName");
+        findTripsByNameQuery.setParameter("name",name);
+        List<Trip> tripList =findTripsByNameQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
+
+
     public List<Trip> findAllTrips(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -235,5 +296,37 @@ public class TripDAO {
         session.getTransaction().commit();
         session.close();
         return tripList;
+    }
+
+    public void updateNumberOfTripsAvailable(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query updateTripsAvailable = session.createNamedQuery("updateNumberOfTripsAvailable");
+        updateTripsAvailable.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public int setNumberOfAdults(int numberOfAdults){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query setNumberOfAdultsQuery = session.createNamedQuery("setNumberOfAdults");
+        setNumberOfAdultsQuery.setParameter("numberOfAdults",numberOfAdults);
+        int result = setNumberOfAdultsQuery.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+
+    public int setNumberOfChildren(int numberOfChildren){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query setNumberOfChildrenQuery = session.createNamedQuery("setNumberOfChildren");
+        setNumberOfChildrenQuery.setParameter("numberOfChildren",numberOfChildren);
+        int result = setNumberOfChildrenQuery.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 }

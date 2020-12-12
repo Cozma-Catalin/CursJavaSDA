@@ -3,7 +3,7 @@ package persistence.dao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import persistence.HibernateUtil;
+import persistence.utils.HibernateUtil;
 import persistence.entities.Airport;
 
 import javax.persistence.NoResultException;

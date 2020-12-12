@@ -6,7 +6,8 @@ import java.sql.Timestamp;
 
 @NamedQueries({
         @NamedQuery(name = "findFlightByFlightNumber",query = "select flight from Flight flight where flightNumber= :flightNumber"),
-        @NamedQuery(name = "countFlightNumber",query = "select count(flightNumber) from Flight where flightNumber= :flightNumber")
+        @NamedQuery(name = "countFlightNumber",query = "select count(flightNumber) from Flight where flightNumber= :flightNumber"),
+        @NamedQuery(name = "updateSeatsAvailable",query = "update from Flight set seatsAvailable= seatsAvailable - :numberOfPersons where flightNumber= :flightNumber")
 })
 
 

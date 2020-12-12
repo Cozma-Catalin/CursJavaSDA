@@ -70,12 +70,14 @@ REFERENCES rooms(id)
 CREATE TABLE flights(
 id INT PRIMARY KEY AUTO_INCREMENT ,
 flight_number VARCHAR(20) NOT NULL,
-departure_date_and_time VARCHAR(20) NOT NULL,
+departure_date DATE NOT NULL,
+departure_time TIME NOT NULL,
 departure_airport INT NOT NULL,
 CONSTRAINT fk_departure_airport
 FOREIGN KEY (departure_airport)
 REFERENCES airports(id),
-arriving_date_and_time VARCHAR(20) NOT NULL,
+arriving_date DATE NOT NULL,
+arriving_time TIME NOT NULL,
 arriving_airport INT NOT NULL,
 CONSTRAINT fk_arriving_airport
 FOREIGN KEY (arriving_airport)

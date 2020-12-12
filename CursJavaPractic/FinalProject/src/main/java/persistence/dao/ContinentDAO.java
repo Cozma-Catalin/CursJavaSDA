@@ -1,15 +1,12 @@
 package persistence.dao;
 
-import business.dto.CountryDTO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import persistence.HibernateUtil;
+import persistence.utils.HibernateUtil;
 import persistence.entities.Continent;
-import persistence.entities.Country;
 
 import javax.persistence.NoResultException;
-import java.util.List;
 
 
 @Repository

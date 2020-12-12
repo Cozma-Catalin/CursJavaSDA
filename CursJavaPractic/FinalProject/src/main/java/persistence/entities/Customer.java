@@ -7,10 +7,10 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "findCustomerByEmail", query = "select customer from Customer customer where customer.email= :email"),
         @NamedQuery(name = "countEmail", query = "select count(email) from Customer where email= :email "),
-        @NamedQuery(name = "findCustomerAccount", query = "select customer from Customer customer inner join customer.account account where account.userName= :userName and account.password= :password")
+        @NamedQuery(name = "findCustomerAccount", query = "select customer from Customer customer inner join customer.account account where account.userName= :userName and account.password= :password"),
+        @NamedQuery(name = "findCustomerByUserName",query = "select customer from Customer customer inner join customer.account account where account.userName= :userName")
 
 })
-
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -40,11 +40,8 @@ public class Customer {
     @JoinColumn(name = "accounts_id")
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "purchased_trips",
-            joinColumns = {@JoinColumn(name = "customers_id")},
-            inverseJoinColumns = {@JoinColumn(name = "trips_id")})
-    private Set<Trip> tripSet;
+    @OneToMany(mappedBy = "customer")
+    private Set<PurchasedTrip> purchasedTripSet;
 
 
     public Customer() {
@@ -60,16 +57,7 @@ public class Customer {
         this.account = account;
     }
 
-    public Customer(String name, String surname, Date birthDate, String address, String phoneNumber, String email, Account account, Set<Trip> tripSet) {
-        this.name = name;
-        this.surname = surname;
-        this.birthDate = birthDate;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.account = account;
-        this.tripSet = tripSet;
-    }
+
 
 
     public int getId() {
@@ -137,12 +125,12 @@ public class Customer {
         this.account = account;
     }
 
-    public Set<Trip> getTripSet() {
-        return tripSet;
+    public Set<PurchasedTrip> getPurchasedTripSet() {
+        return purchasedTripSet;
     }
 
-    public void setTripSet(Set<Trip> tripSet) {
-        this.tripSet = tripSet;
+    public void setPurchasedTripSet(Set<PurchasedTrip> purchasedTripSet) {
+        this.purchasedTripSet = purchasedTripSet;
     }
 
     @Override

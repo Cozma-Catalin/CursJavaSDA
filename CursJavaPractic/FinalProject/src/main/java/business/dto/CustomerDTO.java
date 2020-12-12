@@ -4,6 +4,7 @@ package business.dto;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.Set;
 
 public class CustomerDTO {
     @NotNull @NotBlank @NotEmpty @Pattern(regexp = "([a-z A-Z])*")
@@ -20,7 +21,7 @@ public class CustomerDTO {
     @Valid
     private AccountDTO accountDTO;
 
-
+    private Set<TripDTO> tripDTOSet;
 
     public CustomerDTO() {
     }
@@ -82,8 +83,16 @@ public class CustomerDTO {
         this.accountDTO = accountDTO;
     }
 
+    public Set<TripDTO> getTripDTOSet() {
+        return tripDTOSet;
+    }
+
+    public void setTripDTOSet(Set<TripDTO> tripDTOSet) {
+        this.tripDTOSet = tripDTOSet;
+    }
+
     @Override
     public String toString() {
-        return "CustomerDTO: " + name + ", " + surname + ", birthDate: " + birthDate + ", email: " + email ;
+        return "CustomerDTO: " + name + ", " + surname + ", birthDate: " + birthDate + ", email: " + email + tripDTOSet;
     }
 }

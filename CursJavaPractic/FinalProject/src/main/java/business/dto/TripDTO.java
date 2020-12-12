@@ -39,7 +39,7 @@ public class TripDTO {
     private int numberOfAdults;
     @NotNull
     private int numberOfChildren;
-    private double tripsPrice;
+
     @NotNull
     private int numberOfTripsAvailable;
 
@@ -152,9 +152,6 @@ public class TripDTO {
         this.numberOfChildren = numberOfChildren;
     }
 
-    public void setTripsPrice(double tripsPrice) {
-        this.tripsPrice = tripsPrice;
-    }
 
     public int getNumberOfTripsAvailable() {
         return numberOfTripsAvailable;
@@ -164,6 +161,7 @@ public class TripDTO {
         this.numberOfTripsAvailable = numberOfTripsAvailable;
     }
 
+
     @Override
     public String toString() {
         return "TripDTO: " + name + ", staying Hotels:" + stayingHotelDTO + ", meal type='" + mealType +
@@ -171,6 +169,6 @@ public class TripDTO {
                 returningFlightDTO + ", number of days=" + numberOfDays + ", promoted:" + promoted +
                 ", price for adult=" + priceForAdult + ", price for child=" + priceForChild +
                 ", number of adults=" + numberOfAdults + ", number of children=" + numberOfChildren +
-                ", trips price=" + tripsPrice + ", number of trips available: " + numberOfTripsAvailable;
+                ", number of trips available: " + numberOfTripsAvailable;
     }
 }

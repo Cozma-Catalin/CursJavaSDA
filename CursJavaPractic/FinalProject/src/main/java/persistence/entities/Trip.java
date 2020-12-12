@@ -6,6 +6,7 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "countTrips", query = "select count(name) from Trip trip where trip.name= :name and trip.departureDate= :departureDate"),
+        @NamedQuery(name = "countTripsByName", query = "select count(name) from Trip where name= :name"),
         @NamedQuery(name = "deleteTripsByName", query = "delete from Trip where name= :name "),
         @NamedQuery(name = "findPromotedTrips", query = "select trip from Trip trip where promoted= :promoted"),
         @NamedQuery(name = "findTripsByDepartureContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
@@ -32,7 +33,12 @@ import java.util.Set;
         @NamedQuery(name = "findTripsByMealType" ,query = "select trip from Trip trip where mealType= :mealType"),
         @NamedQuery(name = "findTripsByHotelStars" , query = " select trip from Trip trip inner join trip.stayingHotel stayingHotel where stayingHotel.numberOfStars= :numberOfStars"),
         @NamedQuery(name = "findTripsByNumberOfDays",query = "select trip from Trip trip where numberOfDays= :numberOfDays"),
-        @NamedQuery(name = "findAllTrips" ,query = "select trip from Trip trip order by trip.tripsPrice asc")
+        @NamedQuery(name = "findAllTrips" ,query = "select trip from Trip trip"),
+        @NamedQuery(name = "findTripByNameAndDepartureDate",query = "select trip from Trip trip where name= :name and departureDate= :departureDate"),
+        @NamedQuery(name = "findTripByName",query = "select trip from Trip trip where name= :name"),
+        @NamedQuery(name = "updateNumberOfTripsAvailable",query = "update from Trip set numberOfTripsAvailable= numberOfTripsAvailable - 1"),
+        @NamedQuery(name = "setNumberOfAdults",query = "update from Trip set numberOfAdults= :numberOfAdults"),
+        @NamedQuery(name = "setNumberOfChildren",query = "update from Trip set numberOfChildren= :numberOfChildren")
 })
 
 @Entity
@@ -78,24 +84,15 @@ public class Trip {
     @Column(name = "price_for_child")
     private double priceForChild;
 
-    @Column(name = "number_of_adults")
-    private int numberOfAdults;
-
-    @Column(name = "number_of_children")
-    private int numberOfChildren;
-
-    @Column(name = "trip_price")
-    private double tripsPrice;
 
     @Column(name = "number_of_trips_available")
     private int numberOfTripsAvailable;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "tripSet")
-    private Set<Customer> customerSet;
+    @OneToMany(mappedBy = "trip")
+    private Set<PurchasedTrip> purchasedTripSet;
 
     public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, java.sql.Date departureDate,
-                Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild,
-                int numberOfAdults, int numberOfChildren, double tripsPrice, int numberOfTripsAvailable) {
+                Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild, int numberOfTripsAvailable) {
         this.name = name;
         this.departureFlight = departureFlight;
         this.returningFlight = returningFlight;
@@ -107,9 +104,6 @@ public class Trip {
         this.promoted = promoted;
         this.priceForAdult = priceForAdult;
         this.priceForChild = priceForChild;
-        this.numberOfAdults = numberOfAdults;
-        this.numberOfChildren = numberOfChildren;
-        this.tripsPrice = tripsPrice;
         this.numberOfTripsAvailable = numberOfTripsAvailable;
     }
 
@@ -212,29 +206,7 @@ public class Trip {
         this.priceForChild = priceForChild;
     }
 
-    public int getNumberOfAdults() {
-        return numberOfAdults;
-    }
 
-    public void setNumberOfAdults(int numberOfAdults) {
-        this.numberOfAdults = numberOfAdults;
-    }
-
-    public int getNumberOfChildren() {
-        return numberOfChildren;
-    }
-
-    public void setNumberOfChildren(int numberOfChildren) {
-        this.numberOfChildren = numberOfChildren;
-    }
-
-    public double getTripsPrice() {
-        return tripsPrice;
-    }
-
-    public void setTripsPrice(double tripsPrice) {
-        this.tripsPrice = tripsPrice;
-    }
 
     public int getNumberOfTripsAvailable() {
         return numberOfTripsAvailable;
@@ -244,13 +216,7 @@ public class Trip {
         this.numberOfTripsAvailable = numberOfTripsAvailable;
     }
 
-    public Set<Customer> getCustomerSet() {
-        return customerSet;
-    }
 
-    public void setCustomerSet(Set<Customer> customerSet) {
-        this.customerSet = customerSet;
-    }
 
     @Override
     public String toString() {
@@ -258,7 +224,6 @@ public class Trip {
                 + ", staying Hotel:" + stayingHotel + ", meal type:" + mealType + ", departure date:" + departureDate
                 + ", return date:" + returnDate + ", number of days:" + numberOfDays + ", promoted:" + promoted
                 + ", price for adult:" + priceForAdult + ", price for child:" + priceForChild
-                + ", number of adults:" + numberOfAdults + ", number of children:" + numberOfChildren
-                + ", trips price:" + tripsPrice + ", number of trips available: " + numberOfTripsAvailable;
+                + ", number of trips available: " + numberOfTripsAvailable;
     }
 }

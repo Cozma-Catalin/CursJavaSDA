@@ -14,7 +14,8 @@ public class AccountDTO {
     @NotEmpty
     @NotBlank
     private String password;
-
+    @NotNull
+    private boolean loggedIn;
 
 
     public AccountDTO() {
@@ -36,9 +37,16 @@ public class AccountDTO {
         this.password = password;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
     @Override
     public String toString() {
-        return "AccountDTO for user: " + userName ;
+        return "AccountDTO for user: " + userName + ", logged in:" + loggedIn;
     }
 }
