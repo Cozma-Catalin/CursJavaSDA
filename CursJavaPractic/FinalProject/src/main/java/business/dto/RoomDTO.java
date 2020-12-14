@@ -5,13 +5,18 @@ import javax.validation.constraints.NotNull;
 public class RoomDTO {
     @NotNull
     private String roomType;
+
     @NotNull
     private int numberOfRooms;
+
     @NotNull
     private boolean extraBed;
+
+    @NotNull
+    private double price;
+
     @NotNull
     private int roomsAvailable;
-
 
 
     public RoomDTO() {
@@ -42,11 +47,26 @@ public class RoomDTO {
         this.extraBed = extraBed;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getRoomsAvailable() {
         return roomsAvailable;
     }
 
     public void setRoomsAvailable(int roomsAvailable) {
         this.roomsAvailable = roomsAvailable;
+    }
+
+
+    @Override
+    public String toString() {
+        return "RoomDTO:" + roomType + ", numberOfRooms: " + numberOfRooms + ", extra bed:" + extraBed +
+                ", price: " + price + ", roomsAvailable: " + roomsAvailable;
     }
 }

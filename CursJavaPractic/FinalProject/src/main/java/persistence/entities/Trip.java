@@ -6,7 +6,6 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "countTrips", query = "select count(name) from Trip trip where trip.name= :name and trip.departureDate= :departureDate"),
-        @NamedQuery(name = "countTripsByName", query = "select count(name) from Trip where name= :name"),
         @NamedQuery(name = "deleteTripsByName", query = "delete from Trip where name= :name "),
         @NamedQuery(name = "findPromotedTrips", query = "select trip from Trip trip where promoted= :promoted"),
         @NamedQuery(name = "findTripsByDepartureContinent", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
@@ -36,9 +35,7 @@ import java.util.Set;
         @NamedQuery(name = "findAllTrips" ,query = "select trip from Trip trip"),
         @NamedQuery(name = "findTripByNameAndDepartureDate",query = "select trip from Trip trip where name= :name and departureDate= :departureDate"),
         @NamedQuery(name = "findTripByName",query = "select trip from Trip trip where name= :name"),
-        @NamedQuery(name = "updateNumberOfTripsAvailable",query = "update from Trip set numberOfTripsAvailable= numberOfTripsAvailable - 1"),
-        @NamedQuery(name = "setNumberOfAdults",query = "update from Trip set numberOfAdults= :numberOfAdults"),
-        @NamedQuery(name = "setNumberOfChildren",query = "update from Trip set numberOfChildren= :numberOfChildren")
+        @NamedQuery(name = "updateNumberOfTripsAvailable",query = "update from Trip set numberOfTripsAvailable= numberOfTripsAvailable - 1")
 })
 
 @Entity

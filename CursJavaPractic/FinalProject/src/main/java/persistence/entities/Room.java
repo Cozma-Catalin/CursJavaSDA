@@ -2,7 +2,10 @@ package persistence.entities;
 
 import javax.persistence.*;
 import java.util.Set;
-
+@NamedQueries({
+        @NamedQuery(name = "findRoomByType",query = "select room from Room room where roomType= :roomType"),
+        @NamedQuery(name = "updateRoomsAvailable",query = "update from Room set roomsAvailable= :roomsAvailable where roomType= :roomType")
+})
 
 @Entity
 @Table(name = "rooms")
@@ -20,6 +23,9 @@ public class Room {
     @Column(name = "extra_bed")
     private boolean extraBed;
 
+    @Column(name = "price")
+    private double price;
+
     @Column(name = "rooms_available")
     private int roomsAvailable;
 
@@ -27,10 +33,11 @@ public class Room {
     private Set<Hotel> hotelSet;
 
 
-    public Room(String roomType, int numberOfRooms, boolean extraBed, int roomsAvailable) {
+    public Room(String roomType, int numberOfRooms, boolean extraBed,double price, int roomsAvailable) {
         this.roomType = roomType;
         this.numberOfRooms = numberOfRooms;
         this.extraBed = extraBed;
+        this.price = price;
         this.roomsAvailable = roomsAvailable;
     }
 
@@ -69,6 +76,14 @@ public class Room {
         this.extraBed = extraBed;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getRoomsAvailable() {
         return roomsAvailable;
     }
@@ -88,6 +103,6 @@ public class Room {
     @Override
     public String toString() {
         return "Room: " + roomType + ", number of rooms:" + numberOfRooms + ", extra bed: " +
-                extraBed + ",number of rooms available : " + roomsAvailable;
+                extraBed +", price: " + price + ",number of rooms available : " + roomsAvailable;
     }
 }

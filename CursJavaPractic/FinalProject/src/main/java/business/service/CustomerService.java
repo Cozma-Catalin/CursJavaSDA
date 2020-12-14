@@ -100,12 +100,6 @@ public class CustomerService {
     }
 
 
-    public double calculateTripsPrice(TripDTO tripDTO, Trip trip) {
-        double totalFlightPrice = (trip.getDepartureFlight().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()))
-                + (trip.getReturningFlight().getPrice() * (tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()));
-        return ((trip.getPriceForAdult() * tripDTO.getNumberOfAdults() + (trip.getPriceForChild() * tripDTO.getNumberOfChildren())) + totalFlightPrice);
-    }
-
     public CustomerDTO findCustomerByUserName(String userName) {
         CustomerDTO customerDTO = new CustomerDTO();
         Customer customer = customerDAO.findCustomerByUserName(userName);

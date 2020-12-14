@@ -31,16 +31,6 @@ public class TripDAO {
     }
 
 
-    public long countTripsByName(String name){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query countTripsByNameQuery = session.createNamedQuery("countTripsByName");
-        countTripsByNameQuery.setParameter("name",name);
-        long result = (Long) countTripsByNameQuery.getSingleResult();
-        session.getTransaction().commit();
-        session.close();
-        return result;
-    }
 
     public int deleteTripsByName(String name){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -307,26 +297,5 @@ public class TripDAO {
         session.close();
     }
 
-    public int setNumberOfAdults(int numberOfAdults){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query setNumberOfAdultsQuery = session.createNamedQuery("setNumberOfAdults");
-        setNumberOfAdultsQuery.setParameter("numberOfAdults",numberOfAdults);
-        int result = setNumberOfAdultsQuery.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-        return result;
-    }
 
-
-    public int setNumberOfChildren(int numberOfChildren){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query setNumberOfChildrenQuery = session.createNamedQuery("setNumberOfChildren");
-        setNumberOfChildrenQuery.setParameter("numberOfChildren",numberOfChildren);
-        int result = setNumberOfChildrenQuery.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-        return result;
-    }
 }

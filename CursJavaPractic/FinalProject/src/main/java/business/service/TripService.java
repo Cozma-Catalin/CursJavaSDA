@@ -28,6 +28,8 @@ public class TripService {
     ContinentDAO continentDAO;
     @Autowired
     FlightDAO flightDAO;
+    @Autowired
+    RoomDAO roomDAO;
 
 
     public void insertTrip(TripDTO tripDTO) {
@@ -121,6 +123,7 @@ public class TripService {
             room.setRoomType(roomDTO.getRoomType());
             room.setNumberOfRooms(roomDTO.getNumberOfRooms());
             room.setExtraBed(roomDTO.isExtraBed());
+            room.setPrice(roomDTO.getPrice());
             room.setRoomsAvailable(roomDTO.getRoomsAvailable());
             rooms.add(room);
         }
@@ -263,7 +266,7 @@ public class TripService {
 
 
     private Airport prepareAirport(AirportDTO airportDTO, Session session) {
-        Airport airport = airportDAO.findAirportByName(airportDTO.getName(),session);
+        Airport airport = airportDAO.findAirportByName(airportDTO.getName(), session);
         if (airport == null) {
             airport = new Airport();
             airport.setName(airportDTO.getName());
@@ -299,14 +302,10 @@ public class TripService {
     }
 
 
-
     public long countTrips(String name, Date date) {
-        return  tripDAO.countTrips(name, date);
+        return tripDAO.countTrips(name, date);
     }
 
-    public long countTripsByName(String name) {
-        return  tripDAO.countTripsByName(name);
-    }
 
     public int deleteTripsByName(String name) {
         return tripDAO.deleteTripsByName(name);
@@ -317,104 +316,104 @@ public class TripService {
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureContinent(String continentName){
+    public List<TripDTO> findTripsByDepartureContinent(String continentName) {
         List<Trip> tripList = tripDAO.findTripsByDepartureContinent(continentName);
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByArrivingContinent(String continentName){
+    public List<TripDTO> findTripsByArrivingContinent(String continentName) {
         List<Trip> tripList = tripDAO.findTripsByArrivingContinent(continentName);
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureCountry(String countryName){
+    public List<TripDTO> findTripsByDepartureCountry(String countryName) {
         List<Trip> tripList = tripDAO.findTripsByDepartureCountry(countryName);
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByArrivingCountry(String countryName){
+    public List<TripDTO> findTripsByArrivingCountry(String countryName) {
         List<Trip> tripList = tripDAO.findTripsByArrivingCountry(countryName);
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureCity(String cityName){
+    public List<TripDTO> findTripsByDepartureCity(String cityName) {
         List<Trip> tripList = tripDAO.findTripsByDepartureCity(cityName);
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByArrivingCity(String cityName){
+    public List<TripDTO> findTripsByArrivingCity(String cityName) {
         List<Trip> tripList = tripDAO.findTripsByArrivingCity(cityName);
-      return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByHotel(String hotelName){
+    public List<TripDTO> findTripsByHotel(String hotelName) {
         List<Trip> tripList = tripDAO.findTripsByHotel(hotelName);
-      return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureAirport(String airportName){
+    public List<TripDTO> findTripsByDepartureAirport(String airportName) {
         List<Trip> tripList = tripDAO.findTripsByDepartureAirport(airportName);
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureDate(java.sql.Date departureDate){
+    public List<TripDTO> findTripsByDepartureDate(java.sql.Date departureDate) {
         List<Trip> tripList = tripDAO.findTripsByDepartureDate(departureDate);
-      return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByReturnDate(java.sql.Date returnDate){
+    public List<TripDTO> findTripsByReturnDate(java.sql.Date returnDate) {
         List<Trip> tripList = tripDAO.findTripsByReturnDate(returnDate);
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByDepartureTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame){
-        List<Trip> tripList = tripDAO.findTripsByDepartureTimeFrame(beginTimeFrame,endTimeFrame);
-       return getTripDTOList(tripList);
-    }
-
-    public List<TripDTO> findTripsByReturnTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame){
-        List<Trip> tripList = tripDAO.findTripsByReturnTimeFrame(beginTimeFrame,endTimeFrame);
+    public List<TripDTO> findTripsByDepartureTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame) {
+        List<Trip> tripList = tripDAO.findTripsByDepartureTimeFrame(beginTimeFrame, endTimeFrame);
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByMealType(String mealType){
+    public List<TripDTO> findTripsByReturnTimeFrame(java.sql.Date beginTimeFrame, java.sql.Date endTimeFrame) {
+        List<Trip> tripList = tripDAO.findTripsByReturnTimeFrame(beginTimeFrame, endTimeFrame);
+        return getTripDTOList(tripList);
+    }
+
+    public List<TripDTO> findTripsByMealType(String mealType) {
         List<Trip> tripList = tripDAO.findTripsByMealType(mealType);
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByHotelStars(double numberOfStars){
+    public List<TripDTO> findTripsByHotelStars(double numberOfStars) {
         List<Trip> tripList = tripDAO.findTripsByHotelStars(numberOfStars);
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findTripsByNumberOfDays(int numberOfDays){
+    public List<TripDTO> findTripsByNumberOfDays(int numberOfDays) {
         List<Trip> tripList = tripDAO.findTripsByNumberOfDays(numberOfDays);
-      return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findAllTrips(){
+    public List<TripDTO> findAllTrips() {
         List<Trip> tripList = tripDAO.findAllTrips();
-       return getTripDTOList(tripList);
+        return getTripDTOList(tripList);
     }
 
-    public TripDTO findTripByNameAndDepartureDate(String name, java.sql.Date departureDate){
-        Trip trip = tripDAO.findTripByNameAndDepartureDate(name,departureDate);
-        if(trip==null){
+    public TripDTO findTripByNameAndDepartureDate(String name, java.sql.Date departureDate) {
+        Trip trip = tripDAO.findTripByNameAndDepartureDate(name, departureDate);
+        if (trip == null) {
             return null;
         }
         return getTripDTO(trip);
     }
 
 
-    public TripDTO findTripByName(String name){
+    public TripDTO findTripByName(String name) {
         Trip trip = tripDAO.findTripByName(name);
-        if(trip == null){
+        if (trip == null) {
             return null;
         }
         return getTripDTO(trip);
     }
 
-    public List<TripDTO> findTripsByName(String name){
+    public List<TripDTO> findTripsByName(String name) {
         List<Trip> tripList = tripDAO.findTripsByName(name);
         return getTripDTOList(tripList);
     }
@@ -455,7 +454,7 @@ public class TripService {
         departureFlightDTO.setArrivingDate(departureFlight.getArrivingDate());
         departureFlightDTO.setArrivingTime(departureFlight.getArrivingTime());
 
-        setDepartureAirportDTO(departureFlightDTO,departureFlight.getDepartureAirport());
+        setDepartureAirportDTO(departureFlightDTO, departureFlight.getDepartureAirport());
         setArrivingAirportDTO(departureFlight, departureFlightDTO);
         return departureFlightDTO;
     }
@@ -495,12 +494,12 @@ public class TripService {
         returningFlightDTO.setArrivingDate(returningFlight.getArrivingDate());
         returningFlightDTO.setArrivingTime(returningFlight.getArrivingTime());
 
-        setDepartureAirportDTO(returningFlightDTO,returningFlight.getDepartureAirport());
+        setDepartureAirportDTO(returningFlightDTO, returningFlight.getDepartureAirport());
         setArrivingAirportDTO(returningFlight, returningFlightDTO);
         return returningFlightDTO;
     }
 
-    private HotelDTO setStayingHotel(Hotel hotel){
+    private HotelDTO setStayingHotel(Hotel hotel) {
         HotelDTO hotelDTO = new HotelDTO();
         hotelDTO.setName(hotel.getName());
         hotelDTO.setAddress(hotel.getAddress());
@@ -520,23 +519,40 @@ public class TripService {
 
     private Set<RoomDTO> getRoomDTOS(Hotel hotel) {
         Set<RoomDTO> roomDTOSet = new HashSet<>();
-        for(Room room : hotel.getRoomSet()){
+        for (Room room : hotel.getRoomSet()) {
             RoomDTO roomDTO = new RoomDTO();
             roomDTO.setNumberOfRooms(room.getNumberOfRooms());
             roomDTO.setRoomType(room.getRoomType());
             roomDTO.setRoomsAvailable(room.getRoomsAvailable());
             roomDTO.setExtraBed(room.isExtraBed());
+            roomDTO.setPrice(room.getPrice());
             roomDTOSet.add(roomDTO);
         }
         return roomDTOSet;
     }
 
-    public int setNumberOfAdults(int numberOfAdults){
-       return tripDAO.setNumberOfAdults(numberOfAdults);
+    public boolean checkAvailability(TripDTO tripDTO) {
+        if (tripDTO.getNumberOfTripsAvailable() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public int setNumberOfChildren(int numberOfChildren){
-        return tripDAO.setNumberOfChildren(numberOfChildren);
+    public boolean checkSingleRoomAvailability(TripDTO tripDTO, int singleRooms) {
+        Room singleRoom = roomDAO.findRoomByType("single");
+        if (singleRoom.getRoomsAvailable() - singleRooms >= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkDoubleRoomAvailability(TripDTO tripDTO, int doubleRooms){
+        Room doubleRoom = roomDAO.findRoomByType("double");
+        if(doubleRoom.getRoomsAvailable() - doubleRooms >= 0){
+            return true;
+        }
+        return false;
     }
 
 

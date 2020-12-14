@@ -1,8 +1,6 @@
 package frontEnd.controller;
 
-import business.dto.CustomerDTO;
-import business.dto.PurchasedTripDTO;
-import business.dto.TripDTO;
+import business.dto.*;
 import business.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import persistence.entities.Trip;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 public class CustomerController {
@@ -25,6 +25,8 @@ public class CustomerController {
     FlightService flightService;
     @Autowired
     PurchasedTripService purchasedTripService;
+    @Autowired
+    RoomService roomService;
 
 
     @PostMapping(path = "/insertCustomer")
@@ -85,35 +87,57 @@ public class CustomerController {
 
 
     @PostMapping(path = "/purchaseTrip")
-    public ResponseEntity purchaseTrip(@RequestParam String userName,int numberOfAdults,int numberOfChildren,String tripToPurchase) {
+    public ResponseEntity purchaseTrip(@RequestParam String userName, String tripToPurchase, int numberOfAdults, int numberOfChildren, int singleRooms, int doubleRooms) {
         TripDTO tripDTO = tripService.findTripByName(tripToPurchase);
         if (tripDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips with name:" + tripToPurchase);
         }
 
         CustomerDTO customerDTO = customerService.findCustomerByUserName(userName);
-        if(customerDTO == null){
+        if (customerDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No customer with user name: " + userName + " found!");
         }
-        if(!customerDTO.getAccountDTO().isLoggedIn()){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not logged in.");
+        if (!customerDTO.getAccountDTO().isLoggedIn()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not logged in!");
+        }
+        if (!tripService.checkAvailability(tripDTO)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Trip sold out!");
         }
 
         tripDTO.setNumberOfAdults(numberOfAdults);
         tripDTO.setNumberOfChildren(numberOfChildren);
-        if(!flightService.checkAvailability((tripDTO.getNumberOfAdults()+tripDTO.getNumberOfChildren()), tripDTO.getDepartureFlightDTO().getSeatsAvailable())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No seats available for departure flight.");
+        if (!flightService.checkAvailability((tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()), tripDTO.getDepartureFlightDTO().getSeatsAvailable())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No seats available for departure flight!");
         }
 
-        if(!flightService.checkAvailability((tripDTO.getNumberOfAdults()+tripDTO.getNumberOfChildren()), tripDTO.getReturningFlightDTO().getSeatsAvailable())){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No seats available for returning flight.");
+        if (!flightService.checkAvailability((tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()), tripDTO.getReturningFlightDTO().getSeatsAvailable())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No seats available for returning flight!");
         }
+
+        if (!tripService.checkSingleRoomAvailability(tripDTO, singleRooms)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No single rooms available!");
+        }
+
+        if (!tripService.checkDoubleRoomAvailability(tripDTO, doubleRooms)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No double rooms available!");
+        }
+
+        Set<RoomDTO> roomDTOSet = new HashSet<>();
+        RoomDTO singleRoomDTO = roomService.findRoomByType("single");
+        roomDTOSet.add(singleRoomDTO);
+        RoomDTO doubleRoomDTO = roomService.findRoomByType("double");
+        roomDTOSet.add(doubleRoomDTO);
 
         PurchasedTripDTO purchasedTripDTO = new PurchasedTripDTO();
         purchasedTripDTO.setCustomerDTO(customerDTO);
         purchasedTripDTO.setTripDTO(tripDTO);
+        purchasedTripDTO.getTripDTO().getStayingHotelDTO().setRoomDTOSet(roomDTOSet);
+        purchasedTripDTO.setTotalPrice((singleRoomDTO.getPrice() * singleRooms)+(doubleRoomDTO.getPrice() * doubleRooms));
 
         purchasedTripService.insertPurchasedTrip(purchasedTripDTO);
+
+        roomService.updateRoomAvailability(singleRoomDTO.getRoomType(), (singleRoomDTO.getRoomsAvailable() - singleRooms));
+        roomService.updateRoomAvailability(doubleRoomDTO.getRoomType(), (doubleRoomDTO.getRoomsAvailable() - doubleRooms));
         return ResponseEntity.ok("Trip purchased.");
     }
 

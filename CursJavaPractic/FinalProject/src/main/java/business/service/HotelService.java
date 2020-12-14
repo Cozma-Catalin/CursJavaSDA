@@ -90,6 +90,7 @@ public class HotelService {
             roomDTO.setRoomType(r.getRoomType());
             roomDTO.setNumberOfRooms(r.getNumberOfRooms());
             roomDTO.setExtraBed(r.isExtraBed());
+            roomDTO.setPrice(r.getPrice());
             roomDTO.setRoomsAvailable(r.getRoomsAvailable());
             roomDTOSet.add(roomDTO);
         }
