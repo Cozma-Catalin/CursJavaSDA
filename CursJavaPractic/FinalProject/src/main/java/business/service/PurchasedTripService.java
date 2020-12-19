@@ -1,7 +1,6 @@
 package business.service;
 
 import business.dto.PurchasedTripDTO;
-import business.dto.TripDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.*;
@@ -9,6 +8,7 @@ import persistence.entities.PurchasedTrip;
 import persistence.entities.Trip;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 @Service
@@ -20,8 +20,6 @@ public class PurchasedTripService {
     @Autowired
     TripDAO tripDAO;
     @Autowired
-    TripService tripService;
-    @Autowired
     FlightDAO flightDAO;
 
 
@@ -30,9 +28,8 @@ public class PurchasedTripService {
         purchasedTrip.setCustomer(customerDAO.findCustomerByEmail(purchasedTripDTO.getCustomerDTO().getEmail()));
         purchasedTrip.setTrip(tripDAO.findTripByName(purchasedTripDTO.getTripDTO().getName()));
 
-        Calendar calendar = Calendar.getInstance();
-        java.util.Date dateUtil = calendar.getTime();
-        java.sql.Date dateOfPurchase = new Date(dateUtil.getTime());
+
+        LocalDateTime dateOfPurchase = LocalDateTime.now();
         purchasedTrip.setDateOfPurchase(dateOfPurchase);
 
         purchasedTrip.setTotalPrice(calculateTripsPrice(purchasedTripDTO, purchasedTrip.getTrip()));

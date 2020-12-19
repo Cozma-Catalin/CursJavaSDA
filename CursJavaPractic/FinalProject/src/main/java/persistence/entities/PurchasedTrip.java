@@ -1,7 +1,7 @@
 package persistence.entities;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "purchased_trips")
@@ -19,7 +19,7 @@ public class PurchasedTrip {
     private Trip trip;
 
     @Column(name = "date_of_purchase")
-    private Date dateOfPurchase;
+    private LocalDateTime dateOfPurchase;
 
     @Column(name = "total_price")
     private double totalPrice;
@@ -54,11 +54,11 @@ public class PurchasedTrip {
         this.trip = trip;
     }
 
-    public Date getDateOfPurchase() {
+    public LocalDateTime getDateOfPurchase() {
         return dateOfPurchase;
     }
 
-    public void setDateOfPurchase(Date dateOfPurchase) {
+    public void setDateOfPurchase(LocalDateTime dateOfPurchase) {
         this.dateOfPurchase = dateOfPurchase;
     }
 
