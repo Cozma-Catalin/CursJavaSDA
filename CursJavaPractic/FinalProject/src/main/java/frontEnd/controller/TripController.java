@@ -1,6 +1,8 @@
 package frontEnd.controller;
 
+import business.dto.PurchasedTripDTO;
 import business.dto.TripDTO;
+import business.service.PurchasedTripService;
 import business.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -16,6 +19,12 @@ public class TripController {
 
     @Autowired
     TripService tripService;
+    @Autowired
+    PurchasedTripService purchasedTripService;
+
+
+
+
 
     @PostMapping(path = "/insertTrip")
     public ResponseEntity insertTrip(@RequestBody @Valid TripDTO tripDTO) {
@@ -223,5 +232,27 @@ public class TripController {
         }
         return ResponseEntity.ok(tripDTOList);
     }
+
+    @GetMapping("/showPurchasedTripsByCustomer")
+    public ResponseEntity showPurchasedTripsByCustomer(@RequestParam String name){
+        List<PurchasedTripDTO> purchasedTripDTOList = purchasedTripService.showPurchasedTrips(name);
+        if(purchasedTripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips purchased recently.");
+        }
+        return ResponseEntity.ok(purchasedTripDTOList);
+    }
+
+
+
+    @GetMapping("/showPurchasedTripsByDate")
+    public ResponseEntity showPurchasedTripsByDate(@RequestParam Date date){
+        List<PurchasedTripDTO> purchasedTripDTOList = purchasedTripService.showPurchasedTripsByDate(date);
+        if(purchasedTripDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips purchased recently.");
+        }
+        return ResponseEntity.ok(purchasedTripDTOList);
+    }
+
+
 
 }

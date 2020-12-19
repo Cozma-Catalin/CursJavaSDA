@@ -36,6 +36,7 @@ import java.util.Set;
         @NamedQuery(name = "findTripByNameAndDepartureDate",query = "select trip from Trip trip where name= :name and departureDate= :departureDate"),
         @NamedQuery(name = "findTripByName",query = "select trip from Trip trip where name= :name"),
         @NamedQuery(name = "updateNumberOfTripsAvailable",query = "update from Trip set numberOfTripsAvailable= numberOfTripsAvailable - 1")
+
 })
 
 @Entity

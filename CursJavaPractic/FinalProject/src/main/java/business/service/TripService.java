@@ -68,7 +68,7 @@ public class TripService {
         session.close();
     }
 
-    private Trip setTrip(TripDTO tripDTO, Flight departureFlight, Flight returningFlight, Hotel stayingHotel) {
+    public Trip setTrip(TripDTO tripDTO, Flight departureFlight, Flight returningFlight, Hotel stayingHotel) {
         Trip trip = new Trip();
         trip.setName(tripDTO.getName());
         trip.setDepartureFlight(departureFlight);

@@ -21,7 +21,7 @@ public class CustomerDTO {
     @Valid
     private AccountDTO accountDTO;
 
-    private Set<TripDTO> tripDTOSet;
+
 
     public CustomerDTO() {
     }
@@ -83,16 +83,10 @@ public class CustomerDTO {
         this.accountDTO = accountDTO;
     }
 
-    public Set<TripDTO> getTripDTOSet() {
-        return tripDTOSet;
-    }
 
-    public void setTripDTOSet(Set<TripDTO> tripDTOSet) {
-        this.tripDTOSet = tripDTOSet;
-    }
 
     @Override
     public String toString() {
-        return "CustomerDTO: " + name + ", " + surname + ", birthDate: " + birthDate + ", email: " + email + tripDTOSet;
+        return "CustomerDTO: " + name + ", " + surname + ", birthDate: " + birthDate + ", email: " + email ;
     }
 }

@@ -1,7 +1,13 @@
 package persistence.entities;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Date;
+
+
+@NamedQueries({
+        @NamedQuery(name = "showPurchasedTripsByCustomer",query = "select p from PurchasedTrip p inner join p.customer customer where name= :name"),
+        @NamedQuery(name = "showPurchasedTripsByDate",query = "select p from PurchasedTrip p where (dateOfPurchase between :dateOfPurchase and :currentDate) ")
+})
 
 @Entity
 @Table(name = "purchased_trips")
@@ -19,7 +25,7 @@ public class PurchasedTrip {
     private Trip trip;
 
     @Column(name = "date_of_purchase")
-    private LocalDateTime dateOfPurchase;
+    private Date dateOfPurchase;
 
     @Column(name = "total_price")
     private double totalPrice;
@@ -54,11 +60,11 @@ public class PurchasedTrip {
         this.trip = trip;
     }
 
-    public LocalDateTime getDateOfPurchase() {
+    public Date getDateOfPurchase() {
         return dateOfPurchase;
     }
 
-    public void setDateOfPurchase(LocalDateTime dateOfPurchase) {
+    public void setDateOfPurchase(Date dateOfPurchase) {
         this.dateOfPurchase = dateOfPurchase;
     }
 
@@ -69,4 +75,6 @@ public class PurchasedTrip {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+
 }

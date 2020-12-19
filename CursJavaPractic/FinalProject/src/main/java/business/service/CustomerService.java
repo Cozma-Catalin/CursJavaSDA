@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 import persistence.dao.CustomerDAO;
 import persistence.dao.FlightDAO;
 import persistence.dao.TripDAO;
-import persistence.entities.Account;
-import persistence.entities.Customer;
-import persistence.entities.Trip;
+import persistence.entities.*;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Iterator;
 
 
@@ -26,10 +26,7 @@ public class CustomerService {
 
     @Autowired
     CustomerDAO customerDAO;
-    @Autowired
-    TripDAO tripDAO;
-    @Autowired
-    FlightDAO flightDAO;
+
 
     public void insertCustomerDTO(CustomerDTO customerDTO) {
         Customer customer = getCustomerFromDTO(customerDTO);
@@ -67,6 +64,7 @@ public class CustomerService {
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setName(customer.getName());
         customerDTO.setSurname(customer.getSurname());
+        customerDTO.setAddress(customer.getAddress());
         customerDTO.setBirthDate(customer.getBirthDate());
         customerDTO.setPhoneNumber(customer.getPhoneNumber());
         customerDTO.setEmail(customer.getEmail());
@@ -121,7 +119,7 @@ public class CustomerService {
     public static void main(String[] args) throws IOException {
 
 
-       readFile();
+        readFile();
     }
 
     public static void readFile() throws IOException {
@@ -131,17 +129,55 @@ public class CustomerService {
 
         try {
             Iterator<Row> rowIterator = sheet.iterator();
+            Row row = rowIterator.next();
             while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
+               row = rowIterator.next();
+
 
                 Iterator<Cell> cellIterator = row.cellIterator();
-                while (cellIterator.hasNext()) {
-                    Cell cell = cellIterator.next();
-                    DataFormatter dataFormatter = new DataFormatter();
-                    Object cellData = dataFormatter.formatCellValue(cell);
-                    System.out.print(cellData + "|" + "\t");
-                }
-                System.out.println();
+                DataFormatter dataFormatter = new DataFormatter();
+
+                Cell cell = cellIterator.next();
+
+
+                cell = cellIterator.next();
+                System.out.println(cell);
+                Object cellData = dataFormatter.formatCellValue(cell);
+                Trip trip = new Trip();
+                trip.setName((String) cellData);
+                cell = cellIterator.next();
+                System.out.println(cell);
+                trip.setMealType(cell.getStringCellValue());
+                cell = cellIterator.next();
+                System.out.println(cell);
+                cellData = dataFormatter.formatCellValue(cell);
+
+
+                cell = cellIterator.next();
+                System.out.println(cell);
+                Flight flight = new Flight();
+                flight.setFlightNumber(cell.getStringCellValue());
+                cell = cellIterator.next();
+                System.out.println(cell);
+
+                cell = cellIterator.next();System.out.println(cell);
+                Airport departAirport = new Airport();
+                departAirport.setName(cell.getStringCellValue());
+                cell = cellIterator.next();System.out.println(cell);
+                City city = new City();
+                city.setName(cell.getStringCellValue());
+                cell = cellIterator.next();System.out.println(cell);
+                Country country = new Country();
+                country.setName(cell.getStringCellValue());
+                cell = cellIterator.next();System.out.println(cell);
+                Continent continent = new Continent();
+                continent.setName(cell.getStringCellValue());
+                country.setContinent(continent);
+                city.setCountry(country);
+                departAirport.setCity(city);
+                flight.setDepartureAirport(departAirport);
+                trip.setDepartureFlight(flight);
+                System.out.println(trip);
             }
             workbook.close();
 
