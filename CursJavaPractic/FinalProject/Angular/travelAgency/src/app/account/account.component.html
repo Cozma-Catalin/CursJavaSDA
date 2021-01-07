@@ -1,0 +1,43 @@
+<html>
+    <head>
+         Register Account
+    </head>
+          
+        <body>
+            <div>
+                <h2 id="h2">Bine ati venit</h2>
+                <h3 id="h3">Va rugam sa va introduceti datele in campurile de mai jos</h3>
+            </div>
+    
+            <form>
+                <div>
+                    <div id="datePersonale">
+                        <p>Introduceti datele personale</p>
+                        <p>userName</p>
+                        <input type="text" required="true" name="userName" (focusout)="focusoutFunctionUserName($event)"><br/>
+                        <p class="error">{{errorMessageUserName}}</p>
+                    </div>
+    
+                    <div id="dateIdentificare">
+                        <p>Introduceti datele de identificare</p>
+                        <p>Password</p>
+                        <input type="password" required="true" name="Password" (focusout)="focusoutFunctionPassword($event)"><br/>
+                        <p class="error">{{errorMessagePasswordLength}}</p>
+                        <p>Confirm password</p>
+                        <input type="password" required="true" name="Confirm password" (focusout)="focusoutFunctionConfirmPassword($event)"><br/>
+                        <p class="error">{{errorMessagePassword}}</p>
+                    
+                        <input type="submit" name="Inregistrare" (click)="inregistrare()"><br/>
+                    </div>
+                </div>
+            </form>
+        <div>
+            <h2>Ati introdus urmatoarele date</h2>
+            <p>Nume: </p>{{personInfo.userName}}
+            <p>Parola: </p>{{personInfo.password}}
+            <p>Confirmare parola: </p>{{personInfo.confirmPassword}}
+        
+        </div>
+                    
+    </body>
+</html>
