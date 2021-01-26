@@ -1,26 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountComponent } from './account/account.component';
-import { TripComponent } from './trip/trip.component';
+import { TripService } from './trip.service';
+import {UserService} from './user.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AccountComponent,
-    TripComponent
-  ],
-  imports: [ 
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule
+    ],
+    declarations: [
+        AppComponent,
+        routingComponents
+    ],
+    providers: [TripService,UserService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

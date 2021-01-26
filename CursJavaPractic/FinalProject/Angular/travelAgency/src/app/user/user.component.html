@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>User component</title>
+    </head>
+    <body>
+        <h3>{{errorMsg}}</h3> 
+        <form>
+            <div id="userData" >
+               <br/>
+                    <h3>Fill in the fields in order to register :</h3>
+                    <p>First Name: 
+                    <input type="text" required="true" name="firstName" (focusout)="focusoutFunctionFirstName($event)"></p>
+                    <p class="error">{{errorMessageFirstName}}</p>
+                    <p>Last Name: 
+                    <input type="text" required="true" name="lastName" (focusout)="focusoutFunctionLastName($event)"></p>
+                    <p class="error">{{errorMessageLastName}}</p>
+                    <p>City:  
+                    <input type="text" required="true" name="city" (focusout)="focusoutFunctionCity($event)"></p>
+                    <p class="error">{{errorMessageCity}}</p>
+                    <p>Date of birth:  
+                    <input type="date" required="true" name="dateOfBirth" (focusout)="focusoutFunctionDateOfBirth($event)"></p>
+                    <p>E-mail: 
+                    <input type="email" required="true" name="email" (focusout)="focusoutFunctionEmail($event)"></p>
+                    <p class="error">{{errorMessageEmail}}</p>
+                    <p>User Name:  
+                    <input type="text" required="true" name="userName" (focusout)="focusoutFunctionUserName($event)"></p>
+                    <p class="error">{{errorMessageUserName}}</p>
+                    <p>Password:  
+                    <input type="password" required="true" name="password" (focusout)="focusoutFunctionPassword($event)"></p>
+                    <p class="error">{{errorMessagePasswordLength}}</p>
+                    <p>Confirma password: 
+                     <input type="password" required="true" name="confirmPassword" (focusout)="focusoutFunctionConfirmPassword($event)"></p>
+                    <p class="error">{{errorMessagePassword}}</p> 
+                    
+                    <button  name="register" (click)="register()">Register</button>
+          </div>
+        </form>
+ 
+    </body>
+</html>
