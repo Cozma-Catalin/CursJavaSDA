@@ -36,8 +36,8 @@ public class CustomerService {
 
     private void setAccount(CustomerDTO customerDTO, Customer customer) {
         Account account = new Account();
-        account.setUserName(customerDTO.getAccountDTO().getUserName());
-        account.setPassword(customerDTO.getAccountDTO().getPassword());
+        account.setUserName(customerDTO.getAccount().getUserName());
+        account.setPassword(customerDTO.getAccount().getPassword());
         customer.setAccount(account);
     }
 
@@ -48,6 +48,9 @@ public class CustomerService {
 
     public CustomerDTO findCustomerByEmail(String email) {
         Customer customer = customerDAO.findCustomerByEmail(email);
+        if(customer==null){
+            return null;
+        }
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setName(customer.getName());
         customerDTO.setSurname(customer.getSurname());
@@ -60,7 +63,7 @@ public class CustomerService {
         accountDTO.setUserName(customer.getAccount().getUserName());
         accountDTO.setPassword(customer.getAccount().getPassword());
         accountDTO.setLoggedIn(customer.getAccount().isLoggedIn());
-        customerDTO.setAccountDTO(accountDTO);
+        customerDTO.setAccount(accountDTO);
         return customerDTO;
     }
 
@@ -81,7 +84,7 @@ public class CustomerService {
         accountDTO.setUserName(customer.getAccount().getUserName());
         accountDTO.setPassword(customer.getAccount().getPassword());
         accountDTO.setLoggedIn(customer.getAccount().isLoggedIn());
-        customerDTO.setAccountDTO(accountDTO);
+        customerDTO.setAccount(accountDTO);
 
         return customerDTO;
     }
@@ -90,19 +93,22 @@ public class CustomerService {
     public CustomerDTO findCustomerByUserName(String userName) {
         CustomerDTO customerDTO = new CustomerDTO();
         Customer customer = customerDAO.findCustomerByUserName(userName);
+        if(customer==null){
+            return null;
+        }else {
+            customerDTO.setName(customer.getName());
+            customerDTO.setSurname(customer.getSurname());
+            customerDTO.setBirthDate(customer.getBirthDate());
+            customerDTO.setAddress(customer.getAddress());
+            customerDTO.setEmail(customer.getEmail());
+            AccountDTO accountDTO = new AccountDTO();
 
-        customerDTO.setName(customer.getName());
-        customerDTO.setSurname(customer.getSurname());
-        customerDTO.setBirthDate(customer.getBirthDate());
-        customerDTO.setAddress(customer.getAddress());
-        customerDTO.setEmail(customer.getEmail());
-        AccountDTO accountDTO = new AccountDTO();
-
-        accountDTO.setUserName(customer.getAccount().getUserName());
-        accountDTO.setPassword(customer.getAccount().getPassword());
-        accountDTO.setLoggedIn(customer.getAccount().isLoggedIn());
-        customerDTO.setAccountDTO(accountDTO);
-        return customerDTO;
+            accountDTO.setUserName(customer.getAccount().getUserName());
+            accountDTO.setPassword(customer.getAccount().getPassword());
+            accountDTO.setLoggedIn(customer.getAccount().isLoggedIn());
+            customerDTO.setAccount(accountDTO);
+            return customerDTO;
+        }
     }
 
 }

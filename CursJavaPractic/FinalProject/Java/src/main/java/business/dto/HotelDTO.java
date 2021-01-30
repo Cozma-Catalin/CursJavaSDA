@@ -22,11 +22,11 @@ public class HotelDTO {
     @NotNull
     private String description;
     @NotNull @Valid
-    private Set<RoomDTO> roomDTOSet;
+    private Set<RoomDTO> rooms;
 
 
     @Valid
-    private CityDTO cityDTO;
+    private CityDTO city;
 
 
 
@@ -57,20 +57,20 @@ public class HotelDTO {
         this.description = description;
     }
 
-    public Set<RoomDTO> getRoomDTOSet() {
-        return roomDTOSet;
+    public Set<RoomDTO> getRooms() {
+        return rooms;
     }
 
-    public void setRoomDTOSet(Set<RoomDTO> roomDTOSet) {
-        this.roomDTOSet = roomDTOSet;
+    public void setRooms(Set<RoomDTO> rooms) {
+        this.rooms = rooms;
     }
 
-    public CityDTO getCityDTO() {
-        return cityDTO;
+    public CityDTO getCity() {
+        return city;
     }
 
-    public void setCityDTO(CityDTO cityDTO) {
-        this.cityDTO = cityDTO;
+    public void setCity(CityDTO city) {
+        this.city = city;
     }
 
     public String getAddress() {
@@ -84,6 +84,6 @@ public class HotelDTO {
     @Override
     public String toString() {
         return "HotelDTO: " + name + ", address: " + address + ", numberOfStars:" + numberOfStars +
-                 ", rooms : " + roomDTOSet + ", description:" + description + ", cityDTO:" + cityDTO ;
+                 ", rooms : " + rooms + ", description:" + description + ", cityDTO:" + city ;
     }
 }

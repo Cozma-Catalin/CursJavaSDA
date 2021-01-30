@@ -47,7 +47,12 @@ public class CustomerDAO {
         session.beginTransaction();
         Query findCustomerByEmailQuery = session.createNamedQuery("findCustomerByEmail");
         findCustomerByEmailQuery.setParameter("email", email);
-        Customer customer = (Customer) findCustomerByEmailQuery.getSingleResult();
+        Customer customer = null;
+        try {
+          customer = (Customer) findCustomerByEmailQuery.getSingleResult();
+        }catch (NoResultException e){
+            System.out.println(e.getCause());
+        }
         session.getTransaction().commit();
         session.close();
         return customer;
@@ -61,19 +66,12 @@ public class CustomerDAO {
         session.close();
     }
 
-    public void purchaseTrip(Customer customer) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.saveOrUpdate(customer);
-        session.getTransaction().commit();
-        session.close();
-    }
 
-    public Customer findCustomerByUserName(String userNme) {
+    public Customer findCustomerByUserName(String userName) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query findCustomerByUserNameQuery = session.createNamedQuery("findCustomerByUserName");
-        findCustomerByUserNameQuery.setParameter("userName", userNme);
+        findCustomerByUserNameQuery.setParameter("userName", userName);
         Customer customer = null;
         try {
             customer = (Customer) findCustomerByUserNameQuery.getSingleResult();

@@ -13,7 +13,7 @@ public class CountryDTO {
     @Pattern(regexp = "([a-z A-Z])*")
     private String name;
     @Valid
-    private ContinentDTO continentDTO;
+    private ContinentDTO continent;
 
 
 
@@ -32,16 +32,16 @@ public class CountryDTO {
         this.name = name;
     }
 
-    public ContinentDTO getContinentDTO() {
-        return continentDTO;
+    public ContinentDTO getContinent() {
+        return continent;
     }
 
-    public void setContinentDTO(ContinentDTO continentDTO) {
-        this.continentDTO = continentDTO;
+    public void setContinent(ContinentDTO continent) {
+        this.continent = continent;
     }
 
     @Override
     public String toString() {
-        return "CountryDTO: " + name + "," + continentDTO ;
+        return "CountryDTO: " + name + "," + continent ;
     }
 }

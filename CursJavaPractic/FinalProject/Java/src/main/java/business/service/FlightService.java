@@ -52,10 +52,10 @@ public class FlightService {
     }
 
     private void setArrivingCity(FlightDTO flightDTO, Airport arrivingAirportFound, Airport arrivingAirport) {
-        City arrivingCityFound = cityDAO.findCity(flightDTO.getArrivingAirport().getCityDTO().getName());
+        City arrivingCityFound = cityDAO.findCity(flightDTO.getArrivingAirport().getCity().getName());
         if (arrivingCityFound == null) {
             City arrivingCity = new City();
-            arrivingCity.setName(flightDTO.getArrivingAirport().getCityDTO().getName());
+            arrivingCity.setName(flightDTO.getArrivingAirport().getCity().getName());
             setArrivingCountry(flightDTO, arrivingCity);
             arrivingAirport.setCity(arrivingCity);
         } else {
@@ -65,10 +65,10 @@ public class FlightService {
     }
 
     private void setArrivingCountry(FlightDTO flightDTO, City arrivingCity) {
-        Country arrivingCountryFound = countryDAO.findCountry(flightDTO.getArrivingAirport().getCityDTO().getCountryDTO().getName());
+        Country arrivingCountryFound = countryDAO.findCountry(flightDTO.getArrivingAirport().getCity().getCountry().getName());
         if (arrivingCountryFound == null) {
             Country arrivingCountry = new Country();
-            arrivingCountry.setName(flightDTO.getArrivingAirport().getCityDTO().getCountryDTO().getName());
+            arrivingCountry.setName(flightDTO.getArrivingAirport().getCity().getCountry().getName());
             arrivingCity.setCountry(arrivingCountry);
         } else {
             arrivingCity.setCountry(arrivingCountryFound);
@@ -89,10 +89,10 @@ public class FlightService {
     }
 
     private void setDepartureCity(FlightDTO flightDTO, Airport departureAirportFound, Airport departureAirport) {
-        City departCityFound = cityDAO.findCity(flightDTO.getDepartureAirport().getCityDTO().getName());
+        City departCityFound = cityDAO.findCity(flightDTO.getDepartureAirport().getCity().getName());
         if (departCityFound == null) {
             City departCity = new City();
-            departCity.setName(flightDTO.getDepartureAirport().getCityDTO().getName());
+            departCity.setName(flightDTO.getDepartureAirport().getCity().getName());
             setDepartureCountry(flightDTO, departCity);
             departureAirport.setCity(departCity);
         } else {
@@ -102,10 +102,10 @@ public class FlightService {
     }
 
     private void setDepartureCountry(FlightDTO flightDTO, City departCity) {
-        Country departCountryFound = countryDAO.findCountry(flightDTO.getDepartureAirport().getCityDTO().getCountryDTO().getName());
+        Country departCountryFound = countryDAO.findCountry(flightDTO.getDepartureAirport().getCity().getCountry().getName());
         if (departCountryFound == null) {
             Country departCountry = new Country();
-            departCountry.setName(flightDTO.getDepartureAirport().getCityDTO().getCountryDTO().getName());
+            departCountry.setName(flightDTO.getDepartureAirport().getCity().getCountry().getName());
             departCity.setCountry(departCountry);
         } else {
             departCity.setCountry(departCountryFound);
@@ -141,10 +141,10 @@ public class FlightService {
         departureAirportDTO.setName(flight.getDepartureAirport().getName());
         ContinentDTO continentDTO = new ContinentDTO(flight.getDepartureAirport().getCity().getCountry().getContinent().getName());
         CountryDTO countryDTO = new CountryDTO(flight.getDepartureAirport().getCity().getCountry().getName());
-        countryDTO.setContinentDTO(continentDTO);
+        countryDTO.setContinent(continentDTO);
         CityDTO cityDTO = new CityDTO(flight.getDepartureAirport().getCity().getName());
-        cityDTO.setCountryDTO(countryDTO);
-        departureAirportDTO.setCityDTO(cityDTO);
+        cityDTO.setCountry(countryDTO);
+        departureAirportDTO.setCity(cityDTO);
         return departureAirportDTO;
     }
 
@@ -153,10 +153,10 @@ public class FlightService {
         arrivingAirportDTO.setName(flight.getArrivingAirport().getName());
         ContinentDTO continentDTO = new ContinentDTO(flight.getArrivingAirport().getCity().getCountry().getContinent().getName());
         CountryDTO countryDTO = new CountryDTO(flight.getArrivingAirport().getCity().getCountry().getName());
-        countryDTO.setContinentDTO(continentDTO);
+        countryDTO.setContinent(continentDTO);
         CityDTO cityDTO = new CityDTO(flight.getArrivingAirport().getCity().getName());
-        cityDTO.setCountryDTO(countryDTO);
-        arrivingAirportDTO.setCityDTO(cityDTO);
+        cityDTO.setCountry(countryDTO);
+        arrivingAirportDTO.setCity(cityDTO);
         return arrivingAirportDTO;
     }
 

@@ -3,8 +3,11 @@ package frontEnd.controller;
 
 import business.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import persistence.dao.AccountDAO;
+import persistence.entities.Account;
+@CrossOrigin
 @RestController
 public class AccountController {
     @Autowired

@@ -31,10 +31,10 @@ public class CountryService {
     }
 
     public void setContinent(CountryDTO countryDTO, Country country) {
-        Continent continentFound = continentDAO.findContinent(countryDTO.getContinentDTO().getName());
+        Continent continentFound = continentDAO.findContinent(countryDTO.getContinent().getName());
         if (continentFound == null) {
             Continent continent = new Continent();
-            continent.setName(countryDTO.getContinentDTO().getName());
+            continent.setName(countryDTO.getContinent().getName());
             country.setContinent(continent);
         } else {
             country.setContinent(continentFound);
@@ -54,7 +54,7 @@ public class CountryService {
         countryDTO.setName(country.getName());
         ContinentDTO continentDTO = new ContinentDTO();
         continentDTO.setName(country.getContinent().getName());
-        countryDTO.setContinentDTO(continentDTO);
+        countryDTO.setContinent(continentDTO);
         return countryDTO;
     }
 
@@ -66,7 +66,7 @@ public class CountryService {
             countryDTO.setName(c.getName());
             ContinentDTO continentDTO = new ContinentDTO();
             continentDTO.setName(c.getContinent().getName());
-            countryDTO.setContinentDTO(continentDTO);
+            countryDTO.setContinent(continentDTO);
             countryDTOList.add(countryDTO);
         }
         return countryDTOList;

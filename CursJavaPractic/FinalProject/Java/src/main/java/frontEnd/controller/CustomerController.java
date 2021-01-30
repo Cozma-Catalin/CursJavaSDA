@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
-
+@CrossOrigin
 @RestController
 public class CustomerController {
 
@@ -31,9 +31,9 @@ public class CustomerController {
 
     @PostMapping(path = "/insertCustomer")
     public ResponseEntity insertCustomer(@RequestBody @Valid CustomerDTO customerDTO) {
-        customerDTO.getAccountDTO().setPassword(accountService.cryptPass(customerDTO.getAccountDTO().getPassword()));
+        customerDTO.getAccount().setPassword(accountService.cryptPass(customerDTO.getAccount().getPassword()));
 
-        if (accountService.countUserName(customerDTO.getAccountDTO().getUserName()) != 0) {
+        if (accountService.countUserName(customerDTO.getAccount().getUserName()) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("This user_name already registered.");
         } else if (customerService.countEmail(customerDTO.getEmail()) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("This email already registered.");
@@ -41,6 +41,7 @@ public class CustomerController {
         customerService.insertCustomerDTO(customerDTO);
         return ResponseEntity.ok("Customer added.");
     }
+
 
     @PutMapping(path = "/logOut")
     public ResponseEntity logOut(@RequestParam String userName) {
@@ -74,6 +75,16 @@ public class CustomerController {
         return ResponseEntity.ok(customerDTO);
     }
 
+    @GetMapping(path = "/checkEmail")
+    public ResponseEntity checkEmail(@RequestParam String email) {
+        CustomerDTO customerDTO = customerService.findCustomerByEmail(email);
+        if (customerDTO != null) {
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body( email + " already registered.");
+        }else {
+            return ResponseEntity.ok(email + " is available.");
+        }
+    }
+
 
     @GetMapping(path = "/findCustomerAccount")
     public ResponseEntity findCustomerAccount(@RequestParam String userName, String password) {
@@ -83,6 +94,17 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find account with user name:" + userName);
         }
         return ResponseEntity.ok(customerDTO);
+    }
+
+
+    @GetMapping(path = "/checkUserName")
+    public ResponseEntity checkUserName(@RequestParam String userName) {
+        CustomerDTO customerDTO = customerService.findCustomerByUserName(userName);
+        if (customerDTO != null) {
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body( userName + " already used." );
+        }else {
+            return ResponseEntity.ok(userName + " is available.");
+        }
     }
 
 
@@ -97,7 +119,7 @@ public class CustomerController {
         if (customerDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No customer with user name: " + userName + " found!");
         }
-        if (!customerDTO.getAccountDTO().isLoggedIn()) {
+        if (!customerDTO.getAccount().isLoggedIn()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not logged in!");
         }
         if (!tripService.checkAvailability(tripDTO)) {
@@ -106,11 +128,11 @@ public class CustomerController {
 
         tripDTO.setNumberOfAdults(numberOfAdults);
         tripDTO.setNumberOfChildren(numberOfChildren);
-        if (!flightService.checkAvailability((tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()), tripDTO.getDepartureFlightDTO().getSeatsAvailable())) {
+        if (!flightService.checkAvailability((tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()), tripDTO.getDepartureFlight().getSeatsAvailable())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No seats available for departure flight!");
         }
 
-        if (!flightService.checkAvailability((tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()), tripDTO.getReturningFlightDTO().getSeatsAvailable())) {
+        if (!flightService.checkAvailability((tripDTO.getNumberOfAdults() + tripDTO.getNumberOfChildren()), tripDTO.getReturningFlight().getSeatsAvailable())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No seats available for returning flight!");
         }
 
@@ -129,9 +151,9 @@ public class CustomerController {
         roomDTOSet.add(doubleRoomDTO);
 
         PurchasedTripDTO purchasedTripDTO = new PurchasedTripDTO();
-        purchasedTripDTO.setCustomerDTO(customerDTO);
-        purchasedTripDTO.setTripDTO(tripDTO);
-        purchasedTripDTO.getTripDTO().getStayingHotelDTO().setRoomDTOSet(roomDTOSet);
+        purchasedTripDTO.setCustomer(customerDTO);
+        purchasedTripDTO.setTrip(tripDTO);
+        purchasedTripDTO.getTrip().getStayingHotel().setRooms(roomDTOSet);
         purchasedTripDTO.setTotalPrice((singleRoomDTO.getPrice() * singleRooms)+(doubleRoomDTO.getPrice() * doubleRooms));
 
         purchasedTripService.insertPurchasedTrip(purchasedTripDTO);

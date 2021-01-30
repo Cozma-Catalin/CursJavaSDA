@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 public class AirportController {
     @Autowired
@@ -17,9 +17,9 @@ public class AirportController {
 
     @PostMapping(path = "/insertAirport")
     public ResponseEntity insertAirport(@RequestBody @Valid AirportDTO airportDTO) {
-        List<String> airportNameList = airportService.getAirportNameByCityName(airportDTO.getCityDTO().getName());
+        List<String> airportNameList = airportService.getAirportNameByCityName(airportDTO.getCity().getName());
         if (airportNameList.contains(airportDTO.getName())) {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(airportDTO.getName() + ", in " + airportDTO.getCityDTO().getName() + " already in database.");
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(airportDTO.getName() + ", in " + airportDTO.getCity().getName() + " already in database.");
         }
         airportService.insertAirport(airportDTO);
         return ResponseEntity.ok(airportDTO.getName() + " added.");

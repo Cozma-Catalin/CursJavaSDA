@@ -3,13 +3,13 @@ package business.dto;
 
 
 import java.sql.Date;
-import java.time.LocalDateTime;
+
 
 
 public class PurchasedTripDTO {
 
-    private CustomerDTO customerDTO;
-    private TripDTO tripDTO;
+    private CustomerDTO customer;
+    private TripDTO trip;
     private Date dateOfPurchase ;
     private double totalPrice;
     private double discount;
@@ -17,20 +17,20 @@ public class PurchasedTripDTO {
     public PurchasedTripDTO() {
     }
 
-    public CustomerDTO getCustomerDTO() {
-        return customerDTO;
+    public CustomerDTO getCustomer() {
+        return customer;
     }
 
-    public void setCustomerDTO(CustomerDTO customerDTO) {
-        this.customerDTO = customerDTO;
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
     }
 
-    public TripDTO getTripDTO() {
-        return tripDTO;
+    public TripDTO getTrip() {
+        return trip;
     }
 
-    public void setTripDTO(TripDTO tripDTO) {
-        this.tripDTO = tripDTO;
+    public void setTrip(TripDTO trip) {
+        this.trip = trip;
     }
 
     public Date getDateOfPurchase() {

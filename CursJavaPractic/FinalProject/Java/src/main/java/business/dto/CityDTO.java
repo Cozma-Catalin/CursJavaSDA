@@ -15,7 +15,7 @@ public class CityDTO {
     private String name;
 
     @Valid
-    private CountryDTO countryDTO;
+    private CountryDTO country;
 
 
 
@@ -35,16 +35,16 @@ public class CityDTO {
         this.name = name;
     }
 
-    public CountryDTO getCountryDTO() {
-        return countryDTO;
+    public CountryDTO getCountry() {
+        return country;
     }
 
-    public void setCountryDTO(CountryDTO countryDTO) {
-        this.countryDTO = countryDTO;
+    public void setCountry(CountryDTO country) {
+        this.country = country;
     }
 
     @Override
     public String toString() {
-        return "CityDTO: " + name + ", " + countryDTO ;
+        return "CityDTO: " + name + ", " + country ;
     }
 }

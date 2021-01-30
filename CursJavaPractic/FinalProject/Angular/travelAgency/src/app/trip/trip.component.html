@@ -1,42 +1,56 @@
 <html>
-    <body>
-        <h2>Trip Detail</h2>
-        <h3>{{errorMsg}}</h3>    
-        <ul *ngFor="let trip of trips">
-            <li>{{trip.name}}</li>
-            <li><p>Departure date: {{trip.departureDate}}</p></li> 
-            <li><p>Departure Flight Info:</p><ul>
-                <li><p>{{trip.departureFlight.flightNumber}} - departing at: {{trip.departureFlight.departureTime}} - {{trip.departureFlight.departureDate}} from: {{trip.departureFlight.departureAirport.name}} - {{trip.departureFlight.departureAirport.city.name}},{{trip.departureFlight.departureAirport.city.country.name}}-{{trip.departureFlight.departureAirport.city.country.continent.name}}</p></li>
-                <li><p>arriving at: {{trip.departureFlight.arrivingTime}} - {{trip.departureFlight.arrivingDate}} in: {{trip.departureFlight.arrivingAirport.name}} - {{trip.departureFlight.arrivingAirport.city.name}},{{trip.departureFlight.arrivingAirport.city.country.name}}-{{trip.departureFlight.arrivingAirport.city.country.continent.name}} </p></li>
-                <li><p>Price per person: {{trip.departureFlight.price}}$</p></li>
-                <li><p>Availability: {{trip.departureFlight.seatsAvailable}}</p></li>    
-            </ul>  
-            <li><p>Return date: {{trip.returnDate}}</p></li>
-            <li><p>Returning Flight Info: </p><ul>
-                <li><p>{{trip.returningFlight.flightNumber}} - departing at: {{trip.returningFlight.departureTime}} - {{trip.returningFlight.departureDate}} from: {{trip.returningFlight.departureAirport.name}} - {{trip.returningFlight.departureAirport.city.name}},{{trip.returningFlight.departureAirport.city.country.name}}-{{trip.returningFlight.departureAirport.city.country.continent.name}}</p></li>
-                <li><p>arriving at: {{trip.returningFlight.arrivingTime}} - {{trip.returningFlight.arrivingDate}} in: {{trip.returningFlight.arrivingAirport.name}} - {{trip.returningFlight.arrivingAirport.city.name}},{{trip.returningFlight.arrivingAirport.city.country.name}}-{{trip.returningFlight.arrivingAirport.city.country.continent.name}} </p></li>
-                <li><p>Price per person: {{trip.returningFlight.price}}$</p></li>
-                <li><p>Availability: {{trip.returningFlight.seatsAvailable}}</p></li>    
-            </ul>    
-            <li><p>Hotel Info: </p><ul>
-                <li><p>'{{trip.stayingHotel.name}}' {{trip.stayingHotel.numberOfStars}} stars ,address:{{trip.stayingHotel.address}}-{{trip.stayingHotel.city.name}}-{{trip.stayingHotel.city.country.name}} </p></li>   
-                <li><h3>Accomodation options:</h3></li>     
-                    <ul *ngFor="let room of trip.stayingHotel.rooms">
-                    <li><p>Room type: {{room.roomType}}</p> </li>
-                    <li><p>Number of rooms available: {{room.roomsAvailable}} from a total of {{room.numberOfRooms}} rooms.</p></li>
-                    <li><p>Option for extra bed available: {{room.extraBed}}</p></li>
-                    <li><p>Price per room: {{room.price}}</p></li>
-                    </ul>
-            </ul>      
-            <li><p>Meal type: {{trip.mealType}}</p></li>  
-            <li><p>Number of days: {{trip.numberOfDays}}</p></li>    
-            <li><p>Price per adult: {{trip.priceForAdult}}</p></li>
-            <li><p>Price per kid: {{trip.priceForChild}}</p></li>
-            <li><p>Trips available: {{trip.numberOfTripsAvailable}}</p></li>
-            <nav>
-            <a routerLink="/users" routerLinkActive="active">Purchase Trip</a>
-             </nav>
-        </ul>
+ <app-header></app-header>
+
+<body>
+    
+<br/><br/><br/><br/><br/><br/><br/><br/>
+    <ul *ngFor="let trip of trips">
+        <li><h2>{{trip.name}}</h2></li>
+        <li><p>Departure date: {{trip.departureDate}}</p></li> 
+        <div class="departureFlight"> 
+            <li><h2>Departure Flight Info:</h2><ul>
+            <li><p>{{trip.departureFlight.flightNumber}} - departing at: {{trip.departureFlight.departureTime}} - {{trip.departureFlight.departureDate}} from: {{trip.departureFlight.departureAirport.name}} - {{trip.departureFlight.departureAirport.city.name}},{{trip.departureFlight.departureAirport.city.country.name}}-{{trip.departureFlight.departureAirport.city.country.continent.name}}</p></li>
+            <li><p>arriving at: {{trip.departureFlight.arrivingTime}} - {{trip.departureFlight.arrivingDate}} in: {{trip.departureFlight.arrivingAirport.name}} - {{trip.departureFlight.arrivingAirport.city.name}},{{trip.departureFlight.arrivingAirport.city.country.name}}-{{trip.departureFlight.arrivingAirport.city.country.continent.name}} </p></li>
+            <li><p>Price per person: {{trip.departureFlight.price}}$</p></li>
+            <li><p>Availability: {{trip.departureFlight.seatsAvailable}}</p></li>    
+        </ul>  </div> 
+        <li><p>Return date: {{trip.returnDate}}</p></li>
+        <div class="returningFlight">
+            <li><h2>Returning Flight Info:</h2><ul>
+            <li><p>{{trip.returningFlight.flightNumber}} - departing at: {{trip.returningFlight.departureTime}} - {{trip.returningFlight.departureDate}} from: {{trip.returningFlight.departureAirport.name}} - {{trip.returningFlight.departureAirport.city.name}},{{trip.returningFlight.departureAirport.city.country.name}}-{{trip.returningFlight.departureAirport.city.country.continent.name}}</p></li>
+            <li><p>arriving at: {{trip.returningFlight.arrivingTime}} - {{trip.returningFlight.arrivingDate}} in: {{trip.returningFlight.arrivingAirport.name}} - {{trip.returningFlight.arrivingAirport.city.name}},{{trip.returningFlight.arrivingAirport.city.country.name}}-{{trip.returningFlight.arrivingAirport.city.country.continent.name}} </p></li>
+            <li><p>Price per person: {{trip.returningFlight.price}}$</p></li>
+            <li><p>Availability: {{trip.returningFlight.seatsAvailable}}</p></li>    
+            </ul> 
+        </div>
+        <div class="hotelInfo">
+            <li><h2>Hotel Info: </h2><ul>
+            <li><p>'{{trip.stayingHotel.name}}' {{trip.stayingHotel.numberOfStars}} stars ,address:{{trip.stayingHotel.address}}-{{trip.stayingHotel.city.name}}-{{trip.stayingHotel.city.country.name}} </p></li>   
+            <li><h3>Accomodation options:</h3></li>     
+                <ul *ngFor="let room of trip.stayingHotel.rooms">
+                <li><p>Room type: {{room.roomType}}</p> </li>
+                <li><p>Number of rooms available: {{room.roomsAvailable}} from a total of {{room.numberOfRooms}} rooms.</p></li>
+                <li><p>Option for extra bed available: {{room.extraBed}}</p></li>
+                <li><p>Price per room: {{room.price}}</p></li>
+                </ul>
+            </ul>   
+        </div>
+        <li><p>Meal type: {{trip.mealType}}</p></li>  
+        <li><p>Number of days: {{trip.numberOfDays}}</p></li>    
+        <li><p>Price per adult: {{trip.priceForAdult}}</p></li>
+        <li><p>Price per kid: {{trip.priceForChild}}</p></li>
+        <li><p>Trips available: {{trip.numberOfTripsAvailable}}</p></li>
+
+
+
+
+
+
+        <nav>
+        <a routerLink="/accounts" routerLinkActive="active">Purchase Trip</a>
+         </nav>
+    </ul>
+
 
     </body>
 </html>

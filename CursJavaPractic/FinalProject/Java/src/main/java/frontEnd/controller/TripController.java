@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class TripController {
 
@@ -23,17 +22,24 @@ public class TripController {
     PurchasedTripService purchasedTripService;
 
 
-
+    @GetMapping(path = "/findAllTrips")
+    public ResponseEntity findAllTrips() {
+        List<TripDTO> tripDTOList = tripService.findAllTrips();
+        if (tripDTOList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found in database. ");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
 
 
     @PostMapping(path = "/insertTrip")
-    public ResponseEntity insertTrip(@RequestBody @Valid TripDTO tripDTO) {
-        long result = tripService.countTrips(tripDTO.getName(), tripDTO.getDepartureDate());
+    public ResponseEntity insertTrip(@RequestBody @Valid TripDTO trip) {
+        long result = tripService.countTrips(trip.getName(), trip.getDepartureDate());
         if (result != 0) {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(tripDTO.getName() + " already added for date: " + tripDTO.getDepartureDate());
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(trip.getName() + " already added for date: " + trip.getDepartureDate());
         }
-        tripService.insertTrip(tripDTO);
-        return ResponseEntity.ok(tripDTO.getName() + " added.");
+        tripService.insertTrip(trip);
+        return ResponseEntity.ok(trip.getName() + " added.");
     }
 
     @DeleteMapping(path = "/deleteTripsByName")
@@ -223,15 +229,6 @@ public class TripController {
         return ResponseEntity.ok(tripDTOList);
     }
 
-
-    @GetMapping(path = "/findAllTrips")
-    public ResponseEntity findAllTrips() {
-        List<TripDTO> tripDTOList = tripService.findAllTrips();
-        if (tripDTOList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found in database. ");
-        }
-        return ResponseEntity.ok(tripDTOList);
-    }
 
     @GetMapping("/showPurchasedTripsByCustomer")
     public ResponseEntity showPurchasedTripsByCustomer(@RequestParam String name){

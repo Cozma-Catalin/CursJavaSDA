@@ -7,13 +7,41 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class UserService {
  
+postId;
 
+userInfo:User=new User()
  
-
+name:string;
+surname:string;
+phoneNumber:string; 
+birthDate:string;
+address:string;
+email:string;
+userName:string;   
+password:string;
 
   private _url: string = "http://localhost:8080/findCustomerAccount?userName=ka7a_79&password=123456";
 
+  private post_url = 'http://localhost:8080/insertCustomer';
+
   constructor(private http:HttpClient) { }
+
+  register() :any{
+    
+    this.http.post<any>(this.post_url,{
+      name:this.name,
+      surname:this.surname,
+      birthDate:this.birthDate,
+      address:this.address,
+      phoneNumber:this.phoneNumber,
+      email:this.email,  
+       account:{
+          userName:this.userName,
+          password:this.password
+      }}).toPromise().then((data: any) => {
+        console.log(data);
+    })
+}
 
     getUsers(): Observable<User[]>{
       return this.http.get<User[]>(this._url);

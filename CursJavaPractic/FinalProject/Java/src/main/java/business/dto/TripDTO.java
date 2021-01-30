@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
+
 
 
 public class TripDTO {
@@ -18,13 +18,13 @@ public class TripDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private java.sql.Date departureDate;
     @Valid
-    private FlightDTO departureFlightDTO;
+    private FlightDTO departureFlight;
     @NotNull
-    private Date returnDate;
+    private java.sql.Date returnDate;
     @Valid
-    private FlightDTO returningFlightDTO;
+    private FlightDTO returningFlight;
     @Valid
-    private HotelDTO stayingHotelDTO;
+    private HotelDTO stayingHotel;
     @NotNull @NotBlank @NotEmpty @Pattern(regexp = "([a-z A-Z])*")
     private String mealType;
     @NotNull
@@ -56,28 +56,28 @@ public class TripDTO {
         this.name = name;
     }
 
-    public HotelDTO getStayingHotelDTO() {
-        return stayingHotelDTO;
+    public HotelDTO getStayingHotel() {
+        return stayingHotel;
     }
 
-    public void setStayingHotelDTO(HotelDTO stayingHotelDTO) {
-        this.stayingHotelDTO = stayingHotelDTO;
+    public void setStayingHotel(HotelDTO stayingHotel) {
+        this.stayingHotel = stayingHotel;
     }
 
-    public FlightDTO getDepartureFlightDTO() {
-        return departureFlightDTO;
+    public FlightDTO getDepartureFlight() {
+        return departureFlight;
     }
 
-    public void setDepartureFlightDTO(FlightDTO departureFlightDTO) {
-        this.departureFlightDTO = departureFlightDTO;
+    public void setDepartureFlight(FlightDTO departureFlight) {
+        this.departureFlight = departureFlight;
     }
 
-    public FlightDTO getReturningFlightDTO() {
-        return returningFlightDTO;
+    public FlightDTO getReturningFlight() {
+        return returningFlight;
     }
 
-    public void setReturningFlightDTO(FlightDTO returningFlightDTO) {
-        this.returningFlightDTO = returningFlightDTO;
+    public void setReturningFlight(FlightDTO returningFlight) {
+        this.returningFlight = returningFlight;
     }
 
     public String getMealType() {
@@ -96,11 +96,11 @@ public class TripDTO {
         this.departureDate = departureDate;
     }
 
-    public Date getReturnDate() {
+    public java.sql.Date getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(java.sql.Date returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -164,9 +164,9 @@ public class TripDTO {
 
     @Override
     public String toString() {
-        return "TripDTO: " + name + ", staying Hotels:" + stayingHotelDTO + ", meal type='" + mealType +
-                ", departure date:" + departureDate + departureFlightDTO + ", return date:" + returnDate +
-                returningFlightDTO + ", number of days=" + numberOfDays + ", promoted:" + promoted +
+        return "TripDTO: " + name + ", staying Hotels:" + stayingHotel + ", meal type='" + mealType +
+                ", departure date:" + departureDate + departureFlight + ", return date:" + returnDate +
+                returningFlight + ", number of days=" + numberOfDays + ", promoted:" + promoted +
                 ", price for adult=" + priceForAdult + ", price for child=" + priceForChild +
                 ", number of adults=" + numberOfAdults + ", number of children=" + numberOfChildren +
                 ", number of trips available: " + numberOfTripsAvailable;

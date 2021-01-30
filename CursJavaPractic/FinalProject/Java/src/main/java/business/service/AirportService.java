@@ -33,10 +33,10 @@ public class AirportService {
     }
 
     private void setCityForAirport(AirportDTO airportDTO, Airport airport) {
-        City cityFound = cityDAO.findCity(airportDTO.getCityDTO().getName());
+        City cityFound = cityDAO.findCity(airportDTO.getCity().getName());
         if (cityFound == null) {
             City city = new City();
-            city.setName(airportDTO.getCityDTO().getName());
+            city.setName(airportDTO.getCity().getName());
             setCountryForCity(airportDTO, city);
             airport.setCity(city);
         } else {
@@ -46,10 +46,10 @@ public class AirportService {
     }
 
     private void setCountryForCity(AirportDTO airportDTO, City cityFound) {
-        Country countryFound = countryDAO.findCountry(airportDTO.getCityDTO().getCountryDTO().getName());
+        Country countryFound = countryDAO.findCountry(airportDTO.getCity().getCountry().getName());
         if (countryFound == null) {
             Country country = new Country();
-            country.setName(airportDTO.getCityDTO().getCountryDTO().getName());
+            country.setName(airportDTO.getCity().getCountry().getName());
             cityFound.setCountry(country);
         } else {
             cityFound.setCountry(countryFound);
@@ -80,8 +80,8 @@ public class AirportService {
         cityDTO.setName(airport.getCity().getName());
         CountryDTO countryDTO = new CountryDTO();
         countryDTO.setName(airport.getCity().getCountry().getName());
-        cityDTO.setCountryDTO(countryDTO);
-        airportDTO.setCityDTO(cityDTO);
+        cityDTO.setCountry(countryDTO);
+        airportDTO.setCity(cityDTO);
         return airportDTO;
     }
 
@@ -98,8 +98,8 @@ public class AirportService {
             cityDTO.setName(airport.getCity().getName());
             CountryDTO countryDTO = new CountryDTO();
             countryDTO.setName(airport.getCity().getCountry().getName());
-            cityDTO.setCountryDTO(countryDTO);
-            airportDTO.setCityDTO(cityDTO);
+            cityDTO.setCountry(countryDTO);
+            airportDTO.setCity(cityDTO);
             airportDTOList.add(airportDTO);
         }
         return airportDTOList;

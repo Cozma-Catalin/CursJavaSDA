@@ -13,13 +13,13 @@ public class CustomerDTO {
     private String surname;
     @NotNull @NotBlank @NotEmpty
     private String address;
-    private Date birthDate;
+    private java.sql.Date birthDate;
     @NotNull @NotBlank @NotEmpty
     private String phoneNumber;
     @NotNull @NotBlank @NotEmpty @Email
     private String email;
     @Valid
-    private AccountDTO accountDTO;
+    private AccountDTO account;
 
 
 
@@ -42,11 +42,11 @@ public class CustomerDTO {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
+    public java.sql.Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(java.sql.Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -75,12 +75,12 @@ public class CustomerDTO {
     }
 
 
-    public AccountDTO getAccountDTO() {
-        return accountDTO;
+    public AccountDTO getAccount() {
+        return account;
     }
 
-    public void setAccountDTO(AccountDTO accountDTO) {
-        this.accountDTO = accountDTO;
+    public void setAccount(AccountDTO account) {
+        this.account = account;
     }
 
 

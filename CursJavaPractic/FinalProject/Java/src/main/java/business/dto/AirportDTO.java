@@ -12,7 +12,7 @@ public class AirportDTO {
     private String name;
     @NotNull
     @Valid
-    private CityDTO cityDTO;
+    private CityDTO city;
 
 
 
@@ -27,16 +27,16 @@ public class AirportDTO {
         this.name = name;
     }
 
-    public CityDTO getCityDTO() {
-        return cityDTO;
+    public CityDTO getCity() {
+        return city;
     }
 
-    public void setCityDTO(CityDTO cityDTO) {
-        this.cityDTO = cityDTO;
+    public void setCity(CityDTO city) {
+        this.city = city;
     }
 
     @Override
     public String toString() {
-        return "AirportDTO: " + name + "," + cityDTO ;
+        return "AirportDTO: " + name + "," + city ;
     }
 }

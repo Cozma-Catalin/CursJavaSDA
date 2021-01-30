@@ -4,8 +4,6 @@ import business.dto.CustomerDTO;
 import business.dto.PurchasedTripDTO;
 import business.dto.TripDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import persistence.dao.*;
 import persistence.entities.PurchasedTrip;
@@ -34,8 +32,8 @@ public class PurchasedTripService {
 
     public void insertPurchasedTrip(PurchasedTripDTO purchasedTripDTO) {
         PurchasedTrip purchasedTrip = new PurchasedTrip();
-        purchasedTrip.setCustomer(customerDAO.findCustomerByEmail(purchasedTripDTO.getCustomerDTO().getEmail()));
-        purchasedTrip.setTrip(tripDAO.findTripByName(purchasedTripDTO.getTripDTO().getName()));
+        purchasedTrip.setCustomer(customerDAO.findCustomerByEmail(purchasedTripDTO.getCustomer().getEmail()));
+        purchasedTrip.setTrip(tripDAO.findTripByName(purchasedTripDTO.getTrip().getName()));
 
 
         Calendar calendar = Calendar.getInstance();
@@ -48,16 +46,16 @@ public class PurchasedTripService {
         purchasedTripDAO.insertPurchasedTrip(purchasedTrip);
 
         tripDAO.updateNumberOfTripsAvailable();
-        flightDAO.updateSeatsAvailable((purchasedTripDTO.getTripDTO().getNumberOfAdults() + purchasedTripDTO.getTripDTO().getNumberOfChildren()), purchasedTrip.getTrip().getDepartureFlight().getFlightNumber());
-        flightDAO.updateSeatsAvailable((purchasedTripDTO.getTripDTO().getNumberOfAdults() + purchasedTripDTO.getTripDTO().getNumberOfChildren()), purchasedTrip.getTrip().getReturningFlight().getFlightNumber());
+        flightDAO.updateSeatsAvailable((purchasedTripDTO.getTrip().getNumberOfAdults() + purchasedTripDTO.getTrip().getNumberOfChildren()), purchasedTrip.getTrip().getDepartureFlight().getFlightNumber());
+        flightDAO.updateSeatsAvailable((purchasedTripDTO.getTrip().getNumberOfAdults() + purchasedTripDTO.getTrip().getNumberOfChildren()), purchasedTrip.getTrip().getReturningFlight().getFlightNumber());
 
     }
 
     private double calculateTripsPrice(PurchasedTripDTO purchasedTripDTO, Trip trip) {
-        double totalFlightPrice = (trip.getDepartureFlight().getPrice() * (purchasedTripDTO.getTripDTO().getNumberOfAdults() + purchasedTripDTO.getTripDTO().getNumberOfChildren()))
-                + (trip.getReturningFlight().getPrice() * (purchasedTripDTO.getTripDTO().getNumberOfAdults() + purchasedTripDTO.getTripDTO().getNumberOfChildren()));
+        double totalFlightPrice = (trip.getDepartureFlight().getPrice() * (purchasedTripDTO.getTrip().getNumberOfAdults() + purchasedTripDTO.getTrip().getNumberOfChildren()))
+                + (trip.getReturningFlight().getPrice() * (purchasedTripDTO.getTrip().getNumberOfAdults() + purchasedTripDTO.getTrip().getNumberOfChildren()));
 
-        double totalPrice = purchasedTripDTO.getTotalPrice() + ((trip.getPriceForAdult() * purchasedTripDTO.getTripDTO().getNumberOfAdults() + (trip.getPriceForChild() * purchasedTripDTO.getTripDTO().getNumberOfChildren())) + totalFlightPrice);
+        double totalPrice = purchasedTripDTO.getTotalPrice() + ((trip.getPriceForAdult() * purchasedTripDTO.getTrip().getNumberOfAdults() + (trip.getPriceForChild() * purchasedTripDTO.getTrip().getNumberOfChildren())) + totalFlightPrice);
         return totalPrice;
     }
 
@@ -88,9 +86,9 @@ public class PurchasedTripService {
             purchasedTripDTO.setTotalPrice(p.getTotalPrice());
             purchasedTripDTO.setDiscount(p.getDiscount());
             TripDTO tripDTO = tripService.findTripByName(p.getTrip().getName());
-            purchasedTripDTO.setTripDTO(tripDTO);
+            purchasedTripDTO.setTrip(tripDTO);
             CustomerDTO customerDTO = customerService.findCustomerByEmail(p.getCustomer().getEmail());
-            purchasedTripDTO.setCustomerDTO(customerDTO);
+            purchasedTripDTO.setCustomer(customerDTO);
             purchasedTripDTOList.add(purchasedTripDTO);
         }
         return purchasedTripDTOList;
@@ -107,9 +105,9 @@ public class PurchasedTripService {
             purchasedTripDTO.setTotalPrice(p.getTotalPrice());
             purchasedTripDTO.setDiscount(p.getDiscount());
             TripDTO tripDTO = tripService.findTripByName(p.getTrip().getName());
-            purchasedTripDTO.setTripDTO(tripDTO);
+            purchasedTripDTO.setTrip(tripDTO);
             CustomerDTO customerDTO = customerService.findCustomerByEmail(p.getCustomer().getEmail());
-            purchasedTripDTO.setCustomerDTO(customerDTO);
+            purchasedTripDTO.setCustomer(customerDTO);
             purchasedTripDTOList.add(purchasedTripDTO);
         }
         return purchasedTripDTOList;

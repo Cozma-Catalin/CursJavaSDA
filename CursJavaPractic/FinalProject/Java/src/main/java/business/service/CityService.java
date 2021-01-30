@@ -37,10 +37,10 @@ public class CityService {
     }
 
     public void setCountry(CityDTO cityDTO, City city) {
-        Country countryFound = countryDAO.findCountry(cityDTO.getCountryDTO().getName());
+        Country countryFound = countryDAO.findCountry(cityDTO.getCountry().getName());
         if (countryFound == null) {
             Country country = new Country();
-            country.setName(cityDTO.getCountryDTO().getName());
+            country.setName(cityDTO.getCountry().getName());
             setContinent(cityDTO, country);
             city.setCountry(country);
         } else {
@@ -49,10 +49,10 @@ public class CityService {
     }
 
     private void setContinent(CityDTO cityDTO, Country country) {
-        Continent continentFound = continentDAO.findContinent(cityDTO.getCountryDTO().getContinentDTO().getName());
+        Continent continentFound = continentDAO.findContinent(cityDTO.getCountry().getContinent().getName());
         if (continentFound == null) {
             Continent continent = new Continent();
-            continent.setName(cityDTO.getCountryDTO().getContinentDTO().getName());
+            continent.setName(cityDTO.getCountry().getContinent().getName());
             country.setContinent(continent);
         } else {
             country.setContinent(continentFound);
@@ -87,8 +87,8 @@ public class CityService {
         countryDTO.setName(city.getCountry().getName());
         ContinentDTO continentDTO = new ContinentDTO();
         continentDTO.setName(city.getCountry().getContinent().getName());
-        countryDTO.setContinentDTO(continentDTO);
-        cityDTO.setCountryDTO(countryDTO);
+        countryDTO.setContinent(continentDTO);
+        cityDTO.setCountry(countryDTO);
         return cityDTO;
     }
 
@@ -102,8 +102,8 @@ public class CityService {
             countryDTO.setName(c.getCountry().getName());
             ContinentDTO continentDTO = new ContinentDTO();
             continentDTO.setName(c.getCountry().getContinent().getName());
-            countryDTO.setContinentDTO(continentDTO);
-            cityDTO.setCountryDTO(countryDTO);
+            countryDTO.setContinent(continentDTO);
+            cityDTO.setCountry(countryDTO);
             cityDTOList.add(cityDTO);
         }
         return cityDTOList;

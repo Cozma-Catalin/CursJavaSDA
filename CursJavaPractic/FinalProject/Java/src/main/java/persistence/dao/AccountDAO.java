@@ -4,11 +4,13 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import persistence.utils.HibernateUtil;
-import persistence.entities.Account;
+
 
 
 @Repository
-public class AccountDAO {
+public class AccountDAO{
+
+
 
     public int updateUserLogIn(boolean loggedIn,String userName){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -57,18 +59,7 @@ public class AccountDAO {
         return retrievedPassword;
     }
 
-    public Account findAccount(String userName, String password){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query findAccountQuery = session.createNamedQuery("findAccount");
-        findAccountQuery.setParameter("userName",userName);
-        findAccountQuery.setParameter("password",password);
-        Account account= (Account) findAccountQuery.getSingleResult();
-        session.getTransaction().commit();
-        session.close();
-        return account;
-    }
-
+  
 
     public long countUserName(String userName){
         Session session = HibernateUtil.getSessionFactory().openSession();

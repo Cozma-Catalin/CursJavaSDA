@@ -25,7 +25,7 @@ public class Customer {
     private String surname;
 
     @Column(name = "date_of_birth")
-    private Date birthDate;
+    private java.sql.Date birthDate;
 
     @Column(name = "address")
     private String address;
@@ -47,7 +47,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String surname, Date birthDate, String address, String phoneNumber, String email, Account account) {
+    public Customer(String name, String surname, java.sql.Date birthDate, String address, String phoneNumber, String email, Account account) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
@@ -84,11 +84,11 @@ public class Customer {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
+    public java.sql.Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(java.sql.Date birthDate) {
         this.birthDate = birthDate;
     }
 

@@ -1,4 +1,4 @@
-//body{background-image: url(./assets/earth.jpg);background-size:100%;}
+
 
 .error{color: red;}
 
@@ -14,7 +14,7 @@ h1 {
     font-weight: lighter;
   }
   body { 
-    margin: 2em; 
+    margin: 0px; 
   }
   body, input[text], button { 
     color: #888; 

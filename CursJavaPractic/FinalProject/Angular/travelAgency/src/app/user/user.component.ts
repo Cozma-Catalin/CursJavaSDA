@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from './user';
+import {Account} from '../account/account'
 
 
 @Component({
@@ -15,25 +16,26 @@ export class UserComponent implements OnInit {
  
   userInfo:User=new User()
  
-  firstName='';
-  lastName='';
-  city=''; 
-  dateOfBirth='';
-  email='';
-  userName= '';   
-  password='';
-  confirmPassword='';
+  name:'';
+  surname:'';
+  phoneNumber:''; 
+  birthDate:'';
+  email:'';
+  account:Account = new Account ;
+  userName:'';   
+  password:'';
   
-  errorMessageFirstName='';
-  errorMessageLastName='';
-  errorMessageCity='';
+  
+  errorMessageName='';
+  errorMessageSurname='';
+  errorMessagePhoneNumber='';
   errorMessageEmail='';
   errorMessageUserName='';
   errorMessagePassword='';
   errorMessagePasswordLength='';
   
 
-
+  post_url = 'http://localhost:8080/insertCustomer'
 
 
   constructor(private _userService:UserService ) { }
@@ -47,89 +49,71 @@ export class UserComponent implements OnInit {
   }
 
   
-  register(): void{
+  
 
-  }
+  
+  register(): any {
+    
+   this._userService.register();
+}
 
-  focusoutFunctionFirstName(event:any){
-    this.firstName = event.target.value;
-    var txt = this.firstName.split("");
-    for(var i=0; i<this.firstName.length; i++){
+  focusoutFunctionName(event:any){
+    this.name = event.target.value;
+    var txt = this.name.split("");
+    for(var i=0; i<this.name.length; i++){
       if(txt[i]=='1' || txt[i]=='2' || txt[i]=='3' || txt[i]=='4' || txt[i]=='5' || txt[i]=='6' || txt[i]=='7' || txt[i]=='8' || txt[i]=='9' || txt[i]=='0'){
-        this.errorMessageFirstName='Invalid field !';
+        this.errorMessageName='Invalid field !';
       }else{
-        this.errorMessageFirstName='';
+        this.errorMessageName='';
       }
     }
-    this.userInfo.firstName=this.firstName;
+    this.userInfo.name=this.name;
   }
 
-  focusoutFunctionLastName(event:any){
-    this.lastName = event.target.value;
-    var txt = this.lastName.split("");
-    for(var i=0; i<this.lastName.length ;i++){
+  focusoutFunctionSurname(event:any){
+    this.surname = event.target.value;
+    var txt = this.surname.split("");
+    for(var i=0; i<this.surname.length ;i++){
       if(txt[i]=='1' || txt[i]=='2' || txt[i]=='3' || txt[i]=='4' || txt[i]=='5' || txt[i]=='6' || txt[i]=='7' || txt[i]=='8' || txt[i]=='9' || txt[i]=='0'){
-        this.errorMessageLastName='Invalid field !';
+        this.errorMessageSurname='Invalid field !';
       }else{
-        this.errorMessageLastName='';
+        this.errorMessageSurname='';
       }
     }
-    this.userInfo.lastName=this.lastName;
+    this.userInfo.surname=this.surname;
   }
 
-  focusoutFunctionCity(event:any){
-    this.city = event.target.value;
-    var txt = this.city.split("");
-    for(var i=0; i<this.city.length; i++){
-      if(txt[i]=='1' || txt[i]=='2' || txt[i]=='3' || txt[i]=='4' || txt[i]=='5' || txt[i]=='6' || txt[i]=='7' || txt[i]=='8' || txt[i]=='9' || txt[i]=='0'){
-        this.errorMessageCity='Invalid field !';
+  focusoutFunctionPhoneNumber(event:any){
+    this.phoneNumber = event.target.value;
+    
+      if(this.phoneNumber.length<10){
+        this.errorMessagePhoneNumber='Phone number must be 10 characters long !';
       }else{
-        this.errorMessageCity='';
+        this.errorMessagePhoneNumber='';
       }
-    }
-    this.userInfo.city=this.city;
+      
+    this.userInfo.phoneNumber=this.phoneNumber;
   }
 
-  focusoutFunctionDateOfBirth(event:any){
-    this.userInfo.dateOfBirth = event.target.value;
-    this.userInfo.dateOfBirth=this.dateOfBirth;
+  focusoutFunctionBirthDate(event:any){
+    this.userInfo.birthDate = event.target.value;
+    this.userInfo.birthDate=this.birthDate;
   }
 
   
-  focusoutFunctionUserName(event:any){
-    this.userName = event.target.value;
-
-    this._userService.checkUserName(this.userName).subscribe(data => this.users = data,
-      error => this.errorMsg = error);
-    this.userInfo.userName=this.userName;
-  }
-
   focusoutFunctionPassword(event:any){
     this.password = event.target.value;
-    if(this.password.length<8){
-      this.errorMessagePasswordLength='Password must contain at least 8 characters !';
+    if(this.password.length<6){
+      this.errorMessagePasswordLength='Password must contain at least 6 characters !';
     }else{
       this.errorMessagePasswordLength='';
+      this.account.password=this.password;
     }
-    this.userInfo.password=this.password;
-  }
-
-  focusoutFunctionConfirmPassword(event:any){
-    this.confirmPassword = event.target.value;
-    if(this.confirmPassword!=this.password){
-      this.errorMessagePassword='Passwords not matching !';
-    }
-    else{
-      this.errorMessagePassword='';
-    }
-    this.userInfo.confirmPassword=this.confirmPassword;
-  }
-
-  focusoutFunctionEmail(event:any){
-    this.email = event.target.value;
     
-    this._userService.checkEmail(this.email).subscribe(data => this.users = data,
-      error => this.errorMsg = error);
-    this.userInfo.email=this.email;
   }
+
+
+
+ 
+
 }

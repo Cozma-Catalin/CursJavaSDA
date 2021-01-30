@@ -3,7 +3,6 @@ package business.service;
 import business.dto.*;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import persistence.utils.HibernateUtil;
 import persistence.dao.*;
@@ -11,7 +10,6 @@ import persistence.entities.*;
 
 import java.util.*;
 
-@Scope("prototype")
 @Service
 public class TripService {
     @Autowired
@@ -32,29 +30,43 @@ public class TripService {
     RoomDAO roomDAO;
 
 
+    public List<TripDTO> findAllTrips() {
+        List<Trip> tripList = tripDAO.findAllTrips();
+        return getTripDTOList(tripList);
+    }
+
+    private List<TripDTO> getTripDTOList(List<Trip> tripList) {
+        List<TripDTO> tripDTOList = new LinkedList<>();
+        for (Trip trip : tripList) {
+            tripDTOList.add(getTripDTO(trip));
+        }
+        return tripDTOList;
+    }
+
+
     public void insertTrip(TripDTO tripDTO) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Continent departureContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getDepartureAirport().getCityDTO().getCountryDTO().getContinentDTO(), session);
-        Continent arrivingContinent = prepareContinent(tripDTO.getDepartureFlightDTO().getArrivingAirport().getCityDTO().getCountryDTO().getContinentDTO(), session);
-        Continent returningDepartureContinent = setReturningContinent(session, arrivingContinent, tripDTO.getReturningFlightDTO().getDepartureAirport());
-        Continent returningArrivingContinent = setReturningContinent(session, departureContinent, tripDTO.getReturningFlightDTO().getArrivingAirport());
+        Continent departureContinent = prepareContinent(tripDTO.getDepartureFlight().getDepartureAirport().getCity().getCountry().getContinent(), session);
+        Continent arrivingContinent = prepareContinent(tripDTO.getDepartureFlight().getArrivingAirport().getCity().getCountry().getContinent(), session);
+        Continent returningDepartureContinent = setReturningContinent(session, arrivingContinent, tripDTO.getReturningFlight().getDepartureAirport());
+        Continent returningArrivingContinent = setReturningContinent(session, departureContinent, tripDTO.getReturningFlight().getArrivingAirport());
 
-        Country departureCountry = setDepartureCountry(session, departureContinent, tripDTO.getDepartureFlightDTO().getDepartureAirport());
-        Country arrivingCountry = setDepartureCountry(session, arrivingContinent, tripDTO.getDepartureFlightDTO().getArrivingAirport());
-        Country returningDepartureCountry = setCountryForReturningFlight(session, arrivingContinent, returningDepartureContinent, arrivingCountry, tripDTO.getReturningFlightDTO().getDepartureAirport());
-        Country returningArrivingCountry = setCountryForReturningFlight(session, departureContinent, returningArrivingContinent, departureCountry, tripDTO.getReturningFlightDTO().getArrivingAirport());
+        Country departureCountry = setDepartureCountry(session, departureContinent, tripDTO.getDepartureFlight().getDepartureAirport());
+        Country arrivingCountry = setDepartureCountry(session, arrivingContinent, tripDTO.getDepartureFlight().getArrivingAirport());
+        Country returningDepartureCountry = setCountryForReturningFlight(session, arrivingContinent, returningDepartureContinent, arrivingCountry, tripDTO.getReturningFlight().getDepartureAirport());
+        Country returningArrivingCountry = setCountryForReturningFlight(session, departureContinent, returningArrivingContinent, departureCountry, tripDTO.getReturningFlight().getArrivingAirport());
 
-        City departureCity = setCityForDepartureFlight(session, departureCountry, tripDTO.getDepartureFlightDTO().getDepartureAirport());
-        City arrivingCity = setCityForDepartureFlight(session, arrivingCountry, tripDTO.getDepartureFlightDTO().getArrivingAirport());
-        City returningDepartureCity = setCityForReturningFlight(session, arrivingCountry, returningDepartureCountry, arrivingCity, tripDTO.getReturningFlightDTO().getDepartureAirport());
-        City returningArrivingCity = setCityForReturningFlight(session, departureCountry, returningArrivingCountry, departureCity, tripDTO.getReturningFlightDTO().getArrivingAirport());
+        City departureCity = setCityForDepartureFlight(session, departureCountry, tripDTO.getDepartureFlight().getDepartureAirport());
+        City arrivingCity = setCityForDepartureFlight(session, arrivingCountry, tripDTO.getDepartureFlight().getArrivingAirport());
+        City returningDepartureCity = setCityForReturningFlight(session, arrivingCountry, returningDepartureCountry, arrivingCity, tripDTO.getReturningFlight().getDepartureAirport());
+        City returningArrivingCity = setCityForReturningFlight(session, departureCountry, returningArrivingCountry, departureCity, tripDTO.getReturningFlight().getArrivingAirport());
 
-        Airport departureAirport = setAirportForDepartureFlight(session, departureCity, tripDTO.getDepartureFlightDTO().getDepartureAirport());
-        Airport arrivingAirport = setAirportForDepartureFlight(session, arrivingCity, tripDTO.getDepartureFlightDTO().getArrivingAirport());
-        Airport returningDepartureAirport = setAirportForReturningFlight(session, arrivingCity, returningDepartureCity, arrivingAirport, tripDTO.getReturningFlightDTO().getDepartureAirport());
-        Airport returningArrivingAirport = setAirportForReturningFlight(session, departureCity, returningArrivingCity, departureAirport, tripDTO.getReturningFlightDTO().getArrivingAirport());
+        Airport departureAirport = setAirportForDepartureFlight(session, departureCity, tripDTO.getDepartureFlight().getDepartureAirport());
+        Airport arrivingAirport = setAirportForDepartureFlight(session, arrivingCity, tripDTO.getDepartureFlight().getArrivingAirport());
+        Airport returningDepartureAirport = setAirportForReturningFlight(session, arrivingCity, returningDepartureCity, arrivingAirport, tripDTO.getReturningFlight().getDepartureAirport());
+        Airport returningArrivingAirport = setAirportForReturningFlight(session, departureCity, returningArrivingCity, departureAirport, tripDTO.getReturningFlight().getArrivingAirport());
 
         Flight departureFlight = setDepartureFlight(tripDTO, session, departureAirport, arrivingAirport);
         Flight returningFlight = setReturningFlight(tripDTO, session, departureAirport, arrivingAirport, returningDepartureAirport, returningArrivingAirport);
@@ -89,27 +101,27 @@ public class TripService {
     private Hotel setHotel(TripDTO tripDTO, Flight departureFlight, City arrivingCity, Session session) {
         City city;
 
-        Hotel hotel = hotelDAO.findHotelByAddress(tripDTO.getStayingHotelDTO().getAddress());
+        Hotel hotel = hotelDAO.findHotelByAddress(tripDTO.getStayingHotel().getAddress());
         if (hotel == null) {
             hotel = new Hotel();
-            hotel.setName(tripDTO.getStayingHotelDTO().getName());
-            if (tripDTO.getStayingHotelDTO().getCityDTO().getName().equalsIgnoreCase(departureFlight.getArrivingAirport().getCity().getName())) {
+            hotel.setName(tripDTO.getStayingHotel().getName());
+            if (tripDTO.getStayingHotel().getCity().getName().equalsIgnoreCase(departureFlight.getArrivingAirport().getCity().getName())) {
                 city = arrivingCity;
             } else {
-                city = prepareCity(tripDTO.getStayingHotelDTO().getCityDTO(), session);
+                city = prepareCity(tripDTO.getStayingHotel().getCity(), session);
                 if (city.getCountry() == null) {
-                    Country country = prepareCountry(tripDTO.getStayingHotelDTO().getCityDTO().getCountryDTO(), session);
+                    Country country = prepareCountry(tripDTO.getStayingHotel().getCity().getCountry(), session);
                     if (country.getContinent() == null) {
-                        Continent continent = new Continent(tripDTO.getStayingHotelDTO().getCityDTO().getCountryDTO().getContinentDTO().getName());
+                        Continent continent = new Continent(tripDTO.getStayingHotel().getCity().getCountry().getContinent().getName());
                         country.setContinent(continent);
                     }
                     city.setCountry(country);
                 }
             }
             hotel.setCity(city);
-            hotel.setAddress(tripDTO.getStayingHotelDTO().getAddress());
-            hotel.setDescription(tripDTO.getStayingHotelDTO().getDescription());
-            hotel.setNumberOfStars(tripDTO.getStayingHotelDTO().getNumberOfStars());
+            hotel.setAddress(tripDTO.getStayingHotel().getAddress());
+            hotel.setDescription(tripDTO.getStayingHotel().getDescription());
+            hotel.setNumberOfStars(tripDTO.getStayingHotel().getNumberOfStars());
             setRoomsForHotel(tripDTO, hotel);
         }
         return hotel;
@@ -118,7 +130,7 @@ public class TripService {
 
     private void setRoomsForHotel(TripDTO tripDTO, Hotel hotel) {
         Set<Room> rooms = new HashSet<>();
-        for (RoomDTO roomDTO : tripDTO.getStayingHotelDTO().getRoomDTOSet()) {
+        for (RoomDTO roomDTO : tripDTO.getStayingHotel().getRooms()) {
             Room room = new Room();
             room.setRoomType(roomDTO.getRoomType());
             room.setNumberOfRooms(roomDTO.getNumberOfRooms());
@@ -132,7 +144,7 @@ public class TripService {
 
     private Flight setReturningFlight(TripDTO tripDTO, Session session, Airport departureAirport, Airport
             arrivingAirport, Airport returningDepartureAirport, Airport returningArrivingAirport) {
-        Flight returningFlight = prepareFlight(tripDTO.getReturningFlightDTO(), session);
+        Flight returningFlight = prepareFlight(tripDTO.getReturningFlight(), session);
         if (returningFlight.getDepartureAirport() == null) {
             if (returningDepartureAirport == null) {
                 returningFlight.setDepartureAirport(arrivingAirport);
@@ -153,7 +165,7 @@ public class TripService {
 
     private Flight setDepartureFlight(TripDTO tripDTO, Session session, Airport departureAirport, Airport
             arrivingAirport) {
-        Flight departureFlight = prepareFlight(tripDTO.getDepartureFlightDTO(), session);
+        Flight departureFlight = prepareFlight(tripDTO.getDepartureFlight(), session);
         if (departureFlight.getDepartureAirport() == null) {
             departureFlight.setDepartureAirport(departureAirport);
         }
@@ -194,8 +206,8 @@ public class TripService {
     private City setCityForReturningFlight(Session session, Country arrivingCountry, Country
             returningDepartureCountry, City arrivingCity, AirportDTO departureFlightDepartureAirport) {
         City returningDepartureCity = null;
-        if (!departureFlightDepartureAirport.getCityDTO().getName().equalsIgnoreCase(arrivingCity.getName())) {
-            returningDepartureCity = prepareCity(departureFlightDepartureAirport.getCityDTO(), session);
+        if (!departureFlightDepartureAirport.getCity().getName().equalsIgnoreCase(arrivingCity.getName())) {
+            returningDepartureCity = prepareCity(departureFlightDepartureAirport.getCity(), session);
             if (returningDepartureCity.getCountry() == null) {
                 if (returningDepartureCountry == null) {
                     returningDepartureCity.setCountry(arrivingCountry);
@@ -208,7 +220,7 @@ public class TripService {
     }
 
     private City setCityForDepartureFlight(Session session, Country departureCountry, AirportDTO departureFlightDepartureAirport) {
-        City departureCity = prepareCity(departureFlightDepartureAirport.getCityDTO(), session);
+        City departureCity = prepareCity(departureFlightDepartureAirport.getCity(), session);
         if (departureCity.getCountry() == null) {
             departureCity.setCountry(departureCountry);
         }
@@ -218,8 +230,8 @@ public class TripService {
     private Country setCountryForReturningFlight(Session session, Continent arrivingContinent, Continent
             returningDepartureContinent, Country arrivingCountry, AirportDTO departureFlightDepartureAirport) {
         Country returningDepartureCountry = null;
-        if (!arrivingCountry.getName().equalsIgnoreCase(departureFlightDepartureAirport.getCityDTO().getCountryDTO().getName())) {
-            returningDepartureCountry = prepareCountry(departureFlightDepartureAirport.getCityDTO().getCountryDTO(), session);
+        if (!arrivingCountry.getName().equalsIgnoreCase(departureFlightDepartureAirport.getCity().getCountry().getName())) {
+            returningDepartureCountry = prepareCountry(departureFlightDepartureAirport.getCity().getCountry(), session);
             if (returningDepartureCountry.getContinent() == null) {
                 if (returningDepartureContinent == null) {
                     returningDepartureCountry.setContinent(arrivingContinent);
@@ -232,7 +244,7 @@ public class TripService {
     }
 
     private Country setDepartureCountry(Session session, Continent departureContinent, AirportDTO departureAirport2) {
-        Country departureCountry = prepareCountry(departureAirport2.getCityDTO().getCountryDTO(), session);
+        Country departureCountry = prepareCountry(departureAirport2.getCity().getCountry(), session);
         if (departureCountry.getContinent() == null) {
             departureCountry.setContinent(departureContinent);
         }
@@ -242,8 +254,8 @@ public class TripService {
     private Continent setReturningContinent(Session session, Continent arrivingContinent, AirportDTO
             departureAirport2) {
         Continent returningDepartureContinent = null;
-        if (!arrivingContinent.getName().equalsIgnoreCase(departureAirport2.getCityDTO().getCountryDTO().getContinentDTO().getName())) {
-            returningDepartureContinent = prepareContinent(departureAirport2.getCityDTO().getCountryDTO().getContinentDTO(), session);
+        if (!arrivingContinent.getName().equalsIgnoreCase(departureAirport2.getCity().getCountry().getContinent().getName())) {
+            returningDepartureContinent = prepareContinent(departureAirport2.getCity().getCountry().getContinent(), session);
         }
         return returningDepartureContinent;
     }
@@ -391,10 +403,7 @@ public class TripService {
         return getTripDTOList(tripList);
     }
 
-    public List<TripDTO> findAllTrips() {
-        List<Trip> tripList = tripDAO.findAllTrips();
-        return getTripDTOList(tripList);
-    }
+
 
     public TripDTO findTripByNameAndDepartureDate(String name, java.sql.Date departureDate) {
         Trip trip = tripDAO.findTripByNameAndDepartureDate(name, departureDate);
@@ -418,24 +427,18 @@ public class TripService {
         return getTripDTOList(tripList);
     }
 
-    private List<TripDTO> getTripDTOList(List<Trip> tripList) {
-        List<TripDTO> tripDTOList = new LinkedList<>();
-        for (Trip trip : tripList) {
-            tripDTOList.add(getTripDTO(trip));
-        }
-        return tripDTOList;
-    }
+
 
 
     private TripDTO getTripDTO(Trip trip) {
         TripDTO tripDTO = new TripDTO();
         tripDTO.setName(trip.getName());
         tripDTO.setDepartureDate(trip.getDepartureDate());
-        tripDTO.setDepartureFlightDTO(setDepartureFlightDTO(trip.getDepartureFlight()));
+        tripDTO.setDepartureFlight(setDepartureFlightDTO(trip.getDepartureFlight()));
         tripDTO.setReturnDate(trip.getReturnDate());
-        tripDTO.setReturningFlightDTO(setReturningFlightDTO(trip.getReturningFlight()));
+        tripDTO.setReturningFlight(setReturningFlightDTO(trip.getReturningFlight()));
         tripDTO.setMealType(trip.getMealType());
-        tripDTO.setStayingHotelDTO(setStayingHotel(trip.getStayingHotel()));
+        tripDTO.setStayingHotel(setStayingHotel(trip.getStayingHotel()));
         tripDTO.setNumberOfDays(trip.getNumberOfDays());
         tripDTO.setPriceForAdult(trip.getPriceForAdult());
         tripDTO.setPriceForChild(trip.getPriceForChild());
@@ -465,10 +468,10 @@ public class TripService {
         arrivingAirportDTO.setName(arrivingAirport.getName());
         ContinentDTO arrivingContinentDTO = new ContinentDTO(arrivingAirport.getCity().getCountry().getContinent().getName());
         CountryDTO arrivingCountryDTO = new CountryDTO(arrivingAirport.getCity().getCountry().getName());
-        arrivingCountryDTO.setContinentDTO(arrivingContinentDTO);
+        arrivingCountryDTO.setContinent(arrivingContinentDTO);
         CityDTO arrivingCityDTO = new CityDTO(arrivingAirport.getCity().getName());
-        arrivingCityDTO.setCountryDTO(arrivingCountryDTO);
-        arrivingAirportDTO.setCityDTO(arrivingCityDTO);
+        arrivingCityDTO.setCountry(arrivingCountryDTO);
+        arrivingAirportDTO.setCity(arrivingCityDTO);
         departureFlightDTO.setArrivingAirport(arrivingAirportDTO);
     }
 
@@ -477,10 +480,10 @@ public class TripService {
         departureAirportDTO.setName(departureAirport.getName());
         ContinentDTO departureContinentDTO = new ContinentDTO(departureAirport.getCity().getCountry().getContinent().getName());
         CountryDTO departureCountryDTO = new CountryDTO(departureAirport.getCity().getCountry().getName());
-        departureCountryDTO.setContinentDTO(departureContinentDTO);
+        departureCountryDTO.setContinent(departureContinentDTO);
         CityDTO departureCityDTO = new CityDTO(departureAirport.getCity().getName());
-        departureCityDTO.setCountryDTO(departureCountryDTO);
-        departureAirportDTO.setCityDTO(departureCityDTO);
+        departureCityDTO.setCountry(departureCountryDTO);
+        departureAirportDTO.setCity(departureCityDTO);
         departureFlightDTO.setDepartureAirport(departureAirportDTO);
     }
 
@@ -507,13 +510,13 @@ public class TripService {
         hotelDTO.setDescription(hotel.getDescription());
         ContinentDTO continentDTO = new ContinentDTO(hotel.getCity().getCountry().getContinent().getName());
         CountryDTO countryDTO = new CountryDTO(hotel.getCity().getCountry().getName());
-        countryDTO.setContinentDTO(continentDTO);
+        countryDTO.setContinent(continentDTO);
         CityDTO cityDTO = new CityDTO();
         cityDTO.setName(hotel.getCity().getName());
-        cityDTO.setCountryDTO(countryDTO);
-        hotelDTO.setCityDTO(cityDTO);
+        cityDTO.setCountry(countryDTO);
+        hotelDTO.setCity(cityDTO);
 
-        hotelDTO.setRoomDTOSet(getRoomDTOS(hotel));
+        hotelDTO.setRooms(getRoomDTOS(hotel));
         return hotelDTO;
     }
 

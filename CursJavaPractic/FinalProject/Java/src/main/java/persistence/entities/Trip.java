@@ -1,7 +1,6 @@
 package persistence.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @NamedQueries({
@@ -57,7 +56,7 @@ public class Trip {
     private Flight departureFlight;
 
     @Column(name = "return_date")
-    private Date returnDate;
+    private java.sql.Date returnDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "returning_flight")
@@ -82,7 +81,6 @@ public class Trip {
     @Column(name = "price_for_child")
     private double priceForChild;
 
-
     @Column(name = "number_of_trips_available")
     private int numberOfTripsAvailable;
 
@@ -90,7 +88,7 @@ public class Trip {
     private Set<PurchasedTrip> purchasedTripSet;
 
     public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, java.sql.Date departureDate,
-                Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild, int numberOfTripsAvailable) {
+                java.sql.Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild, int numberOfTripsAvailable) {
         this.name = name;
         this.departureFlight = departureFlight;
         this.returningFlight = returningFlight;
@@ -164,11 +162,11 @@ public class Trip {
         this.departureDate = departureDate;
     }
 
-    public Date getReturnDate() {
+    public java.sql.Date getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(java.sql.Date returnDate) {
         this.returnDate = returnDate;
     }
 
