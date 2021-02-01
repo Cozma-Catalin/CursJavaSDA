@@ -2,85 +2,103 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f0799b0-d571-44d0-a3d6-fe8e2fafdefa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Fitness/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/Fitness.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/business/HibernateUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/CourseDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/CustomerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/GymDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/JanitorDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/ManagerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/SubscriptionDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/dao/TrainerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Gym.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Janitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Manager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Subscription.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/SubscriptionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/java/persistance/entities/Trainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Fitness/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/business/service/products/CementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/business/service/products/CementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/frontEnd/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/frontEnd/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/dao/products/CementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/dao/products/CementDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/dao/products/ScrewdriverDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/dao/products/ScrewdriverDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/accounts/AdminAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/accounts/AdminAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/accounts/ClientAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/accounts/ClientAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/finance/Cashier.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/finance/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/finance/ShoppingCart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/products/Cement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/products/Cement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/products/Paint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/products/Paint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/products/Screwdriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/src/main/java/persistance/entities/products/Screwdriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/src/test/java/CementDAOTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/frontEnd/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/frontEnd/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/dao/products/CementDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/dao/products/CementDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/dao/products/ScrewdriverDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/dao/products/ScrewdriverDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/accounts/AdminAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/accounts/AdminAccount.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/accounts/ClientAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/accounts/ClientAccount.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/finance/Cashier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/finance/ShoppingCart.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/finance/ShoppingCart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/products/Cement.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/products/Cement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/products/Paint.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/products/Paint.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/products/Screwdriver.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ConstructionStore/target/classes/persistance/entities/products/Screwdriver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ConstructionStore/target/test-classes/CementDAOTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/ConstructionStore_DDL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../MySQL/ConstructionStore_DDL.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DDL_ChampionsLeague.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DDL_IT_Company.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DDL_Library.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DDL_School.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DML_ChampionsLeague.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DML_Fitness.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DML_IT_Company.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DQL_ChampionsLeague.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DQL_Fitness.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/DQL_IT_Company.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/Fit.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/FitnessDDL.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/LibraryDDL.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/Tema_MySQL.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/schoolDataBaseScript.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/Fitness/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/Fitness/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/dao/PersonDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Gym.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Gym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Subscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Subscription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Workout.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/java/persistance/entities/Workout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/dao/PersonDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Gym.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Gym.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Person.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Subscription.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Subscription.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Workout.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/HibernateFitnessProj/target/classes/persistance/entities/Workout.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/trip/trip.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/trip/trip.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/trip/trip.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Angular/travelAgency/src/app/trip/trip.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/AirportDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/AirportDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/CityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/CityDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/CountryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/CountryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/CustomerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/CustomerDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/HotelDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/HotelDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/PurchasedTripDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/PurchasedTripDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/TripDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/dto/TripDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/AirportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/AirportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/CityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/CityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/CountryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/CountryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/FlightService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/FlightService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/HotelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/HotelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/PurchasedTripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/PurchasedTripService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/TripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/business/service/TripService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/AirportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/AirportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/CityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/CityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/ContinentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/ContinentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/CountryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/CountryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/FlightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/HotelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/TripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/controller/TripController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/entryPoint/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/frontEnd/entryPoint/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/dao/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/dao/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/dao/CustomerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/dao/TripDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/dao/TripDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/entities/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/entities/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/entities/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/entities/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/entities/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/src/main/java/persistence/entities/Trip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/META-INF/FinalProject.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/AirportDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/AirportDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/CityDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/CityDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/CountryDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/CountryDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/CustomerDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/CustomerDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/HotelDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/HotelDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/PurchasedTripDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/PurchasedTripDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/TripDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/dto/TripDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/AirportService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/AirportService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/CityService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/CityService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/CountryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/CountryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/CustomerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/CustomerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/FlightService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/FlightService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/HotelService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/HotelService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/PurchasedTripService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/PurchasedTripService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/TripService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/business/service/TripService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/AirportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/AirportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/CityController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/CityController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/ContinentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/ContinentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/CountryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/CountryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/CustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/FlightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/FlightController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/HotelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/HotelController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/TripController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/controller/TripController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/entryPoint/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/frontEnd/entryPoint/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/dao/AccountDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/dao/AccountDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/dao/CustomerDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/dao/CustomerDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/dao/TripDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/dao/TripDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/entities/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/entities/Customer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/entities/Trip.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FinalProject/Java/target/classes/persistence/entities/Trip.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FinalProject/Java/target/test-classes/persistence/dao/AccountDAOTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Americano.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Americano.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/AmountNotAcceptedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/AmountNotAcceptedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Cappucino.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Cappucino.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Chips.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Chips.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Coffee.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Coffee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/CoffeeFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/CoffeeFileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Cola.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Cola.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Croissant.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Croissant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Drink.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Drink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/DrinkFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/DrinkFileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Esspresso.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Esspresso.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Fanta.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Fanta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/META-INF/VendingMachine.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/NotEnoughAmountException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/NotEnoughAmountException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/NotEnoughMoneyException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/NotEnoughMoneyException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/ProductFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/ProductFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/ProteinBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/ProteinBar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Snack.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Snack.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/SnackFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/SnackFileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/VendingMachine.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/VendingMachine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Watter.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Teme/ExercitiiJavaFundamentals/VendingMachine/target/classes/Watter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../optimizare(ForInFor)/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../optimizare(ForInFor)/target/classes/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +133,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SpringBoot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -149,45 +167,25 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="478" y="109" key="#Project_Structure" timestamp="1599303877956">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="478" y="109" key="#Project_Structure/0.0.1536.864@0.0.1536.864" timestamp="1599303877956" />
-    <state x="925" y="157" key="#com.intellij.ide.util.MemberChooser" timestamp="1599297651867">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="925" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1599297651867" />
-    <state x="907" y="371" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1599291689642">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="907" y="371" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.864@0.0.1536.864" timestamp="1599291689642" />
     <state x="969" y="193" key="FileChooserDialogImpl" timestamp="1604736832067">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="969" y="193" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1604736832067" />
-    <state width="1493" height="221" key="GridCell.Tab.0.bottom" timestamp="1599384728790">
+    <state width="1493" height="221" key="GridCell.Tab.0.bottom" timestamp="1611832431127">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="221" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1599384728790" />
-    <state width="1493" height="221" key="GridCell.Tab.0.center" timestamp="1599384728790">
+    <state width="1493" height="221" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1611832431127" />
+    <state width="1493" height="221" key="GridCell.Tab.0.center" timestamp="1611832431127">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="221" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1599384728790" />
-    <state width="1493" height="221" key="GridCell.Tab.0.left" timestamp="1599384728790">
+    <state width="1493" height="221" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1611832431127" />
+    <state width="1493" height="221" key="GridCell.Tab.0.left" timestamp="1611832431127">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="221" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1599384728790" />
-    <state width="1493" height="221" key="GridCell.Tab.0.right" timestamp="1599384728790">
+    <state width="1493" height="221" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1611832431127" />
+    <state width="1493" height="221" key="GridCell.Tab.0.right" timestamp="1611832431127">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="221" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1599384728790" />
-    <state x="555" y="116" key="SettingsEditor" timestamp="1599303871285">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="555" y="116" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1599303871285" />
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1599288823663">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1599288823663" />
+    <state width="1493" height="221" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1611832431127" />
   </component>
 </project>
