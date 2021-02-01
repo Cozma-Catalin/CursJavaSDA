@@ -1,5 +1,9 @@
 package persistence.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -37,7 +41,9 @@ import java.util.Set;
         @NamedQuery(name = "updateNumberOfTripsAvailable",query = "update from Trip set numberOfTripsAvailable= numberOfTripsAvailable - 1")
 
 })
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "trips")
 public class Trip {
@@ -87,139 +93,4 @@ public class Trip {
     @OneToMany(mappedBy = "trip")
     private Set<PurchasedTrip> purchasedTripSet;
 
-    public Trip(String name, Flight departureFlight, Flight returningFlight, Hotel stayingHotel, String mealType, java.sql.Date departureDate,
-                java.sql.Date returnDate, int numberOfDays, boolean promoted, double priceForAdult, double priceForChild, int numberOfTripsAvailable) {
-        this.name = name;
-        this.departureFlight = departureFlight;
-        this.returningFlight = returningFlight;
-        this.stayingHotel = stayingHotel;
-        this.mealType = mealType;
-        this.departureDate = departureDate;
-        this.returnDate = returnDate;
-        this.numberOfDays = numberOfDays;
-        this.promoted = promoted;
-        this.priceForAdult = priceForAdult;
-        this.priceForChild = priceForChild;
-        this.numberOfTripsAvailable = numberOfTripsAvailable;
-    }
-
-    public Trip() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Flight getDepartureFlight() {
-        return departureFlight;
-    }
-
-    public void setDepartureFlight(Flight departureFlight) {
-        this.departureFlight = departureFlight;
-    }
-
-    public Flight getReturningFlight() {
-        return returningFlight;
-    }
-
-    public void setReturningFlight(Flight returningFlight) {
-        this.returningFlight = returningFlight;
-    }
-
-    public Hotel getStayingHotel() {
-        return stayingHotel;
-    }
-
-    public void setStayingHotel(Hotel stayingHotel) {
-        this.stayingHotel = stayingHotel;
-    }
-
-    public String getMealType() {
-        return mealType;
-    }
-
-    public void setMealType(String mealType) {
-        this.mealType = mealType;
-    }
-
-    public java.sql.Date getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(java.sql.Date departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public java.sql.Date getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(java.sql.Date returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public int getNumberOfDays() {
-        return numberOfDays;
-    }
-
-    public void setNumberOfDays(int numberOfDays) {
-        this.numberOfDays = numberOfDays;
-    }
-
-    public boolean isPromoted() {
-        return promoted;
-    }
-
-    public void setPromoted(boolean promoted) {
-        this.promoted = promoted;
-    }
-
-    public double getPriceForAdult() {
-        return priceForAdult;
-    }
-
-    public void setPriceForAdult(double priceForAdult) {
-        this.priceForAdult = priceForAdult;
-    }
-
-    public double getPriceForChild() {
-        return priceForChild;
-    }
-
-    public void setPriceForChild(double priceForChild) {
-        this.priceForChild = priceForChild;
-    }
-
-
-
-    public int getNumberOfTripsAvailable() {
-        return numberOfTripsAvailable;
-    }
-
-    public void setNumberOfTripsAvailable(int numberOfTripsAvailable) {
-        this.numberOfTripsAvailable = numberOfTripsAvailable;
-    }
-
-    
-
-    @Override
-    public String toString() {
-        return "Trip: " + name + "departure flight: " + departureFlight + " returning flight: " + returningFlight
-                + ", staying Hotel:" + stayingHotel + ", meal type:" + mealType + ", departure date:" + departureDate
-                + ", return date:" + returnDate + ", number of days:" + numberOfDays + ", promoted:" + promoted
-                + ", price for adult:" + priceForAdult + ", price for child:" + priceForChild
-                + ", number of trips available: " + numberOfTripsAvailable;
-    }
 }

@@ -535,27 +535,17 @@ public class TripService {
     }
 
     public boolean checkAvailability(TripDTO tripDTO) {
-        if (tripDTO.getNumberOfTripsAvailable() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return tripDTO.getNumberOfTripsAvailable() > 0;
     }
 
     public boolean checkSingleRoomAvailability(TripDTO tripDTO, int singleRooms) {
         Room singleRoom = roomDAO.findRoomByType("single");
-        if (singleRoom.getRoomsAvailable() - singleRooms >= 0) {
-            return true;
-        }
-        return false;
+        return singleRoom.getRoomsAvailable() - singleRooms >= 0;
     }
 
     public boolean checkDoubleRoomAvailability(TripDTO tripDTO, int doubleRooms){
         Room doubleRoom = roomDAO.findRoomByType("double");
-        if(doubleRoom.getRoomsAvailable() - doubleRooms >= 0){
-            return true;
-        }
-        return false;
+        return doubleRoom.getRoomsAvailable() - doubleRooms >= 0;
     }
 
 

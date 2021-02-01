@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from './user';
@@ -13,7 +13,7 @@ import {Account} from '../account/account'
 export class UserComponent implements OnInit {
   public users=[];
   public errorMsg;
- 
+  private http:HttpClient;
   userInfo:User=new User()
  
   name:'';
@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   phoneNumber:''; 
   birthDate:'';
   email:'';
+  address:'';
   account:Account = new Account ;
   userName:'';   
   password:'';
@@ -39,7 +40,7 @@ export class UserComponent implements OnInit {
 
 
   constructor(private _userService:UserService ) { }
-
+  
   ngOnInit() {}
 
   getUser(){
@@ -54,7 +55,7 @@ export class UserComponent implements OnInit {
   
   register(): any {
     
-   this._userService.register();
+    this._userService.register();
 }
 
   focusoutFunctionName(event:any){

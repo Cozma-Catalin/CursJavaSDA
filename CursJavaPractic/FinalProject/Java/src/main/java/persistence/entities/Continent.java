@@ -1,6 +1,10 @@
 package persistence.entities;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,6 +14,10 @@ import java.util.Set;
         @NamedQuery(name = "countContinent",query = "select count(name) from Continent where name= :name"),
 
 })
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "continents")
@@ -26,37 +34,5 @@ public class Continent {
 
     public Continent(String name) {
         this.name = name;
-    }
-
-    public Continent() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Country> getCountrySet() {
-        return countrySet;
-    }
-
-    public void setCountrySet(Set<Country> countrySet) {
-        this.countrySet = countrySet;
-    }
-
-    @Override
-    public String toString() {
-        return "Continent: " + name ;
     }
 }

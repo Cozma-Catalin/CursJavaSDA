@@ -16,6 +16,7 @@ surname:string;
 phoneNumber:string; 
 birthDate:string;
 address:string;
+account:Account;
 email:string;
 userName:string;   
 password:string;
@@ -27,9 +28,7 @@ password:string;
   constructor(private http:HttpClient) { }
 
   register() :any{
-    
-    this.http.post<any>(this.post_url,{
-      name:this.name,
+    const body ={name:this.name,
       surname:this.surname,
       birthDate:this.birthDate,
       address:this.address,
@@ -38,7 +37,9 @@ password:string;
        account:{
           userName:this.userName,
           password:this.password
-      }}).toPromise().then((data: any) => {
+      }};
+    this.http.post<any>(this.post_url,body
+      ).toPromise().then((data: any) => {
         console.log(data);
     })
 }

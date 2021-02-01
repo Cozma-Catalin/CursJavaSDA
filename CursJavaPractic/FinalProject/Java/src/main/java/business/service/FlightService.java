@@ -161,11 +161,7 @@ public class FlightService {
     }
 
     public boolean checkAvailability(int numberOfPersons,int seatsAvailable){
-        if(seatsAvailable-numberOfPersons > 0) {
-            return true;
-        }else{
-            return false;
-        }
+        return seatsAvailable - numberOfPersons > 0;
     }
 
 }

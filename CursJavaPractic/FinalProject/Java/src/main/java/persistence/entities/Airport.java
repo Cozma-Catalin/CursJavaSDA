@@ -1,5 +1,10 @@
 package persistence.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @NamedQueries({
@@ -11,7 +16,9 @@ import javax.persistence.*;
         @NamedQuery(name = "findAirportsInCity",query = "select airport from Airport airport inner join airport.city city where city.name= :cityName")
 
 })
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "airports")
 public class Airport {
@@ -27,38 +34,5 @@ public class Airport {
     private City city;
 
 
-    public Airport() {
-    }
-
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    @Override
-    public String toString() {
-        return "Airport: " + name + ", " + city ;
-    }
 
 }

@@ -1,5 +1,9 @@
 package persistence.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,7 +14,9 @@ import java.util.Set;
         @NamedQuery(name = "findCountriesInContinent",query = "select country from Country country inner join country.continent continent where continent.name= :name"),
         @NamedQuery(name = "changeCountryName",query = "update from Country set name= :newName where name= :name")
 })
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "countries")
 public class Country {
@@ -28,52 +34,5 @@ public class Country {
     @OneToMany(mappedBy = "country")
     private Set<City> citySet;
 
-    public Country(String name, Continent continent) {
-        this.name = name;
-        this.continent = continent;
-    }
 
-    public Country() {
-    }
-
-    public Country(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Continent getContinent() {
-        return continent;
-    }
-
-    public void setContinent(Continent continent) {
-        this.continent = continent;
-    }
-
-    public Set<City> getCitySet() {
-        return citySet;
-    }
-
-    public void setCitySet(Set<City> citySet) {
-        this.citySet = citySet;
-    }
-
-    @Override
-    public String toString() {
-        return "Country: " + name + ", " + continent ;
-    }
 }
