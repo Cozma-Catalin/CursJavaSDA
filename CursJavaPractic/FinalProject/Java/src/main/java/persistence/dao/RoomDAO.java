@@ -12,6 +12,8 @@ import javax.persistence.NoResultException;
 @Repository
 public class RoomDAO {
 
+
+
     public Room findRoomByType(String roomType){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

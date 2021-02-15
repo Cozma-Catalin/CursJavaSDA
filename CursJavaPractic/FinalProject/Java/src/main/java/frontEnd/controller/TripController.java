@@ -14,6 +14,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/api/trip")
 public class TripController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class TripController {
     PurchasedTripService purchasedTripService;
 
 
-    @GetMapping(path = "/findAllTrips")
+    @GetMapping(path = "/findAll")
     public ResponseEntity findAllTrips() {
         List<TripDTO> tripDTOList = tripService.findAllTrips();
         if (tripDTOList.isEmpty()) {
@@ -32,7 +33,7 @@ public class TripController {
     }
 
 
-    @PostMapping(path = "/insertTrip")
+    @PostMapping(path = "/insert")
     public ResponseEntity insertTrip(@RequestBody @Valid TripDTO trip) {
         long result = tripService.countTrips(trip.getName(), trip.getDepartureDate());
         if (result != 0) {
@@ -42,7 +43,7 @@ public class TripController {
         return ResponseEntity.ok(trip.getName() + " added.");
     }
 
-    @DeleteMapping(path = "/deleteTripsByName")
+    @DeleteMapping(path = "/deleteByName")
     public ResponseEntity deleteTripsByName(@RequestParam String name) {
         int result = tripService.deleteTripsByName(name);
         if (result == 0) {
@@ -52,7 +53,7 @@ public class TripController {
         return ResponseEntity.ok(name + " deleted.");
     }
 
-    @GetMapping(path = "/findPromotedTrips")
+    @GetMapping(path = "/findPromoted")
     public ResponseEntity findPromotedTrips(@RequestParam boolean promoted) {
         List<TripDTO> tripDTOList = tripService.findPromotedTrips(promoted);
         if (tripDTOList.isEmpty()) {
@@ -61,7 +62,7 @@ public class TripController {
         return ResponseEntity.ok(tripDTOList);
     }
 
-    @GetMapping(path = "/findTripsByDepartureContinent")
+    @GetMapping(path = "/findByDepartureContinent")
     public ResponseEntity findTripsByDepartureContinent(@RequestParam String continentName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureContinent(continentName);
         if (tripDTOList.isEmpty()) {
@@ -71,7 +72,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByArrivingContinent")
+    @GetMapping(path = "/findByArrivingContinent")
     public ResponseEntity findTripsByArrivingContinent(@RequestParam String continentName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingContinent(continentName);
         if (tripDTOList.isEmpty()) {
@@ -81,7 +82,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByDepartureCountry")
+    @GetMapping(path = "/findByDepartureCountry")
     public ResponseEntity findTripsByDepartureCountry(@RequestParam String countryName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureCountry(countryName);
         if (tripDTOList.isEmpty()) {
@@ -91,7 +92,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByArrivingCountry")
+    @GetMapping(path = "/findByArrivingCountry")
     public ResponseEntity findTripsByArrivingCountry(@RequestParam String countryName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingCountry(countryName);
         if (tripDTOList.isEmpty()) {
@@ -101,7 +102,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByDepartureCity")
+    @GetMapping(path = "/findByDepartureCity")
     public ResponseEntity findTripsByDepartureCity(@RequestParam String cityName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureCity(cityName);
         if (tripDTOList.isEmpty()) {
@@ -111,7 +112,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByArrivingCity")
+    @GetMapping(path = "/findByArrivingCity")
     public ResponseEntity findTripsByArrivingCity(@RequestParam String cityName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingCity(cityName);
         if (tripDTOList.isEmpty()) {
@@ -121,7 +122,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByHotel")
+    @GetMapping(path = "/findByHotel")
     public ResponseEntity findTripsByHotel(@RequestParam String hotelName) {
         List<TripDTO> tripDTOList = tripService.findTripsByHotel(hotelName);
         if (tripDTOList.isEmpty()) {
@@ -131,7 +132,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByDepartureAirport")
+    @GetMapping(path = "/findByDepartureAirport")
     public ResponseEntity findTripsByDepartureAirport(@RequestParam String airportName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureAirport(airportName);
         if (tripDTOList.isEmpty()) {
@@ -140,8 +141,17 @@ public class TripController {
         return ResponseEntity.ok(tripDTOList);
     }
 
+    @GetMapping(path = "/findByArrivingAirport")
+    public ResponseEntity findTripsByArrivingAirport(@RequestParam String airportName) {
+        List<TripDTO> tripDTOList = tripService.findTripsByArrivingAirport(airportName);
+        if (tripDTOList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips found arriving at airport: " + airportName + ".");
+        }
+        return ResponseEntity.ok(tripDTOList);
+    }
 
-    @GetMapping(path = "/findTripsByDepartureDate")
+
+    @GetMapping(path = "/findByDepartureDate")
     public ResponseEntity findTripsByDepartureDate(@RequestParam Date departureDate) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureDate(departureDate);
         if (tripDTOList.isEmpty()) {
@@ -151,7 +161,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByReturnDate")
+    @GetMapping(path = "/findByReturnDate")
     public ResponseEntity findTripsByReturnDate(@RequestParam Date returnDate) {
         List<TripDTO> tripDTOList = tripService.findTripsByReturnDate(returnDate);
         if (tripDTOList.isEmpty()) {
@@ -161,7 +171,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByDepartureTimeFrame")
+    @GetMapping(path = "/findByDepartureTimeFrame")
     public ResponseEntity findTripsByDepartureTimeFrame(@RequestParam Date beginTimeFrame, Date endTimeFrame) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureTimeFrame(beginTimeFrame, endTimeFrame);
         if (tripDTOList.isEmpty()) {
@@ -171,7 +181,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByReturnTimeFrame")
+    @GetMapping(path = "/findByReturnTimeFrame")
     public ResponseEntity findTripsByReturnTimeFrame(@RequestParam Date beginTimeFrame, Date endTimeFrame) {
         List<TripDTO> tripDTOList = tripService.findTripsByReturnTimeFrame(beginTimeFrame, endTimeFrame);
         if (tripDTOList.isEmpty()) {
@@ -181,7 +191,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByMealType")
+    @GetMapping(path = "/findByMealType")
     public ResponseEntity findTripsByMealType(@RequestParam String mealType) {
         List<TripDTO> tripDTOList = tripService.findTripsByMealType(mealType);
         if (tripDTOList.isEmpty()) {
@@ -190,7 +200,7 @@ public class TripController {
         return ResponseEntity.ok(tripDTOList);
     }
 
-    @GetMapping(path = "/findTripsByHotelStars")
+    @GetMapping(path = "/findByHotelStars")
     public ResponseEntity findTripsByHotelStars(@RequestParam double numberOfStars) {
         List<TripDTO> tripDTOList = tripService.findTripsByHotelStars(numberOfStars);
         if (tripDTOList.isEmpty()) {
@@ -200,7 +210,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByNumberOfDays")
+    @GetMapping(path = "/findByNumberOfDays")
     public ResponseEntity findTripsByNumberOfDays(@RequestParam int numberOfDays) {
         List<TripDTO> tripDTOList = tripService.findTripsByNumberOfDays(numberOfDays);
         if (tripDTOList.isEmpty()) {
@@ -210,7 +220,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripByNameAndDepartureDate")
+    @GetMapping(path = "/findByNameAndDepartureDate")
     public ResponseEntity findTripByNameAndDepartureDate(@RequestParam String name, Date departureDate) {
         TripDTO tripDTOList = tripService.findTripByNameAndDepartureDate(name, departureDate);
         if (tripDTOList == null) {
@@ -220,7 +230,7 @@ public class TripController {
     }
 
 
-    @GetMapping(path = "/findTripsByName")
+    @GetMapping(path = "/findByName")
     public ResponseEntity findTripsByName(@RequestParam String name) {
         List<TripDTO> tripDTOList = tripService.findTripsByName(name);
         if (tripDTOList.isEmpty()) {

@@ -6,6 +6,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
+
+
 public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
@@ -18,4 +20,6 @@ public class HibernateUtil {
         }
         return sessionFactory;
     }
+
+
 }

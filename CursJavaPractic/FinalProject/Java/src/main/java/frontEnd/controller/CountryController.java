@@ -12,13 +12,14 @@ import javax.validation.Valid;
 import java.util.List;
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/api/country")
 public class CountryController {
     @Autowired
     CountryService countryService;
     @Autowired
     ContinentService continentService;
 
-    @PostMapping(path = "/insertCountry")
+    @PostMapping(path = "/insert")
     public ResponseEntity insertCountry(@RequestBody @Valid CountryDTO countryDTO) {
 
         if (countryService.countCountryDTO(countryDTO.getName()) != 0) {
@@ -28,7 +29,7 @@ public class CountryController {
         return ResponseEntity.ok("Country '" + countryDTO.getName() + "' added.");
     }
 
-    @GetMapping(path = "/findCountry")
+    @GetMapping(path = "/findByName")
     public ResponseEntity findCountry(@RequestParam String name) {
         CountryDTO countryDTO = countryService.findCountryDTO(name);
         if (countryDTO == null) {
@@ -37,7 +38,7 @@ public class CountryController {
         return ResponseEntity.ok(countryDTO);
     }
 
-    @GetMapping(path = "/findCountriesInContinent")
+    @GetMapping(path = "/findInContinent")
     public ResponseEntity findCountriesInContinent(@RequestParam String continentName){
         if(continentService.countContinentDTO(continentName)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(continentName+ " can't be found in database.");
@@ -50,7 +51,7 @@ public class CountryController {
     }
 
 
-    @DeleteMapping(path = "/deleteCountry")
+    @DeleteMapping(path = "/deleteByName")
     public ResponseEntity deleteCountry(@RequestParam String name) {
         if(countryService.countCountryDTO(name)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(name + " can't be found in database to be deleted.");
@@ -59,7 +60,7 @@ public class CountryController {
         return ResponseEntity.ok("Country '" + name + "' deleted.");
     }
 
-    @PutMapping(path = "/changeCountryName")
+    @PutMapping(path = "/changeName")
     public ResponseEntity changeCountryName(@RequestParam String newName, String name) {
         if (countryService.countCountryDTO(newName) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(newName + " already exists in database.");

@@ -1,11 +1,17 @@
 package business.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CountryDTO {
     @NotNull
     @NotEmpty
@@ -15,33 +21,7 @@ public class CountryDTO {
     @Valid
     private ContinentDTO continent;
 
-
-
-    public CountryDTO( String name) {
+    public CountryDTO(String name){
         this.name = name;
-    }
-
-    public CountryDTO() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ContinentDTO getContinent() {
-        return continent;
-    }
-
-    public void setContinent(ContinentDTO continent) {
-        this.continent = continent;
-    }
-
-    @Override
-    public String toString() {
-        return "CountryDTO: " + name + "," + continent ;
     }
 }

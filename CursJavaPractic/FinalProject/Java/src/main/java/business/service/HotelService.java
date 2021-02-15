@@ -43,6 +43,7 @@ public class HotelService {
             room.setRoomType(r.getRoomType());
             room.setNumberOfRooms(r.getNumberOfRooms());
             room.setExtraBed(r.isExtraBed());
+            room.setPrice(r.getPrice());
             room.setRoomsAvailable(r.getRoomsAvailable());
             roomSet.add(room);
         }
@@ -126,9 +127,7 @@ public class HotelService {
     public List<HotelDTO> findHotel(String name) {
         List<HotelDTO> hotelDTOList = new LinkedList<>();
         List<Hotel> hotelList = hotelDAO.findHotel(name);
-        if(hotelList.isEmpty()){
-            return null;
-        }
+
         for (Hotel h : hotelList) {
             HotelDTO hotelDTO = new HotelDTO();
             hotelDTO.setName(h.getName());

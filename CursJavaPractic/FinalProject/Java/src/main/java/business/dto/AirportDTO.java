@@ -1,10 +1,14 @@
 package business.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+@Data
+@NoArgsConstructor
 public class AirportDTO {
     @NotNull
     @NotEmpty
@@ -14,29 +18,4 @@ public class AirportDTO {
     @Valid
     private CityDTO city;
 
-
-
-    public AirportDTO() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CityDTO getCity() {
-        return city;
-    }
-
-    public void setCity(CityDTO city) {
-        this.city = city;
-    }
-
-    @Override
-    public String toString() {
-        return "AirportDTO: " + name + "," + city ;
-    }
 }

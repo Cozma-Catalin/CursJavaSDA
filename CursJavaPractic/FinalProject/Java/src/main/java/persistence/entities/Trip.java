@@ -27,6 +27,8 @@ import java.util.Set;
                 "inner join departureFlight.arrivingAirport arrivingAirport inner join arrivingAirport.city city where city.name= :name"),
         @NamedQuery(name = "findTripsByDepartureAirport", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
                 "inner join departureFlight.departureAirport departureAirport where departureAirport.name= :name"),
+        @NamedQuery(name = "findTripsByArrivingAirport", query = "select trip from Trip trip inner join trip.departureFlight departureFlight " +
+                "inner join departureFlight.arrivingAirport arrivingAirport where arrivingAirport.name= :name"),
         @NamedQuery(name = "findTripsByHotel", query = "select trip from Trip trip inner join trip.stayingHotel stayingHotel where stayingHotel.name= :name"),
         @NamedQuery(name = "findTripsByDepartureDate", query = "select trip from Trip trip where departureDate= :departureDate"),
         @NamedQuery(name = "findTripsByReturnDate", query = "select trip from Trip trip where returnDate= :returnDate"),

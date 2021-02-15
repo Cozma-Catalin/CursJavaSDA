@@ -1,17 +1,17 @@
 package persistence.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
+
 @NamedQueries({
         @NamedQuery(name = "findRoomByType",query = "select room from Room room where roomType= :roomType"),
         @NamedQuery(name = "updateRoomsAvailable",query = "update from Room set roomsAvailable= :roomsAvailable where roomType= :roomType")
 })
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -38,5 +38,4 @@ public class Room {
 
     @ManyToMany(mappedBy = "roomSet")
     private Set<Hotel> hotelSet;
-
 }

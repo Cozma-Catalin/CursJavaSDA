@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/api/customer")
 public class CustomerController {
 
     @Autowired
@@ -29,7 +30,7 @@ public class CustomerController {
     RoomService roomService;
 
 
-    @PostMapping(path = "/insertCustomer")
+    @PostMapping(path = "/insert")
     public ResponseEntity insertCustomer(@RequestBody @Valid CustomerDTO customerDTO) {
         customerDTO.getAccount().setPassword(accountService.cryptPass(customerDTO.getAccount().getPassword()));
 
@@ -66,7 +67,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    @GetMapping(path = "/findCustomerByEmail")
+    @GetMapping(path = "/findByEmail")
     public ResponseEntity findCustomerByEmail(@RequestParam String email) {
         CustomerDTO customerDTO = customerService.findCustomerByEmail(email);
         if (customerDTO == null) {
@@ -86,7 +87,7 @@ public class CustomerController {
     }
 
 
-    @GetMapping(path = "/findCustomerAccount")
+    @GetMapping(path = "/findAccount")
     public ResponseEntity findCustomerAccount(@RequestParam String userName, String password) {
         String cryptedPassword = accountService.cryptPass(password);
         CustomerDTO customerDTO = customerService.findCustomerAccount(userName, cryptedPassword);

@@ -8,6 +8,7 @@ import persistence.utils.HibernateUtil;
 import persistence.dao.*;
 import persistence.entities.*;
 
+
 import java.util.*;
 
 @Service
@@ -71,7 +72,7 @@ public class TripService {
         Flight departureFlight = setDepartureFlight(tripDTO, session, departureAirport, arrivingAirport);
         Flight returningFlight = setReturningFlight(tripDTO, session, departureAirport, arrivingAirport, returningDepartureAirport, returningArrivingAirport);
 
-        Hotel stayingHotel = setHotel(tripDTO, departureFlight, arrivingCity, session);
+        Hotel stayingHotel = setHotel(tripDTO, arrivingCity, session);
 
         Trip trip = setTrip(tripDTO, departureFlight, returningFlight, stayingHotel);
 
@@ -98,14 +99,14 @@ public class TripService {
     }
 
 
-    private Hotel setHotel(TripDTO tripDTO, Flight departureFlight, City arrivingCity, Session session) {
+    private Hotel setHotel(TripDTO tripDTO, City arrivingCity, Session session) {
         City city;
 
         Hotel hotel = hotelDAO.findHotelByAddress(tripDTO.getStayingHotel().getAddress());
         if (hotel == null) {
             hotel = new Hotel();
             hotel.setName(tripDTO.getStayingHotel().getName());
-            if (tripDTO.getStayingHotel().getCity().getName().equalsIgnoreCase(departureFlight.getArrivingAirport().getCity().getName())) {
+            if (tripDTO.getStayingHotel().getCity().getName().equalsIgnoreCase(arrivingCity.getName())) {
                 city = arrivingCity;
             } else {
                 city = prepareCity(tripDTO.getStayingHotel().getCity(), session);
@@ -365,6 +366,11 @@ public class TripService {
 
     public List<TripDTO> findTripsByDepartureAirport(String airportName) {
         List<Trip> tripList = tripDAO.findTripsByDepartureAirport(airportName);
+        return getTripDTOList(tripList);
+    }
+
+    public List<TripDTO> findTripsByArrivingAirport(String airportName) {
+        List<Trip> tripList = tripDAO.findTripsByArrivingAirport(airportName);
         return getTripDTOList(tripList);
     }
 

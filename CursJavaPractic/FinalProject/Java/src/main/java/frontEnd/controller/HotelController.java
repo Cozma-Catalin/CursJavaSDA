@@ -11,11 +11,12 @@ import javax.validation.Valid;
 import java.util.List;
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/api/hotel")
 public class HotelController {
     @Autowired
     HotelService hotelService;
 
-    @PostMapping(path = "insertHotel")
+    @PostMapping(path = "/insert")
     public ResponseEntity insertHotel(@RequestBody @Valid HotelDTO hotelDTO) {
         List<String> addressList = hotelService.countHotelAddress(hotelDTO.getAddress());
         if (addressList.contains(hotelDTO.getAddress())) {
@@ -25,7 +26,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelDTO.getName() + " added.");
     }
 
-    @GetMapping(path = "/findHotelsInCity")
+    @GetMapping(path = "/findInCity")
     public ResponseEntity findHotelsInCity(@RequestParam String cityName) {
         List<HotelDTO> hotelDTOList = hotelService.findHotelsInCity(cityName);
         if (hotelDTOList.isEmpty()) {
@@ -34,7 +35,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelDTOList);
     }
 
-    @PostMapping(path = "/findHotelByName")
+    @GetMapping(path = "/findByName")
     public ResponseEntity findHotelByName(@RequestParam String hotelName) {
         List<HotelDTO> hotelDTOList = hotelService.findHotel(hotelName);
         if (hotelDTOList.isEmpty()) {
@@ -43,7 +44,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelDTOList);
     }
 
-    @DeleteMapping(path = "/deleteHotelByName")
+    @DeleteMapping(path = "/deleteByName")
     public ResponseEntity deleteHotelByName(@RequestParam String hotelName) {
         if (hotelService.countHotelName(hotelName) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(hotelName + " can't be found in database.");
@@ -52,7 +53,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelName + " deleted.");
     }
 
-    @DeleteMapping(path = "/deleteHotelByAddress")
+    @DeleteMapping(path = "/deleteByAddress")
     public ResponseEntity deleteHotelByAddress(@RequestParam String address) {
         List<String> addressList = hotelService.countHotelAddress(address);
         if (addressList.isEmpty()) {
@@ -63,7 +64,7 @@ public class HotelController {
     }
 
 
-    @PutMapping(path = "/changeHotelName")
+    @PutMapping(path = "/changeName")
     public ResponseEntity changeHotelName(@RequestParam String newName, String name) {
 
         if (hotelService.findHotel(name).isEmpty()) {
@@ -77,7 +78,7 @@ public class HotelController {
     }
 
 
-    @GetMapping(path = "findHotelByAddress")
+    @GetMapping(path = "findByAddress")
     public ResponseEntity findHotelByAddress(@RequestParam String address) {
         HotelDTO hotelDTO = hotelService.findHotelByAddress(address);
         if (hotelDTO == null) {

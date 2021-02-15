@@ -11,12 +11,13 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/api/continent")
 public class ContinentController {
     @Autowired
     ContinentService continentService;
 
 
-    @PostMapping(path = "/insertContinent")
+    @PostMapping(path = "/insert")
     public ResponseEntity insertContinent(@RequestBody @Valid ContinentDTO continentDTO) {
         if (continentService.countContinentDTO(continentDTO.getName()) != 0){
             return  ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(continentDTO.getName() + " already exists in database");
@@ -25,7 +26,7 @@ public class ContinentController {
         return ResponseEntity.ok("Continent '" + continentDTO.getName() + "' added.");
     }
 
-    @GetMapping(path = "/findContinent")
+    @GetMapping(path = "/findByName")
     public ResponseEntity findContinent(@RequestParam String name){
         ContinentDTO continentDTO = continentService.findContinentDTO(name);
         if(continentDTO==null){
@@ -35,7 +36,7 @@ public class ContinentController {
     }
 
 
-    @DeleteMapping(path = "/deleteContinent")
+    @DeleteMapping(path = "/deleteByName")
     public ResponseEntity deleteContinent(String name){
         if(continentService.countContinentDTO(name)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Continent '" + name + "' can't be found in database.");

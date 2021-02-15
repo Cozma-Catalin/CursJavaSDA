@@ -2,58 +2,34 @@ package business.dto;
 
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PurchasedTripDTO {
-
+    @Valid
     private CustomerDTO customer;
+
+    @Valid
     private TripDTO trip;
+
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfPurchase ;
+
+    @NotNull
     private double totalPrice;
+
+    @NotNull
     private double discount;
 
-    public PurchasedTripDTO() {
-    }
-
-    public CustomerDTO getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerDTO customer) {
-        this.customer = customer;
-    }
-
-    public TripDTO getTrip() {
-        return trip;
-    }
-
-    public void setTrip(TripDTO trip) {
-        this.trip = trip;
-    }
-
-    public Date getDateOfPurchase() {
-        return dateOfPurchase;
-    }
-
-    public void setDateOfPurchase(Date dateOfPurchase) {
-        this.dateOfPurchase = dateOfPurchase;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public void setDiscount(double discount){
-        this.discount = discount;
-    }
-
-    public double getDiscount(){
-        return discount;
-    }
 }

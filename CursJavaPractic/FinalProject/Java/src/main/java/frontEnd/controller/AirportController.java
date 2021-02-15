@@ -11,11 +11,12 @@ import javax.validation.Valid;
 import java.util.List;
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/api/airport")
 public class AirportController {
     @Autowired
     AirportService airportService;
 
-    @PostMapping(path = "/insertAirport")
+    @PostMapping(path = "/insert")
     public ResponseEntity insertAirport(@RequestBody @Valid AirportDTO airportDTO) {
         List<String> airportNameList = airportService.getAirportNameByCityName(airportDTO.getCity().getName());
         if (airportNameList.contains(airportDTO.getName())) {
@@ -25,7 +26,7 @@ public class AirportController {
         return ResponseEntity.ok(airportDTO.getName() + " added.");
     }
 
-    @DeleteMapping(path = "/deleteAirportByName")
+    @DeleteMapping(path = "/deleteByName")
     public ResponseEntity deleteAirportByName(@RequestParam String name) {
         int result = airportService.deleteAirportByName(name);
         if (result == 0) {
@@ -34,7 +35,7 @@ public class AirportController {
         return ResponseEntity.ok(name + " deleted.");
     }
 
-    @GetMapping(path = "/findAirportByName")
+    @GetMapping(path = "/findByName")
     public ResponseEntity findAirportByName(@RequestParam String name) {
 
         if (airportService.countAirportName(name) == 0) {
@@ -44,7 +45,7 @@ public class AirportController {
         return ResponseEntity.ok(airportDTO);
     }
 
-    @GetMapping(path = "/findAirportsInCity")
+    @GetMapping(path = "/findInCity")
     public ResponseEntity findAirportInCity(@RequestParam String cityName){
         List<AirportDTO> airportDTOList = airportService.findAirportsInCity(cityName);
         if(airportDTOList == null){
@@ -54,7 +55,7 @@ public class AirportController {
     }
 
 
-    @PutMapping(path = "/changeAirportName")
+    @PutMapping(path = "/changeName")
     public ResponseEntity changeAirportName(@RequestParam String newName, String name) {
         if (airportService.countAirportName(newName) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(newName + " already exists in database.");

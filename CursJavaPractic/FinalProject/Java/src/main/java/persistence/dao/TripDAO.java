@@ -157,6 +157,17 @@ public class TripDAO {
         return tripList;
     }
 
+    public List<Trip> findTripsByArrivingAirport(String airportName){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query findTripsByDepartureAirportQuery = session.createNamedQuery("findTripsByArrivingAirport");
+        findTripsByDepartureAirportQuery.setParameter("name",airportName);
+        List<Trip> tripList = findTripsByDepartureAirportQuery.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return tripList;
+    }
+
     public List<Trip> findTripsByDepartureDate(java.sql.Date departureDate){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

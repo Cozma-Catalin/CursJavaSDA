@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistence.dao.AccountDAO;
 
+import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +16,7 @@ public class AccountService {
 
     @Autowired
     AccountDAO accountDAO;
+
 
 
     public int deleteAccount(String userName) {

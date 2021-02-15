@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS travel_agency;
+
 CREATE DATABASE travel_agency;
 USE travel_agency;
 
@@ -34,14 +34,33 @@ FOREIGN KEY (cities_id)
 REFERENCES cities(id)
 );
 
+CREATE TABLE flights(
+id INT PRIMARY KEY AUTO_INCREMENT ,
+flight_number VARCHAR(20) NOT NULL,
+departure_date DATE NOT NULL,
+departure_time TIME NOT NULL,
+departure_airport INT NOT NULL,
+CONSTRAINT fk_departure_airport
+FOREIGN KEY (departure_airport)
+REFERENCES airports(id),
+arriving_date DATE NOT NULL,
+arriving_time TIME NOT NULL,
+arriving_airport INT NOT NULL,
+CONSTRAINT fk_arriving_airport
+FOREIGN KEY (arriving_airport)
+REFERENCES airports(id),
+price DOUBLE NOT NULL,
+seats_available INT NOT NULL
+);
+
 CREATE TABLE rooms(
 id INT PRIMARY KEY AUTO_INCREMENT ,
 type VARCHAR(15) NOT NULL,
 number_of_rooms INT NOT NULL,
 extra_bed TINYINT ,
+price DOUBLE NOT NULL,
 rooms_available INT NOT NULL
 );
-
 
 CREATE TABLE hotels(
 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -67,25 +86,6 @@ FOREIGN KEY (rooms_id)
 REFERENCES rooms(id)
 );
 
-CREATE TABLE flights(
-id INT PRIMARY KEY AUTO_INCREMENT ,
-flight_number VARCHAR(20) NOT NULL,
-departure_date DATE NOT NULL,
-departure_time TIME NOT NULL,
-departure_airport INT NOT NULL,
-CONSTRAINT fk_departure_airport
-FOREIGN KEY (departure_airport)
-REFERENCES airports(id),
-arriving_date DATE NOT NULL,
-arriving_time TIME NOT NULL,
-arriving_airport INT NOT NULL,
-CONSTRAINT fk_arriving_airport
-FOREIGN KEY (arriving_airport)
-REFERENCES airports(id),
-price DOUBLE NOT NULL,
-seats_available INT NOT NULL
-);
-
 CREATE TABLE trips(
 id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(30) NOT NULL,
@@ -108,16 +108,13 @@ number_of_days INT NOT NULL,
 promoted TINYINT NOT NULL,
 price_for_adults DOUBLE NOT NULL,
 price_for_child DOUBLE NOT NULL,
-number_of_adults INT NOT NULL,
-number_of_children INT ,
-trip_price DOUBLE NOT NULL,
 number_of_trips_available INT NOT NULL
 );
 
 CREATE TABLE accounts(
 id INT PRIMARY KEY AUTO_INCREMENT,
 user_name VARCHAR(15) NOT NULL UNIQUE,
-password VARCHAR(15) NOT NULL,
+password VARCHAR(150) NOT NULL,
 logged_in TINYINT 
 );
 
@@ -145,7 +142,10 @@ REFERENCES trips(id),
 customers_id INT NOT NULL,
 CONSTRAINT fk_customers_trips
 FOREIGN KEY (customers_id)
-REFERENCES customers(id)
+REFERENCES customers(id),
+date_of_purchase DATE NOT NULL,
+total_price DOUBLE NOT NULL,
+discount DOUBLE 
 );
 
 
