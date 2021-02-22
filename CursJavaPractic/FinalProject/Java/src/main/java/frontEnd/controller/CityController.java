@@ -6,6 +6,7 @@ import business.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ public class CityController {
     CountryService countryService;
 
     @PostMapping(path = "/insert")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity insertCity(@RequestBody @Valid CityDTO cityDTO) {
         if (cityService.countCityDTO(cityDTO.getName()) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("This city is already in the database.");
@@ -29,6 +31,7 @@ public class CityController {
     }
 
     @GetMapping(path = "/findByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findCity(@RequestParam String name) {
         CityDTO cityDTO = cityService.findCityDTO(name);
         if (cityDTO == null) {
@@ -38,6 +41,7 @@ public class CityController {
     }
 
     @GetMapping(path = "/findInCountry")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findCitiesInCountry(String countryName) {
         if (countryService.countCountryDTO(countryName) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryName + " isn't in the database.");
@@ -51,6 +55,7 @@ public class CityController {
 
 
     @DeleteMapping(path = "/deleteByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteCity(@RequestParam String name) {
         if (cityService.countCityDTO(name) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(name + " can't be found in database.");
@@ -60,6 +65,7 @@ public class CityController {
     }
 
     @PutMapping(path = "/changeName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity changeCityName(@RequestParam String newName, String cityName) {
         if (cityService.countCityDTO(newName) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(newName + " is already in the database.");

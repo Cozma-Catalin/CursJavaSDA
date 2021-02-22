@@ -7,6 +7,7 @@ import business.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.sql.Date;
@@ -24,6 +25,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findAll")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findAllTrips() {
         List<TripDTO> tripDTOList = tripService.findAllTrips();
         if (tripDTOList.isEmpty()) {
@@ -34,6 +36,7 @@ public class TripController {
 
 
     @PostMapping(path = "/insert")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity insertTrip(@RequestBody @Valid TripDTO trip) {
         long result = tripService.countTrips(trip.getName(), trip.getDepartureDate());
         if (result != 0) {
@@ -44,6 +47,7 @@ public class TripController {
     }
 
     @DeleteMapping(path = "/deleteByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteTripsByName(@RequestParam String name) {
         int result = tripService.deleteTripsByName(name);
         if (result == 0) {
@@ -54,6 +58,7 @@ public class TripController {
     }
 
     @GetMapping(path = "/findPromoted")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findPromotedTrips(@RequestParam boolean promoted) {
         List<TripDTO> tripDTOList = tripService.findPromotedTrips(promoted);
         if (tripDTOList.isEmpty()) {
@@ -63,6 +68,7 @@ public class TripController {
     }
 
     @GetMapping(path = "/findByDepartureContinent")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByDepartureContinent(@RequestParam String continentName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureContinent(continentName);
         if (tripDTOList.isEmpty()) {
@@ -73,6 +79,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByArrivingContinent")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByArrivingContinent(@RequestParam String continentName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingContinent(continentName);
         if (tripDTOList.isEmpty()) {
@@ -83,6 +90,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByDepartureCountry")
+ //   @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByDepartureCountry(@RequestParam String countryName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureCountry(countryName);
         if (tripDTOList.isEmpty()) {
@@ -93,6 +101,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByArrivingCountry")
+ //   @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByArrivingCountry(@RequestParam String countryName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingCountry(countryName);
         if (tripDTOList.isEmpty()) {
@@ -103,6 +112,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByDepartureCity")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByDepartureCity(@RequestParam String cityName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureCity(cityName);
         if (tripDTOList.isEmpty()) {
@@ -113,6 +123,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByArrivingCity")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByArrivingCity(@RequestParam String cityName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingCity(cityName);
         if (tripDTOList.isEmpty()) {
@@ -123,6 +134,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByHotel")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByHotel(@RequestParam String hotelName) {
         List<TripDTO> tripDTOList = tripService.findTripsByHotel(hotelName);
         if (tripDTOList.isEmpty()) {
@@ -133,6 +145,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByDepartureAirport")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByDepartureAirport(@RequestParam String airportName) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureAirport(airportName);
         if (tripDTOList.isEmpty()) {
@@ -142,6 +155,7 @@ public class TripController {
     }
 
     @GetMapping(path = "/findByArrivingAirport")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByArrivingAirport(@RequestParam String airportName) {
         List<TripDTO> tripDTOList = tripService.findTripsByArrivingAirport(airportName);
         if (tripDTOList.isEmpty()) {
@@ -152,6 +166,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByDepartureDate")
+   //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByDepartureDate(@RequestParam Date departureDate) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureDate(departureDate);
         if (tripDTOList.isEmpty()) {
@@ -162,6 +177,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByReturnDate")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByReturnDate(@RequestParam Date returnDate) {
         List<TripDTO> tripDTOList = tripService.findTripsByReturnDate(returnDate);
         if (tripDTOList.isEmpty()) {
@@ -172,6 +188,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByDepartureTimeFrame")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByDepartureTimeFrame(@RequestParam Date beginTimeFrame, Date endTimeFrame) {
         List<TripDTO> tripDTOList = tripService.findTripsByDepartureTimeFrame(beginTimeFrame, endTimeFrame);
         if (tripDTOList.isEmpty()) {
@@ -182,6 +199,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByReturnTimeFrame")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByReturnTimeFrame(@RequestParam Date beginTimeFrame, Date endTimeFrame) {
         List<TripDTO> tripDTOList = tripService.findTripsByReturnTimeFrame(beginTimeFrame, endTimeFrame);
         if (tripDTOList.isEmpty()) {
@@ -192,6 +210,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByMealType")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByMealType(@RequestParam String mealType) {
         List<TripDTO> tripDTOList = tripService.findTripsByMealType(mealType);
         if (tripDTOList.isEmpty()) {
@@ -201,6 +220,7 @@ public class TripController {
     }
 
     @GetMapping(path = "/findByHotelStars")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByHotelStars(@RequestParam double numberOfStars) {
         List<TripDTO> tripDTOList = tripService.findTripsByHotelStars(numberOfStars);
         if (tripDTOList.isEmpty()) {
@@ -211,6 +231,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByNumberOfDays")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByNumberOfDays(@RequestParam int numberOfDays) {
         List<TripDTO> tripDTOList = tripService.findTripsByNumberOfDays(numberOfDays);
         if (tripDTOList.isEmpty()) {
@@ -221,6 +242,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByNameAndDepartureDate")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripByNameAndDepartureDate(@RequestParam String name, Date departureDate) {
         TripDTO tripDTOList = tripService.findTripByNameAndDepartureDate(name, departureDate);
         if (tripDTOList == null) {
@@ -231,6 +253,7 @@ public class TripController {
 
 
     @GetMapping(path = "/findByName")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findTripsByName(@RequestParam String name) {
         List<TripDTO> tripDTOList = tripService.findTripsByName(name);
         if (tripDTOList.isEmpty()) {
@@ -241,6 +264,7 @@ public class TripController {
 
 
     @GetMapping("/showPurchasedTripsByCustomer")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity showPurchasedTripsByCustomer(@RequestParam String name){
         List<PurchasedTripDTO> purchasedTripDTOList = purchasedTripService.showPurchasedTrips(name);
         if(purchasedTripDTOList.isEmpty()){
@@ -252,6 +276,7 @@ public class TripController {
 
 
     @GetMapping("/showPurchasedTripsByDate")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity showPurchasedTripsByDate(@RequestParam Date date){
         List<PurchasedTripDTO> purchasedTripDTOList = purchasedTripService.showPurchasedTripsByDate(date);
         if(purchasedTripDTOList.isEmpty()){

@@ -4,57 +4,28 @@ import { User } from './user/user';
 import { Observable } from 'rxjs';
 
 
+
+
 @Injectable()
 export class UserService {
- 
-postId;
 
-userInfo:User=new User()
- 
-name:string;
-surname:string;
-phoneNumber:string; 
-birthDate:string;
-address:string;
-account:Account;
-email:string;
-userName:string;   
-password:string;
-
-  private _url: string = "http://localhost:8080/findCustomerAccount?userName=ka7a_79&password=123456";
-
-  private post_url = 'http://localhost:8080/insertCustomer';
 
   constructor(private http:HttpClient) { }
 
-  register() :any{
-    const body ={name:this.name,
-      surname:this.surname,
-      birthDate:this.birthDate,
-      address:this.address,
-      phoneNumber:this.phoneNumber,
-      email:this.email,  
-       account:{
-          userName:this.userName,
-          password:this.password
-      }};
-    this.http.post<any>(this.post_url,body
-      ).toPromise().then((data: any) => {
-        console.log(data);
-    })
-}
 
-    getUsers(): Observable<User[]>{
-      return this.http.get<User[]>(this._url);
-                      
-    }
+  
+  public addUser(user: User): Observable<User>{
+    return this.http.post<User>("http://localhost:8080/api/user/insert",user);
+  }
 
-    checkUserName(userName:string): Observable<User[]>{
-      return this.http.get<User[]>("http://localhost:8080/checkUserName?userName="+userName);
-    }
+  public getUsers(): Observable<User[]>{
+    return this.http.get<User[]>('http://localhost:8080/api/user/findUserAccount?email=cozmacatalindaniel99@gmail.com&password=123456');              
+  }
+    
+
 
     checkEmail(email:string): Observable<User[]>{
-      return this.http.get<User[]>("http://localhost:8080/checkEmail?email="+email );
+      return this.http.get<User[]>("http://localhost:8080/api/user/checkEmail?email="+email );
     }
 
   errorHandler(error: HttpErrorResponse){
@@ -66,3 +37,4 @@ password:string;
 
 
 }
+

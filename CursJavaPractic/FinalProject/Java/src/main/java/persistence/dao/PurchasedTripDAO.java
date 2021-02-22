@@ -26,7 +26,7 @@ public class PurchasedTripDAO {
     public List<PurchasedTrip> showPurchasedTrips(String name){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query showPurchasedTripsQuery = session.createNamedQuery("showPurchasedTripsByCustomer");
+        Query showPurchasedTripsQuery = session.createNamedQuery("showPurchasedTripsByUser");
         showPurchasedTripsQuery.setParameter("name",name);
         List<PurchasedTrip> purchasedTrips = null;
         try{

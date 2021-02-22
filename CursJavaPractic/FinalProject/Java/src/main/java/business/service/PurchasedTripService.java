@@ -1,6 +1,6 @@
 package business.service;
 
-import business.dto.CustomerDTO;
+import business.dto.UserDTO;
 import business.dto.PurchasedTripDTO;
 import business.dto.TripDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class PurchasedTripService {
     @Autowired
     PurchasedTripDAO purchasedTripDAO;
     @Autowired
-    CustomerDAO customerDAO;
+    UserDAO userDAO;
     @Autowired
     TripDAO tripDAO;
     @Autowired
@@ -27,12 +27,12 @@ public class PurchasedTripService {
     @Autowired
     TripService tripService;
     @Autowired
-    CustomerService customerService;
+    UserService userService;
 
 
     public void insertPurchasedTrip(PurchasedTripDTO purchasedTripDTO) {
         PurchasedTrip purchasedTrip = new PurchasedTrip();
-        purchasedTrip.setCustomer(customerDAO.findCustomerByEmail(purchasedTripDTO.getCustomer().getEmail()));
+        purchasedTrip.setUser(userDAO.findUserByEmail(purchasedTripDTO.getUser().getEmail()));
         purchasedTrip.setTrip(tripDAO.findTripByName(purchasedTripDTO.getTrip().getName()));
 
 
@@ -87,8 +87,8 @@ public class PurchasedTripService {
             purchasedTripDTO.setDiscount(p.getDiscount());
             TripDTO tripDTO = tripService.findTripByName(p.getTrip().getName());
             purchasedTripDTO.setTrip(tripDTO);
-            CustomerDTO customerDTO = customerService.findCustomerByEmail(p.getCustomer().getEmail());
-            purchasedTripDTO.setCustomer(customerDTO);
+            UserDTO userDTO = userService.findUserByEmail(p.getUser().getEmail());
+            purchasedTripDTO.setUser(userDTO);
             purchasedTripDTOList.add(purchasedTripDTO);
         }
         return purchasedTripDTOList;
@@ -106,8 +106,8 @@ public class PurchasedTripService {
             purchasedTripDTO.setDiscount(p.getDiscount());
             TripDTO tripDTO = tripService.findTripByName(p.getTrip().getName());
             purchasedTripDTO.setTrip(tripDTO);
-            CustomerDTO customerDTO = customerService.findCustomerByEmail(p.getCustomer().getEmail());
-            purchasedTripDTO.setCustomer(customerDTO);
+            UserDTO userDTO = userService.findUserByEmail(p.getUser().getEmail());
+            purchasedTripDTO.setUser(userDTO);
             purchasedTripDTOList.add(purchasedTripDTO);
         }
         return purchasedTripDTOList;

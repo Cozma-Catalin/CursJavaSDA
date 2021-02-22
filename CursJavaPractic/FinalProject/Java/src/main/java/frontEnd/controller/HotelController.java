@@ -5,6 +5,7 @@ import business.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ public class HotelController {
     HotelService hotelService;
 
     @PostMapping(path = "/insert")
+ //   @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity insertHotel(@RequestBody @Valid HotelDTO hotelDTO) {
         List<String> addressList = hotelService.countHotelAddress(hotelDTO.getAddress());
         if (addressList.contains(hotelDTO.getAddress())) {
@@ -27,6 +29,7 @@ public class HotelController {
     }
 
     @GetMapping(path = "/findInCity")
+ //   @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findHotelsInCity(@RequestParam String cityName) {
         List<HotelDTO> hotelDTOList = hotelService.findHotelsInCity(cityName);
         if (hotelDTOList.isEmpty()) {
@@ -36,6 +39,7 @@ public class HotelController {
     }
 
     @GetMapping(path = "/findByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findHotelByName(@RequestParam String hotelName) {
         List<HotelDTO> hotelDTOList = hotelService.findHotel(hotelName);
         if (hotelDTOList.isEmpty()) {
@@ -45,6 +49,7 @@ public class HotelController {
     }
 
     @DeleteMapping(path = "/deleteByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteHotelByName(@RequestParam String hotelName) {
         if (hotelService.countHotelName(hotelName) == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(hotelName + " can't be found in database.");
@@ -54,6 +59,7 @@ public class HotelController {
     }
 
     @DeleteMapping(path = "/deleteByAddress")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteHotelByAddress(@RequestParam String address) {
         List<String> addressList = hotelService.countHotelAddress(address);
         if (addressList.isEmpty()) {
@@ -65,6 +71,7 @@ public class HotelController {
 
 
     @PutMapping(path = "/changeName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity changeHotelName(@RequestParam String newName, String name) {
 
         if (hotelService.findHotel(name).isEmpty()) {
@@ -79,6 +86,7 @@ public class HotelController {
 
 
     @GetMapping(path = "findByAddress")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findHotelByAddress(@RequestParam String address) {
         HotelDTO hotelDTO = hotelService.findHotelByAddress(address);
         if (hotelDTO == null) {

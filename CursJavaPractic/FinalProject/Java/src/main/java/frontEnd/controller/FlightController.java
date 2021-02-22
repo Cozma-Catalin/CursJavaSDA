@@ -5,6 +5,7 @@ import business.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ public class FlightController {
     FlightService flightService;
 
     @PostMapping(path = "/insert")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity insertFlight(@RequestBody @Valid FlightDTO flightDTO){
         if(flightService.countFlightNumber(flightDTO.getFlightNumber())!=0){
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(flightDTO.getFlightNumber() + " already in database.");
@@ -25,6 +27,7 @@ public class FlightController {
     }
 
     @GetMapping(path = "/findByFlightNumber")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findFlightByFlightNumber(@RequestParam String flightNumber){
         FlightDTO flightDTO = flightService.findFlightByFlightNumber(flightNumber);
         if(flightDTO == null){

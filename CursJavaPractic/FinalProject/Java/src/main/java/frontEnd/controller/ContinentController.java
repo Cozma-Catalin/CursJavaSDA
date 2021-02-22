@@ -5,6 +5,7 @@ import business.service.ContinentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ public class ContinentController {
 
 
     @PostMapping(path = "/insert")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity insertContinent(@RequestBody @Valid ContinentDTO continentDTO) {
         if (continentService.countContinentDTO(continentDTO.getName()) != 0){
             return  ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(continentDTO.getName() + " already exists in database");
@@ -27,6 +29,7 @@ public class ContinentController {
     }
 
     @GetMapping(path = "/findByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findContinent(@RequestParam String name){
         ContinentDTO continentDTO = continentService.findContinentDTO(name);
         if(continentDTO==null){
@@ -37,6 +40,7 @@ public class ContinentController {
 
 
     @DeleteMapping(path = "/deleteByName")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteContinent(String name){
         if(continentService.countContinentDTO(name)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Continent '" + name + "' can't be found in database.");

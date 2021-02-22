@@ -6,6 +6,7 @@ import business.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ public class CountryController {
     ContinentService continentService;
 
     @PostMapping(path = "/insert")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity insertCountry(@RequestBody @Valid CountryDTO countryDTO) {
 
         if (countryService.countCountryDTO(countryDTO.getName()) != 0) {
@@ -30,6 +32,7 @@ public class CountryController {
     }
 
     @GetMapping(path = "/findByName")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findCountry(@RequestParam String name) {
         CountryDTO countryDTO = countryService.findCountryDTO(name);
         if (countryDTO == null) {
@@ -39,6 +42,7 @@ public class CountryController {
     }
 
     @GetMapping(path = "/findInContinent")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findCountriesInContinent(@RequestParam String continentName){
         if(continentService.countContinentDTO(continentName)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(continentName+ " can't be found in database.");
@@ -52,6 +56,7 @@ public class CountryController {
 
 
     @DeleteMapping(path = "/deleteByName")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteCountry(@RequestParam String name) {
         if(countryService.countCountryDTO(name)==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(name + " can't be found in database to be deleted.");
@@ -61,6 +66,7 @@ public class CountryController {
     }
 
     @PutMapping(path = "/changeName")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity changeCountryName(@RequestParam String newName, String name) {
         if (countryService.countCountryDTO(newName) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(newName + " already exists in database.");

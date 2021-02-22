@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from './user';
-import {Account} from '../account/account'
+
 
 
 @Component({
@@ -14,16 +15,15 @@ export class UserComponent implements OnInit {
   public users=[];
   public errorMsg;
   private http:HttpClient;
+  
   userInfo:User=new User()
  
   name:'';
   surname:'';
   phoneNumber:''; 
-  birthDate:'';
+  birthDate;
   email:'';
   address:'';
-  account:Account = new Account ;
-  userName:'';   
   password:'';
   
   
@@ -31,33 +31,43 @@ export class UserComponent implements OnInit {
   errorMessageSurname='';
   errorMessagePhoneNumber='';
   errorMessageEmail='';
-  errorMessageUserName='';
   errorMessagePassword='';
   errorMessagePasswordLength='';
   
 
-  post_url = 'http://localhost:8080/insertCustomer'
+  
 
 
   constructor(private _userService:UserService ) { }
   
-  ngOnInit() {}
-
-  getUser(){
-    this._userService.getUsers().subscribe(data => this.users = data,
-      error => this.errorMsg = error);
-
+  ngOnInit() {
+  
   }
 
-  
-  
+  public getUsers(): void{
+    this._userService.getUsers().subscribe(data => this.users = data,
+      (error: HttpErrorResponse) => {alert(error.message);
+      }
+    );
+}  
 
-  
-  register(): any {
-    
-    this._userService.register();
+
+public onAddUser(addForm: NgForm):void{
+
+  this._userService.addUser(addForm.value).subscribe(
+    (response: User) => {
+      console.log(response);
+      addForm.reset();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+      addForm.reset();
+    }
+  );
 }
 
+  
+ 
   focusoutFunctionName(event:any){
     this.name = event.target.value;
     var txt = this.name.split("");
@@ -97,7 +107,7 @@ export class UserComponent implements OnInit {
   }
 
   focusoutFunctionBirthDate(event:any){
-    this.userInfo.birthDate = event.target.value;
+    this.birthDate = event.target.value;
     this.userInfo.birthDate=this.birthDate;
   }
 
@@ -108,7 +118,7 @@ export class UserComponent implements OnInit {
       this.errorMessagePasswordLength='Password must contain at least 6 characters !';
     }else{
       this.errorMessagePasswordLength='';
-      this.account.password=this.password;
+      this.password=this.password;
     }
     
   }

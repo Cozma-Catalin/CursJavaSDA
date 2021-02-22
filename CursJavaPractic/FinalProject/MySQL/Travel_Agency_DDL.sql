@@ -1,4 +1,4 @@
-
+DROP DATABASE travel_agency;
 CREATE DATABASE travel_agency;
 USE travel_agency;
 
@@ -111,26 +111,17 @@ price_for_child DOUBLE NOT NULL,
 number_of_trips_available INT NOT NULL
 );
 
-CREATE TABLE accounts(
-id INT PRIMARY KEY AUTO_INCREMENT,
-user_name VARCHAR(15) NOT NULL UNIQUE,
-password VARCHAR(150) NOT NULL,
-logged_in TINYINT 
-);
 
-CREATE TABLE customers(
+CREATE TABLE users(
 id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(20) NOT NULL,
 surname VARCHAR(30) NOT NULL,
 address VARCHAR(30) NOT NULL,
 date_of_birth DATE NOT NULL,
 phone_number VARCHAR(20) NOT NULL,
-email VARCHAR(40) NOT NULL ,
-accounts_id INT NOT NULL ,
-CONSTRAINT fk_customers_accounts
-FOREIGN KEY (accounts_id)
-REFERENCES accounts(id),
-UNIQUE(email,accounts_id) 
+email VARCHAR(40) NOT NULL UNIQUE,
+password VARCHAR(150) NOT NULL,
+logged_in TINYINT 
 );
 
 CREATE TABLE purchased_trips(
@@ -139,10 +130,10 @@ trips_id INT NOT NULL,
 CONSTRAINT fk_trips_purchased
 FOREIGN KEY (trips_id)
 REFERENCES trips(id),
-customers_id INT NOT NULL,
-CONSTRAINT fk_customers_trips
-FOREIGN KEY (customers_id)
-REFERENCES customers(id),
+users_id INT NOT NULL,
+CONSTRAINT fk_users_trips
+FOREIGN KEY (users_id)
+REFERENCES users(id),
 date_of_purchase DATE NOT NULL,
 total_price DOUBLE NOT NULL,
 discount DOUBLE 

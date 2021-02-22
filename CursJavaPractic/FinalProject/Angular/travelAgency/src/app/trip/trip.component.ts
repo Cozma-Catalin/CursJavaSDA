@@ -9,13 +9,14 @@ import {TripService} from '../trip.service'
 export class TripComponent implements OnInit {
   public trips=[];
   
+
  
 
   constructor(private _tripService:TripService) { 
   }
 
   ngOnInit() {
-    this._tripService.getTrips().subscribe(data => this.trips = data);
+    this._tripService.getTrips().subscribe(data => this.trips = data)
     console.log('Get trips succesfull !');
   }
 

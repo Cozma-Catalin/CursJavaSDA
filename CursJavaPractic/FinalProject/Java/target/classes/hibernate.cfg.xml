@@ -16,8 +16,7 @@
         <mapping class="persistence.entities.City"/>
         <mapping class="persistence.entities.Hotel"/>
         <mapping class="persistence.entities.Airport"/>
-        <mapping class="persistence.entities.Account"/>
-        <mapping class="persistence.entities.Customer"/>
+        <mapping class="persistence.entities.User"/>
         <mapping class="persistence.entities.Trip"/>
         <mapping class="persistence.entities.Room"/>
         <mapping class="persistence.entities.Flight"/>

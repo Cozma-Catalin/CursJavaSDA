@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.util.Date;
-import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
+public class UserDTO {
     @NotNull @NotBlank @NotEmpty @Pattern(regexp = "([a-z A-Z])*")
     private String name;
 
@@ -30,8 +28,12 @@ public class CustomerDTO {
     @NotNull @NotBlank @NotEmpty @Email
     private String email;
 
-    @Valid
-    private AccountDTO account;
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    private String password;
+    @NotNull
+    private boolean loggedIn;
 
 
 

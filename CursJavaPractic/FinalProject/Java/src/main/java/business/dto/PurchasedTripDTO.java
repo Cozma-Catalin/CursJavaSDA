@@ -17,7 +17,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class PurchasedTripDTO {
     @Valid
-    private CustomerDTO customer;
+    private UserDTO user;
 
     @Valid
     private TripDTO trip;

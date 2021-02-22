@@ -1,24 +1,34 @@
 
-<html>
-    <body>
-    
-    <form>
-        
-<br/><br/><br/><br/><br/><br/><br/><br/>
-        <div id="userData" >
-           <br/>
-                <h2>Fill in the fields in order to Log In :</h2>
-                <p>User Name:  
-                    <input type="text" required="true" name="userName" (focusout)="focusoutFunctionUserName($event)"></p>
-                    <p class="error">{{errorMessageUserName}}</p>
-                    <p>Password:  
-                    <input type="password" required="true" name="password" (focusout)="focusoutFunctionPassword($event)"></p>
-                    <p class="error">{{errorMessagePasswordLength}}</p>
-                <button  name="login" (click)="login()">Log In</button>
-            </div>    
-              
-    </form>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        body {
+        background-color: #3e3e3e;
+        color: white;
+        }
+    </style>
 
-  
-    </body>
-</html>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p>
+            <label for="username" class="sr-only">E-mail</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Email" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+        </p>
+        <input name="_csrf" type="hidden" value="98d2474e-b88b-4da0-a153-fd33d2b4b273">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    </form>
+</div>
+</body></html>

@@ -5,6 +5,7 @@ import business.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,13 +14,11 @@ import java.util.HashSet;
 import java.util.Set;
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/api/customer")
-public class CustomerController {
+@RequestMapping(path = "/api/user")
+public class UserController {
 
     @Autowired
-    CustomerService customerService;
-    @Autowired
-    AccountService accountService;
+    UserService userService;
     @Autowired
     TripService tripService;
     @Autowired
@@ -31,55 +30,56 @@ public class CustomerController {
 
 
     @PostMapping(path = "/insert")
-    public ResponseEntity insertCustomer(@RequestBody @Valid CustomerDTO customerDTO) {
-        customerDTO.getAccount().setPassword(accountService.cryptPass(customerDTO.getAccount().getPassword()));
+ //   @PreAuthorize("hasAnyRole('ROLE_USER')")
+    public ResponseEntity insert(@RequestBody @Valid UserDTO userDTO) {
+        userDTO.setPassword(userService.cryptPass(userDTO.getPassword()));
 
-        if (accountService.countUserName(customerDTO.getAccount().getUserName()) != 0) {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("This user_name already registered.");
-        } else if (customerService.countEmail(customerDTO.getEmail()) != 0) {
+        if (userService.countEmail(userDTO.getEmail()) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("This email already registered.");
         }
-        customerService.insertCustomerDTO(customerDTO);
-        return ResponseEntity.ok("Customer added.");
+        userService.insertUserDTO(userDTO);
+        return ResponseEntity.ok("User added.");
     }
 
 
     @PutMapping(path = "/logOut")
-    public ResponseEntity logOut(@RequestParam String userName) {
-        int result = accountService.updateUserLogIn(false, userName);
+    public ResponseEntity logOut(@RequestParam String email) {
+        int result = userService.updateUserLogIn(false, email);
         if (result == 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userName + " can't find an account with this user name.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find an account with this email '" + email + "'.");
         }
-        return ResponseEntity.ok(userName + " logged out successfully.");
+        return ResponseEntity.ok("Logged out successfully.");
     }
 
 
     @PutMapping(path = "/logIn")
-    public ResponseEntity logIn(@RequestParam String userName, String password) {
-        String cryptedPassword = accountService.cryptPass(password);
-        if (customerService.findCustomerAccount(userName, cryptedPassword) == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong input for 'UserName' or 'password'!");
+    public ResponseEntity logIn(@RequestParam String email, String password) {
+        String cryptedPassword = userService.cryptPass(password);
+        if (userService.findUserByEmail(email) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong input for email!");
         }
-        if (cryptedPassword.equals(accountService.checkRegistration(userName, cryptedPassword))) {
-            accountService.updateUserLogIn(true, userName);
-            return ResponseEntity.ok(userName + " logged in successfully.");
+        if (!cryptedPassword.equals(userService.checkRegistration(email, cryptedPassword))) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong password!");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        userService.updateUserLogIn(true, email);
+        UserDTO userDTO = userService.findUserAccount(email, cryptedPassword);
+        return ResponseEntity.ok("Logged in successfully." + userDTO);
     }
 
     @GetMapping(path = "/findByEmail")
-    public ResponseEntity findCustomerByEmail(@RequestParam String email) {
-        CustomerDTO customerDTO = customerService.findCustomerByEmail(email);
-        if (customerDTO == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find customer with email: " + email);
+ //   @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    public ResponseEntity findByEmail(@RequestParam String email) {
+        UserDTO userDTO = userService.findUserByEmail(email);
+        if (userDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find user with email: " + email);
         }
-        return ResponseEntity.ok(customerDTO);
+        return ResponseEntity.ok(userDTO);
     }
 
     @GetMapping(path = "/checkEmail")
     public ResponseEntity checkEmail(@RequestParam String email) {
-        CustomerDTO customerDTO = customerService.findCustomerByEmail(email);
-        if (customerDTO != null) {
+        UserDTO userDTO = userService.findUserByEmail(email);
+        if (userDTO != null) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body( email + " already registered.");
         }else {
             return ResponseEntity.ok(email + " is available.");
@@ -87,40 +87,30 @@ public class CustomerController {
     }
 
 
-    @GetMapping(path = "/findAccount")
-    public ResponseEntity findCustomerAccount(@RequestParam String userName, String password) {
-        String cryptedPassword = accountService.cryptPass(password);
-        CustomerDTO customerDTO = customerService.findCustomerAccount(userName, cryptedPassword);
-        if (customerDTO == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find account with user name:" + userName);
+    @GetMapping(path = "/findUserAccount")
+    public ResponseEntity findCustomerAccount(@RequestParam String email, String password) {
+        String cryptedPassword = userService.cryptPass(password);
+        UserDTO userDTO = userService.findUserAccount(email, cryptedPassword);
+        if (userDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find account with email:" + email);
         }
-        return ResponseEntity.ok(customerDTO);
+        return ResponseEntity.ok(userDTO);
     }
 
-
-    @GetMapping(path = "/checkUserName")
-    public ResponseEntity checkUserName(@RequestParam String userName) {
-        CustomerDTO customerDTO = customerService.findCustomerByUserName(userName);
-        if (customerDTO != null) {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body( userName + " already used." );
-        }else {
-            return ResponseEntity.ok(userName + " is available.");
-        }
-    }
 
 
     @PostMapping(path = "/purchaseTrip")
-    public ResponseEntity purchaseTrip(@RequestParam String userName, String tripToPurchase, int numberOfAdults, int numberOfChildren, int singleRooms, int doubleRooms) {
+    public ResponseEntity purchaseTrip(@RequestParam String email, String tripToPurchase, int numberOfAdults, int numberOfChildren, int singleRooms, int doubleRooms) {
         TripDTO tripDTO = tripService.findTripByName(tripToPurchase);
         if (tripDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No trips with name:" + tripToPurchase);
         }
 
-        CustomerDTO customerDTO = customerService.findCustomerByUserName(userName);
-        if (customerDTO == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No customer with user name: " + userName + " found!");
+        UserDTO userDTO = userService.findUserByEmail(email);
+        if (userDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user with email: " + email + " found!");
         }
-        if (!customerDTO.getAccount().isLoggedIn()) {
+        if (!userDTO.isLoggedIn()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not logged in!");
         }
         if (!tripService.checkAvailability(tripDTO)) {
@@ -152,7 +142,7 @@ public class CustomerController {
         roomDTOSet.add(doubleRoomDTO);
 
         PurchasedTripDTO purchasedTripDTO = new PurchasedTripDTO();
-        purchasedTripDTO.setCustomer(customerDTO);
+        purchasedTripDTO.setUser(userDTO);
         purchasedTripDTO.setTrip(tripDTO);
         purchasedTripDTO.getTrip().getStayingHotel().setRooms(roomDTOSet);
         purchasedTripDTO.setTotalPrice((singleRoomDTO.getPrice() * singleRooms)+(doubleRoomDTO.getPrice() * doubleRooms));

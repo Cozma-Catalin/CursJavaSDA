@@ -5,6 +5,7 @@ import business.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ public class AirportController {
     AirportService airportService;
 
     @PostMapping(path = "/insert")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity insertAirport(@RequestBody @Valid AirportDTO airportDTO) {
         List<String> airportNameList = airportService.getAirportNameByCityName(airportDTO.getCity().getName());
         if (airportNameList.contains(airportDTO.getName())) {
@@ -27,6 +29,7 @@ public class AirportController {
     }
 
     @DeleteMapping(path = "/deleteByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity deleteAirportByName(@RequestParam String name) {
         int result = airportService.deleteAirportByName(name);
         if (result == 0) {
@@ -36,6 +39,7 @@ public class AirportController {
     }
 
     @GetMapping(path = "/findByName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findAirportByName(@RequestParam String name) {
 
         if (airportService.countAirportName(name) == 0) {
@@ -46,6 +50,7 @@ public class AirportController {
     }
 
     @GetMapping(path = "/findInCity")
+  //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity findAirportInCity(@RequestParam String cityName){
         List<AirportDTO> airportDTOList = airportService.findAirportsInCity(cityName);
         if(airportDTOList == null){
@@ -56,6 +61,7 @@ public class AirportController {
 
 
     @PutMapping(path = "/changeName")
+   // @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity changeAirportName(@RequestParam String newName, String name) {
         if (airportService.countAirportName(newName) != 0) {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(newName + " already exists in database.");

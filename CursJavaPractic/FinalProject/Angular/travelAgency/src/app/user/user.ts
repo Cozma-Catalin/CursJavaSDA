@@ -1,10 +1,11 @@
 export class User{
     name: string;
     surname: string;
-    birthDate: string;
+    birthDate: Date;
     address:string;
     phoneNumber: string;
     email: string;
-    account:Account;
+    password: string;
+
 }
 

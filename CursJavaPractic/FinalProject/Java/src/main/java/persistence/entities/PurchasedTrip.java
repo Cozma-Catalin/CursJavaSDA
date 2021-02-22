@@ -9,7 +9,7 @@ import java.sql.Date;
 
 
 @NamedQueries({
-        @NamedQuery(name = "showPurchasedTripsByCustomer",query = "select p from PurchasedTrip p inner join p.customer customer where name= :name"),
+        @NamedQuery(name = "showPurchasedTripsByUser",query = "select p from PurchasedTrip p inner join p.user user where name= :name"),
         @NamedQuery(name = "showPurchasedTripsByDate",query = "select p from PurchasedTrip p where (dateOfPurchase between :dateOfPurchase and :currentDate) ")
 })
 @Data
@@ -23,8 +23,8 @@ public class PurchasedTrip {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "customers_id")
-    private Customer customer;
+    @JoinColumn(name = "users_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "trips_id")

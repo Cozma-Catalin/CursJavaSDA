@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 import { Trip } from './trip/trip';
 import { Observable } from 'rxjs';
 
+
 @Injectable()
 export class TripService {
 
-  private _url: string = "http://localhost:8080/findAllTrips";
+ 
 
   constructor(private http:HttpClient) { }
 
     getTrips(): Observable<Trip[]>{
-      return this.http.get<Trip[]>(this._url);
+      return this.http.get<Trip[]>("http://localhost:8080/api/trip/findAll");
                       
     }
       
