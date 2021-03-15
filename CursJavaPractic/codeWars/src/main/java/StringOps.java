@@ -85,5 +85,38 @@ public class StringOps {
         return celsius;
 
     }
+
+    public static void main(String[] args) {
+        System.out.println(getGrade(92,93,94));
+        System.out.println(MakeUpperCase("lower case string"));
+
+
+    }
+
+    public static char getGrade(int s1, int s2, int s3) {
+
+
+        double avg = (s1+s2+s3)/3;
+        return avg >= 90 ? 'A' : avg >= 80 ? 'B' : avg >= 70 ? 'C' : avg >= 60 ? 'D': 'F';
+  /*      if(avg <100 && avg> 90){
+            return 'A';
+        }else if(avg<90 && avg > 80){
+            return 'B';
+        }else if(avg<80 && avg > 70){
+            return 'C';
+        }else if(avg<70 && avg > 60){
+            return 'D';
+        }else{
+            return 'F';
+        }*/
+
+    }
+
+
+    public static String MakeUpperCase(String str){
+        return str.toUpperCase();
+    }
 }
+
+
 

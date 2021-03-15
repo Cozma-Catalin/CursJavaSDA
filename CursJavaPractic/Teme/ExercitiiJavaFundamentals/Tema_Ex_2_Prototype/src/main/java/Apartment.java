@@ -3,7 +3,7 @@ public class Apartment {
     private String numberOfBathRooms;
     private boolean balcony;
 
-    public Apartment(){
+    public Apartment() {
 
     }
 
