@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5f7c04ff-b6b0-4c9e-adfb-9549d11fb4fc" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="193" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Variabile" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Z7M9iPWUqynBWWgHxZLV6DWGT8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="Presentation Assistant" />
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Variabile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Variabile" />
+      <module name="Variabile" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Variabile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",VISIBILITY_SORTER,SHOW_INTERFACES,SHOW_PROPERTIES,SHOW_INHERITED,SHOW_ANONYMOUS" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f7c04ff-b6b0-4c9e-adfb-9549d11fb4fc" name="Default Changelist" comment="" />
+      <created>1584185529425</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584185529425</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="485" y="71" key="#Main" timestamp="1586171759765">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="485" y="71" key="#Main/0.0.1536.864@0.0.1536.864" timestamp="1586171759765" />
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584185964876">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1584185964875" />
+    <state x="613" y="293" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1584363079382">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="613" y="293" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.864@0.0.1536.864" timestamp="1584363079382" />
+    <state x="551" y="167" key="FileChooserDialogImpl" timestamp="1585982993147">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="551" y="167" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1585982993147" />
+    <state width="1342" height="192" key="GridCell.Tab.0.bottom" timestamp="1586002764782">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1342" height="192" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1586002764782" />
+    <state width="1342" height="192" key="GridCell.Tab.0.center" timestamp="1586002764781">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1342" height="192" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1586002764781" />
+    <state width="1342" height="192" key="GridCell.Tab.0.left" timestamp="1586002764781">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1342" height="192" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1586002764781" />
+    <state width="1342" height="192" key="GridCell.Tab.0.right" timestamp="1586002764782">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1342" height="192" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1586002764782" />
+    <state x="277" y="14" key="SettingsEditor" timestamp="1584469295669">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="277" y="14" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1584469295669" />
+    <state x="575" y="275" key="com.intellij.ide.util.TipDialog" timestamp="1586066880568">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="575" y="275" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1586066880568" />
+    <state x="425" y="197" key="run.anything.popup" timestamp="1584471444432">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1584471444432" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1584469261708">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1584469261708" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Variabile$Variabile.ic" NAME="Variabile Coverage Results" MODIFIED="1584471454297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
