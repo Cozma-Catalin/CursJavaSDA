@@ -1,0 +1,110 @@
+<html>
+  <head>
+<title>Car Shop</title>
+  </head>
+
+  <body>
+  
+  <h1><b>Welcome to our shop...</b></h1>
+
+  <table id="table">
+    <tr>
+        <th id="home"><a href="http://localhost:4200/">Home</a></th>
+       <!-- <th id="register"><a href="../RegisterCar.html">Register Car</a></th>
+        <th id="sell"><a href="../SellCAr.html">Sell Car</a></th> -->
+        <th id="contact"><a href="https://www.facebook.com/yocozma/">Contact</a></th>
+    </tr>
+</table>
+
+  <div>
+     <a href="https://www.astonmartin.com/en-gb/"> <img id="aston" src="assets\images\aston_martin.png" ></a>
+     <a href="https://www.porsche.com/central-eastern-europe/en/_romania_/"><img id='porsche' src="assets\images\porsche.png" ></a>
+     <a href="https://www.mercedes-benz.com/en/"> <img id="mercedes" src="assets\images\mercedes.png" ></a>
+     <a href="https://www.maserati.com/international/en"> <img id="maserati" src="assets\images\maserati.png"></a>
+     <a href="https://www.audi.com/en.html"> <img id="audi" src="assets\images\audi.png" ></a>
+
+  </div>
+
+  <div class="registrationForm">
+       <h2><b>Car Registration Form</b></h2>
+          <form name="registration_form" onsubmit = "processRegistrationForm();return false">
+           <label>Brand:</label>
+              <select name = 'brand' required='true'>
+                  <option value=""></option>
+                  <option value="audi">Audi</option>
+                  <option value="aston">Aston-Martin</option>
+                  <option value="bmw">BMW</option>
+                  <option value="ferrari">Ferrari</option>
+                  <option value="maserati">Maserati</option> 
+                  <option value="mercedes">Mercedes-Benz</option>   
+                  <option value="porsche">Porsche</option>
+                  <option value="other">Other</option>
+               </select>   
+           <label>Model:</label>
+           <input type="text" required="true" name="model"/><br/>
+           <label>Production year</label>
+           <input type="date" required= "true" name="productionYear"><br/>
+           <label>Registration year</label>
+           <input type="date" required="true" name="registrationYear"><br/>
+           <label>Color</label>
+              <select name='color' required= 'true'>
+                  <option value=""></option>
+                  <option value="white">White</option>
+                  <option value="black">Black</option>
+                  <option value="grey">Grey</option>
+                  <option value="blue">Blue</option>
+                  <option value="green">Green</option>
+                  <option value="red">Red</option>
+                  <option value="pink">Pink</option>
+                  <option value="other">Other</option>
+              </select><br/>
+           <label>Fuel type</label>   
+               <select name='fuelType' required='true'>
+                  <option value=""></option>
+                  <option value="gas">Gas</option>
+                  <option value="diesel">Diesel</option>
+                  <option value="electric">Electric</option>
+                  <option value="hybrid">Hybrid</option>
+                  <option value="other">Other</option>
+              </select><br/>
+           <label>Km</label>
+           <input type="text" name="km" required='true'><br/>
+           <label>Price</label>
+           <input type="number" name="price" required='true'><br/>
+           <label>Crashed</label>
+           <input type="radio" name="crashed" ><br/><br/>   
+           <input id='submit' type="submit" value="Submit"/><br/>
+          </form>
+  </div>
+
+
+  <div class="sellingForm">
+      <h2><b>Car Selling Form</b></h2>
+          <form name="selling_form" onsubmit="processSellingForm();return false">
+              <label> Buyers name</label>
+              <input type="text" name="name" required='true'><br/>
+              <label>Buyers surname</label>
+              <input type="text" name="surname" required='true'><br/>
+              <label>City</label>
+              <input type="text" name="city" required='true'><br/>
+              <label>Age</label>
+              <input type='number' name='age' required='true'><br/>
+              <label>Selling price</label>
+              <input type="number" name="price" required='true'><br/>
+              <label>Leasing</label>
+              <input type="radio" name="leasing" ><br/>
+              <label>e-mail</label>
+              <input type="text" required='true' name="email"><br/>
+              <label> Phone number</label>
+              <input type="number" required='true' name="phoneNumber"><br/>
+              <label>Selling date</label>
+              <input type="date" required='true' name="date"><br/><br/>
+              <input id='submit' type="submit" value='Submit'/>
+          </form>
+  </div>
+
+
+
+
+</body>
+</html>

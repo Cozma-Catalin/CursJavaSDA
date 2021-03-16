@@ -1,0 +1,7 @@
+
+body{background-image: url(assets/images/ferrari.png);background-size: contain;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 25px;}
+h1{text-align: center;}
+h2{text-align: center;}
+.registrationForm{place-self:center ;background-color: rgb(238, 237, 194);text-align:justify;width: 500px;height: 350px;float: left;padding-left: 50px;padding-right: 50px;opacity: 70%;}
+.sellingForm{place-self:center;background-color: rgb(238, 237, 194);float: right; width:500px;height: 350px;text-align:justify;padding-left: 50px;padding-right: 50px;opacity: 70%;}
+#submit{font-weight: bold;place-self:center;background-color: rgb(202, 206, 199);color: black;width: 100px;}
