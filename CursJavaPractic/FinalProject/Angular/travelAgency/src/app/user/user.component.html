@@ -11,10 +11,10 @@
                <br/>
                     <h2>Fill in the fields in order to register :</h2>
                     <p>Name: 
-                    <input type="text" required="true" ngModel name="firstName" (focusout)="focusoutFunctionName($event)"></p>
+                    <input type="text" required="true" ngModel name="name" (focusout)="focusoutFunctionName($event)"></p>
                     <p class="error">{{errorMessageName}}</p>
                     <p>Surname: 
-                    <input type="text" required="true" ngModel name="lastName" (focusout)="focusoutFunctionSurname($event)"></p>
+                    <input type="text" required="true" ngModel name="surname" (focusout)="focusoutFunctionSurname($event)"></p>
                     <p class="error">{{errorMessageSurname}}</p>
                     <p>Phone Number:  
                     <input type="text" required="true" ngModel name="phoneNumber" (focusout)="focusoutFunctionPhoneNumber($event)"></p>
@@ -29,7 +29,6 @@
                   
                     <p>Password:  
                     <input type="password" required="true" ngModel autocomplete="new-password" name="password" (focusout)="focusoutFunctionPassword($event)"></p>
-                    <p class="error">{{errorMessagePasswordLength}}</p>
             
                     <button [disabled]="addForm.invalid" type="submit" >Register</button>
           </div>

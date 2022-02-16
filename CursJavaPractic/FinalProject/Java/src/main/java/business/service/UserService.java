@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 public class UserService {
 
     @Autowired
-    UserDAO userDAO;
+     UserDAO userDAO;
 
 
     public void insertUserDTO(UserDTO userDTO) {
@@ -69,6 +69,7 @@ public class UserService {
         userDTO.setBirthDate(user.getBirthDate());
         userDTO.setAddress(user.getAddress());
         userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
         userDTO.setLoggedIn(user.isLoggedIn());
 
         return userDTO;

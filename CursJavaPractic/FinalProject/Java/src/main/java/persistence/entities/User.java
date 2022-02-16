@@ -33,7 +33,7 @@ public class User {
     private String surname;
 
     @Column(name = "date_of_birth")
-    private java.sql.Date birthDate;
+    private String birthDate;
 
     @Column(name = "address")
     private String address;

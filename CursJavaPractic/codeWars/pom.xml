@@ -8,5 +8,23 @@
     <artifactId>codeWars</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <java.version>8</java.version>
+    </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <target>11</target>
+                    <source>11</source>
+
+                </configuration>
+
+
+            </plugin>
+        </plugins>
+    </build>
 </project>

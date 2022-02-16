@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd" PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN">
-        -<hibernate-configuration>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd" PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"/>
+        <hibernate-configuration>
+
     <!-- sectiunea in care scriem toate configurarile necesare frameworkului Hibernare pentru a se conecta la baza de date si pentru a mapa obiectele la tabele -->
     <!-- hibernate se conecteaza la baza de date in cadrul unei sesiuni -->
         -<session-factory>

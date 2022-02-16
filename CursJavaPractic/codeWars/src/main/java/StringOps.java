@@ -6,12 +6,69 @@ import java.util.stream.Stream;
 
 public class StringOps {
 
-    public boolean isIsogram(String str) {
+    public static void main(String[] args) {
+    /*    System.out.println(getGrade(92,93,94));
+        System.out.println(MakeUpperCase("lower case string"));
+        System.out.println(makePalindrome("grape"));
+        isIsogram("catlin");
+        accum("catalin");
+    */
+
+        System.out.println(validPhoneNumber("(123) 456-7890"));
+        System.out.println(validPhoneNumber("(1111)555 2345"));
+        System.out.println(validPhoneNumber("(198) 123 4567"));
+
+    }
+
+
+        public static boolean validPhoneNumber(String phoneNumber) {
+            boolean valid = false;
+            if(phoneNumber.matches("\\(\\d{3}\\)\\s\\d{3}-?\\d{4}")){
+                valid = true;
+            }
+            return valid;
+        }
+
+
+    public static StringBuilder makePalindrome(String text) {
+        StringBuilder palindrome = new StringBuilder(text);
+        if (text.isEmpty()) {
+            return new StringBuilder("String is empty!");
+        }else if(text.isBlank()){
+            return new StringBuilder("String is blank!");
+        }
+
+        int k = text.length() - 1;
+        if (k <= 2 && Character.valueOf(text.charAt(0)) != Character.valueOf(text.charAt(k))) {
+            for (int j = k; j > 0; j--) {
+                palindrome.append(Character.valueOf(text.charAt(j - 1)));
+            }
+            if (k == 2 && Character.valueOf(text.charAt(1)) == Character.valueOf(text.charAt(2))) {
+                palindrome.append(Character.valueOf(text.charAt(0)));
+            }
+        } else {
+            for (int i = 0; i < (text.length() / 2) + 1; i++) {
+                if (Character.valueOf(text.charAt(i)) == (Character.valueOf(text.charAt(k - i)))) {
+                    continue;
+                } else {
+                    for (int j = text.length() - 1; j > 0; j--) {
+                        palindrome.append(Character.valueOf(text.charAt(j - 1)));
+                    }
+                    break;
+                }
+            }
+        }
+
+
+        return palindrome;
+    }
+
+    public static boolean isIsogram(String str) {
         String[] array = str.toLowerCase().split("");
         boolean isogram = true;
         Arrays.sort(array);
         for (int i = 0; i < array.length - 1; i++) {
-            if (array[i].equalsIgnoreCase(array[i + 1])) {
+            if (array[i].contains(array[i+1])) {
                 isogram = false;
                 break;
             }
@@ -21,7 +78,7 @@ public class StringOps {
         return isogram;
     }
 
-    public String accum(String s) {
+    public static String accum(String s) {
         StringBuilder bldr = new StringBuilder();
         int i = 0;
         for (char c : s.toCharArray()) {
@@ -86,18 +143,12 @@ public class StringOps {
 
     }
 
-    public static void main(String[] args) {
-        System.out.println(getGrade(92,93,94));
-        System.out.println(MakeUpperCase("lower case string"));
-
-
-    }
 
     public static char getGrade(int s1, int s2, int s3) {
 
 
-        double avg = (s1+s2+s3)/3;
-        return avg >= 90 ? 'A' : avg >= 80 ? 'B' : avg >= 70 ? 'C' : avg >= 60 ? 'D': 'F';
+        double avg = (s1 + s2 + s3) / 3;
+        return avg >= 90 ? 'A' : avg >= 80 ? 'B' : avg >= 70 ? 'C' : avg >= 60 ? 'D' : 'F';
   /*      if(avg <100 && avg> 90){
             return 'A';
         }else if(avg<90 && avg > 80){
@@ -113,7 +164,7 @@ public class StringOps {
     }
 
 
-    public static String MakeUpperCase(String str){
+    public static String MakeUpperCase(String str) {
         return str.toUpperCase();
     }
 }

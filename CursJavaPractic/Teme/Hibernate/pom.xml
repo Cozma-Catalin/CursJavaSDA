@@ -1,25 +1,28 @@
-<?xml version ='1.0' encoding='UTF-8'?>
-<!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-<hibernate-configuration>
-    <!-- sectiunea in care scriem toate config necesare frameworkului hibernate pentru a conecta la baza de date si pentru a mapa obiectele la tabele-->
-    <!-- hibernate se conecteaza la baza de date in cadrul unei sesiuni-->
+    <groupId>org.example</groupId>
+    <artifactId>HibernateBestPractices</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
 
-    <session-factory>
-        <!-- datele de config pentru orice sesiune creata de hibernate cu baza noastra de date-->
-        <!-- dialectul de baza de date folosit: mysql,oracle,postgres-->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <!-- driverul pentru baza de date: jdbc-->
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <!-- adresa bazei de date-->
-        <property name="hibernate.connection.url">jdbc:mysql://localhost3306/school?serverTimezone=UTC</property>
-        <!-- userul pentru conectarea la baza de date-->
-        <property name="hibernate.connection.username">root</property>
-        <!-- parola -->
-        <property name="hibernate.connection.password">1234</property>
-        <!-- specificam care clase trebuiesc mapate cu un tabel din baza de date-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.18.Final</version>
+        </dependency>
 
-    </session-factory>
-</hibernate-configuration>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.20</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

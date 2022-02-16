@@ -2,6 +2,7 @@ package frontEnd.controller;
 
 import business.dto.*;
 import business.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+
 import javax.validation.Valid;
+
 import java.util.HashSet;
 import java.util.Set;
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping(path = "/api/user")
 public class UserController {
+
 
     @Autowired
     UserService userService;
@@ -28,8 +33,8 @@ public class UserController {
     @Autowired
     RoomService roomService;
 
-
     @PostMapping(path = "/insert")
+
  //   @PreAuthorize("hasAnyRole('ROLE_USER')")
     public ResponseEntity insert(@RequestBody @Valid UserDTO userDTO) {
         userDTO.setPassword(userService.cryptPass(userDTO.getPassword()));
@@ -38,7 +43,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("This email already registered.");
         }
         userService.insertUserDTO(userDTO);
-        return ResponseEntity.ok("User added.");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Ok");
     }
 
 
@@ -53,17 +58,19 @@ public class UserController {
 
 
     @PutMapping(path = "/logIn")
+    @CrossOrigin
     public ResponseEntity logIn(@RequestParam String email, String password) {
         String cryptedPassword = userService.cryptPass(password);
         if (userService.findUserByEmail(email) == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong input for email!");
         }
+
         if (!cryptedPassword.equals(userService.checkRegistration(email, cryptedPassword))) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong password!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong password ...!");
         }
         userService.updateUserLogIn(true, email);
-        UserDTO userDTO = userService.findUserAccount(email, cryptedPassword);
-        return ResponseEntity.ok("Logged in successfully." + userDTO);
+
+        return ResponseEntity.ok("Logged in successfully with email: " + email);
     }
 
     @GetMapping(path = "/findByEmail")
@@ -88,7 +95,8 @@ public class UserController {
 
 
     @GetMapping(path = "/findUserAccount")
-    public ResponseEntity findCustomerAccount(@RequestParam String email, String password) {
+    public ResponseEntity findUserAccount(@RequestParam String email, String password) {
+        log.info("Finding user account!");
         String cryptedPassword = userService.cryptPass(password);
         UserDTO userDTO = userService.findUserAccount(email, cryptedPassword);
         if (userDTO == null) {
@@ -97,6 +105,16 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
+
+    @GetMapping(path = "/{email}/{password}")
+    public ResponseEntity findUserAccountPathVariable(@PathVariable String email,@PathVariable String password) {
+        String cryptedPassword = userService.cryptPass(password);
+        UserDTO userDTO = userService.findUserAccount(email, cryptedPassword);
+        if (userDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Can't find account with email:" + email);
+        }
+        return ResponseEntity.ok(userDTO);
+    }
 
 
     @PostMapping(path = "/purchaseTrip")

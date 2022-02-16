@@ -9,7 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { AccountService} from './account.service'
+import { LoginService} from './login.service'
+import { DatePipe } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -24,8 +26,9 @@ import { AccountService} from './account.service'
         HeaderComponent,
         FooterComponent,
         HomeComponent,
+        LoginComponent,
     ],
-    providers: [TripService,UserService,AccountService],
+    providers: [TripService,UserService,LoginService, DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

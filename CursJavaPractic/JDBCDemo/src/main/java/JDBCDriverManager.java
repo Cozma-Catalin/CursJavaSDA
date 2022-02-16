@@ -19,7 +19,8 @@ public class JDBCDriverManager {
             //      - deschidem conexiunea folosindu ne de clasa DriverManager
 
             try {
-                databaseConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/school?serverTimezone=UTC", "root", "123456");
+                databaseConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/school?serverTimezone=UTC"
+                        , "root", "123456");
                 // parametru url al metodei getConnection contine:
                 //      - jdbc - tipul de driver folosit (alte tipuri intalnite : odbc)
                 //      - mysql - tipul bazei de date folosite (alte tipuri: oracle, postgres,mariadb,microsoft)
@@ -107,6 +108,16 @@ public class JDBCDriverManager {
 
                 //pentru query urile de select (cele care nu modifica structura sau datele din tabele) folosim metoda executeQuery
 */
+             //  String deleteQuery = "delete from students";
+             //  PreparedStatement deleteStatement = databaseConnection.prepareStatement(deleteQuery);
+             //  deleteStatement.executeUpdate();
+
+
+
+                String insertQuery = "insert into students(name,surname,year_of_birth,major,address_id) values('Catalin','Cozma',1989,'Info',29),('Marian','Cozma',1987,'Info',29)";
+                Statement insertStatement = databaseConnection.createStatement();
+                insertStatement.executeUpdate(insertQuery);
+
 
                 String selectQuery = "select * from students where major = 'Info'";
                 PreparedStatement selectStatement = databaseConnection.prepareStatement(selectQuery);
@@ -120,7 +131,7 @@ public class JDBCDriverManager {
                     String firstName = result.getString("surname");
                     String yearOfBirth = result.getString("year_of_birth");
 
-                    System.out.println("Studentul cu optional sport este: " + name + " " + firstName + " "  + yearOfBirth);
+                    System.out.println("Studentul cu optional info este: " + name + " " + firstName + " "  + yearOfBirth);
                 }
 
 

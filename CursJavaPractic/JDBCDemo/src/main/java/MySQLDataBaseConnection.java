@@ -1,9 +1,11 @@
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
+
+import javax.sql.PooledConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public abstract class MySQLDataBaseConnection implements Connection  {
-
+public abstract class MySQLDataBaseConnection implements DBConnection  {
 
 
     private MySQLDataBaseConnection(){}
@@ -17,8 +19,15 @@ public abstract class MySQLDataBaseConnection implements Connection  {
         Connection conn = null;
         {
             try {
-                conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
 
+                MysqlConnectionPoolDataSource db = new MysqlConnectionPoolDataSource();
+                db.setURL(URL);
+                db.setUser(USER_NAME);
+                db.setPassword(PASSWORD);
+
+                PooledConnection pconn = db.getPooledConnection();
+
+                conn = pconn.getConnection();
 
             } catch (SQLException e) {
                 e.printStackTrace();

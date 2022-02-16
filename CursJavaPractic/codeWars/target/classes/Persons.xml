@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="Person">
+    <void property="address">
+     <string>Calugareni Galati</string>
+    </void>
+    <void property="dob">
+     <string>02-09-1989</string>
+    </void>
+    <void property="lang">
+     <string>Java</string>
+    </void>
+    <void property="name">
+     <string>Cozma Catalin</string>
+    </void>
+    <void property="sex">
+     <string>M</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Person">
+    <void property="address">
+     <string>Calugareni Galati</string>
+    </void>
+    <void property="dob">
+     <string>29-06-1987</string>
+    </void>
+    <void property="lang">
+     <string>Java</string>
+    </void>
+    <void property="name">
+     <string>Cozma Marian</string>
+    </void>
+    <void property="sex">
+     <string>M</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Person">
+    <void property="address">
+     <string>Calugareni Galati</string>
+    </void>
+    <void property="dob">
+     <string>07-09-1991</string>
+    </void>
+    <void property="lang">
+     <string>Java</string>
+    </void>
+    <void property="name">
+     <string>Rusu Adriana</string>
+    </void>
+    <void property="sex">
+     <string>F</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

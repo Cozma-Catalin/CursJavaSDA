@@ -14,8 +14,8 @@ export class UserService {
 
 
   
-  public addUser(user: User): Observable<User>{
-    return this.http.post<User>("http://localhost:8080/api/user/insert",user);
+  public addUser(user: User): any{
+    return this.http.post("http://localhost:8080/api/user/insert", user,{responseType: 'text'});
   }
 
   public getUsers(): Observable<User[]>{

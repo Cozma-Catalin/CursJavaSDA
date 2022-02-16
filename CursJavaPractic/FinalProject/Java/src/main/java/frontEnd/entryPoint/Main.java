@@ -24,7 +24,7 @@ public class Main {
         SpringApplication.run(Main.class,args);
     }
 
-/*
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -39,6 +39,6 @@ public class Main {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
-    }*/
+    }
 
 }

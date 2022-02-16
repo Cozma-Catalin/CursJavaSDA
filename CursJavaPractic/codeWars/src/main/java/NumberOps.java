@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class NumberOps {
 
@@ -11,12 +12,38 @@ public class NumberOps {
         pancakeSort(new int[]{1, 5, 4, 3, 2, 10, 9});
       fizzBuzz(20);
         System.out.println(fibRec(7));
+
+        String number = "99730298499892525";
+        System.out.println(solve(number));
+
+        int[] arr = new int[]{-5, 4, 2, 10, 9};
+        int [] result = twoSum(arr,5);
+*/
+
+        //  for (int i:result) {
+        //    System.out.println(i);
+        // }
+
         int[] fibNr=fib(8);
         for(int value:fibNr){
             System.out.println(value);
-        }*/
-        String number = "99730298499892525";
-        System.out.println(solve(number));
+        }
+
+    }
+
+    public static int[] twoSum(int[] arr, int target) {
+        Map<Integer, Integer> numbers = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            int temp = target - arr[i];
+            if (numbers.containsKey(temp)) {
+                return new int[]{i, numbers.get(temp)};
+            }
+            numbers.put(arr[i], i);
+        }
+
+
+        return new int[]{-1, -1};
     }
 
     public static double sum(double[] numbers) {
@@ -238,7 +265,7 @@ public class NumberOps {
     }
 
     public static int[] fib(int n) {
-        int[] fibNr = new int[n + 1];
+        int[] fibNr = new int[n];
         fibNr[1] = 1;
         for (int i = 2; i < n; i++) {
             fibNr[i] = fibNr[i - 1] + fibNr[i - 2];

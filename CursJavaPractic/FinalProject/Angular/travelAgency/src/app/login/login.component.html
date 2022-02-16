@@ -1,0 +1,19 @@
+  
+<div class="background-wrap">
+    <div class="background"></div>
+  </div>
+ 
+  <form id="accesspanel" action="">
+    
+    <div class="inset">
+      <p>
+        <input type="text" name="email" [(ngModel)]="email" id="email" placeholder="email">
+      </p>
+      <p>
+        <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
+      </p>
+    </div>
+    <p class="p-container">
+      <input type="submit" name="Login"  value="Login" (click)="doLogin()">
+    </p>
+  </form>

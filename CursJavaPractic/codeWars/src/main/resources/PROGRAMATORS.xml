@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding = "UTF-8"?>
+<!DOCTYPE PROGRAMATORS SYSTEM "PROGRAMATORS.dtd">
+
+<PROGRAMATORS>
+    <PROGRAMATOR LANG="JAVA">
+        <PERSON>
+            <NAME>COZMA CATALIN</NAME>
+            <SEX>M</SEX>
+            <DOB>
+                <DATE>
+                    <DAY>09</DAY>
+                    <MONTH>02</MONTH>
+                    <YEAR>1989</YEAR>
+                </DATE>
+            </DOB>
+            <ADDRESS>
+                <STREET>CALUGARENI</STREET>
+                <CITY>GALATI</CITY>
+            </ADDRESS>
+        </PERSON>
+    </PROGRAMATOR>
+
+    <PROGRAMATOR LANG="PYTHON">
+        <PERSON>
+            <NAME>COZMA MARIAN</NAME>
+            <SEX>M</SEX>
+            <DOB>
+                <DATE>
+                    <DAY>29</DAY>
+                    <MONTH>06</MONTH>
+                    <YEAR>1987</YEAR>
+                </DATE>
+            </DOB>
+            <ADDRESS>
+                <STREET>ALEEA TOMESTI</STREET>
+                <CITY>BUCURESTI</CITY>
+            </ADDRESS>
+        </PERSON>
+    </PROGRAMATOR>
+</PROGRAMATORS>

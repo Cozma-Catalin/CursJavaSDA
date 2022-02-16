@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from './user';
-
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class UserComponent implements OnInit {
   
 
 
-  constructor(private _userService:UserService ) { }
+  constructor(private _userService:UserService, private datePipe: DatePipe ) { }
   
   ngOnInit() {
   
@@ -52,16 +52,19 @@ export class UserComponent implements OnInit {
 }  
 
 
-public onAddUser(addForm: NgForm):void{
+public onAddUser(addForm: NgForm):any{
+  let userData = addForm.value
+  userData.birthDate = this.datePipe.transform(userData.birthDate, "yyyy-MM-dd")
 
-  this._userService.addUser(addForm.value).subscribe(
-    (response: User) => {
-      console.log(response);
-      addForm.reset();
+  this._userService.addUser(userData).subscribe(
+    (response: any) => {
+      alert(response),
+      location.reload;
+      //addForm.reset();
     },
-    (error: HttpErrorResponse) => {
+    (error: any) => {
       alert(error.message);
-      addForm.reset();
+     // addForm.reset();
     }
   );
 }

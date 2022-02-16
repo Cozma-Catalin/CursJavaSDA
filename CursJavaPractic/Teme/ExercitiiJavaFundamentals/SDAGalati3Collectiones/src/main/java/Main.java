@@ -6,8 +6,8 @@ public class Main {
 
         // Set
         //sa se declare un set in care adaugam 10 din capitalele europei
-        Set<String> capitals = new HashSet<String>();
-        //adaugam 10 capitale
+        Set<String> capitals = new HashSet<>();
+
         capitals.add("Bucuresti");
         capitals.add("Viena");
         capitals.add("Madrid");

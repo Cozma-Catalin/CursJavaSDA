@@ -20,7 +20,7 @@ public class UserDTO {
     @NotNull @NotBlank @NotEmpty
     private String address;
 
-    private java.sql.Date birthDate;
+    private String birthDate;
 
     @NotNull @NotBlank @NotEmpty
     private String phoneNumber;
@@ -32,7 +32,7 @@ public class UserDTO {
     @NotEmpty
     @NotBlank
     private String password;
-    @NotNull
+
     private boolean loggedIn;
 
 

@@ -41,10 +41,15 @@ public class UserDAO {
     public String checkRegistration(String email,String password){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
+        String retrievedPassword = null;
         Query checkRegistrationQuery = session.createNamedQuery("checkRegistration");
         checkRegistrationQuery.setParameter("email",email);
         checkRegistrationQuery.setParameter("password",password);
-        String retrievedPassword = (String) checkRegistrationQuery.getSingleResult();
+        try{
+           retrievedPassword = (String) checkRegistrationQuery.getSingleResult();
+        }catch (NoResultException e){
+            System.out.println(e.getCause());
+        }
         session.getTransaction().commit();
         session.close();
         return retrievedPassword;
